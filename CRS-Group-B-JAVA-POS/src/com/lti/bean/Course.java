@@ -9,7 +9,7 @@ import java.util.Collection;
  */
 public class Course {
 	private int courseID;
-	private Collection students;
+	private Collection<Student> students;
 	private Professor prof;
 	private String department;
 	private int prereqCourseID;
@@ -37,13 +37,13 @@ public class Course {
 	/**
 	 * @return the students
 	 */
-	public Collection getStudents() {
+	public Collection<Student> getStudents() {
 		return students;
 	}
 	/**
 	 * @param students the students to set
 	 */
-	public void setStudents(Collection students) {
+	public void setStudents(Collection<Student> students) {
 		this.students = students;
 	}
 	/**
