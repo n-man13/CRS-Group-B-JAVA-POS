@@ -9,9 +9,9 @@ Payment: Id, Student, Amount
 
 Service
 
-StudentService: ApplyToCourse, dropCourse, listApplyedCourses, MakePayment, CheckGrades, ListAllCourses
+StudentService: applyToCourse, dropCourse, listAppliedCourses, makePayment, checkGrades, listAllCourses
 CourseService: getNumberStudents, notifyStudent
-ProfessorService: applyToCouse, recordGrades, checkStudens, 
+ProfessorService: applyToCouse, recordGrades, checkStudents, 
 AdminService: createCourse, checkStudentPayment, updateCourses, deleteCourses, listCourses
 CatalogService: listCoursesByDepartment, listAllCourses 
 PaymentService: validatePayment, 
