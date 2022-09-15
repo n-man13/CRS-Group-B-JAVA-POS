@@ -10,19 +10,19 @@ import java.util.Collection;
  */
 public class Professor {
 	private int profID;
-	private Collection courses;
+	private Collection<Course> courses;
 	
 	
 	/**
 	 * @return the courses
 	 */
-	public Collection getCourses() {
+	public Collection<Course> getCourses() {
 		return courses;
 	}
 	/**
 	 * @param courses the courses to set
 	 */
-	public void setCourses(Collection courses) {
+	public void setCourses(Collection<Course> courses) {
 		this.courses = courses;
 	}
 	/**

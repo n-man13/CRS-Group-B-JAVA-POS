@@ -10,8 +10,8 @@ import java.util.Collection;
 public class Student {
 	
 	private int studentID;
-	private Collection registeredCourses;
-	private Collection alternateCourses;
+	private Collection<Course> registeredCourses;
+	private Collection<Course> alternateCourses;
 	private Collection grades; //move elsewhere in the future
 	
 	
@@ -28,25 +28,25 @@ public class Student {
 	/**
 	 * @return the registeredCourses
 	 */
-	public Collection getRegisteredCourses() {
+	public Collection<Course> getRegisteredCourses() {
 		return registeredCourses;
 	}
 	/**
 	 * @param registeredCourses the registeredCourses to set
 	 */
-	public void setRegisteredCourses(Collection registeredCourses) {
+	public void setRegisteredCourses(Collection<Course> registeredCourses) {
 		this.registeredCourses = registeredCourses;
 	}
 	/**
 	 * @return the alternateCourses
 	 */
-	public Collection getAlternateCourses() {
+	public Collection<Course> getAlternateCourses() {
 		return alternateCourses;
 	}
 	/**
 	 * @param alternateCourses the alternateCourses to set
 	 */
-	public void setAlternateCourses(Collection alternateCourses) {
+	public void setAlternateCourses(Collection<Course> alternateCourses) {
 		this.alternateCourses = alternateCourses;
 	}
 	/**
