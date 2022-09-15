@@ -6,7 +6,7 @@ package com.lti.bean;
 import java.util.Collection;
 
 /**
- * @author user101
+ * @author Nikhil, Luca
  *
  */
 public class Catalog {

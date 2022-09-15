@@ -2,7 +2,7 @@ package com.lti.bean;
 
 /**
  * 
- * @author user101
+ * @author Nikhil, Luca
  *
  */
 public class Admin {
