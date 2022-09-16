@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @author Nikhil, Luca, Muhammad
  *
  */
-public class CRSUserInterface {
+public class CRSApplicationMenu {
 
 	/**
 	 * @param args
