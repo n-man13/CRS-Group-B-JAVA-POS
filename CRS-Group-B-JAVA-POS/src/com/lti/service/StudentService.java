@@ -5,7 +5,7 @@ import com.lti.bean.Student;
 public class StudentService implements StudentServiceInterface {
 	
 	private Student student;
-	private static int newestID = 1;
+	private static int newestID = 0;
 	
 	public StudentService() {
 		student = new Student(++newestID);
