@@ -19,25 +19,24 @@ public class CRSUserInterface {
 		// need to take input
 		// 
 		Scanner scan = new Scanner(System.in);
-<<<<<<< HEAD
+
 		boolean firstMenu = true;
 		boolean secondMenu = true;
 		while (firstMenu) {
-=======
+
 		boolean homeMenu = true;
 		
 		
 		while (homeMenu) {
 			boolean loginMenu = true;
->>>>>>> branch 'main' of https://github.com/n-man13/CRS-Group-B-JAVA-POS.git
+
 			System.out.println("*****Welcome to CRS Application*****");
 			System.out.println("Enter your choice: ");
 			System.out.println("1. Login");
 			System.out.println("2. Student registration");
 			System.out.println("3. Update password");
 			System.out.println("4. Exit");
-<<<<<<< HEAD
-=======
+
 			int choice = Integer.parseInt(scan.nextLine());
 			switch(choice){  
 		    //Case statements  
@@ -172,7 +171,7 @@ public class CRSUserInterface {
 			
 		}
 		System.out.println("Thank you for using CRS, have a great day!");	
->>>>>>> branch 'main' of https://github.com/n-man13/CRS-Group-B-JAVA-POS.git
+
 			
 	}
 
