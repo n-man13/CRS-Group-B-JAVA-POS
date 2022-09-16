@@ -11,6 +11,7 @@ public class Payment {
 	private int paymentID;
 	private Student payer;
 	private double amountPaid;
+	private String modeOfPayment; // Just added from feedback
 	
 	/**
 	 * @return the paymentID
@@ -47,6 +48,18 @@ public class Payment {
 	 */
 	public void setAmountPaid(double amountPaid) {
 		this.amountPaid = amountPaid;
+	}
+	/**
+	 * @return the modeOfPayment
+	 */
+	public String getModeOfPayment() {
+		return modeOfPayment;
+	}
+	/**
+	 * @param modeOfPayment the modeOfPayment to set
+	 */
+	public void setModeOfPayment(String modeOfPayment) {
+		this.modeOfPayment = modeOfPayment;
 	}
 	
 	
