@@ -14,6 +14,4 @@ public class ProfessorService {
 		//view students in professor's course
 	}
 	
-	
-
 }
