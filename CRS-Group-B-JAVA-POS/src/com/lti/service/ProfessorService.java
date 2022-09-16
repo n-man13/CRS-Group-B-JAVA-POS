@@ -12,7 +12,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 
 	public ArrayList<Student> checkStudents() {
 		// view students in professor's course
-		return new ArrayList<Student>();
+		return null;
 	}
 
 	public void recordGrade(double grade, int StudentID, int classID) {
