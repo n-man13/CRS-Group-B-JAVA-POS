@@ -1,6 +1,6 @@
 package com.lti.bean;
 
-import java.util.Collection;
+import java.util.*;
 
 /**
  * 
@@ -10,19 +10,19 @@ import java.util.Collection;
  */
 public class Professor {
 	private int profID;
-	private Collection<Course> courses;
+	private ArrayList<Course> courses;
 	
 	
 	/**
 	 * @return the courses
 	 */
-	public Collection<Course> getCourses() {
+	public ArrayList<Course> getCourses() {
 		return courses;
 	}
 	/**
 	 * @param courses the courses to set
 	 */
-	public void setCourses(Collection<Course> courses) {
+	public void setCourses(ArrayList<Course> courses) {
 		this.courses = courses;
 	}
 	/**

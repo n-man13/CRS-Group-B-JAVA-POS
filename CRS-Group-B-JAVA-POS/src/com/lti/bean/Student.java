@@ -1,6 +1,6 @@
 package com.lti.bean;
 
-import java.util.Collection;
+import java.util.*;
 /**
  * 
  * Student: Id, courses, alternateCourses, gradeCourses, username, password
@@ -10,9 +10,9 @@ import java.util.Collection;
 public class Student {
 	
 	private int studentID;
-	private Collection<Course> registeredCourses;
-	private Collection<Course> alternateCourses;
-	private Collection grades; //move elsewhere in the future
+	private ArrayList<Course> registeredCourses;
+	private ArrayList<Course> alternateCourses;
+	private ArrayList<Double> grades; //move elsewhere in the future
 	
 	
 	
@@ -28,25 +28,25 @@ public class Student {
 	/**
 	 * @return the registeredCourses
 	 */
-	public Collection<Course> getRegisteredCourses() {
+	public ArrayList<Course> getRegisteredCourses() {
 		return registeredCourses;
 	}
 	/**
 	 * @param registeredCourses the registeredCourses to set
 	 */
-	public void setRegisteredCourses(Collection<Course> registeredCourses) {
+	public void setRegisteredCourses(ArrayList<Course> registeredCourses) {
 		this.registeredCourses = registeredCourses;
 	}
 	/**
 	 * @return the alternateCourses
 	 */
-	public Collection<Course> getAlternateCourses() {
+	public ArrayList<Course> getAlternateCourses() {
 		return alternateCourses;
 	}
 	/**
 	 * @param alternateCourses the alternateCourses to set
 	 */
-	public void setAlternateCourses(Collection<Course> alternateCourses) {
+	public void setAlternateCourses(ArrayList<Course> alternateCourses) {
 		this.alternateCourses = alternateCourses;
 	}
 	/**
@@ -58,7 +58,7 @@ public class Student {
 	/**
 	 * @return the grades
 	 */
-	public Collection getGrades() {
+	public ArrayList<Double> getGrades() {
 		return grades;
 	}
 	
