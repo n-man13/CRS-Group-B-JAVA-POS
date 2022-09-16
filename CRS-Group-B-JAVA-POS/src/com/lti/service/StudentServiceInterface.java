@@ -1,5 +1,6 @@
 package com.lti.service;
 
+//student service interface
 public interface StudentServiceInterface {
 	public void applyToCourse() ;
 	

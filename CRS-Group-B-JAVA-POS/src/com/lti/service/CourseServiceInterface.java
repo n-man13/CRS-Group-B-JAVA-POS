@@ -5,5 +5,4 @@ public interface CourseServiceInterface {
 	public void checkAvailability();
 	public void notifyStudent();
 	
-
 }

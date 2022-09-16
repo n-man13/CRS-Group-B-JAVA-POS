@@ -7,5 +7,4 @@ public interface AdminServiceInterface {
     public void deleteCourse();
     public void listAllCourse();
 	public void approveStudentRegistration();
-	
 }
