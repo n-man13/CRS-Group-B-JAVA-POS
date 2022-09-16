@@ -1,5 +1,7 @@
 package com.lti.service;
 
+import java.util.ArrayList;
+
 import com.lti.bean.*;
 
 public class ProfessorService implements ProfessorServiceInterface {
@@ -8,12 +10,14 @@ public class ProfessorService implements ProfessorServiceInterface {
 		// apply to specific course
 	}
 
-	public void recordGrade() {
-		// register a grade for a student
+	public ArrayList<Student> checkStudents() {
+		// view students in professor's course
+		return new ArrayList<Student>();
 	}
 
-	public void checkStudents() {
-		// view students in professor's course
+	public void recordGrade(double grade, int StudentID, int classID) {
+		// record grade for student in class
+
 	}
 
 }
