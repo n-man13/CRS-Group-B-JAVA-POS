@@ -1,6 +1,6 @@
 package com.lti.service;
 
-public class StudentService {
+public class StudentService implements StudentServiceInterface {
 	
 	public void applyToCourse() {
 		//adds course from applied list

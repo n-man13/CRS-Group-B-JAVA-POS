@@ -1,6 +1,6 @@
 package com.lti.service;
 
-public class ProfessorService {
+public class ProfessorService implements ProfessorServiceInterface {
 	
 	public void applyToCourse () {
 		//apply to specific course
