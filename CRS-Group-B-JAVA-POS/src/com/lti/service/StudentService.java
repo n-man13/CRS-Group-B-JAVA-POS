@@ -5,12 +5,14 @@ import com.lti.bean.Student;
 public class StudentService implements StudentServiceInterface {
 	
 	private Student student;
+	private static int newestID = 1;
 	
-	public StudentService(int id) {
-		student = new Student(id);
+	public StudentService() {
+		student = new Student(++newestID);
 	}
 	public void applyToCourse() {
 		//adds course from applied list
+
 	}
 	
 	public void dropCourse() {
