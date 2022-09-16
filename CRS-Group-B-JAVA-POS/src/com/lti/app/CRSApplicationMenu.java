@@ -20,7 +20,9 @@ public class CRSApplicationMenu {
 		// 
 		Scanner scan = new Scanner(System.in);
 		boolean homeMenu = true;
-		
+		CRSAdminMenu adminMenu = new CRSAdminMenu();
+		CRSProfessorMenu professorMenu = new CRSProfessorMenu();
+		CRSStudentMenu studentMenu = new CRSStudentMenu();
 		
 		while (homeMenu) {
 			boolean loginMenu = true;
@@ -48,82 +50,16 @@ public class CRSApplicationMenu {
 		    	while(userMenu) {
 		    		switch(role) {
 		    		case 1:
-		    			System.out.println("*****Welcome Student " + username + "*****");
-		    			System.out.println("Enter your choice: ");
-		    			System.out.println("1. Apply to course");
-		    			System.out.println("2. Drop course");
-		    			System.out.println("3. View applied courses");
-		    			System.out.println("4. Make payment");
-		    			System.out.println("5. Check grades");
-		    			System.out.println("6. Apply to course");
-		    			System.out.println("7. View all courses");
-		    			System.out.println("8. Log out");
-		    			int studentChoice = Integer.parseInt(scan.nextLine());
-		    			switch (studentChoice) {
-		    			case 1:
-		    				System.out.println("Please apply to course");
-		    			break;
-		    			
-		    			// TODO all cases with method implemented from service layer
-		    			
-		    			case 8:
-		    				userMenu = false;
-		    				System.out.println("Please press enter to log out");
-		    				scan.nextLine();
-	    				break;
-	    				default: System.out.println("Method is not implemented or invalid input");
-		    			}
-		    			
+		    			//TODO it should take a student as a parameter
+		    			userMenu = studentMenu.studentMenu();
 	    			break;
 		    		case 2:
-		    			System.out.println("*****Welcome Professor " + username + "*****");
-		    			System.out.println("Enter your choice: ");
-		    			System.out.println("1. Apply to course");
-		    			System.out.println("2. Record grade");
-		    			System.out.println("3. Check students");
-		    			System.out.println("4. Log out");
-		    			int professorChoice = Integer.parseInt(scan.nextLine());
-		    			switch (professorChoice) {
-		    			case 1:
-		    				System.out.println("Please apply to course");
-	    				break;
-		    			
-		    			// TODO all cases with method called from service layer
-		    			
-		    			case 4:
-		    				userMenu = false;
-		    				System.out.println("Please press enter to log out");
-		    				scan.nextLine();
-	    				break;
-	    				default: System.out.println("Method is not implemented or invalid input");
-		    				
-		    			}
+		    			//TODO it should take a professor as a parameter
+		    			userMenu = professorMenu.professorMenu();
     				break;
 		    		case 3:
-		    			System.out.println("*****Welcome Admin " + username + "*****");
-		    			System.out.println("Enter your choice: ");
-		    			System.out.println("1. Create course");
-		    			System.out.println("2. Delete course");
-		    			System.out.println("2. Update course");
-		    			System.out.println("4. View all courses");
-		    			System.out.println("5. Approve registration");
-		    			System.out.println("6. Log out");
-		    			int adminChoice = Integer.parseInt(scan.nextLine());
-		    			switch (adminChoice) {
-		    			case 1:
-		    				System.out.println("Create course");
-	    				break;
-		    			
-		    			// TODO all cases with method called from service layer
-		    			
-		    			case 6:
-		    				userMenu = false;
-		    				System.out.println("Please press enter to log out");
-		    				scan.nextLine();
-	    				break;
-	    				default: System.out.println("Method is not implemented or invalid input");
-		    				
-		    			}
+		    			//TODO it should take a admin as a parameter
+		    			userMenu = adminMenu.adminMenu();
 	    			break;
 	    			default: System.out.println("Invalid Role");
 		    		}
