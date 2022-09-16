@@ -3,26 +3,26 @@
  */
 package com.lti.bean;
 
-import java.util.Collection;
+import java.util.*;
 
 /**
  * @author Nikhil, Luca
  *
  */
 public class Catalog {
-	private Collection<Course> allCourses;
+	private ArrayList<Course> allCourses;
 
 	/**
 	 * @return the allCourses
 	 */
-	public Collection<Course> getAllCourses() {
+	public ArrayList<Course> getAllCourses() {
 		return allCourses;
 	}
 
 	/**
 	 * @param allCourses the allCourses to set
 	 */
-	public void setAllCourses(Collection<Course> allCourses) {
+	public void setAllCourses(ArrayList<Course> allCourses) {
 		this.allCourses = allCourses;
 	}
 	

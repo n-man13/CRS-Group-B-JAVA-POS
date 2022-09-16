@@ -1,7 +1,14 @@
 package com.lti.service;
 
-public class StudentService {
+import com.lti.bean.Student;
+
+public class StudentService implements StudentServiceInterface {
 	
+	private Student student;
+	
+	public StudentService(int id) {
+		student = new Student(id);
+	}
 	public void applyToCourse() {
 		//adds course from applied list
 	}

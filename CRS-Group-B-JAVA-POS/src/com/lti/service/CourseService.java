@@ -1,6 +1,6 @@
 package com.lti.service;
 
-public class CourseService {
+public class CourseService implements CourseServiceInterface{
 	
 	public void getNumberStudents() {
 		//get number of students that applied on this course
