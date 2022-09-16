@@ -1,5 +1,8 @@
 package com.lti.service;
 
+import java.util.ArrayList;
+
+import com.lti.bean.Course;
 import com.lti.bean.Student;
 
 public class StudentService implements StudentServiceInterface {
@@ -10,7 +13,23 @@ public class StudentService implements StudentServiceInterface {
 	public StudentService() {
 		student = new Student(++newestID);
 	}
-	public void applyToCourse() {
+	
+	public StudentService(int studentID) {
+		
+	}
+	public void applyToCourse(Student student, Course course) {
+		ArrayList<Course> courses = student.getRegisteredCourses();
+		System.out.println("Currently registered in the following: " + courses);
+		
+		courses.add(course);
+		System.out.println("Now registered in the following: " + courses);
+
+		student.setRegisteredCourses(courses);
+		
+		
+		
+		
+		
 		//adds course from applied list
 
 	}

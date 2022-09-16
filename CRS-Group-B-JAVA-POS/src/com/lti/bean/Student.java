@@ -7,12 +7,12 @@ import java.util.*;
  * @author Nikhil, Luca
  *
  */
-public class Student {
+public class Student extends User {
 	
 	private int studentID;
-	private ArrayList<Course> registeredCourses;
-	private ArrayList<Course> alternateCourses;
-	private ArrayList<Double> grades; //move elsewhere in the future
+	private ArrayList<Course> registeredCourses = new ArrayList<Course>();
+	private ArrayList<Course> alternateCourses = new ArrayList<Course>();
+	private ArrayList<Double> grades = new ArrayList<Double>(); //move elsewhere in the future
 	
 	
 	
@@ -60,6 +60,11 @@ public class Student {
 	 */
 	public ArrayList<Double> getGrades() {
 		return grades;
+	}
+	@Override
+	public String toString() {
+		return "Student [studentID=" + studentID + ", registeredCourses=" + registeredCourses + ", alternateCourses="
+				+ alternateCourses + ", grades=" + grades + "]";
 	}
 	
 	

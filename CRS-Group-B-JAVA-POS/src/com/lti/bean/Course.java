@@ -22,6 +22,15 @@ public class Course {
 		this.courseID = courseID;
 	}
 	
+	public Course(int courseID, String department, int prereqCourseID) {
+		this.courseID = courseID;
+		this.department = department;
+		this.prereqCourseID = prereqCourseID;
+		
+	}
+	
+	
+	
 	/**
 	 * @return the courseID
 	 */
@@ -81,6 +90,12 @@ public class Course {
 	 */
 	public void setPrereqCourseID(int prereqCourseID) {
 		this.prereqCourseID = prereqCourseID;
+	}
+
+	@Override
+	public String toString() {
+		return "Course [courseID=" + courseID + ", students=" + students + ", prof=" + prof + ", department="
+				+ department + ", prereqCourseID=" + prereqCourseID + "]";
 	}
 	
 	

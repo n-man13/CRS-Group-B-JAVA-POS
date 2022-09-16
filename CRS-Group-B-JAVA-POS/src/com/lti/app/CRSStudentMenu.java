@@ -1,10 +1,31 @@
 package com.lti.app;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.lti.bean.*;
+import com.lti.service.StudentService;
 
 public class CRSStudentMenu {
 	
-	public boolean studentMenu() {
+	public boolean studentMenu(Student student, ArrayList<Course> courses) {
+		
+//		//temporary data for testing
+//		Catalog courseCatalog = new Catalog();
+//		Course course1 = new Course(1, "math", 0);
+//		Course course2 = new Course(2, "physics", 0);
+//		Course course3 = new Course(3, "chemistry", 0);
+//		ArrayList <Course> courses = new ArrayList <Course> ();
+//		courses.add(course1);
+//		courses.add(course2);
+//		courses.add(course3);
+		
+//		
+//		courseCatalog.setAllCourses(courses);
+		StudentService studentService = new StudentService();
+		Course currentCourse;
+		
+		
 		
 		
 		Scanner scan = new Scanner(System.in);
@@ -22,7 +43,20 @@ public class CRSStudentMenu {
 		int studentChoice = Integer.parseInt(scan.nextLine());
 		switch (studentChoice) {
 		case 1:
-			System.out.println("Please apply to course");
+			System.out.println("You selected apply to course");
+			int courseID ;
+			System.out.println("Please tell me the course ID");
+			courseID = scan.nextInt();
+			
+			for(Course c : courses) {
+				if(c.getCourseID() == courseID) {
+					studentService.applyToCourse(student, c);
+				}
+			}
+		
+			
+			
+			
 		break;
 		
 		// TODO all cases with method implemented from service layer

@@ -18,7 +18,7 @@ public class CourseService implements CourseServiceInterface{
 	
 	public void checkAvailability() {
 		//check if course is not full (>10)
-		if(this.course.getStudents().size() <= 10) {
+		if(this.course.getStudents().size() < 10) {
 			System.out.println("This course is available");
 		}
 		else {

@@ -3,7 +3,12 @@
  */
 package com.lti.app;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.lti.bean.Catalog;
+import com.lti.bean.Course;
+import com.lti.bean.Student;
 
 /**
  * @author Nikhil, Luca, Muhammad
@@ -18,6 +23,24 @@ public class CRSApplicationMenu {
 		// TODO Auto-generated method stub
 		// need to take input
 		// 
+		
+		Catalog courseCatalog = new Catalog();
+		Course course1 = new Course(1, "math", 0);
+		Course course2 = new Course(2, "physics", 0);
+		Course course3 = new Course(3, "chemistry", 0);
+		ArrayList <Course> courses = new ArrayList <Course> ();
+		courses.add(course1);
+		courses.add(course2);
+		courses.add(course3);
+		
+		Student student1 = new Student(1);
+		Student student2 = new Student(2);
+		Student student3 = new Student(3);
+		ArrayList <Student> students = new ArrayList <Student> ();
+		students.add(student1);
+		students.add(student2);
+		students.add(student3);
+		
 		Scanner scan = new Scanner(System.in);
 		boolean homeMenu = true;
 		CRSAdminMenu adminMenu = new CRSAdminMenu();
@@ -40,6 +63,8 @@ public class CRSApplicationMenu {
 		    	boolean userMenu = true;
 		    	System.out.println("Enter Username: ");
 		    	String username = scan.nextLine();
+		    
+		    	
 		    	System.out.println("Enter Password: ");
 		    	String password = scan.nextLine();
 		    	System.out.println("Enter Role: ");
@@ -51,7 +76,13 @@ public class CRSApplicationMenu {
 		    		switch(role) {
 		    		case 1:
 		    			//TODO it should take a student as a parameter
-		    			userMenu = studentMenu.studentMenu();
+		    			for (Student s: students) {
+				    		if (s.getStudentID() == Integer.parseInt(username)) {
+				    			userMenu = studentMenu.studentMenu(s, courses );
+				    		}
+				    		
+				    	}
+		    			
 	    			break;
 		    		case 2:
 		    			//TODO it should take a professor as a parameter
