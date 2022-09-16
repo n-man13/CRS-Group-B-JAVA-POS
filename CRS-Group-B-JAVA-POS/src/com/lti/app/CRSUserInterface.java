@@ -19,11 +19,11 @@ public class CRSUserInterface {
 		// need to take input
 		// 
 		Scanner scan = new Scanner(System.in);
-		boolean firstMenu = true;
+		boolean homeMenu = true;
 		
 		
-		while (firstMenu) {
-			boolean secondMenu = true;
+		while (homeMenu) {
+			boolean loginMenu = true;
 			System.out.println("*****Welcome to CRS Application*****");
 			System.out.println("Enter your choice: ");
 			System.out.println("1. Login");
@@ -34,8 +34,8 @@ public class CRSUserInterface {
 			switch(choice){  
 		    //Case statements  
 		    case 1: 
-		    while (secondMenu) {
-		    	boolean thirdMenu = true;
+		    while (loginMenu) {
+		    	boolean userMenu = true;
 		    	System.out.println("Enter Username: ");
 		    	String username = scan.nextLine();
 		    	System.out.println("Enter Password: ");
@@ -45,7 +45,7 @@ public class CRSUserInterface {
 		    	System.out.println("2. Professor");
 		    	System.out.println("3. Admin");
 		    	int role = Integer.parseInt(scan.nextLine());
-		    	while(thirdMenu) {
+		    	while(userMenu) {
 		    		switch(role) {
 		    		case 1:
 		    			System.out.println("*****Welcome Student " + username + "*****");
@@ -58,6 +58,21 @@ public class CRSUserInterface {
 		    			System.out.println("6. Apply to course");
 		    			System.out.println("7. View all courses");
 		    			System.out.println("8. Log out");
+		    			int studentChoice = Integer.parseInt(scan.nextLine());
+		    			switch (studentChoice) {
+		    			case 1:
+		    				System.out.println("Please apply to course");
+		    			break;
+		    			
+		    			// TODO all cases with method implemented from service layer
+		    			
+		    			case 8:
+		    				System.out.println("Please press enter to log out");
+		    				scan.nextLine();
+	    				break;
+	    				default: System.out.println("Method is not implemented or invalid input");
+		    			}
+		    			
 	    			break;
 		    		case 2:
 		    			System.out.println("*****Welcome Professor " + username + "*****");
@@ -66,6 +81,21 @@ public class CRSUserInterface {
 		    			System.out.println("2. Record grade");
 		    			System.out.println("3. Check students");
 		    			System.out.println("4. Log out");
+		    			int professorChoice = Integer.parseInt(scan.nextLine());
+		    			switch (professorChoice) {
+		    			case 1:
+		    				System.out.println("Please apply to course");
+	    				break;
+		    			
+		    			// TODO all cases with method called from service layer
+		    			
+		    			case 4:
+		    				System.out.println("Please press enter to log out");
+		    				scan.nextLine();
+	    				break;
+	    				default: System.out.println("Method is not implemented or invalid input");
+		    				
+		    			}
     				break;
 		    		case 3:
 		    			System.out.println("*****Welcome Admin " + username + "*****");
@@ -76,16 +106,28 @@ public class CRSUserInterface {
 		    			System.out.println("4. View all courses");
 		    			System.out.println("5. Approve registration");
 		    			System.out.println("6. Log out");
+		    			int adminChoice = Integer.parseInt(scan.nextLine());
+		    			switch (adminChoice) {
+		    			case 1:
+		    				System.out.println("Create course");
+	    				break;
+		    			
+		    			// TODO all cases with method called from service layer
+		    			
+		    			case 6:
+		    				System.out.println("Please press enter to log out");
+		    				scan.nextLine();
+	    				break;
+	    				default: System.out.println("Method is not implemented or invalid input");
+		    				
+		    			}
 	    			break;
 	    			default: System.out.println("Invalid Role");
 		    		}
-		    		System.out.println("Press enter to log out");
-		    		scan.nextLine();
-		    		thirdMenu = false;
 		    	}
 		    	System.out.println("Press enter to return to main page");
 	    		scan.nextLine();
-	    		secondMenu = false;
+	    		loginMenu = false;
 		    }
 		    break;  
 		    case 2: 
@@ -111,7 +153,7 @@ public class CRSUserInterface {
 		    case 4:
 		    	System.out.println("Press enter to exit");
 	    		scan.nextLine();
-	    		firstMenu = false;
+	    		homeMenu = false;
 		    //Default case statement 
     		break;
 		    default:System.out.println("Invalid Operation");  
