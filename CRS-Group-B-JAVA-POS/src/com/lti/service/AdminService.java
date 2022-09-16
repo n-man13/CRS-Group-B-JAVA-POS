@@ -1,6 +1,6 @@
 package com.lti.service;
 
-public class AdminService {
+public class AdminService implements AdminServiceInterface{
 	
 	public void createCourse() {
 		
