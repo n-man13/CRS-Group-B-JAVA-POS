@@ -67,6 +67,7 @@ public class CRSUserInterface {
 		    			// TODO all cases with method implemented from service layer
 		    			
 		    			case 8:
+		    				userMenu = false;
 		    				System.out.println("Please press enter to log out");
 		    				scan.nextLine();
 	    				break;
@@ -90,6 +91,7 @@ public class CRSUserInterface {
 		    			// TODO all cases with method called from service layer
 		    			
 		    			case 4:
+		    				userMenu = false;
 		    				System.out.println("Please press enter to log out");
 		    				scan.nextLine();
 	    				break;
@@ -115,6 +117,7 @@ public class CRSUserInterface {
 		    			// TODO all cases with method called from service layer
 		    			
 		    			case 6:
+		    				userMenu = false;
 		    				System.out.println("Please press enter to log out");
 		    				scan.nextLine();
 	    				break;
