@@ -12,6 +12,11 @@ public class Payment {
 	private Student payer;
 	private double amountPaid;
 	private String modeOfPayment; // Just added from feedback
+	private String cvv;
+	private String expiration;
+	private String cardNumber;
+	
+
 	
 	/**
 	 * @return the paymentID
@@ -60,6 +65,24 @@ public class Payment {
 	 */
 	public void setModeOfPayment(String modeOfPayment) {
 		this.modeOfPayment = modeOfPayment;
+	}
+	public String getCvv() {
+		return cvv;
+	}
+	public void setCvv(String cvv) {
+		this.cvv = cvv;
+	}
+	public String getExpiration() {
+		return expiration;
+	}
+	public void setExpiration(String expiration) {
+		this.expiration = expiration;
+	}
+	public String getCardNumber() {
+		return cardNumber;
+	}
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 	
 	
