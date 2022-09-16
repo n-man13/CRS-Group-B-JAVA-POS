@@ -8,7 +8,6 @@ public class TestApp {
 		// TODO Auto-generated method stub
 		// Commit 1
 		
-		}
 	}
-
 }
+
