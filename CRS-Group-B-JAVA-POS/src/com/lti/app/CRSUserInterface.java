@@ -4,7 +4,7 @@
 package com.lti.app;
 
 /**
- * @author user101
+ * @author Nikhil, Luca, Muhammad
  *
  */
 public class CRSUserInterface {
@@ -14,7 +14,8 @@ public class CRSUserInterface {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		// need to take input
+		// 
 	}
 
 }
