@@ -19,7 +19,7 @@ Student Service
 	
 5. checkGrades
 	view for each applied course the grade you have
-
+	
 6. listAllCourses
 	display all courses
 
@@ -29,7 +29,7 @@ Admin Service
 	ask information (name, department) -> on app
 	get arrayList length and generate ID -> on app
 	call method createCourse returns a course
-	add newly created course to arrayList
+	add newly created course to arrayList in app
 		
 2. updateCourse(ID, name, department)
 	ask ID (needs validation)

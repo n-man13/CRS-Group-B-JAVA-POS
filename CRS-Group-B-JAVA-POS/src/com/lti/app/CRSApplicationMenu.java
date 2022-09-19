@@ -131,7 +131,7 @@ public class CRSApplicationMenu {
 			
 		}
 		System.out.println("Thank you for using CRS, have a great day!");	
-			
+		scan.close();
 	}
 
 }
