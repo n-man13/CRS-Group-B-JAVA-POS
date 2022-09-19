@@ -63,9 +63,21 @@ public class CRSStudentMenu {
 			}
 			System.out.println("Please select the course ID");
 			courseID = scan.nextInt();
-			studentService.dropCourse(int id);
+			studentService.dropCourse(Student student, int id);
+			break;
 			
-			
+		case 3:
+			System.out.println("You selected Display applied courses");
+			for (Course c : student.getRegisteredCourses()) {
+				System.out.println(c);
+			}
+			break;
+		case 4:
+			System.out.println("You selected Make Payment");
+			break;
+		
+		case 5:
+			System.out.println("You ");
 		
 		// TODO all cases with method implemented from service layer
 		
