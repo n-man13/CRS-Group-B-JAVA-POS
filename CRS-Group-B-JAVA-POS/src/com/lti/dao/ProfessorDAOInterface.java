@@ -14,8 +14,8 @@ public interface ProfessorDAOInterface {
 	/**
 	 * 
 	 * @param prof new professor to add
-	 * @return if professor was created and saved
+	 * @return new ID if created successfully, else -1
 	 */
-	public boolean createProfessor(Professor prof);
+	public int createProfessor(Professor prof);
 	
 }

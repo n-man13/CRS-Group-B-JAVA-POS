@@ -5,26 +5,30 @@ import java.util.ArrayList;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
 import com.lti.dao.CourseDAOInterface;
+import com.lti.dao.ProfessorDAOInterface;
 
 public class AdminService implements AdminServiceInterface{
+	private CourseDAOInterface courseDAO;
+	private ProfessorDAOInterface profDAO;
 	
 	public Course createCourse(int id, String name, String department, int prereqID) {
 		Course newCourse = new Course(id, name, department, prereqID);
-		CourseDAOInterface course = new CourseDAO();
-		course.createCourse(newCourse);
+		
+		courseDAO.createCourse(newCourse);
 		System.out.println("Course created");
 		return newCourse;
 		
 	}
 	
-	public Professor createProfessor(int profID) {
-		Professor prof = new Professor(profID);
+	public Professor createProfessor(String name) {
+		Professor prof = new Professor(name);
+		int id = profDAO.createProfessor(prof);
 		System.out.println("Professor created");
+		prof = new Professor(id, name);
 		return prof;
-
 	}
 	
-	public void updateCourse(Course course, String name, String department, Professor prof, int prereqID) {
+	public void updateCourse(Course course, String name, String department, Professor prof, int prereqID) { //TODO:
 		course.setName(name);
 		course.setDepartment(department);
 		course.setProf(prof);

@@ -10,6 +10,7 @@ import java.util.*;
  */
 public class Professor {
 	private int profID;
+	private String name;
 	private ArrayList<Course> courses;
 	
 	
@@ -17,10 +18,20 @@ public class Professor {
 	
 	/**
 	 * @param profID
+	 * @param name
 	 */
-	public Professor(int profID) {
+	public Professor(int profID, String name) {
 		super();
-		this.profID = profID;
+		this.name = name;
+		courses = new ArrayList<Course>();
+	}
+	/**
+	 * 
+	 * @param name
+	 */
+	public Professor(String name) {
+		super();
+		this.name = name;
 		courses = new ArrayList<Course>();
 	}
 	/**
@@ -40,6 +51,18 @@ public class Professor {
 	 */
 	public int getProfID() {
 		return profID;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

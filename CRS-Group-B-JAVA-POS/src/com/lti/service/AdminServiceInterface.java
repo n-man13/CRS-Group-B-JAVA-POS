@@ -7,7 +7,7 @@ import com.lti.bean.Professor;
 
 public interface AdminServiceInterface {
 	public Course createCourse(int id, String name, String department, int prereqID);
-	public Professor createProfessor(int profID);	
+	public Professor createProfessor(String name);	
     public void updateCourse(Course course, String name, String department, Professor prof, int prereqID);
     public Course deleteCourse(ArrayList<Course> courses, int courseID);
     public void listAllCourse();
