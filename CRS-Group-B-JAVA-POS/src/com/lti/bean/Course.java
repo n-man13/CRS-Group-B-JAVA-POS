@@ -9,6 +9,7 @@ import java.util.*;
  */
 public class Course {
 	private int courseID;
+	private String name;
 	private ArrayList<Student> students;
 	private Professor prof;
 	private String department;
@@ -22,8 +23,9 @@ public class Course {
 		this.courseID = courseID;
 	}
 	
-	public Course(int courseID, String department, int prereqCourseID) {
+	public Course(int courseID, String name, String department, int prereqCourseID) {
 		this.courseID = courseID;
+		this.name = name;
 		this.department = department;
 		this.prereqCourseID = prereqCourseID;
 		
@@ -43,6 +45,20 @@ public class Course {
 	public void setCourseID(int courseID) {
 		this.courseID = courseID;
 	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	/**
 	 * @return the students
 	 */
