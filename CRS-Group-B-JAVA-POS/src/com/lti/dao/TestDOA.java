@@ -1,4 +1,4 @@
-package com.lti.doa;
+package com.lti.dao;
 
 public class TestDOA {
 
