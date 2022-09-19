@@ -53,10 +53,11 @@ public class CRSStudentMenu {
 					studentService.applyToCourse(student, c);
 				}
 			}
+			
 		
 			
 			
-			
+		
 		break;
 		
 		// TODO all cases with method implemented from service layer
@@ -65,10 +66,12 @@ public class CRSStudentMenu {
 			
 			System.out.println("Please press enter to log out");
 			scan.nextLine();
+			scan.close();
 			return false;
 			
 		default: System.out.println("Method is not implemented or invalid input");
 		}
+		scan.close();	
 		return true;
 	}
 
