@@ -52,13 +52,12 @@ public class CRSStudentMenu {
 			System.out.println("Please select the course ID");
 			int courseID = scan.nextInt();
 			//Parameters (studentId, courseId)
-			studentService.applyToCourse(student.getStudentID(), courseID);
-			
+			studentService.applyToCourse(student.getStudentID(), courseID);			
 		break;
 		
 		case 2:
 			System.out.println("You selected Drop Course");
-			courseService.viewAppliedCourses();
+			courseService.viewAppliedCourses(student.getStudentID());
 			System.out.println("Please select the course ID");
 			courseID = scan.nextInt();
 			//Parameters (studentId, courseId)

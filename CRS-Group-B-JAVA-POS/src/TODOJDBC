@@ -16,6 +16,10 @@ Student
 	display all courses you applied for
 
 4. makePayment
+	display courses from course roster where studentID and payed = false
+	call method from PaymentService makePayment(studentId)
+		display amount
+		update all courses of student with payed to true.
 	
 5. checkGrades
 	display grades for each course student applied to
