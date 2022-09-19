@@ -1,9 +1,13 @@
 package com.lti.service;
 
+import com.lti.bean.Course;
+
 public class AdminService implements AdminServiceInterface{
 	
-	public void createCourse() {
+	public Course createCourse(int id, String name, String department, int prereqID) {
+		Course newCourse = new Course(id, name, department, prereqID);
 		System.out.println("Course created");
+		return newCourse;
 		
 	}
 	
