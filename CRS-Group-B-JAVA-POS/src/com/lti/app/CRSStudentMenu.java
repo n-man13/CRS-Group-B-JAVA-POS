@@ -53,12 +53,19 @@ public class CRSStudentMenu {
 					studentService.applyToCourse(student, c);
 				}
 			}
-			
-		
-			
-			
-		
 		break;
+		
+		case 2:
+			System.out.println("You selected Drop Course");
+			System.out.println("Your Courses");
+			for (Course c : student.getRegisteredCourses()) {
+				System.out.println(c);
+			}
+			System.out.println("Please select the course ID");
+			courseID = scan.nextInt();
+			studentService.dropCourse(int id);
+			
+			
 		
 		// TODO all cases with method implemented from service layer
 		
