@@ -28,17 +28,17 @@ public interface CourseDAOInterface {
 	
 	/**
 	 * 
-	 * @param course the course to modify
-	 * @param prof the professor to teach
+	 * @param courseID the course to modify
+	 * @param profID the professor to teach
 	 * @return if course was updated
 	 */
-	public boolean addProfessor(Course course, Professor prof);
+	public boolean addProfessor(int courseID, int profID);
 	
 	
 	/**
 	 * 
-	 * @param course the course to delete
+	 * @param courseID the course to delete
 	 * @return the course that was deleted, else null
 	 */
-	public Course deleteCourse(Course course);
+	public Course deleteCourse(int courseID);
 }

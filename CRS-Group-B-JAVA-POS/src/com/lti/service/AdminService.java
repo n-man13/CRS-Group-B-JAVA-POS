@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
+import com.lti.dao.CourseDAOInterface;
 
 public class AdminService implements AdminServiceInterface{
 	
 	public Course createCourse(int id, String name, String department, int prereqID) {
 		Course newCourse = new Course(id, name, department, prereqID);
+		CourseDAOInterface course = new CourseDAO();
+		course.createCourse(newCourse);
 		System.out.println("Course created");
 		return newCourse;
 		

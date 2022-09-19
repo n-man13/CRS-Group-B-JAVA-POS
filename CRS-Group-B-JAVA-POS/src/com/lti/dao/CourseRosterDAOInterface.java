@@ -14,19 +14,19 @@ import com.lti.bean.*;
  */
 public interface CourseRosterDAOInterface {
 	// view one, view all, create, update, delete
-	public ArrayList<Course> viewAllCourses(Student student);
+	public ArrayList<Course> viewAllCourses(int studentID);
 	
-	public ArrayList<Student> viewAllStudents(Course course);
+	public ArrayList<Student> viewAllStudents(int courseID);
 	
-	public ArrayList<Course> viewAllPaidCourses(Student student);
+	public ArrayList<Course> viewAllPaidCourses(int studentID);
 	
-	public Map<Course, Double> viewGrades(Student student);
+	public Map<Course, Double> viewGrades(int studentID);
 	
-	public boolean addStudent(Student student, Course course, boolean paid);
+	public boolean addStudent(int studentID, int courseID);
 	
-	public boolean coursePaid(Student student, Course course);
+	public boolean coursePaid(int studentID, int courseID);
 	
-	public boolean setGrade(Student student, Course course);
+	public boolean setGrade(int studentID, int courseID);
 	
-	public boolean removeStudent(Student student, Course course);
+	public boolean removeStudent(int studentID, int courseID);
 }
