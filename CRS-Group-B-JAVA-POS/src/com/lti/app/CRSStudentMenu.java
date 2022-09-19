@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.lti.bean.*;
+import com.lti.service.CourseService;
+import com.lti.service.CourseServiceInterface;
 import com.lti.service.StudentService;
 
 public class CRSStudentMenu {
@@ -23,6 +25,8 @@ public class CRSStudentMenu {
 //		
 //		courseCatalog.setAllCourses(courses);
 		StudentService studentService = new StudentService();
+		CourseServiceInterface courseService = new CourseService();
+		
 		Course currentCourse;
 		
 		
@@ -42,34 +46,28 @@ public class CRSStudentMenu {
 		int studentChoice = Integer.parseInt(scan.nextLine());
 		switch (studentChoice) {
 		case 1:
-			System.out.println("You selected apply to course");
-			int courseID ;
-			System.out.println("Please tell me the course ID");
-			courseID = scan.nextInt();
 			
-			for(Course c : courses) {
-				if(c.getCourseID() == courseID) {
-					studentService.applyToCourse(student, c);
-				}
-			}
+			System.out.println("You selected apply to course");
+			courseService.viewAllCourses();
+			System.out.println("Please select the course ID");
+			int courseID = scan.nextInt();
+			//Parameters (studentId, courseId)
+			studentService.applyToCourse(student.getStudentID(), courseID);
+			
 		break;
 		
 		case 2:
 			System.out.println("You selected Drop Course");
-			System.out.println("Your Courses");
-			for (Course c : student.getRegisteredCourses()) {
-				System.out.println(c);
-			}
+			courseService.viewAppliedCourses();
 			System.out.println("Please select the course ID");
 			courseID = scan.nextInt();
-			studentService.dropCourse(Student student, int id);
+			//Parameters (studentId, courseId)
+			studentService.dropCourse(student.getStudentID, courseID);
 			break;
 			
 		case 3:
-			System.out.println("You selected Display applied courses");
-			for (Course c : student.getRegisteredCourses()) {
-				System.out.println(c);
-			}
+			System.out.println("You selected Display applied Courses");
+			courseService.viewAppliedCourses();
 			break;
 		case 4:
 			System.out.println("You selected Make Payment");
@@ -77,19 +75,11 @@ public class CRSStudentMenu {
 		
 		case 5:
 			System.out.println("You selected Check Grades");
-			for (Course c : student.getRegisteredCourses()) {
-				System.out.println("Id: " + c.getCourseID() +
-									" Name: " + c.getName() +
-									" Grade: " + c.getStudentGrades().get(student));
-			}
+			studentService.checkGrades(student.getStudentID());
 		break;	
 		case 6:
 			System.out.println("You selected Display all Courses");
-			for (Course c : student.getRegisteredCourses()) {
-				System.out.println("Id: " + c.getCourseID() +
-									" Name: " + c.getName() +
-									" Department " + c.getDepartment());
-			}
+			courseService.viewAllCourses();
 			
 		case 7:
 			

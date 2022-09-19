@@ -6,11 +6,6 @@ public class CourseService implements CourseServiceInterface{
 	
 	Course course;
 	
-	public CourseService(int courseID) {
-		course = new Course(courseID);
-		
-	}
-	
 	public void getNumberStudents() {
 		//get number of students that applied on this course
 		this.course.getStudents().size();
