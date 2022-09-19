@@ -39,16 +39,5 @@ public interface AdminDAOInterface {
 	 */
 	public ArrayList<Course> listAllCourses();
 	
-	/**
-	 * No Idea what this does
-	 */
-	public void approveStudentRegistration();
-	
-	/**
-	 * 
-	 * @param prof new professor to add
-	 * @return if professor was created and saved
-	 */
-	public boolean createProfessor(Professor prof);
 	
 }
