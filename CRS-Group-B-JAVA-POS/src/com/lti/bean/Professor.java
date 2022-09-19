@@ -13,6 +13,16 @@ public class Professor {
 	private ArrayList<Course> courses;
 	
 	
+	
+	
+	/**
+	 * @param profID
+	 */
+	public Professor(int profID) {
+		super();
+		this.profID = profID;
+		courses = new ArrayList<Course>();
+	}
 	/**
 	 * @return the courses
 	 */

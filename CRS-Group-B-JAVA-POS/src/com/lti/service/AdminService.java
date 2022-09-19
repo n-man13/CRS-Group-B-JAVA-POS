@@ -1,6 +1,9 @@
 package com.lti.service;
 
+import java.util.ArrayList;
+
 import com.lti.bean.Course;
+import com.lti.bean.Professor;
 
 public class AdminService implements AdminServiceInterface{
 	
@@ -11,19 +14,33 @@ public class AdminService implements AdminServiceInterface{
 		
 	}
 	
-	public void createProfessor() {
+	public Professor createProfessor(int profID) {
+		Professor prof = new Professor(profID);
 		System.out.println("Professor created");
+		return prof;
 
 	}
 	
-	public void updateCourse() {
+	public void updateCourse(Course course, String name, String department, Professor prof, int prereqID) {
+		course.setName(name);
+		course.setDepartment(department);
+		course.setProf(prof);
+		course.setPrereqCourseID(prereqID);
 		System.out.println("Course updated");
 
 	}
 	
-	public void deleteCourse() {
-		System.out.println("Course deleted");
-
+	public Course deleteCourse(ArrayList<Course> courses, int courseID) {
+		Course c = null;
+		for (int i = 0; i < courses.size(); i++) {
+			if (courses.get(i).getCourseID() == courseID) {
+				c = courses.remove(i);
+				System.out.println("Course deleted");
+				return c;
+			}
+		}
+		System.out.println("Course not found");
+		return c;
 	}
 	
 	public void listAllCourse() {
