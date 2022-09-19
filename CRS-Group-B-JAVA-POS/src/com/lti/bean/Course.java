@@ -14,7 +14,7 @@ public class Course {
 	private Professor prof;
 	private String department;
 	private int prereqCourseID;
-	
+	private Map<Student, Double> studentGrades;
 	/**
 	 * 
 	 * @param courseID
@@ -112,6 +112,14 @@ public class Course {
 	public String toString() {
 		return "Course [courseID=" + courseID + ", students=" + students + ", prof=" + prof + ", department="
 				+ department + ", prereqCourseID=" + prereqCourseID + "]";
+	}
+
+	public Map<Student, Double> getStudentGrades() {
+		return studentGrades;
+	}
+
+	public void setStudentGrades(Map<Student, Double> studentGrades) {
+		this.studentGrades = studentGrades;
 	}
 	
 	
