@@ -14,19 +14,41 @@ import com.lti.bean.*;
 public interface AdminDAOInterface {
 	/**
 	 * 
+	 * @param course course to create
+	 * @return if course created successfully
+	 */
+	public boolean createCourse(Course course);
+	
+	/**
+	 * 
+	 * @param course course to update
+	 * @return if course updated successfully
+	 */
+	public boolean updateCourse(Course course);
+	
+	/**
+	 * 
+	 * @param course course to create
+	 * @return course deleted successfully, else null
+	 */
+	public Course deleteCourse(Course course);
+	
+	/**
+	 * 
 	 * @return list of all courses in DB
 	 */
-	public ArrayList<Course> getAllCourses();
+	public ArrayList<Course> listAllCourses();
+	
+	/**
+	 * No Idea what this does
+	 */
+	public void approveStudentRegistration();
 	
 	/**
 	 * 
-	 * @return list of all professors in DB
+	 * @param prof new professor to add
+	 * @return if professor was created and saved
 	 */
-	public ArrayList<Professor> getAllProfessors();
+	public boolean createProfessor(Professor prof);
 	
-	/**
-	 * 
-	 * @return list of all students in DB
-	 */
-	public ArrayList<Student> getAllStudents();
 }
