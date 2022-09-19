@@ -25,20 +25,20 @@ Student Service
 
 Admin Service
 	
-1. createCourse(ID, name, department)
+1. createCourse(ID, name, department, prereqID)
 	ask information (name, department) -> on app
 	get arrayList length and generate ID -> on app
 	call method createCourse returns a course
 	add newly created course to arrayList in app
 		
-2. updateCourse(ID, name, department)
+2. updateCourse(ID, name, department, prereqID)
 	ask ID (needs validation)
 	get(id) from arrayList (or hashmap).
 	display old info
 	ask for name change (if blank don't change)
 	ask for department	(if blank don't change)
 	
-3. deleteCourse(ID)
+3. deleteCourse(allCourses, ID)
 	ask for ID
 	if correct remove from Collection
 
@@ -47,6 +47,10 @@ Admin Service
 
 5. approveStudentRegistration
 	...
+	
+6. createProfessor(profID)
+	get size of professors -> profID (in menu)
+	add return to professor list
 	
 Professor Service
 
