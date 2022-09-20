@@ -24,9 +24,14 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 	private static final String PASS = "root";
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
-	
+
+	private UserDAOInterface userDAO;
+
 	@Override
 	public int createProfessor(Professor prof) {
+
+		int userID = userDAO.createNewUser(prof.getUsername(), prof.getPassword(), 2);
+
 		try {
 			// Step 3 Register Driver
 
@@ -41,13 +46,13 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 
 			String sql = "insert into Professor values(?,?)";
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, prof.getProfID());
+			stmt.setInt(1, userID);
 			stmt.setString(2, prof.getName());
-			
+
 			// Step 6 execute statement
 
 			stmt.executeUpdate();
-			return prof.getProfID();
+			return userID;
 
 		} catch (SQLException e) {
 			e.printStackTrace();

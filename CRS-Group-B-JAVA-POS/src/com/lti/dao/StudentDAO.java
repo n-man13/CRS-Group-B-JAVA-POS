@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.lti.bean.Student;
+import com.lti.bean.User;
 
 /**
  * @author user101
@@ -26,16 +27,16 @@ public class StudentDAO implements StudentDAOInterface {
 	private PreparedStatement stmt = null;
 
 	private UserDAOInterface userDAO;
-	
+
 	@Override
 	public boolean createStudent(Student student) {
-		
-		userDAO.createNewUser(student.getUsername(), student.getPassword(), 3);
-		
+		boolean created = false;
+		int userID = userDAO.createNewUser(student.getUsername(), student.getPassword(), 3);
+
 		try {
 			// Step 3 Register Driver
 
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName(JDBC_DRIVER);
 
 			// Step 4 make a connection
 
@@ -46,12 +47,13 @@ public class StudentDAO implements StudentDAOInterface {
 
 			String sql = "insert into Student values(?,?)";
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, student.getStudentID());
+			stmt.setInt(1, userID);
 			stmt.setString(2, student.getName());
 
 			// Step 6 execute statement
 
 			stmt.executeUpdate();
+			created = true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,8 +72,9 @@ public class StudentDAO implements StudentDAOInterface {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+
 		}
-		return false;
+		return created;
 	}
 
 }
