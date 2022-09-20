@@ -75,4 +75,10 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 		return userID;
 	}
 
+	@Override
+	public Professor viewProfessor(int profID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

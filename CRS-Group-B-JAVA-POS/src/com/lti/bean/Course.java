@@ -13,6 +13,7 @@ public class Course {
 	private ArrayList<Student> students;
 	private Professor prof;
 	private String department;
+	private String description;
 	private int prereqCourseID;
 	private Map<Student, Double> studentGrades;
 	/**
@@ -120,6 +121,20 @@ public class Course {
 
 	public void setStudentGrades(Map<Student, Double> studentGrades) {
 		this.studentGrades = studentGrades;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

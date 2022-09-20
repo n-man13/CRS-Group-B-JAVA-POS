@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.lti.bean.Course;
+import com.lti.bean.Professor;
 import com.lti.bean.User;
 
 public class CourseDAO implements CourseDAOInterface {
@@ -20,6 +21,8 @@ public class CourseDAO implements CourseDAOInterface {
 	private static final String PASS = "root";
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
+	
+	private ProfessorDAOInterface profDAO = new ProfessorDAO();
 	
 	/**
 	 * returns all courses in an ArrayList
@@ -50,12 +53,18 @@ public class CourseDAO implements CourseDAOInterface {
 				
 				int tempCourseID  = rs.getInt("courseID");
 				Course tempCourse = new Course(tempCourseID);
-				String tempUsername = rs.getString("name");
+				String tempName = rs.getString("name");
+				tempCourse.setName(tempName);
 				String tempDepartment = rs.getString("department");
+				tempCourse.setDepartment(tempDepartment);
 				String tempDescription = rs.getString("description");
+				tempCourse.setDescription(tempDescription);
 				int tempProfID= rs.getInt("professorID");
+				Professor pro = profDAO.viewProfessor(tempProfID);
+				tempCourse.setProf(pro);
 				int tempPrereqID= rs.getInt("prereqID");
-				
+				tempCourse.setPrereqCourseID(tempPrereqID);
+				courses.add(tempCourse);
 			}
 
 		} catch (SQLException e) {
@@ -77,7 +86,7 @@ public class CourseDAO implements CourseDAOInterface {
 			}
 
 		}
-		return null;
+		return courses;
 	}
 
 	/**
