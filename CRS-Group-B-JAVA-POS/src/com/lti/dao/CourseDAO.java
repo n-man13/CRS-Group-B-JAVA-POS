@@ -120,8 +120,65 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public Course deleteCourse(int courseID) {
-		// TODO Auto-generated method stub
-		return null;
+		Course course = null;
+		try {
+			// Step 3 Register Driver
+
+			Class.forName(JDBC_DRIVER);
+
+			// Step 4 make a connection
+
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// Step 5 create and populate statement
+
+			String sql = "SELECT courseID, name , department, description, professorID, prereqID FROM Course WHERE courseID='?'";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, courseID);
+			
+			// Step 6 execute statement
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				// Retrieve by column name
+				
+				int tempCourseID  = rs.getInt("courseID");
+				course = new Course(tempCourseID);
+				String tempName = rs.getString("name");
+				course.setName(tempName);
+				String tempDepartment = rs.getString("department");
+				course.setDepartment(tempDepartment);
+				String tempDescription = rs.getString("description");
+				course.setDescription(tempDescription);
+				int tempProfID= rs.getInt("professorID");
+				Professor pro = profDAO.viewProfessor(tempProfID);
+				course.setProf(pro);
+				int tempPrereqID= rs.getInt("prereqID");
+				course.setPrereqCourseID(tempPrereqID);
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return course;
 	}
 
 }
