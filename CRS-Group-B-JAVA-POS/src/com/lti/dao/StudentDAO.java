@@ -29,9 +29,9 @@ public class StudentDAO implements StudentDAOInterface {
 	private UserDAOInterface userDAO;
 
 	@Override
-	public boolean createStudent(Student student) {
-		boolean created = false;
-		int userID = userDAO.createNewUser(student.getUsername(), student.getPassword(), 3);
+	public int createStudent(Student student) {
+		int created = -1;
+		created = userDAO.createNewUser(student.getUsername(), student.getPassword(), 3);
 
 		try {
 			// Step 3 Register Driver
@@ -47,13 +47,13 @@ public class StudentDAO implements StudentDAOInterface {
 
 			String sql = "insert into Student values(?,?)";
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, userID);
+			stmt.setInt(1, created);
 			stmt.setString(2, student.getName());
 
 			// Step 6 execute statement
 
 			stmt.executeUpdate();
-			created = true;
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
