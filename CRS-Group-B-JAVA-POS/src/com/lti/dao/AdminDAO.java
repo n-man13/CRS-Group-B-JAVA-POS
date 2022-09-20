@@ -18,7 +18,7 @@ public class AdminDAO implements AdminDAOInterface {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 
-	private UserDAOInterface userDAO;
+	private UserDAOInterface userDAO = new UserDAO();
 	
 	@Override
 	public int createAdmin(Admin admin) {
