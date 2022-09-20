@@ -78,8 +78,59 @@ public class StudentDAO implements StudentDAOInterface {
 
 	@Override
 	public Student viewStudent(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		User us = userDAO.viewUser(username);
+		Student student = null;
+		int id = us.getUserID();
+		
+		try {
+			// Step 3 Register Driver
+
+			Class.forName(JDBC_DRIVER);
+
+			// Step 4 make a connection
+
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// Step 5 create and populate statement
+
+			String sql = "SELECT studentID, name FROM Student";
+			
+			// Step 6 execute statement
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				// Retrieve by column name
+				int tempUserID  = rs.getInt("studentID");
+				String tempName = rs.getString("name");
+				if (tempUserID == id) {
+					student = new Student(id);
+					student.setName(tempName);
+					student.setUsername(us.getUsername());
+					student.setPassword(us.getPassword());
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return student;
 	}
 
 }

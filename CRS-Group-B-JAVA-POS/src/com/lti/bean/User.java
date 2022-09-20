@@ -55,6 +55,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	/**
+	 * @return the userID
+	 */
+	public int getUserID() {
+		return userID;
+	}
 	
 	
 }

@@ -32,7 +32,7 @@ public interface CourseDAOInterface {
 	 * @param profID the professor to teach
 	 * @return if course was updated
 	 */
-	public boolean addProfessor(int courseID, int profID);
+	public boolean addProfessorToCourse(int courseID, int profID);
 	
 	
 	/**
