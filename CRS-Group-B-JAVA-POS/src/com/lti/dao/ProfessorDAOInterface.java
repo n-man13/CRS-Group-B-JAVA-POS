@@ -18,4 +18,5 @@ public interface ProfessorDAOInterface {
 	 */
 	public int createProfessor(Professor prof);
 	
+	public Professor viewProfessor(int profID);
 }

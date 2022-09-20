@@ -6,9 +6,11 @@ package com.lti.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.lti.bean.Professor;
+import com.lti.bean.Student;
 
 /**
  * @author user101
@@ -73,6 +75,58 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 			}
 		}
 		return userID;
+	}
+
+	@Override
+	public Professor viewProfessor(int profID) {
+		Professor prof = null;
+		try {
+			// Step 3 Register Driver
+
+			Class.forName(JDBC_DRIVER);
+
+			// Step 4 make a connection
+
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// Step 5 create and populate statement
+
+			String sql = "SELECT profID, name FROM Professor";
+			
+			stmt = conn.prepareStatement(sql);
+			// Step 6 execute statement
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				// Retrieve by column name
+				int tempUserID  = rs.getInt("profID");
+				String tempName = rs.getString("name");
+				if (tempUserID == profID) {
+					prof = new Professor(tempUserID, tempName);
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return null;
 	}
 
 }

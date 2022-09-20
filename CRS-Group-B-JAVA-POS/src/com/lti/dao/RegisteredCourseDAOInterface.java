@@ -12,7 +12,7 @@ import com.lti.bean.*;
  * @author user101
  *
  */
-public interface CourseRosterDAOInterface {
+public interface RegisteredCourseDAOInterface {
 	// view one, view all, create, update, delete
 	public ArrayList<Course> viewStudentCourses(int studentID);
 	
