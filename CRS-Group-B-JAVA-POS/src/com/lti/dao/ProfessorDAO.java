@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
+import com.lti.utils.DBUtils;
 
 /**
  * @author user101
@@ -18,13 +19,7 @@ import com.lti.bean.Student;
  */
 public class ProfessorDAO implements ProfessorDAOInterface {
 
-	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_URL = "jdbc:mysql://localhost/crsdatabase";
-
-	// Database credentials
-	private static final String USER = "root";
-	private static final String PASS = "root";
-	private Connection conn = null;
+	
 	private PreparedStatement stmt = null;
 
 	private UserDAOInterface userDAO = new UserDAO();
@@ -35,15 +30,7 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 		int userID = userDAO.createNewUser(prof.getUsername(), prof.getPassword(), 2);
 
 		try {
-			// Step 3 Register Driver
-
-			Class.forName(JDBC_DRIVER);
-
-			// Step 4 make a connection
-
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
+			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
 			String sql = "insert into Professor values(?,?)";
@@ -60,19 +47,6 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		return userID;
 	}
@@ -81,15 +55,7 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 	public Professor viewProfessor(int profID) {
 		Professor prof = null;
 		try {
-			// Step 3 Register Driver
-
-			Class.forName(JDBC_DRIVER);
-
-			// Step 4 make a connection
-
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
+			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
 			String sql = "SELECT profID, name FROM Professor";
@@ -111,20 +77,6 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
 		}
 		return null;
 	}

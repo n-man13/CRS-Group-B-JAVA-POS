@@ -7,16 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.lti.bean.User;
+import com.lti.utils.DBUtils;
 
 public class UserDAO implements UserDAOInterface {
 
-	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_URL = "jdbc:mysql://localhost/crsdatabase";
-
-	// Database credentials
-	private static final String USER = "root";
-	private static final String PASS = "root";
-	private Connection conn = null;
+	
 	private PreparedStatement stmt = null;
 
 	/**
@@ -31,14 +26,7 @@ public class UserDAO implements UserDAOInterface {
 	public int createNewUser(String username, String password, int role) {
 		int userID = -1;
 		try {
-			// Step 3 Register Driver
-
-			Class.forName(JDBC_DRIVER);
-
-			// Step 4 make a connection
-
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			Connection conn = DBUtils.getConnection();
 
 			// Step 5 create and populate statement
 
@@ -70,20 +58,6 @@ public class UserDAO implements UserDAOInterface {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
 		}
 		return userID;
 	}

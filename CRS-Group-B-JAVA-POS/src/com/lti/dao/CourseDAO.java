@@ -10,16 +10,11 @@ import java.util.ArrayList;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
 import com.lti.bean.User;
+import com.lti.utils.DBUtils;
 
 public class CourseDAO implements CourseDAOInterface {
 
-	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_URL = "jdbc:mysql://localhost/crsdatabase";
-
-	// Database credentials
-	private static final String USER = "root";
-	private static final String PASS = "root";
-	private Connection conn = null;
+	
 	private PreparedStatement stmt = null;
 	
 	private ProfessorDAOInterface profDAO = new ProfessorDAO();
@@ -32,14 +27,8 @@ public class CourseDAO implements CourseDAOInterface {
 	public ArrayList<Course> viewAllCourses() {
 		ArrayList<Course> courses = new ArrayList<Course>();
 		try {
-			// Step 3 Register Driver
 
-			Class.forName(JDBC_DRIVER);
-
-			// Step 4 make a connection
-
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			Connection conn = DBUtils.getConnection();
 
 			// Step 5 create and populate statement
 
@@ -72,20 +61,6 @@ public class CourseDAO implements CourseDAOInterface {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
 		}
 		return courses;
 	}
@@ -99,14 +74,7 @@ public class CourseDAO implements CourseDAOInterface {
 	public boolean createCourse(Course course) {
 		boolean created = false;
 		try {
-			// Step 3 Register Driver
-
-			Class.forName(JDBC_DRIVER);
-
-			// Step 4 make a connection
-
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			Connection conn = DBUtils.getConnection();
 
 			// Step 5 create and populate statement
 
@@ -163,14 +131,7 @@ public class CourseDAO implements CourseDAOInterface {
 	public Course deleteCourse(int courseID) {
 		Course course = null;
 		try {
-			// Step 3 Register Driver
-
-			Class.forName(JDBC_DRIVER);
-
-			// Step 4 make a connection
-
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			Connection conn = DBUtils.getConnection();
 
 			// Step 5 create and populate statement
 
@@ -208,21 +169,7 @@ public class CourseDAO implements CourseDAOInterface {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-		}
+		} 
 		return course;
 	}
 
