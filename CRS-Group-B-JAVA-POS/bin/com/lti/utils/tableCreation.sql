@@ -55,7 +55,7 @@ CREATE TABLE Course(
 	REFERENCES Course(courseID)
 );
 
-CREATE TABLE SemesterRegistration(
+CREATE TABLE RegisteredCourse(
 	studentID int NOT NULL,
 	courseID int NOT NULL,
 	feePaid bool DEFAULT 0,
@@ -65,4 +65,12 @@ CREATE TABLE SemesterRegistration(
 	REFERENCES Student(studentID),
 	CONSTRAINT FK_CourseID1 FOREIGN KEY (courseID)
 	REFERENCES Course(courseID)
+);
+
+CREATE TABLE SemesterRegistration(
+	studentID int NOT NULL,
+	semester int NOT NULL,
+	CONSTRAINT PK_StudentSemester PRIMARYKEY (studentID, semester),
+	CONSTRAINT FK_StudentID2 FOREIGN KEY (studentID)
+	REFERENCES Student(studentID)
 );
