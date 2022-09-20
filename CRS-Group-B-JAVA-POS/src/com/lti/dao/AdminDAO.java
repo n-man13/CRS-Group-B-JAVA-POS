@@ -37,7 +37,7 @@ public class AdminDAO implements AdminDAOInterface {
 
 			// Step 5 create and populate statement
 
-			String sql = "insert into Student values(?)";
+			String sql = "insert into Admin values(?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, userID);
 
