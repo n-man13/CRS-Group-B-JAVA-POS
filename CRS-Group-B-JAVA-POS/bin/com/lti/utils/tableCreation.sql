@@ -1,5 +1,5 @@
-create database if not exists CRSDatabase
-use CRSDatabase
+create database if not exists CRSDatabase;
+use CRSDatabase;
 
 CREATE TABLE Roles(
 	roleID int NOT NULL UNIQUE,
@@ -9,7 +9,7 @@ CREATE TABLE Roles(
 );
 
 CREATE TABLE User(
-	userID int NOT NULL AUTO INCREMENT,
+	userID int NOT NULL AUTO_INCREMENT,
 	username varchar(24) NOT NULL UNIQUE,
 	password varchar(24) NOT NULL,
 	role int NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE Admin(
 );
 
 CREATE TABLE Course(
-	courseID int NOT NULL AUTO INCREMENT,
+	courseID int NOT NULL AUTO_INCREMENT,
 	name varchar(20),
 	department varchar(20),
 	description varchar(60),
@@ -61,8 +61,8 @@ CREATE TABLE SemesterRegistration(
 	feePaid bool DEFAULT 0,
 	grade double,
 	CONSTRAINT PK_StudentCourse PRIMARY KEY (studentID, courseID),
-	CONSTRAINT FK_StudentID FOREIGN KEY (studentID)
+	CONSTRAINT FK_StudentID1 FOREIGN KEY (studentID)
 	REFERENCES Student(studentID),
-	CONSTRAINT FK_CourseID FOREIGN KEY (courseID)
+	CONSTRAINT FK_CourseID1 FOREIGN KEY (courseID)
 	REFERENCES Course(courseID)
 );
