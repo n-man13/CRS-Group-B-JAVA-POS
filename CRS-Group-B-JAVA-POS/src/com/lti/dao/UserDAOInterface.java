@@ -8,7 +8,7 @@ public interface UserDAOInterface {
 	 * @param username  the users username
 	 * @param password  the users password
 	 * @param role  the role number 
-	 * @return userID generated
+	 * @return userID generated or -1 if already exists
 	 */
 	public int createNewUser(String username, String password, int role);
 	

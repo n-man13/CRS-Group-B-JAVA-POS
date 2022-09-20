@@ -5,7 +5,7 @@ package com.lti.bean;
  * @author Nikhil, Luca, Muhammad
  *
  */
-public class Admin {
+public class Admin extends User {
 	private int adminID;
 
 	

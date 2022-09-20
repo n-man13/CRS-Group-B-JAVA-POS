@@ -6,9 +6,20 @@ package com.lti.bean;
  *
  */
 public class User {
+	private int userID;
 	private String username;
 	private String password;
 	private int role;
+<<<<<<< HEAD
+=======
+	
+	public User() {
+		userID = -1;
+	}
+	public User(int userID) {
+		this.userID = userID;
+	}
+>>>>>>> branch 'main' of https://github.com/n-man13/CRS-Group-B-JAVA-POS.git
 	
 	/**
 	 * @return the username

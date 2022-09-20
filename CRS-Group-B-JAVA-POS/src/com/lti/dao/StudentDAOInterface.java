@@ -13,8 +13,8 @@ public interface StudentDAOInterface {
 	/**
 	 * 
 	 * @param student  the student to add
-	 * @return if student was added successfully
+	 * @return new ID if created successfully, else -1
 	 */
-	public boolean createStudent(Student student);
+	public int createStudent(Student student);
 
 }

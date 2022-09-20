@@ -8,7 +8,7 @@ import java.util.*;
  * @author Nikhil, Luca
  *
  */
-public class Professor {
+public class Professor extends User {
 	private int profID;
 	private String name;
 	private ArrayList<Course> courses;
