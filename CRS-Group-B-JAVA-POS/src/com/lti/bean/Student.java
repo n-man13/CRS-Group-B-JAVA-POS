@@ -10,6 +10,7 @@ import java.util.*;
 public class Student extends User {
 	
 	private int studentID;
+	private String name;
 	private ArrayList<Course> registeredCourses = new ArrayList<Course>();
 	private ArrayList<Course> alternateCourses = new ArrayList<Course>();
 	private ArrayList<Double> grades = new ArrayList<Double>(); //move elsewhere in the future
@@ -25,6 +26,18 @@ public class Student extends User {
 	public Student(int studentID) {
 		this.studentID = studentID;
 		
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 	/**
 	 * @return the registeredCourses
