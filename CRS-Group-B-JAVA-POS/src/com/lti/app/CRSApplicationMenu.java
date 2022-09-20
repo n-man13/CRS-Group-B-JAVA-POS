@@ -8,7 +8,10 @@ import java.util.Scanner;
 
 import com.lti.bean.Catalog;
 import com.lti.bean.Course;
+import com.lti.bean.Professor;
 import com.lti.bean.Student;
+import com.lti.service.ProfessorService;
+import com.lti.service.ProfessorServiceInterface;
 import com.lti.service.StudentService;
 import com.lti.service.StudentServiceInterface;
 import com.lti.service.UserService;
@@ -33,6 +36,7 @@ public class CRSApplicationMenu {
 		CRSStudentMenu studentMenu = new CRSStudentMenu();
 		UserServiceInterface userService = new UserService();
 		StudentServiceInterface studentService = new StudentService();
+		ProfessorServiceInterface professorService = new ProfessorService();
 		
 		while (homeMenu) {
 			boolean loginMenu = true;
@@ -65,14 +69,14 @@ public class CRSApplicationMenu {
 			    		switch(role) {
 			    		case 3:
 			    			Student student = studentService.getStudentByUsername(username);
-			    			userMenu = studentMenu.studentMenu(student);	
+			    			userMenu = studentMenu.studentMenu(student, scan);	
 		    			break;
 			    		case 2:
-			    			//TODO it should take a professor as a parameter
-			    			userMenu = professorMenu.professorMenu();
+			    			Professor professor = professorService.getProfessorByUsername(username);
+			    			userMenu = professorMenu.professorMenu(professor, scan);
 	    				break;
 			    		case 1:
-			    			//TODO it should take a admin as a parameter
+			    			
 			    			userMenu = adminMenu.adminMenu();
 		    			break;
 		    			default: System.out.println("Invalid Role");

@@ -11,5 +11,7 @@ public interface ProfessorServiceInterface {
 	public void recordGrade (double grade, int StudentID, int classID);
 	
 	public ArrayList<Student> checkStudents () ;
+	
+	public Professor getProfessorByUsername(String username);
 
 }

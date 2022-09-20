@@ -2,11 +2,17 @@ package com.lti.app;
 
 import java.util.Scanner;
 
+import com.lti.bean.Professor;
+import com.lti.service.CourseService;
+import com.lti.service.CourseServiceInterface;
+import com.lti.service.StudentService;
+
 public class CRSProfessorMenu {
 	
-	public boolean professorMenu() {
+	public boolean professorMenu(Professor professor, Scanner scan) {
 		
-		Scanner scan = new Scanner(System.in);
+		StudentService studentService = new StudentService();
+		CourseServiceInterface courseService = new CourseService();
 		
 		System.out.println("*****Welcome Professor*****");
 		System.out.println("Enter your choice: ");
@@ -17,7 +23,8 @@ public class CRSProfessorMenu {
 		int professorChoice = Integer.parseInt(scan.nextLine());
 		switch (professorChoice) {
 		case 1:
-			System.out.println("Please apply to course");
+			System.out.println("You have selected Apply to course");
+			
 		break;
 		
 		// TODO all cases with method called from service layer

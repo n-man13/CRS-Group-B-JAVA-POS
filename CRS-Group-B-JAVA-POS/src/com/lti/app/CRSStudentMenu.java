@@ -12,12 +12,10 @@ import com.lti.service.StudentService;
 
 public class CRSStudentMenu {
 	
-	public boolean studentMenu(Student student) {
+	public boolean studentMenu(Student student, Scanner scan) {
 		
 		StudentService studentService = new StudentService();
 		CourseServiceInterface courseService = new CourseService();
-		Course currentCourse;
-		Scanner scan = new Scanner(System.in);
 		int studentId = student.getStudentID();
 		
 		System.out.println("*****Welcome Student "+ student.getUsername() +"*****");
