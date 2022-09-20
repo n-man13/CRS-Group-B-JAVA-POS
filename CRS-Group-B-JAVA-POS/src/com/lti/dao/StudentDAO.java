@@ -96,6 +96,7 @@ public class StudentDAO implements StudentDAOInterface {
 
 			String sql = "SELECT studentID, name FROM Student";
 			
+			stmt = conn.prepareStatement(sql);
 			// Step 6 execute statement
 			ResultSet rs = stmt.executeQuery(sql);
 

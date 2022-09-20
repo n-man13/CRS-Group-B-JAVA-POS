@@ -7,15 +7,17 @@ import java.util.Scanner;
 
 import com.lti.bean.Course;
 import com.lti.bean.Student;
+import com.lti.dao.CourseDAO;
 import com.lti.dao.CourseDAOInterface;
 import com.lti.dao.CourseRosterDAOInterface;
+import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOInterface;
 
 public class StudentService implements StudentServiceInterface {
 
 	private CourseRosterDAOInterface courseRosterDAO;
-	private CourseDAOInterface courseDAO;
-	private StudentDAOInterface studentDAO;
+	private CourseDAOInterface courseDAO = new CourseDAO();
+	private StudentDAOInterface studentDAO = new StudentDAO();
 
 	public void applyToCourse(int studentId, int courseId) {
 		

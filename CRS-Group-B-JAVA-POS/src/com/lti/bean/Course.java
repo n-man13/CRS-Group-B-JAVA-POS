@@ -19,17 +19,17 @@ public class Course {
 	 * 
 	 * @param courseID
 	 */
-//	public Course(int courseID) {
-//		this.courseID = courseID;
-//	}
-//	
-//	public Course(int courseID, String name, String department, int prereqCourseID) {
-//		this.courseID = courseID;
-//		this.name = name;
-//		this.department = department;
-//		this.prereqCourseID = prereqCourseID;
-//		
-//	}
+	public Course(int courseID) {
+		this.courseID = courseID;
+	}
+	
+	public Course(int courseID, String name, String department, int prereqCourseID) {
+		this.courseID = courseID;
+		this.name = name;
+		this.department = department;
+		this.prereqCourseID = prereqCourseID;
+		
+	}
 	
 	
 	
