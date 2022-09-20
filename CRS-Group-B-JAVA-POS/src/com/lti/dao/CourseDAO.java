@@ -44,6 +44,7 @@ public class CourseDAO implements CourseDAOInterface {
 			// Step 5 create and populate statement
 
 			String sql = "SELECT courseID, name , department, description, professorID, prereqID FROM Course";
+			stmt = conn.prepareStatement(sql);
 			
 			// Step 6 execute statement
 			ResultSet rs = stmt.executeQuery(sql);
