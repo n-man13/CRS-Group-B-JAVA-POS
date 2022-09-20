@@ -97,8 +97,49 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public boolean createCourse(Course course) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean created = false;
+		try {
+			// Step 3 Register Driver
+
+			Class.forName(JDBC_DRIVER);
+
+			// Step 4 make a connection
+
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// Step 5 create and populate statement
+
+			String sql = "insert into Course values(?,?)";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, userID);
+			stmt.setString(2, );
+
+			// Step 6 execute statement
+
+			stmt.executeUpdate();
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return created;
 	}
 
 	/**
@@ -109,7 +150,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public boolean addProfessorToCourse(int courseID, int profID) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -158,6 +199,10 @@ public class CourseDAO implements CourseDAOInterface {
 				course.setPrereqCourseID(tempPrereqID);
 				
 			}
+			sql = "DELETE FROM Course WHERE courseID='?'";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, courseID);
+			stmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
