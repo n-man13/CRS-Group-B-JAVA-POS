@@ -78,34 +78,24 @@ public class CourseDAO implements CourseDAOInterface {
 
 			// Step 5 create and populate statement
 
-			String sql = "insert into Course values(?,?)";
+			String sql = "insert into Course values(?,?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, userID);
-			stmt.setString(2, );
+			stmt.setInt(1, course.getCourseID());
+			stmt.setString(2, course.getName());
+			stmt.setString(3, course.getDepartment());
+			stmt.setString(4, course.getDescription());
+			stmt.setInt(5, course.getProf().getProfID());
+			stmt.setInt(6, course.getPrereqCourseID());
 
 			// Step 6 execute statement
 
 			stmt.executeUpdate();
-			
+			created = true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
 		}
 		return created;
 	}
