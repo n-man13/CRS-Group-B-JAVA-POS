@@ -26,7 +26,7 @@ public class StudentDAO implements StudentDAOInterface {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 
-	private UserDAOInterface userDAO;
+	private UserDAOInterface userDAO = new UserDAO();
 
 	@Override
 	public int createStudent(Student student) {

@@ -25,7 +25,7 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 
-	private UserDAOInterface userDAO;
+	private UserDAOInterface userDAO = new UserDAO();
 
 	@Override
 	public int createProfessor(Professor prof) {
