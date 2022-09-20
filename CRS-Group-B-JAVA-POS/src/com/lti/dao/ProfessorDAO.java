@@ -6,15 +6,15 @@ package com.lti.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.lti.bean.Student;
+
+import com.lti.bean.Professor;
 
 /**
  * @author user101
  *
  */
-public class StudentDAO implements StudentDAOInterface {
+public class ProfessorDAO implements ProfessorDAOInterface {
 
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	private static final String DB_URL = "jdbc:mysql://localhost/crsdatabase";
@@ -24,18 +24,13 @@ public class StudentDAO implements StudentDAOInterface {
 	private static final String PASS = "root";
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
-
-	private UserDAOInterface userDAO;
 	
 	@Override
-	public boolean createStudent(Student student) {
-		
-		userDAO.createNewUser(student.getUsername(), student.getPassword(), 3);
-		
+	public int createProfessor(Professor prof) {
 		try {
 			// Step 3 Register Driver
 
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName(JDBC_DRIVER);
 
 			// Step 4 make a connection
 
@@ -44,14 +39,15 @@ public class StudentDAO implements StudentDAOInterface {
 
 			// Step 5 create and populate statement
 
-			String sql = "insert into Student values(?,?)";
+			String sql = "insert into Professor values(?,?)";
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, student.getStudentID());
-			stmt.setString(2, student.getName());
-
+			stmt.setInt(1, prof.getProfID());
+			stmt.setString(2, prof.getName());
+			
 			// Step 6 execute statement
 
 			stmt.executeUpdate();
+			return prof.getProfID();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,7 +67,7 @@ public class StudentDAO implements StudentDAOInterface {
 				e.printStackTrace();
 			}
 		}
-		return false;
+		return 0;
 	}
 
 }
