@@ -16,5 +16,7 @@ public interface StudentDAOInterface {
 	 * @return new ID if created successfully, else -1
 	 */
 	public int createStudent(Student student);
+	
+	public Student viewStudent(String username);
 
 }
