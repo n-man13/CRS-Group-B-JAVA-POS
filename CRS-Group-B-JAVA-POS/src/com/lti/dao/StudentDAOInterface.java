@@ -18,5 +18,7 @@ public interface StudentDAOInterface {
 	public int createStudent(Student student);
 	
 	public Student viewStudent(String username);
+	
+	public Student viewStudent(int studentID);
 
 }

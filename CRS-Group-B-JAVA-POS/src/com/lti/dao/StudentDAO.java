@@ -20,10 +20,9 @@ public class StudentDAO implements StudentDAOInterface {
 
 	private PreparedStatement stmt = null;
 
-	private UserDAOInterface userDAO = new UserDAO();
-
 	@Override
 	public int createStudent(Student student) {
+		UserDAO userDAO = new UserDAO();
 		int userID = userDAO.createNewUser(student.getUsername(), student.getPassword(), 3);
 
 		try {
@@ -48,12 +47,8 @@ public class StudentDAO implements StudentDAOInterface {
 		return userID;
 	}
 
-	@Override
-	public Student viewStudent(String username) {
-		User us = userDAO.viewUser(username);
+	public Student viewStudent(int studentID) {
 		Student student = null;
-		int id = us.getUserID();
-		
 		try {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
@@ -68,11 +63,9 @@ public class StudentDAO implements StudentDAOInterface {
 				// Retrieve by column name
 				int tempUserID  = rs.getInt("studentID");
 				String tempName = rs.getString("name");
-				if (tempUserID == id) {
-					student = new Student(id);
+				if (tempUserID == studentID) {
+					student = new Student(studentID);
 					student.setName(tempName);
-					student.setUsername(us.getUsername());
-					student.setPassword(us.getPassword());
 				}
 			}
 
@@ -82,6 +75,15 @@ public class StudentDAO implements StudentDAOInterface {
 			e.printStackTrace();
 		} 
 		return student;
+	}
+	
+	@Override
+	public Student viewStudent(String username) {
+		UserDAO userDAO = new UserDAO();
+		User us = userDAO.viewUser(username);
+		int studentID = us.getUserID();
+		return viewStudent(studentID);
+		
 	}
 
 }
