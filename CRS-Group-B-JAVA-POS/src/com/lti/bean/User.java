@@ -6,9 +6,17 @@ package com.lti.bean;
  *
  */
 public class User {
+	private int userID;
 	private String username;
 	private String password;
-	private String role;
+	private int role;
+	
+	public User() {
+		userID = -1;
+	}
+	public User(int userID) {
+		this.userID = userID;
+	}
 	
 	/**
 	 * @return the username
@@ -25,13 +33,13 @@ public class User {
 	/**
 	 * @return the role
 	 */
-	public String getRole() {
+	public int getRole() {
 		return role;
 	}
 	/**
 	 * @param role the role to set
 	 */
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 	/**
