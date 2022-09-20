@@ -78,7 +78,13 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return prof;
+	}
+	@Override
+	public Professor viewProfessor(String username) {
+		UserDAO userDAO = new UserDAO();
+		int profID = userDAO.viewUser(username).getUserID();
+		return viewProfessor(profID);
 	}
 
 }

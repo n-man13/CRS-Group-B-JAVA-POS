@@ -26,7 +26,7 @@ public interface RegisteredCourseDAOInterface {
 	
 	public boolean payFee(int studentID, int courseID);
 	
-	public boolean setGrade(int studentID, int courseID);
+	public boolean setGrade(int studentID, int courseID, double grade);
 	
 	public boolean removeStudentRegistration(int studentID, int courseID);
 }
