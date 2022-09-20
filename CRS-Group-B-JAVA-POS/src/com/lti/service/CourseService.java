@@ -1,5 +1,7 @@
 package com.lti.service;
 
+import java.util.List;
+
 import com.lti.bean.Course;
 
 public class CourseService implements CourseServiceInterface{
@@ -23,6 +25,12 @@ public class CourseService implements CourseServiceInterface{
 	
 	public void notifyStudent() {
 		//notify student if course isn't available
+		
+	}
+	
+	public List <> viewAllCourses(List<Course> courses) {
+		
+		
 		
 	}
 	

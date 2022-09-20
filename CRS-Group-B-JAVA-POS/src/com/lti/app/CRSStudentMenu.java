@@ -1,6 +1,7 @@
 package com.lti.app;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.lti.bean.*;
@@ -91,6 +92,15 @@ public class CRSStudentMenu {
 		}
 		scan.close();	
 		return true;
+	}
+	
+	private void displayCourses(List <Course> courses) {
+		for (Course c : courses) {
+			System.out.println("Id: " + c.getCourseID() +
+			"\nName: " + c.getName() + 
+			"\nDepartment: " + c.getDepartment() +
+			"\nPrerequisite" + c.getPrereqCourseID());
+		}
 	}
 
 }

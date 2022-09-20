@@ -1,5 +1,8 @@
 package com.lti.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.lti.bean.Course;
 import com.lti.bean.Student;
 
@@ -18,17 +21,15 @@ public interface StudentServiceInterface {
 	 * @return Course if successful, else null
 	 */
 	public void dropCourse(int studentId, int courseId);
-	public void viewAppliedCourses(int studentId);
+	public  List<Course> viewAppliedCourses(int studentId);
 	/**
 	 * Makes payment for courses
 	 */
-	public void makePayment(int studentId);
+	public void makePayment(int studentId, int courseId);
 	/**
 	 * Check grades for student
 	 * @param student Student to check grades for
 	 */
-	public void checkGrades(Student student) ;
-	
-	public void viewAllCourses();
+	public Map<Course, Double> checkGrades(int studentId);
 
 }

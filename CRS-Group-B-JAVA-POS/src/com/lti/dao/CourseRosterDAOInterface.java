@@ -14,7 +14,7 @@ import com.lti.bean.*;
  */
 public interface CourseRosterDAOInterface {
 	// view one, view all, create, update, delete
-	public ArrayList<Course> viewAllCourses(int studentID);
+	public ArrayList<Course> viewStudentCourses(int studentID);
 	
 	public ArrayList<Student> viewAllStudents(int courseID);
 	
@@ -22,11 +22,11 @@ public interface CourseRosterDAOInterface {
 	
 	public Map<Course, Double> viewGrades(int studentID);
 	
-	public boolean addStudent(int studentID, int courseID);
+	public boolean addStudentRegistration(int studentID, int courseID);
 	
-	public boolean coursePaid(int studentID, int courseID);
+	public boolean payFee(int studentID, int courseID);
 	
 	public boolean setGrade(int studentID, int courseID);
 	
-	public boolean removeStudent(int studentID, int courseID);
+	public boolean removeStudentRegistration(int studentID, int courseID);
 }
