@@ -30,8 +30,7 @@ public class StudentDAO implements StudentDAOInterface {
 
 	@Override
 	public int createStudent(Student student) {
-		int created = -1;
-		created = userDAO.createNewUser(student.getUsername(), student.getPassword(), 3);
+		int userID = userDAO.createNewUser(student.getUsername(), student.getPassword(), 3);
 
 		try {
 			// Step 3 Register Driver
@@ -47,7 +46,7 @@ public class StudentDAO implements StudentDAOInterface {
 
 			String sql = "insert into Student values(?,?)";
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, created);
+			stmt.setInt(1, userID);
 			stmt.setString(2, student.getName());
 
 			// Step 6 execute statement
@@ -74,7 +73,7 @@ public class StudentDAO implements StudentDAOInterface {
 			}
 
 		}
-		return created;
+		return userID;
 	}
 
 }
