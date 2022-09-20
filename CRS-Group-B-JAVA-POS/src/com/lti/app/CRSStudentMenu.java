@@ -20,7 +20,7 @@ public class CRSStudentMenu {
 		Scanner scan = new Scanner(System.in);
 		int studentId = student.getStudentID();
 		
-		System.out.println("*****Welcome Student*****");
+		System.out.println("*****Welcome Student "+ student.getUsername() +"*****");
 		System.out.println("Enter your choice: ");
 		System.out.println("1. Apply to course");
 		System.out.println("2. Drop course");
