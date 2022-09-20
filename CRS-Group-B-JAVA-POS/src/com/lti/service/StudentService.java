@@ -13,7 +13,6 @@ import com.lti.dao.CourseRosterDAOInterface;
 public class StudentService implements StudentServiceInterface {
 
 	private Student student;
-	private static int newestID = 0;
 	private CourseRosterDAOInterface courseRosterDAO;
 	private CourseDAOInterface courseDAO;
 
@@ -41,6 +40,12 @@ public class StudentService implements StudentServiceInterface {
 	public Map<Course, Double> checkGrades(int studentId) {
 		
 		return courseRosterDAO.viewGrades(studentId);
+	}
+
+	
+	public List<Course> viewUnpayedCourses(int studentId) {
+		
+		return courseRosterDAO.viewAllPaidCourses(studentId);
 	}
 
 }

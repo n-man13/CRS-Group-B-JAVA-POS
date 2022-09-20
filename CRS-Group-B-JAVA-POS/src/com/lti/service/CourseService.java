@@ -3,10 +3,12 @@ package com.lti.service;
 import java.util.List;
 
 import com.lti.bean.Course;
+import com.lti.dao.CourseDAOInterface;
 
 public class CourseService implements CourseServiceInterface{
 	
-	Course course;
+	private Course course;
+	private CourseDAOInterface courseDAO;
 	
 	public void getNumberStudents() {
 		//get number of students that applied on this course
@@ -28,10 +30,16 @@ public class CourseService implements CourseServiceInterface{
 		
 	}
 	
-	public List <> viewAllCourses(List<Course> courses) {
+	public List <Course> viewAllCourses() {
 		
+		return courseDAO.viewAllCourses();
 		
-		
+	}
+
+	@Override
+	public List<Course> viewUnpayedCourses() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

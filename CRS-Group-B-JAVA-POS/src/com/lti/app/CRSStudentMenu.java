@@ -2,6 +2,7 @@ package com.lti.app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.lti.bean.*;
@@ -13,27 +14,11 @@ public class CRSStudentMenu {
 	
 	public boolean studentMenu(Student student, ArrayList<Course> courses) {
 		
-//		//temporary data for testing
-//		Catalog courseCatalog = new Catalog();
-//		Course course1 = new Course(1, "math", 0);
-//		Course course2 = new Course(2, "physics", 0);
-//		Course course3 = new Course(3, "chemistry", 0);
-//		ArrayList <Course> courses = new ArrayList <Course> ();
-//		courses.add(course1);
-//		courses.add(course2);
-//		courses.add(course3);
-		
-//		
-//		courseCatalog.setAllCourses(courses);
 		StudentService studentService = new StudentService();
 		CourseServiceInterface courseService = new CourseService();
-		
 		Course currentCourse;
-		
-		
-		
-		
 		Scanner scan = new Scanner(System.in);
+		int studentId = student.getStudentID();
 		
 		System.out.println("*****Welcome Student*****");
 		System.out.println("Enter your choice: ");
@@ -48,41 +33,53 @@ public class CRSStudentMenu {
 		switch (studentChoice) {
 		case 1:
 			
-			System.out.println("You selected apply to course");
-			courseService.viewAllCourses();
+			System.out.println("You have selected apply to course");
+			this.displayCourses(courseService.viewAllCourses());
 			System.out.println("Please select the course ID");
-			int courseID = scan.nextInt();
+			int courseId = scan.nextInt();
 			//Parameters (studentId, courseId)
-			studentService.applyToCourse(student.getStudentID(), courseID);			
+			studentService.applyToCourse(studentId, courseId);			
 		break;
 		
 		case 2:
-			System.out.println("You selected Drop Course");
-			courseService.viewAppliedCourses(student.getStudentID());
+			System.out.println("You have selected Drop Course");
+			this.displayCourses(studentService.viewAppliedCourses(studentId));
 			System.out.println("Please select the course ID");
-			courseID = scan.nextInt();
+			courseId = scan.nextInt();
 			//Parameters (studentId, courseId)
-			studentService.dropCourse(student.getStudentID, courseID);
+			studentService.dropCourse(studentId, courseId);
 			break;
 			
 		case 3:
-			System.out.println("You selected Display applied Courses");
-			courseService.viewAppliedCourses();
+			System.out.println("You have selected Display applied Courses");
+			this.displayCourses(studentService.viewAppliedCourses(studentId));
 			break;
+			
 		case 4:
-			System.out.println("You selected Make Payment");
+			System.out.println("You have selected Make Payment");
+			System.out.println("List of unpayed courses");
+			this.displayCourses(studentService.viewUnpayedCourses(studentId));
+			System.out.println("Please select what course to pay");
+			courseId = scan.nextInt();
+			studentService.makePayment(studentId, courseId);
 			break;
 		
 		case 5:
 			System.out.println("You selected Check Grades");
-			studentService.checkGrades(student.getStudentID());
+			Map<Course, Double> courseAndGrades = studentService.checkGrades(studentId);
+			for (Course c : courseAndGrades.keySet()) {
+				System.out.println("Id: " + c.getCourseID() +
+						"\nName: " + c.getName() + 
+						"\nDepartment: " + c.getDepartment() +
+						"\nGrade" + courseAndGrades.get(c));
+			}
 		break;	
 		case 6:
 			System.out.println("You selected Display all Courses");
 			courseService.viewAllCourses();
-			
-		case 7:
-			
+		break;
+		
+		case 7:	
 			System.out.println("Please press enter to log out");
 			scan.nextLine();
 			scan.close();

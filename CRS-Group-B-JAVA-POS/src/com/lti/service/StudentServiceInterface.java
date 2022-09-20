@@ -31,5 +31,6 @@ public interface StudentServiceInterface {
 	 * @param student Student to check grades for
 	 */
 	public Map<Course, Double> checkGrades(int studentId);
-
+	
+	public List<Course> viewUnpayedCourses(int studentId);
 }
