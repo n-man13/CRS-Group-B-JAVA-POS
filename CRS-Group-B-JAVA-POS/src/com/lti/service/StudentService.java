@@ -51,7 +51,7 @@ public class StudentService implements StudentServiceInterface {
 
 	public Student getStudentByUsername(String username) {
 		
-		return studentDAO.
+		return studentDAO.viewStudent(username);
 		
 	}
 

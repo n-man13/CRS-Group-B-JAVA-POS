@@ -9,6 +9,8 @@ import java.util.Scanner;
 import com.lti.bean.Catalog;
 import com.lti.bean.Course;
 import com.lti.bean.Student;
+import com.lti.service.StudentService;
+import com.lti.service.StudentServiceInterface;
 import com.lti.service.UserService;
 import com.lti.service.UserServiceInterface;
 
@@ -22,6 +24,7 @@ public class CRSApplicationMenu {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 
 		Scanner scan = new Scanner(System.in);
 		boolean homeMenu = true;
@@ -29,6 +32,7 @@ public class CRSApplicationMenu {
 		CRSProfessorMenu professorMenu = new CRSProfessorMenu();
 		CRSStudentMenu studentMenu = new CRSStudentMenu();
 		UserServiceInterface userService = new UserService();
+		StudentServiceInterface studentService = new StudentService();
 		
 		while (homeMenu) {
 			boolean loginMenu = true;
@@ -51,30 +55,23 @@ public class CRSApplicationMenu {
 		    	System.out.println("Enter Password: ");
 		    	String password = scan.nextLine();
 		    	System.out.println("Enter Role: ");
-		    	System.out.println("1. Student");
+		    	System.out.println("1. Admin");
 		    	System.out.println("2. Professor");
-		    	System.out.println("3. Admin");
+		    	System.out.println("3. Student");
 		    	int role = Integer.parseInt(scan.nextLine());
 		    	boolean logInSuccess = userService.verifyCredetials(username, password, role);
 		    	if (logInSuccess) {
 			    	while(userMenu) {
 			    		switch(role) {
-			    		case 1:
-			    			
-			    			//TODO it should take a student as a parameter
-			    			for (Student s: students) {
-					    		if (s.getStudentID() == Integer.parseInt(username)) {
-					    			userMenu = studentMenu.studentMenu(s);
-					    		}
-					    		
-					    	}
-			    			
+			    		case 3:
+			    			Student student = studentService.getStudentByUsername(username);
+			    			userMenu = studentMenu.studentMenu(student);	
 		    			break;
 			    		case 2:
 			    			//TODO it should take a professor as a parameter
 			    			userMenu = professorMenu.professorMenu();
 	    				break;
-			    		case 3:
+			    		case 1:
 			    			//TODO it should take a admin as a parameter
 			    			userMenu = adminMenu.adminMenu();
 		    			break;

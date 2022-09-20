@@ -76,4 +76,10 @@ public class StudentDAO implements StudentDAOInterface {
 		return userID;
 	}
 
+	@Override
+	public Student viewStudent(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

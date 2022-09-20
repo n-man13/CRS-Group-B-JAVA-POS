@@ -10,8 +10,7 @@ public class User {
 	private String username;
 	private String password;
 	private int role;
-<<<<<<< HEAD
-=======
+
 	
 	public User() {
 		userID = -1;
@@ -19,7 +18,6 @@ public class User {
 	public User(int userID) {
 		this.userID = userID;
 	}
->>>>>>> branch 'main' of https://github.com/n-man13/CRS-Group-B-JAVA-POS.git
 	
 	/**
 	 * @return the username
