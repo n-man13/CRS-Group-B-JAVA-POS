@@ -30,7 +30,7 @@ public class StudentDAO implements StudentDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			String sql = "insert into Student values(?,?)";
+			String sql = "INSERT INTO Student VALUES(?,?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, userID);
 			stmt.setString(2, student.getName());
@@ -58,7 +58,7 @@ public class StudentDAO implements StudentDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			String sql = "SELECT studentID, name FROM Student";
+			String sql = "SELECT studentID, name FROM Student"; // TODO add where clause
 			
 			stmt = conn.prepareStatement(sql);
 			// Step 6 execute statement

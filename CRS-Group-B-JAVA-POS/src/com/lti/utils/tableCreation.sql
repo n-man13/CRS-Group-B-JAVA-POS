@@ -46,7 +46,7 @@ CREATE TABLE Course(
 	name varchar(20),
 	department varchar(20),
 	description varchar(60),
-	professorID int,
+	professorID int DEFAULT -1,
 	prereqID int,
 	CONSTRAINT PK_Course PRIMARY KEY (courseID),
 	CONSTRAINT FK_ProfessorID FOREIGN KEY (professorID)

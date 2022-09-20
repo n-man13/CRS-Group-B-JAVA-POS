@@ -108,8 +108,33 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public boolean addProfessorToCourse(int courseID, int profID) {
-		
-		return false;
+		boolean changed = false;
+		try {
+			Connection conn = DBUtils.getConnection();
+			String sql = "SELECT courseID, professorID FROM Course WHERE courseID='?'";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, courseID);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				int tempCourseID = rs.getInt("courseID");
+				int tempProfID = rs.getInt("professorID");
+				if (tempProfID == -1) {
+					sql = "UPDATE Course SET professorID='?' WHERE courseID='?'";
+					stmt = conn.prepareStatement(sql);
+					stmt.setInt(1, profID);
+					stmt.setInt(2, courseID);
+					stmt.executeUpdate();
+					changed = true;
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return changed;
 	}
 
 	/**
