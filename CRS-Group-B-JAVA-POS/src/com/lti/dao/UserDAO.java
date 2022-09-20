@@ -72,14 +72,7 @@ public class UserDAO implements UserDAOInterface {
 	public User viewUser(String username) {
 		User thisUser = null;
 		try {
-			// Step 3 Register Driver
-
-			Class.forName(JDBC_DRIVER);
-
-			// Step 4 make a connection
-
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			Connection conn = DBUtils.getConnection();
 
 			// Step 5 create and populate statement
 
@@ -109,21 +102,7 @@ public class UserDAO implements UserDAOInterface {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-		}
+		} 
 		return thisUser;
 	}
 
