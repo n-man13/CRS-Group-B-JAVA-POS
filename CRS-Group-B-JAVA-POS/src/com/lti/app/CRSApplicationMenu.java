@@ -77,12 +77,13 @@ public class CRSApplicationMenu {
 		    			break;
 		    			default: System.out.println("Invalid Role");
 			    		}	
-		    	System.out.println("Press enter to return to main page");
-	    		scan.nextLine();
-	    		loginMenu = false;
+		    		
+		    		loginMenu = false;
 			    	}
 		    	}
-		    	System.out.println("You entered the wrong credentials");
+		    	else {
+		    		System.out.println("You entered the wrong credentials");
+		    	}
 		    }
 		    break;  
 		    case 2: 
