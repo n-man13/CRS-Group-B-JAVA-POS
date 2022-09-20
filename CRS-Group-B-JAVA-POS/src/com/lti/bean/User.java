@@ -8,7 +8,7 @@ package com.lti.bean;
 public class User {
 	private String username;
 	private String password;
-	private String role;
+	private int role;
 	
 	/**
 	 * @return the username
@@ -25,13 +25,13 @@ public class User {
 	/**
 	 * @return the role
 	 */
-	public String getRole() {
+	public int getRole() {
 		return role;
 	}
 	/**
 	 * @param role the role to set
 	 */
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 	/**

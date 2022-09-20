@@ -1,11 +1,21 @@
 package com.lti.service;
 
-public class UserService implements UserServiceInterface {
+import com.lti.bean.User;
+import com.lti.dao.UserDAOInterface;
 
-	public boolean verifyCredetials(String username, String password) {
-		// verify credentials for all users
-		// need to hash password and store in a hashmap
-		return true;
+public class UserService implements UserServiceInterface {
+	
+	private UserDAOInterface userDAO;
+	private User user;
+
+	public boolean verifyCredetials(String username, String password, int role) {
+		
+		user = userDAO.viewUser(username);
+		if (password == user.getPassword() && role == user.getRole()) {
+			return true;
+		}
+		
+		return false;
 	}
 
 	public void logOut() {

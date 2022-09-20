@@ -9,12 +9,13 @@ import com.lti.bean.Course;
 import com.lti.bean.Student;
 import com.lti.dao.CourseDAOInterface;
 import com.lti.dao.CourseRosterDAOInterface;
+import com.lti.dao.StudentDAOInterface;
 
 public class StudentService implements StudentServiceInterface {
 
-	private Student student;
 	private CourseRosterDAOInterface courseRosterDAO;
 	private CourseDAOInterface courseDAO;
+	private StudentDAOInterface studentDAO;
 
 	public void applyToCourse(int studentId, int courseId) {
 		
@@ -46,6 +47,12 @@ public class StudentService implements StudentServiceInterface {
 	public List<Course> viewUnpayedCourses(int studentId) {
 		
 		return courseRosterDAO.viewAllPaidCourses(studentId);
+	}
+
+	public Student getStudentByUsername(String username) {
+		
+		return studentDAO.
+		
 	}
 
 }

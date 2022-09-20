@@ -33,4 +33,6 @@ public interface StudentServiceInterface {
 	public Map<Course, Double> checkGrades(int studentId);
 	
 	public List<Course> viewUnpayedCourses(int studentId);
+	
+	public Student getStudentByUsername(String username);
 }

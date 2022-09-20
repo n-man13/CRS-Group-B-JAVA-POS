@@ -9,6 +9,8 @@ import java.util.Scanner;
 import com.lti.bean.Catalog;
 import com.lti.bean.Course;
 import com.lti.bean.Student;
+import com.lti.service.UserService;
+import com.lti.service.UserServiceInterface;
 
 /**
  * @author Nikhil, Luca, Muhammad
@@ -20,32 +22,13 @@ public class CRSApplicationMenu {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// need to take input
-		// 
-		
-		Catalog courseCatalog = new Catalog();
-		Course course1 = new Course(1, "math", 0);
-		Course course2 = new Course(2, "physics", 0);
-		Course course3 = new Course(3, "chemistry", 0);
-		ArrayList <Course> courses = new ArrayList <Course> ();
-		courses.add(course1);
-		courses.add(course2);
-		courses.add(course3);
-		
-		Student student1 = new Student(1);
-		Student student2 = new Student(2);
-		Student student3 = new Student(3);
-		ArrayList <Student> students = new ArrayList <Student> ();
-		students.add(student1);
-		students.add(student2);
-		students.add(student3);
-		
+
 		Scanner scan = new Scanner(System.in);
 		boolean homeMenu = true;
 		CRSAdminMenu adminMenu = new CRSAdminMenu();
 		CRSProfessorMenu professorMenu = new CRSProfessorMenu();
 		CRSStudentMenu studentMenu = new CRSStudentMenu();
+		UserServiceInterface userService = new UserService();
 		
 		while (homeMenu) {
 			boolean loginMenu = true;
@@ -72,32 +55,37 @@ public class CRSApplicationMenu {
 		    	System.out.println("2. Professor");
 		    	System.out.println("3. Admin");
 		    	int role = Integer.parseInt(scan.nextLine());
-		    	while(userMenu) {
-		    		switch(role) {
-		    		case 1:
-		    			//TODO it should take a student as a parameter
-		    			for (Student s: students) {
-				    		if (s.getStudentID() == Integer.parseInt(username)) {
-				    			userMenu = studentMenu.studentMenu(s, courses );
-				    		}
-				    		
-				    	}
-		    			
-	    			break;
-		    		case 2:
-		    			//TODO it should take a professor as a parameter
-		    			userMenu = professorMenu.professorMenu();
-    				break;
-		    		case 3:
-		    			//TODO it should take a admin as a parameter
-		    			userMenu = adminMenu.adminMenu();
-	    			break;
-	    			default: System.out.println("Invalid Role");
-		    		}
-		    	}
+		    	boolean logInSuccess = userService.verifyCredetials(username, password, role);
+		    	if (logInSuccess) {
+			    	while(userMenu) {
+			    		switch(role) {
+			    		case 1:
+			    			
+			    			//TODO it should take a student as a parameter
+			    			for (Student s: students) {
+					    		if (s.getStudentID() == Integer.parseInt(username)) {
+					    			userMenu = studentMenu.studentMenu(s);
+					    		}
+					    		
+					    	}
+			    			
+		    			break;
+			    		case 2:
+			    			//TODO it should take a professor as a parameter
+			    			userMenu = professorMenu.professorMenu();
+	    				break;
+			    		case 3:
+			    			//TODO it should take a admin as a parameter
+			    			userMenu = adminMenu.adminMenu();
+		    			break;
+		    			default: System.out.println("Invalid Role");
+			    		}	
 		    	System.out.println("Press enter to return to main page");
 	    		scan.nextLine();
 	    		loginMenu = false;
+			    	}
+		    	}
+		    	System.out.println("You entered the wrong credentials");
 		    }
 		    break;  
 		    case 2: 

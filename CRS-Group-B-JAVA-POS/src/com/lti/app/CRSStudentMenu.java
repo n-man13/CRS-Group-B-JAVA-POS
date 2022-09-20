@@ -12,7 +12,7 @@ import com.lti.service.StudentService;
 
 public class CRSStudentMenu {
 	
-	public boolean studentMenu(Student student, ArrayList<Course> courses) {
+	public boolean studentMenu(Student student) {
 		
 		StudentService studentService = new StudentService();
 		CourseServiceInterface courseService = new CourseService();
