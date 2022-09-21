@@ -1,6 +1,7 @@
 package com.lti.app;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.lti.bean.Course;
@@ -55,20 +56,18 @@ public class CRSProfessorMenu {
 			this.displayCourses(professorService.viewProfessorCourses(professorId));
 			System.out.println("Please select the course ID to view students");
 			courseId = scan.nextInt();
-			Map<Student, Double> viewStudentGrades = registered
-			for (Course c : courseAndGrades.keySet()) {
-				System.out.println("Id: " + c.getCourseID() +
-						"\nName: " + c.getName() + 
-						"\nDepartment: " + c.getDepartment() +
-						"\nGrade" + courseAndGrades.get(c));
+			Map<Student, Double> viewStudentGrades = professorService.viewStudentsGrades(courseId);
+			for (Student s : viewStudentGrades.keySet()) {
+				System.out.println("Id: " + s.getStudentID() +
+						"\nName: " + s.getName() + 
+						"\nGrade" + viewStudentGrades.get(s));
 			}
 		break;
-		case 4:
-			
+		case 4:	
 			System.out.println("Please press enter to log out");
 			scan.nextLine();
 			return false;
-		default: System.out.println("Method is not implemented or invalid input");
+			default: System.out.println("Method is not implemented or invalid input");
 			
 		}
 		return true;

@@ -16,7 +16,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	
 	private ProfessorDAOInterface professorDAO = new ProfessorDAO();
 	private CourseDAOInterface courseDAO = new CourseDAO();
-	private RegisteredCourseDAOInterface registredCourse =  new RegisteredCourseDAO();
+	private RegisteredCourseDAOInterface registeredCourseDAO =  new RegisteredCourseDAO();
 	
 	public void applyToCourse(int professorId, int courseId) {
 		// apply to specific course
@@ -25,13 +25,13 @@ public class ProfessorService implements ProfessorServiceInterface {
 
 	public List<Student> viewStudents(int courseId) {
 		
-		return registredCourse.viewAllStudents(courseId);
+		return registeredCourseDAO.viewAllStudents(courseId);
 		
 	}
 
 	public void recordGrade(double grade, int studentId, int courseId) {
 		// record grade for student in class
-		registredCourse.setGrade(studentId, courseId, grade);
+		registeredCourseDAO.setGrade(studentId, courseId, grade);
 
 	}
 
@@ -50,7 +50,8 @@ public class ProfessorService implements ProfessorServiceInterface {
 	@Override
 	public Map<Student, Double> viewStudentsGrades(int courseId) {
 		
-		return registeredCo
+		return registeredCourseDAO.viewStudentsAndGrades(courseId);
+				
 		
 	}
 
