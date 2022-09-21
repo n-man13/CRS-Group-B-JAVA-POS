@@ -190,8 +190,8 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		try {
 			Connection conn = DBUtils.getConnection();
 			
-			String sql_INSERT = "INSERT INTO RegisteredCourse VALUES(?,?,0,-1)";
-			stmt = conn.prepareStatement(sql_INSERT);
+			//String sql_INSERT = "INSERT INTO RegisteredCourse VALUES(?,?,0,-1)";
+			stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_INSERT);
 			stmt.setInt(1, studentID);
 			stmt.setInt(2, courseID);
 			
@@ -221,12 +221,12 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 
 			// Step 5 create and populate statement
 
-			String sql = "SELECT courseID, studentID, feePaid FROM RegisteredCourse WHERE courseID='?' AND studentID='?'";
-			stmt = conn.prepareStatement(sql);
+			//String sql = "SELECT courseID, studentID, feePaid FROM RegisteredCourse WHERE courseID='?' AND studentID='?'";
+			stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_SELECT_FEE_UNPAID);
 			stmt.setInt(1, courseID);
 			stmt.setInt(2, studentID);
 			// Step 6 execute statement
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name
@@ -235,8 +235,8 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 				int tempStudentID= rs.getInt("studentID");
 				
 				if (courseID == tempCourseID && studentID == tempStudentID) {
-					sql = "UPDATE RegisteredCourse SET feePaid='?' WHERE courseID='?' AND studentID='?'";
-					stmt = conn.prepareStatement(sql);
+					//sql = "UPDATE RegisteredCourse SET feePaid='?' WHERE courseID='?' AND studentID='?'";
+					stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_UPDATE);
 					stmt.setBoolean(1, true);
 					stmt.setInt(2, courseID);
 					stmt.setInt(3, studentID);
@@ -272,12 +272,12 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 
 			// Step 5 create and populate statement
 
-			String sql = "SELECT courseID, studentID, grade FROM RegisteredCourse WHERE courseID='?' AND studentID='?'";
-			stmt = conn.prepareStatement(sql);
+			//String sql = "SELECT courseID, studentID, grade FROM RegisteredCourse WHERE courseID='?' AND studentID='?'";
+			stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID_AND_COURSEID);
 			stmt.setInt(1, courseID);
 			stmt.setInt(2, studentID);
 			// Step 6 execute statement
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name
@@ -286,8 +286,8 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 				int tempStudentID= rs.getInt("studentID");
 				
 				if (courseID == tempCourseID && studentID == tempStudentID) {
-					sql = "UPDATE RegisteredCourse SET grade='?' WHERE courseID='?' AND studentID='?'";
-					stmt = conn.prepareStatement(sql);
+					//sql = "UPDATE RegisteredCourse SET grade='?' WHERE courseID='?' AND studentID='?'";
+					stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_UPDATE_GRADES);
 					stmt.setDouble(1, grade);
 					stmt.setInt(2, courseID);
 					stmt.setInt(3, studentID);
@@ -322,12 +322,12 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 
 			// Step 5 create and populate statement
 
-			String sql = "SELECT courseID, studentID FROM RegisteredCourse WHERE courseID='?' AND studentID='?'";
-			stmt = conn.prepareStatement(sql);
+			//String sql = "SELECT courseID, studentID FROM RegisteredCourse WHERE courseID='?' AND studentID='?'";
+			stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_SELECT_BY_STUDENTID_AND_COURSEID);
 			stmt.setInt(1, courseID);
 			stmt.setInt(2, studentID);
 			// Step 6 execute statement
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name
@@ -336,8 +336,8 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 				int tempStudentID= rs.getInt("studentID");
 				
 				if (courseID == tempCourseID && studentID == tempStudentID) {
-					sql = "DELETE FROM RegisteredCourse WHERE courseID='?' AND studentID='?'";
-					stmt = conn.prepareStatement(sql);
+					//sql = "DELETE FROM RegisteredCourse WHERE courseID='?' AND studentID='?'";
+					stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_DELETE);
 					stmt.setInt(1, courseID);
 					stmt.setInt(2, studentID);
 					
