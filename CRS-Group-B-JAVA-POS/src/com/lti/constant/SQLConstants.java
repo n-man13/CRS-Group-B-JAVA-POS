@@ -5,6 +5,7 @@ public class SQLConstants {
 	// Various queries made to the database in the DAO Layer
 	public static final String USER_INSERT = "INSERT INTO User VALUES(?,?,?)";
 	public static final String USER_SELECT = "SELECT userID, username , password, role FROM User";
+	public static final String USER_UPDATE_PASSWORD = "UPDATE User SET password='?' WHERE username='?'";
 	public static final String STUDENT_INSERT = "INSERT INTO Student VALUES(?,?)";
 	public static final String STUDENT_SELECT = "SELECT studentID, name FROM Student";
 	public static final String PROFESSOR_INSERT = "INSERT INTO Professor VALUES(?,?)";

@@ -19,4 +19,11 @@ public interface UserDAOInterface {
 	 */
 	public User viewUser(String username);
 	
+	/**
+	 * 
+	 * @param username the username of the User to change
+	 * @param password the new password
+	 * @return if the password was changed successfully
+	 */
+	public boolean updatePassword(String username, String password);
 }
