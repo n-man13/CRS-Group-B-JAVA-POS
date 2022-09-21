@@ -3,7 +3,7 @@ package com.lti.constant;
 public class SQLConstants {
 	
 	// Various queries made to the database in the DAO Layer
-	public static final String USER_INSERT = "INSERT INTO User VALUES(?,?,?)";
+	public static final String USER_INSERT = "INSERT INTO User(username, password, role) VALUES(?,?,?)";
 	public static final String USER_SELECT = "SELECT userID, username , password, role FROM User";
 	public static final String USER_UPDATE_PASSWORD = "UPDATE User SET password=? FROM User WHERE username=?";
 	public static final String STUDENT_INSERT = "INSERT INTO Student VALUES(?,?,?)";
