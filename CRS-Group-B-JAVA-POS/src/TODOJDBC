@@ -81,3 +81,10 @@ Professor
 	call sercie method to update course roster
 	parameters (grade, studentID, courseID)
 	
+	Problems
+
+
+Make payment doesn't show unpayed courses
+add professor to course throws key exception error
+admin creating course: Column count doesn't match value count at row 1
+need to add on delete cascade on update cascade;
