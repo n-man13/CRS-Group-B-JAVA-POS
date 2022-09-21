@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.lti.bean.User;
+import com.lti.constant.SQLConstants;
 import com.lti.utils.DBUtils;
 
 public class UserDAO implements UserDAOInterface {
@@ -30,8 +31,9 @@ public class UserDAO implements UserDAOInterface {
 
 			// Step 5 create and populate statement
 
-			String sql = "insert into User values(?,?,?)";
-			stmt = conn.prepareStatement(sql);
+			//String sql = "insert into User values(?,?,?)";
+			
+			stmt = conn.prepareStatement(SQLConstants.USER_INSERT);
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			stmt.setInt(3, role);

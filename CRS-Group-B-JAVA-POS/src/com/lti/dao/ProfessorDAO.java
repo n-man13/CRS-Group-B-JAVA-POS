@@ -58,7 +58,7 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			String sql = "SELECT profID, name FROM Professor";
+			String sql = "SELECT professorID, name FROM Professor";
 			
 			stmt = conn.prepareStatement(sql);
 			// Step 6 execute statement
@@ -66,7 +66,7 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 
 			while (rs.next()) {
 				// Retrieve by column name
-				int tempUserID  = rs.getInt("profID");
+				int tempUserID  = rs.getInt("professorID");
 				String tempName = rs.getString("name");
 				if (tempUserID == profID) {
 					prof = new Professor(tempUserID, tempName);

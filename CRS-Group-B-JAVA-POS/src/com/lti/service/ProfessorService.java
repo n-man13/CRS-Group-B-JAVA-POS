@@ -10,7 +10,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	
 	private ProfessorDAOInterface professorDAO = new ProfessorDAO();
 
-	public void applyToCourse(Course course) {
+	public void applyToCourse(int professorId, int courseId) {
 		// apply to specific course
 	}
 
