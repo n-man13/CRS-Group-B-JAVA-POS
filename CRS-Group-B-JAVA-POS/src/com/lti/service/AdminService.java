@@ -59,13 +59,13 @@ public class AdminService implements AdminServiceInterface{
 	}
 	@Override
 	public Admin getAdminByUsername(String username) {
-		return null;
+		return adminDAO.viewAdmin(username);
 		
 	}
 	@Override
 	public List<Student> unregisteredStudent() {
 		// TODO Auto-generated method stub
-		return null;
+		return studentDAO.viewUnregisteredStudents();
 	}
 	@Override
 	public Student getStudentById(int stuedentId) {
