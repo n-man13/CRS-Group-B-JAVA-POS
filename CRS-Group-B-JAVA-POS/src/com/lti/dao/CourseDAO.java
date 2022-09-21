@@ -140,6 +140,48 @@ public class CourseDAO implements CourseDAOInterface {
 
 	/**
 	 * 
+	 * @param profID the professor teaching
+	 * @return the courses that a professor is teaching
+	 */
+	public ArrayList<Course> viewCoursesByProfessor(int profID){
+		ArrayList<Course> courses = new ArrayList<Course>();
+		Course course = null;
+		try {
+			Connection conn = DBUtils.getConnection();
+			
+			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_BY_PROFESSORID);
+			stmt.setInt(1, profID);
+			ResultSet rs = stmt.executeQuery();
+			//SELECT courseID, name , department, description, professorID, prereqID FROM Course WHERE professorID='?'
+			while(rs.next()) {
+				int tempCourseID = rs.getInt("courseID");
+				String tempName = rs.getString("name");
+				int tempProfID = rs.getInt("professorID");
+				if (tempProfID == profID) {
+					course = new Course(tempCourseID);
+					course.setName(tempName);
+					String tempDepartment = rs.getString("department");
+					course.setDepartment(tempDepartment);
+					String tempDescription = rs.getString("description");
+					course.setDescription(tempDescription);
+					Professor pro = profDAO.viewProfessor(tempProfID);
+					course.setProf(pro);
+					int tempPrereqID= rs.getInt("prereqID");
+					course.setPrereqCourseID(tempPrereqID);
+					courses.add(course);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return courses;
+	}
+	
+	/**
+	 * 
 	 * @param courseID the course to delete
 	 * @return the course that was deleted, else null
 	 */

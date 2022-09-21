@@ -34,6 +34,13 @@ public interface CourseDAOInterface {
 	 */
 	public boolean addProfessorToCourse(int courseID, int profID);
 	
+	/**
+	 * 
+	 * @param profID the professor teaching
+	 * @return the courses that a professor is teaching
+	 */
+	public ArrayList<Course> viewCoursesByProfessor(int profID);
+	
 	
 	/**
 	 * 
