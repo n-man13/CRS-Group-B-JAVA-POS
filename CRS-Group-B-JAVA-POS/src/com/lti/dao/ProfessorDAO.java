@@ -25,6 +25,11 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 
 	private UserDAOInterface userDAO = new UserDAO();
 
+	/**
+	 * 
+	 * @param prof new professor to add
+	 * @return new ID if created successfully, else -1
+	 */
 	@Override
 	public int createProfessor(Professor prof) {
 
@@ -52,6 +57,11 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 		return userID;
 	}
 
+	/**
+	 * 
+	 * @param profID the professor to view
+	 * @return the professor object
+	 */
 	@Override
 	public Professor viewProfessor(int profID) {
 		Professor prof = null;
@@ -81,6 +91,12 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 		}
 		return prof;
 	}
+	
+	/**
+	 * 
+	 * @param username the username of the User
+	 * @return the professor object associated with the username
+	 */
 	@Override
 	public Professor viewProfessor(String username) {
 		UserDAO userDAO = new UserDAO();

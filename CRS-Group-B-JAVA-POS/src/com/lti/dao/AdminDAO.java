@@ -16,6 +16,11 @@ public class AdminDAO implements AdminDAOInterface {
 
 	private UserDAOInterface userDAO = new UserDAO();
 	
+	/**
+	 * 
+	 * @param admin the admin to create
+	 * @return new ID if created successfully, else -1
+	 */
 	@Override
 	public int createAdmin(Admin admin) {
 		
