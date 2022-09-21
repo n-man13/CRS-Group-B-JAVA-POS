@@ -3,6 +3,7 @@ package com.lti.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.lti.bean.Admin;
@@ -45,5 +46,33 @@ public class AdminDAO implements AdminDAOInterface {
 			e.printStackTrace();
 		}
 		return userID;
+	}
+
+	@Override
+	public Admin viewAdmin(String username) {
+		UserDAO userDAO = new UserDAO();
+		int adminID = userDAO.viewUser(username).getUserID();
+		return viewAdmin(adminID);
+	}
+
+	@Override
+	public Admin viewAdmin(int adminID) {
+		Admin admin = null;
+		try {
+			Connection conn = DBUtils.getConnection();
+			
+			stmt = conn.prepareStatement(SQLConstants.ADMIN_SELECT);
+			stmt.setInt(1, adminID);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				int tempID = rs.getInt("adminID");
+				admin = new Admin(tempID);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return admin;
 	}
 }

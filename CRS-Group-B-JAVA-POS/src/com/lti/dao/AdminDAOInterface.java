@@ -9,4 +9,8 @@ public interface AdminDAOInterface {
 	 * @return new ID if created successfully, else -1
 	 */
 	public int createAdmin(Admin admin);
+	
+	public Admin viewAdmin(String username);
+	
+	public Admin viewAdmin(int adminID);
 }

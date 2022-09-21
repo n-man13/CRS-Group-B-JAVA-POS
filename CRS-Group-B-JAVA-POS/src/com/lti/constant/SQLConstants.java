@@ -20,6 +20,7 @@ public class SQLConstants {
 	public static final String COURSE_UPDATE_PROFESSORID = "UPDATE Course SET professorID=? WHERE courseID=?";
 	public static final String COURSE_INSERT = "INSERT INTO Course VALUES(?,?,?,?,?)";
 	public static final String ADMIN_INSERT = "INSERT INTO Admin VALUES(?)";
+	public static final String ADMIN_SELECT = "SELECT adminID FROM Admin WHERE adminID=?";
 	public static final String REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID = "SELECT courseID, studentID FROM RegisteredCourse WHERE courseID=?";
 	public static final String REGISTEREDCOURSE_SELECT_FEE_UNPAID = "SELECT courseID, studentID, feePaid FROM RegisteredCourse WHERE studentID=? AND feePaid=0";
 	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_COURSEID = "SELECT courseID, studentID, grade FROM RegisteredCourse WHERE courseID=?";
