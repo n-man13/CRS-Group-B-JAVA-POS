@@ -37,7 +37,8 @@ public class AdminService implements AdminServiceInterface{
 	@Override
 	public void updateCourse(Course course) {
 		// TODO Auto-generated method stub
-		courseDAO.updateCourse(course);
+		
+		System.out.println(courseDAO.updateCourse(course));
 	}
 	@Override
 	public void deleteCourse(int courseId) {
