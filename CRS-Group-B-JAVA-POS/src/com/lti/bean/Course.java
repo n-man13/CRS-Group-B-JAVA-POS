@@ -32,8 +32,10 @@ public class Course {
 		
 	}
 	
-	
-	
+	public Course() {
+		super();
+	}
+
 	/**
 	 * @return the courseID
 	 */

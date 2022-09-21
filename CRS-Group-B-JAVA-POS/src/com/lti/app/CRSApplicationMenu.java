@@ -6,10 +6,13 @@ package com.lti.app;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.lti.bean.Admin;
 import com.lti.bean.Catalog;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
+import com.lti.service.AdminService;
+import com.lti.service.AdminServiceInterface;
 import com.lti.service.ProfessorService;
 import com.lti.service.ProfessorServiceInterface;
 import com.lti.service.StudentService;
@@ -37,6 +40,7 @@ public class CRSApplicationMenu {
 		UserServiceInterface userService = new UserService();
 		StudentServiceInterface studentService = new StudentService();
 		ProfessorServiceInterface professorService = new ProfessorService();
+		AdminServiceInterface adminService = new AdminService();
 		
 		while (homeMenu) {
 			boolean loginMenu = true;
@@ -76,8 +80,8 @@ public class CRSApplicationMenu {
 			    			userMenu = professorMenu.professorMenu(professor, scan);
 	    				break;
 			    		case 1:
-			    			
-			    			userMenu = adminMenu.adminMenu();
+			    			Admin admin = adminService.getAdminByUsername(username);
+			    			userMenu = adminMenu.adminMenu(admin, scan);
 		    			break;
 		    			default: System.out.println("Invalid Role");
 			    		}	

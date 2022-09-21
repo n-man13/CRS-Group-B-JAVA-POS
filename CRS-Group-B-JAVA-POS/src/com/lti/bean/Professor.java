@@ -34,6 +34,10 @@ public class Professor extends User {
 		this.name = name;
 		courses = new ArrayList<Course>();
 	}
+	
+	public Professor() {
+		
+	}
 	/**
 	 * @return the courses
 	 */

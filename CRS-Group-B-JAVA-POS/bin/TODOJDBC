@@ -47,7 +47,13 @@ Admin
 	display all courses
 	
 5. approveStudentRegistration
-...
+	add attribute boolean registrationApproved to student (Table and bean)
+	add to studentDAO method viewUnapprovedStudents -> returns list of all students with 
+		registrationApproved = false
+	select student id
+	call adminService to update student registration(int studentId)
+	add to studentDao method approveStudentRegistration(int studentId)
+	UPDATE registrationApproved FROM STUDENT WHERE ID = studentId:
 
 6. createProfessor
 	ask information
