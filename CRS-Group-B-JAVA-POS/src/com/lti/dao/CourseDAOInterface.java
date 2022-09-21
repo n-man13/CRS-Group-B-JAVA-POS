@@ -48,4 +48,11 @@ public interface CourseDAOInterface {
 	 * @return the course that was deleted, else null
 	 */
 	public Course deleteCourse(int courseID);
+	
+	/**
+	 * 
+	 * @param courseID the identifier of the course
+	 * @return the course with provided id or null if not found
+	 */
+	public Course viewCourse(int courseID);
 }

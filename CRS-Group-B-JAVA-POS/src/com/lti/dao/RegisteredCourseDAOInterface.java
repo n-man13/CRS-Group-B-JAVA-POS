@@ -20,7 +20,7 @@ public interface RegisteredCourseDAOInterface {
 	
 	public ArrayList<Course> viewAllPaidCourses(int studentID);
 	
-	public Map<Student, Double> viewStudentsAndGrades(int courseId);
+	public Map<Student, Double> viewStudentsAndGrades(int courseID);
 	
 	public Map<Course, Double> viewGrades(int studentID);
 	

@@ -231,4 +231,50 @@ public class CourseDAO implements CourseDAOInterface {
 		return course;
 	}
 
+	/**
+	 * 
+	 * @param courseID the identifier of the course
+	 * @return the course with provided id or null if not found
+	 */
+	public Course viewCourse(int courseID) {
+		Course course = null;
+		try {
+			Connection conn = DBUtils.getConnection();
+
+			// Step 5 create and populate statement
+
+			//String sql = "SELECT courseID, name , department, description, professorID, prereqID FROM Course WHERE courseID='?'";
+			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_BY_COURSEID);
+			stmt.setInt(1, courseID);
+			
+			// Step 6 execute statement
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				// Retrieve by column name
+				
+				int tempCourseID  = rs.getInt("courseID");
+				course = new Course(tempCourseID);
+				String tempName = rs.getString("name");
+				course.setName(tempName);
+				String tempDepartment = rs.getString("department");
+				course.setDepartment(tempDepartment);
+				String tempDescription = rs.getString("description");
+				course.setDescription(tempDescription);
+				int tempProfID= rs.getInt("professorID");
+				Professor pro = profDAO.viewProfessor(tempProfID);
+				course.setProf(pro);
+				int tempPrereqID= rs.getInt("prereqID");
+				course.setPrereqCourseID(tempPrereqID);
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return course;
+	}
+	
 }
