@@ -44,7 +44,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	@Override
 	public List<Course> viewProfessorCourses(int professorId) {
 		// TODO Auto-generated method stub
-		return null;
+		return courseDAO.viewCoursesByProfessor(professorId);
 	}
 
 	@Override

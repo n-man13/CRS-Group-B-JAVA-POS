@@ -23,6 +23,7 @@ public class CRSAdminMenu {
 		Student student = new Student();
 		String courseName;
 		String courseDepartment;
+		String courseDescription;
 		String prereqId;
 		
 		System.out.println("*****Welcome Admin*****");
@@ -58,13 +59,20 @@ public class CRSAdminMenu {
 			course.setCourseID(scan.nextInt());
 			System.out.println("Please provide course name");
 			courseName = scan.nextLine();
-			if (!courseName.isBlank()) course.setName(courseName);
+			if (!courseName.isBlank()) 
+				course.setName(courseName);
 			System.out.println("Please provide course department");
 			courseDepartment = scan.nextLine();
-			if (!courseDepartment.isBlank()) course.setDepartment(courseDepartment);
-			System.out.println("Please provide professor's ID");
+			if (!courseDepartment.isBlank()) 
+				course.setDepartment(courseDepartment);
+			System.out.println("Please provide course description");
+			courseDescription = scan.nextLine();
+			if (!courseDescription.isBlank()) 
+				course.setDescription(courseDescription);
+			System.out.println("Please provide prerequisite ID");
 			prereqId = scan.nextLine();
-			if (!prereqId.isBlank()) course.setPrereqCourseID(Integer.parseInt(prereqId));
+			if (!prereqId.isBlank())
+				course.setPrereqCourseID(Integer.parseInt(prereqId));
 			adminService.updateCourse(course);
 		break;
 		case 3:
