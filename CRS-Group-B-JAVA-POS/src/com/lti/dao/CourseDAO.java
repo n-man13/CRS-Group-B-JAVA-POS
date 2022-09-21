@@ -119,7 +119,7 @@ public class CourseDAO implements CourseDAOInterface {
 			while(rs.next()) {
 				int tempCourseID = rs.getInt("courseID");
 				int tempProfID = rs.getInt("professorID");
-				if (tempProfID == -1) {
+				if (tempProfID == 0) {
 					//sql = "UPDATE Course SET professorID='?' WHERE courseID='?'";
 					stmt = conn.prepareStatement(SQLConstants.COURSE_UPDATE_PROFESSORID);
 					stmt.setInt(1, profID);
