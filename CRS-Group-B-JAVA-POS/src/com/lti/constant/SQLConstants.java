@@ -2,6 +2,7 @@ package com.lti.constant;
 
 public class SQLConstants {
 	
+	// Various queries made to the database in the DAO Layer
 	public static final String USER_INSERT = "INSERT INTO User VALUES(?,?,?)";
 	public static final String USER_SELECT = "SELECT userID, username , password, role FROM User";
 	public static final String STUDENT_INSERT = "INSERT INTO Student VALUES(?,?)";
@@ -13,7 +14,11 @@ public class SQLConstants {
 	public static final String COURSE_SELECT_ALL_COURSES = "SELECT courseID, name , department, description, professorID, prereqID FROM Course";
 	public static final String COURSE_DELETE = "DELETE FROM Course WHERE courseID='?'";
 	public static final String COURSE_UPDATE = "UPDATE Course SET professorID='?' WHERE courseID='?'";
-	public static final String COURSE_INSERT = "INSERT INTO Course VALUES(?,?,?,?,?,?)";
+	public static final String COURSE_INSERT = "INSERT INTO Course VALUES(?,?,?,?,?)";
 	public static final String ADMIN_INSERT = "INSERT INTO Admin VALUES(?)";
-	
+	public static final String REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID = "SELECT courseID, studentID WHERE courseID='?'";
+	public static final String REGISTEREDCOURSE_SELECT_FEE_UNPAID = "SELECT courseID, studentID, feePaid WHERE studentID='?' AND feePaid='0'";
+	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_COURSEID = "SELECT courseID, studentID, grade WHERE courseID='?'";
+	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID = "SELECT courseID, studentID, grade WHERE studentID='?'";
+	public static final String REGISTEREDCOURSE_SELECT_BY_STUDENTID = "SELECT courseID, studentID WHERE studentID='?'";
 }

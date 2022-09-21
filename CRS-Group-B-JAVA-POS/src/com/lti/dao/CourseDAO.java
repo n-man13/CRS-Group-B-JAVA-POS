@@ -17,7 +17,6 @@ public class CourseDAO implements CourseDAOInterface {
 
 	
 	private PreparedStatement stmt = null;
-	
 	private ProfessorDAOInterface profDAO = new ProfessorDAO();
 	
 	/**
@@ -81,12 +80,12 @@ public class CourseDAO implements CourseDAOInterface {
 
 			//String sql = "insert into Course values(?,?,?,?,?,?)";
 			stmt = conn.prepareStatement(SQLConstants.COURSE_INSERT);
-			stmt.setInt(1, course.getCourseID());
-			stmt.setString(2, course.getName());
-			stmt.setString(3, course.getDepartment());
-			stmt.setString(4, course.getDescription());
-			stmt.setInt(5, course.getProf().getProfID());
-			stmt.setInt(6, course.getPrereqCourseID());
+			//stmt.setInt(1, course.getCourseID());
+			stmt.setString(1, course.getName());
+			stmt.setString(2, course.getDepartment());
+			stmt.setString(3, course.getDescription());
+			stmt.setInt(4, course.getProf().getProfID());
+			stmt.setInt(5, course.getPrereqCourseID());
 
 			// Step 6 execute statement
 

@@ -48,7 +48,7 @@ public class StudentService implements StudentServiceInterface {
 	
 	public List<Course> viewUnpayedCourses(int studentId) {
 		
-		return courseRosterDAO.viewAllPaidCourses(studentId);
+		return courseRosterDAO.viewUnpaidCourses(studentId);
 	}
 
 	public Student getStudentByUsername(String username) {

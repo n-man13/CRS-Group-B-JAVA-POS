@@ -9,38 +9,122 @@ import java.util.HashMap;
 import java.util.Map;
 import com.lti.bean.Course;
 import com.lti.bean.Student;
+import com.lti.constant.SQLConstants;
 import com.lti.utils.DBUtils;
 
 public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 
 	private PreparedStatement stmt = null;
-	
+	/**
+	 * 
+	 * @param studentID the id of the student
+	 * @return the courses registered by the student
+	 */
 	@Override
 	public ArrayList<Course> viewStudentCourses(int studentID) {
-		
-		return null;
+		ArrayList<Course> courses = new ArrayList<Course>();
+		try {
+			Connection conn = DBUtils.getConnection();
+			
+			stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_SELECT_BY_STUDENTID);
+			stmt.setInt(1, studentID);
+			
+			ResultSet rs = stmt.executeQuery();
+			CourseDAO cou = new CourseDAO();
+			Course course = null;
+			while (rs.next()) {
+				int tempCourseID = rs.getInt("courseID");
+				course = cou.viewCourse(tempCourseID);
+				int tempStudentID = rs.getInt("studentID");
+				courses.add(course);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return courses;
 	}
 
+	/**
+	 * 
+	 * @param courseID the course to view
+	 * @return the students registered to this course
+	 */
 	@Override
 	public ArrayList<Student> viewAllStudents(int courseID) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Student> students = new ArrayList<Student>();
+		try {
+			Connection conn = DBUtils.getConnection();
+			
+			//String sql_SELECT_STUDENTS_BY_COURSEID = "SELECT courseID, studentID WHERE courseID='?'";
+			stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID);
+			stmt.setInt(1, courseID);
+			
+			ResultSet rs = stmt.executeQuery();
+			StudentDAO stu = new StudentDAO();
+			Student student = null;
+			while (rs.next()) {
+				int tempCourseID = rs.getInt("courseID");
+				student = stu.viewStudent(tempCourseID);
+				int tempStudentID = rs.getInt("studentID");
+				student = stu.viewStudent(tempStudentID);
+				students.add(student);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return students;
 	}
 
+	/**
+	 * Gives a list of all courses yet to be paid
+	 * @param studentID the student
+	 * @return list of all unpaid courses
+	 */
 	@Override
-	public ArrayList<Course> viewAllPaidCourses(int studentID) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Course> viewUnpaidCourses(int studentID) {
+		ArrayList<Course> courses = new ArrayList<Course>();
+		try {
+			Connection conn = DBUtils.getConnection();
+			
+			//String sql_SELECT_GRADES = "SELECT courseID, studentID, feePaid WHERE studentID='?' AND feePaid='0'";
+			stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_SELECT_FEE_UNPAID);
+			stmt.setInt(1, studentID);
+			
+			ResultSet rs = stmt.executeQuery();
+			CourseDAO cou = new CourseDAO();
+			Course course = null;
+			while (rs.next()) {
+				int tempCourseID = rs.getInt("courseID");
+				course = cou.viewCourse(tempCourseID);
+				int tempStudentID = rs.getInt("studentID");
+				boolean tempPaid = rs.getBoolean("feePaid");
+				courses.add(course);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return courses;
 	}
 	
+	/**
+	 * 
+	 * @param courseID the course to look up
+	 * @return a map of students to their grades in the specified class
+	 */
 	@Override
 	public Map<Student, Double> viewStudentsAndGrades(int courseID) {
 		HashMap<Student, Double> map = new HashMap<Student, Double>();
 		try {
 			Connection conn = DBUtils.getConnection();
 			
-			String sql_SELECT_GRADES = "SELECT courseID, studentID, grade WHERE courseID='?'";
-			stmt = conn.prepareStatement(sql_SELECT_GRADES);
+			//String sql_SELECT_GRADES = "SELECT courseID, studentID, grade WHERE courseID='?'";
+			stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_SELECT_GRADES_BY_COURSEID);
 			stmt.setInt(1, courseID);
 			
 			ResultSet rs = stmt.executeQuery();
@@ -61,14 +145,19 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		return map;
 	}
 
+	/**
+	 * 
+	 * @param studentID the student to look at
+	 * @return a map of courses to their grades by the student
+	 */
 	@Override
 	public Map<Course, Double> viewGrades(int studentID) {
 		HashMap<Course, Double> map = new HashMap<Course, Double>();
 		try {
 			Connection conn = DBUtils.getConnection();
 			
-			String sql_SELECT_GRADES = "SELECT courseID, studentID, grade WHERE studentID='?'";
-			stmt = conn.prepareStatement(sql_SELECT_GRADES);
+			//String sql_SELECT_GRADES = "SELECT courseID, studentID, grade WHERE studentID='?'";
+			stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID);
 			stmt.setInt(1, studentID);
 			
 			ResultSet rs = stmt.executeQuery();
@@ -89,6 +178,12 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		return map;
 	}
 
+	/**
+	 * 
+	 * @param studentID the student to add
+	 * @param courseID the course to add
+	 * @return if the student was registered or not
+	 */
 	@Override
 	public boolean addStudentRegistration(int studentID, int courseID) {
 		boolean added = false;
@@ -111,6 +206,12 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		return added;
 	}
 
+	/**
+	 * 
+	 * @param studentID the id of the student that has paid
+	 * @param courseID the course that has benn paid for
+	 * @return if the update was successful
+	 */
 	@Override
 	public boolean payFee(int studentID, int courseID) {
 		boolean changed = false;
@@ -155,6 +256,13 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		return changed;
 	}
 
+	/**
+	 * 
+	 * @param studentID the id of the student
+	 * @param courseID the id of the course
+	 * @param grade the grade to be added
+	 * @return if the grade was set
+	 */
 	@Override
 	public boolean setGrade(int studentID, int courseID, double grade) {
 		boolean changed = false;
@@ -199,6 +307,12 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		return changed;
 	}
 
+	/**
+	 * 
+	 * @param studentID the student to remove from class
+	 * @param courseID the id of the class
+	 * @return if the student was removed
+	 */
 	@Override
 	public boolean removeStudentRegistration(int studentID, int courseID) {
 		boolean removed = false;
