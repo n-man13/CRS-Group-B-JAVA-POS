@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
+import com.lti.constant.SQLConstants;
 import com.lti.utils.DBUtils;
 
 /**
@@ -33,8 +34,8 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			String sql = "insert into Professor values(?,?)";
-			stmt = conn.prepareStatement(sql);
+			//String sql = "insert into Professor values(?,?)";
+			stmt = conn.prepareStatement(SQLConstants.PROFESSOR_INSERT);
 			stmt.setInt(1, userID);
 			stmt.setString(2, prof.getName());
 
@@ -58,11 +59,11 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			String sql = "SELECT professorID, name FROM Professor";
+			//String sql = "SELECT professorID, name FROM Professor";
 			
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(SQLConstants.PROFESSOR_SELECT);
 			// Step 6 execute statement
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name

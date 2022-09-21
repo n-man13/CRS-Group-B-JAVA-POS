@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.lti.bean.Course;
-import com.lti.bean.Professor;
 import com.lti.bean.Student;
 import com.lti.utils.DBUtils;
 

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.lti.bean.Student;
 import com.lti.bean.User;
+import com.lti.constant.SQLConstants;
 import com.lti.utils.DBUtils;
 
 /**
@@ -29,8 +30,8 @@ public class StudentDAO implements StudentDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			String sql = "INSERT INTO Student VALUES(?,?)";
-			stmt = conn.prepareStatement(sql);
+			//String sql = "INSERT INTO Student VALUES(?,?)";
+			stmt = conn.prepareStatement(SQLConstants.STUDENT_INSERT);
 			stmt.setInt(1, userID);
 			stmt.setString(2, student.getName());
 
@@ -53,11 +54,11 @@ public class StudentDAO implements StudentDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			String sql = "SELECT studentID, name FROM Student"; // TODO add where clause
+			//String sql = "SELECT studentID, name FROM Student"; // TODO add where clause
 			
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(SQLConstants.STUDENT_SELECT);
 			// Step 6 execute statement
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name

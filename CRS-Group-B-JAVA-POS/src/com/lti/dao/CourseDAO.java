@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
 import com.lti.bean.User;
+import com.lti.constant.SQLConstants;
 import com.lti.utils.DBUtils;
 
 public class CourseDAO implements CourseDAOInterface {
@@ -32,11 +33,11 @@ public class CourseDAO implements CourseDAOInterface {
 
 			// Step 5 create and populate statement
 
-			String sql = "SELECT courseID, name , department, description, professorID, prereqID FROM Course";
-			stmt = conn.prepareStatement(sql);
+			//String sql = "SELECT courseID, name , department, description, professorID, prereqID FROM Course";
+			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_ALL_COURSES);
 			
 			// Step 6 execute statement
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name
@@ -78,8 +79,8 @@ public class CourseDAO implements CourseDAOInterface {
 
 			// Step 5 create and populate statement
 
-			String sql = "insert into Course values(?,?,?,?,?,?)";
-			stmt = conn.prepareStatement(sql);
+			//String sql = "insert into Course values(?,?,?,?,?,?)";
+			stmt = conn.prepareStatement(SQLConstants.COURSE_INSERT);
 			stmt.setInt(1, course.getCourseID());
 			stmt.setString(2, course.getName());
 			stmt.setString(3, course.getDepartment());
@@ -111,8 +112,8 @@ public class CourseDAO implements CourseDAOInterface {
 		boolean changed = false;
 		try {
 			Connection conn = DBUtils.getConnection();
-			String sql = "SELECT courseID, professorID FROM Course WHERE courseID='?'";
-			stmt = conn.prepareStatement(sql);
+			//String sql = "SELECT courseID, professorID FROM Course WHERE courseID='?'";
+			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_BY_COURSEID);
 			stmt.setInt(1, courseID);
 			ResultSet rs = stmt.executeQuery();
 			
@@ -120,8 +121,8 @@ public class CourseDAO implements CourseDAOInterface {
 				int tempCourseID = rs.getInt("courseID");
 				int tempProfID = rs.getInt("professorID");
 				if (tempProfID == -1) {
-					sql = "UPDATE Course SET professorID='?' WHERE courseID='?'";
-					stmt = conn.prepareStatement(sql);
+					//sql = "UPDATE Course SET professorID='?' WHERE courseID='?'";
+					stmt = conn.prepareStatement(SQLConstants.COURSE_UPDATE);
 					stmt.setInt(1, profID);
 					stmt.setInt(2, courseID);
 					stmt.executeUpdate();
@@ -150,12 +151,12 @@ public class CourseDAO implements CourseDAOInterface {
 
 			// Step 5 create and populate statement
 
-			String sql = "SELECT courseID, name , department, description, professorID, prereqID FROM Course WHERE courseID='?'";
-			stmt = conn.prepareStatement(sql);
+			//String sql = "SELECT courseID, name , department, description, professorID, prereqID FROM Course WHERE courseID='?'";
+			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_BY_COURSEID);
 			stmt.setInt(1, courseID);
 			
 			// Step 6 execute statement
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name
@@ -175,8 +176,8 @@ public class CourseDAO implements CourseDAOInterface {
 				course.setPrereqCourseID(tempPrereqID);
 				
 			}
-			sql = "DELETE FROM Course WHERE courseID='?'";
-			stmt = conn.prepareStatement(sql);
+			//sql = "DELETE FROM Course WHERE courseID='?'";
+			stmt = conn.prepareStatement(SQLConstants.COURSE_DELETE);
 			stmt.setInt(1, courseID);
 			stmt.executeUpdate();
 

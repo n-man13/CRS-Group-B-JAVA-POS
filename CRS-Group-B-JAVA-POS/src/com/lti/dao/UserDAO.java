@@ -42,8 +42,8 @@ public class UserDAO implements UserDAOInterface {
 
 			stmt.executeUpdate();
 
-			sql = "SELECT userID, username , password, role FROM User";
-			ResultSet rs = stmt.executeQuery(sql);
+			//sql = "SELECT userID, username , password, role FROM User";
+			ResultSet rs = stmt.executeQuery(SQLConstants.USER_SELECT);
 
 			while (rs.next()) {
 				// Retrieve by column name
@@ -78,11 +78,11 @@ public class UserDAO implements UserDAOInterface {
 
 			// Step 5 create and populate statement
 
-			String sql = "SELECT userID, username , password, role FROM User";
+			//String sql = "SELECT userID, username , password, role FROM User";
 			
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(SQLConstants.USER_SELECT);
 			// Step 6 execute statement
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery();
 			
 
 			while (rs.next()) {

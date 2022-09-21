@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.lti.bean.Admin;
+import com.lti.constant.SQLConstants;
 import com.lti.utils.DBUtils;
 
 public class AdminDAO implements AdminDAOInterface {
@@ -24,8 +25,8 @@ public class AdminDAO implements AdminDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			String sql = "insert into Admin values(?)";
-			stmt = conn.prepareStatement(sql);
+			//String sql = "insert into Admin values(?)";
+			stmt = conn.prepareStatement(SQLConstants.ADMIN_INSERT);
 			stmt.setInt(1, userID);
 
 			// Step 6 execute statement
