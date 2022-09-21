@@ -36,7 +36,7 @@ public class Professor extends User {
 	}
 	
 	public Professor() {
-		
+		super();
 	}
 	/**
 	 * @return the courses

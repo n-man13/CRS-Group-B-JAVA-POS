@@ -9,13 +9,14 @@ import com.lti.bean.Course;
 import com.lti.bean.Student;
 import com.lti.dao.CourseDAO;
 import com.lti.dao.CourseDAOInterface;
+import com.lti.dao.RegisteredCourseDAO;
 import com.lti.dao.RegisteredCourseDAOInterface;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOInterface;
 
 public class StudentService implements StudentServiceInterface {
 
-	private RegisteredCourseDAOInterface courseRosterDAO;
+	private RegisteredCourseDAOInterface courseRosterDAO = new RegisteredCourseDAO();
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private StudentDAOInterface studentDAO = new StudentDAO();
 

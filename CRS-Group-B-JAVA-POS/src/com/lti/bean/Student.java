@@ -27,12 +27,17 @@ public class Student extends User {
 		this.studentID = studentID;
 		
 	}
+	
+	public Student() {
+		super();
+	}
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+	
 	/**
 	 * @param name the name to set
 	 */

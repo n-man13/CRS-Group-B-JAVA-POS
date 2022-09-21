@@ -73,18 +73,23 @@ public class CRSProfessorMenu {
 		return true;
 	}
 	
-	private void displayCourses(List <Course> courses) {
+	private void displayCourses(List<Course> courses) {
+		System.out.println(
+				"CourseID \t Course Name \t Department \t Description \t\t Professor \t Prerequisite CourseID");
 		for (Course c : courses) {
-			System.out.println("Id: " + c.getCourseID() +
-			"\nName: " + c.getName() + 
-			"\nDepartment: " + c.getDepartment() +
-			"\nPrerequisite" + c.getPrereqCourseID());
+			if (c.getProf() != null)
+				System.out.println(c.getCourseID() + "\t\t" + c.getName() + "\t" + c.getDepartment() + "\t\t"
+						+ c.getDescription() + "\t" + c.getProf().getName() + "\t" + c.getPrereqCourseID());
+			else
+				System.out.println(c.getCourseID() + "\t\t" + c.getName() + "\t" + c.getDepartment() + "\t\t"
+						+ c.getDescription() + "\t" + "No Professor" + "\t" + c.getPrereqCourseID());
 		}
 	}
 	private void displayStudents(List <Student> students) {
+		System.out.println(
+				"StudentID \t Student Name");
 		for (Student s : students) {
-			System.out.println("Id: " + s.getUserID() +
-			"\nName: " + s.getName());
+			System.out.println(s.getUserID() + "\t\t" + s.getName());
 		}
 	}
 

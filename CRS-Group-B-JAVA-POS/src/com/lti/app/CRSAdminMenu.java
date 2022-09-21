@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.lti.bean.Admin;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
+import com.lti.bean.Student;
 import com.lti.service.AdminService;
 import com.lti.service.AdminServiceInterface;
 import com.lti.service.CourseService;
@@ -19,6 +20,7 @@ public class CRSAdminMenu {
 		CourseServiceInterface courseService = new CourseService();
 		Professor professor = new Professor();
 		Course course = new Course();
+		Student student = new Student();
 		String courseName;
 		String courseDepartment;
 		String prereqId;
@@ -87,7 +89,13 @@ public class CRSAdminMenu {
 			adminService.createProfessor(professor);
 		// TODO all cases with method called from service layer
 		break;
-			
+		case 6:
+			System.out.println("You have selected Approve student registration");
+			this.displayStudents(adminService.unregisteredStudent());
+			System.out.println("Select the student you want to register");
+			student = adminService.getStudentById(scan.nextInt());
+			adminService.approveStudentRegistration(student);
+		break;
 		case 7:
 			System.out.println("Please press enter to log out");
 			scan.nextLine();
@@ -98,13 +106,26 @@ public class CRSAdminMenu {
 		return true;
 	}
 	
-	private void displayCourses(List <Course> courses) {
+	private void displayCourses(List<Course> courses) {
+		System.out.println(
+				"CourseID \t Course Name \t Department \t Description \t\t Professor \t Prerequisite CourseID");
 		for (Course c : courses) {
-			System.out.println("Id: " + c.getCourseID() +
-			"\nName: " + c.getName() + 
-			"\nDepartment: " + c.getDepartment() +
-			"\nPrerequisite" + c.getPrereqCourseID());
+			if (c.getProf() != null)
+				System.out.println(c.getCourseID() + "\t\t" + c.getName() + "\t" + c.getDepartment() + "\t\t"
+						+ c.getDescription() + "\t" + c.getProf().getName() + "\t" + c.getPrereqCourseID());
+			else
+				System.out.println(c.getCourseID() + "\t\t" + c.getName() + "\t" + c.getDepartment() + "\t\t"
+						+ c.getDescription() + "\t" + "No Professor" + "\t" + c.getPrereqCourseID());
 		}
 	}
+	private void displayStudents(List <Student> students) {
+		System.out.println(
+				"StudentID \t Student Name");
+		for (Student s : students) {
+			System.out.println(s.getUserID() + "\t\t" + s.getName());
+		}
+	}
+	
+	
 
 }
