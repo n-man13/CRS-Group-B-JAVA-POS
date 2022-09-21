@@ -17,8 +17,18 @@ public interface StudentDAOInterface {
 	 */
 	public int createStudent(Student student);
 	
+	/**
+	 * 
+	 * @param username the username of the User bean
+	 * @return the Student associated with the username
+	 */
 	public Student viewStudent(String username);
 	
+	/**
+	 * 
+	 * @param studentID the id of the student to find
+	 * @return the student associated with the id
+	 */
 	public Student viewStudent(int studentID);
 
 }

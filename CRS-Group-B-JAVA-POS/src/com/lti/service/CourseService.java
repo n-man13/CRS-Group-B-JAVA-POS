@@ -3,12 +3,13 @@ package com.lti.service;
 import java.util.List;
 
 import com.lti.bean.Course;
+import com.lti.dao.CourseDAO;
 import com.lti.dao.CourseDAOInterface;
 
 public class CourseService implements CourseServiceInterface{
 	
 	private Course course;
-	private CourseDAOInterface courseDAO;
+	private CourseDAOInterface courseDAO = new CourseDAO();
 	
 	public void getNumberStudents() {
 		//get number of students that applied on this course

@@ -18,7 +18,17 @@ public interface ProfessorDAOInterface {
 	 */
 	public int createProfessor(Professor prof);
 	
+	/**
+	 * 
+	 * @param profID the professor to view
+	 * @return the professor object
+	 */
 	public Professor viewProfessor(int profID);
 	
+	/**
+	 * 
+	 * @param username the username of the User
+	 * @return the professor object associated with the username
+	 */
 	public Professor viewProfessor(String username);
 }
