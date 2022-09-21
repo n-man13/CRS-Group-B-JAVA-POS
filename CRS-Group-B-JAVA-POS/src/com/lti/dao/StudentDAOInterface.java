@@ -31,4 +31,11 @@ public interface StudentDAOInterface {
 	 */
 	public Student viewStudent(int studentID);
 
+	/**
+	 * 
+	 * @param student student with updated information associated with studentID
+	 * @return if update occurred
+	 */
+	public boolean updateStudent(Student student);
+	
 }

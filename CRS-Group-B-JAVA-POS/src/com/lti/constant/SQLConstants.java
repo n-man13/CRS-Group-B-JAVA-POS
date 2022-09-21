@@ -6,8 +6,9 @@ public class SQLConstants {
 	public static final String USER_INSERT = "INSERT INTO User VALUES(?,?,?)";
 	public static final String USER_SELECT = "SELECT userID, username , password, role FROM User";
 	public static final String USER_UPDATE_PASSWORD = "UPDATE User SET password='?' WHERE username='?'";
-	public static final String STUDENT_INSERT = "INSERT INTO Student VALUES(?,?)";
+	public static final String STUDENT_INSERT = "INSERT INTO Student VALUES(?,?,?)";
 	public static final String STUDENT_SELECT = "SELECT studentID, name FROM Student";
+	public static final String STUDENT_UPDATE = "UPDATE Student SET name='?', registrationApproved='?' WHERE studentID='?'";
 	public static final String PROFESSOR_INSERT = "INSERT INTO Professor VALUES(?,?)";
 	public static final String PROFESSOR_SELECT = "SELECT professorID, name FROM Professor";
 	public static final String COURSE_SELECT_BY_COURSEID = "SELECT courseID, name , department, description, professorID, prereqID FROM Course WHERE courseID='?'";

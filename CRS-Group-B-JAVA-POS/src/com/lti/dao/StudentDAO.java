@@ -34,6 +34,7 @@ public class StudentDAO implements StudentDAOInterface {
 			stmt = conn.prepareStatement(SQLConstants.STUDENT_INSERT);
 			stmt.setInt(1, userID);
 			stmt.setString(2, student.getName());
+			stmt.setBoolean(3, false);
 
 			// Step 6 execute statement
 
@@ -87,4 +88,30 @@ public class StudentDAO implements StudentDAOInterface {
 		
 	}
 
+	/**
+	 * 
+	 * @param student student with updated information associated with studentID
+	 * @return if update occurred
+	 */
+	public boolean updateStudent(Student student) {
+		boolean changed = false;
+		try {
+			Connection conn = DBUtils.getConnection();
+			
+			//UPDATE Student SET name='?', registrationApproved='?' WHERE studentID='?'
+			stmt = conn.prepareStatement(SQLConstants.STUDENT_UPDATE);
+			stmt.setString(1, student.getName());
+			stmt.setBoolean(2, student.isRegistered());
+			stmt.setInt(3, student.getStudentID());
+			stmt.executeUpdate();
+			changed = true;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return changed;
+	}
 }
