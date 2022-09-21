@@ -21,6 +21,7 @@ CREATE TABLE User(
 CREATE TABLE Student(
 	studentID int NOT NULL UNIQUE,
 	name varchar(60) NOT NULL,
+	registrationApproved bool,
 	CONSTRAINT PK_Student PRIMARY KEY (studentID),
 	CONSTRAINT FK_StudentID FOREIGN KEY (studentID)
 	REFERENCES User(userID)
