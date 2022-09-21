@@ -27,7 +27,7 @@ public class CRSStudentMenu {
 		System.out.println("5. Check grades");
 		System.out.println("6. View all courses");
 		System.out.println("7. Log out");
-		int studentChoice = Integer.parseInt(scan.nextLine());
+		int studentChoice = scan.nextInt();
 		switch (studentChoice) {
 		case 1:
 
