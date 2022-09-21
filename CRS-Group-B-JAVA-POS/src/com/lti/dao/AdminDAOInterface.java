@@ -10,7 +10,17 @@ public interface AdminDAOInterface {
 	 */
 	public int createAdmin(Admin admin);
 	
+	/**
+	 * 
+	 * @param username username associated with the admin
+	 * @return the Admin object
+	 */
 	public Admin viewAdmin(String username);
 	
+	/**
+	 * 
+	 * @param adminID the id of the admin
+	 * @return the Admin object
+	 */
 	public Admin viewAdmin(int adminID);
 }

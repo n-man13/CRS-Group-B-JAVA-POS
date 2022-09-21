@@ -47,6 +47,12 @@ public class AdminDAO implements AdminDAOInterface {
 		}
 		return userID;
 	}
+	
+	/**
+	 * 
+	 * @param username username associated with the admin
+	 * @return the Admin object
+	 */
 
 	@Override
 	public Admin viewAdmin(String username) {
@@ -55,6 +61,12 @@ public class AdminDAO implements AdminDAOInterface {
 		return viewAdmin(adminID);
 	}
 
+	
+	/**
+	 * 
+	 * @param adminID the id of the admin
+	 * @return the Admin object
+	 */
 	@Override
 	public Admin viewAdmin(int adminID) {
 		Admin admin = null;
