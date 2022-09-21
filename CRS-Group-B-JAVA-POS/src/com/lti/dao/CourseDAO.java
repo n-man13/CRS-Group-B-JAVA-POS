@@ -121,7 +121,7 @@ public class CourseDAO implements CourseDAOInterface {
 				int tempProfID = rs.getInt("professorID");
 				if (tempProfID == -1) {
 					//sql = "UPDATE Course SET professorID='?' WHERE courseID='?'";
-					stmt = conn.prepareStatement(SQLConstants.COURSE_UPDATE);
+					stmt = conn.prepareStatement(SQLConstants.COURSE_UPDATE_PROFESSORID);
 					stmt.setInt(1, profID);
 					stmt.setInt(2, courseID);
 					stmt.executeUpdate();
@@ -276,4 +276,41 @@ public class CourseDAO implements CourseDAOInterface {
 		return course;
 	}
 	
+	/**
+	 * 
+	 * @param course the course with the required changes made already
+	 * @return if the course was updated
+	 */
+	public boolean updateCourse(Course course) {
+		boolean changed = false;
+		try {
+			Connection conn = DBUtils.getConnection();
+			//String sql = "SELECT courseID, professorID FROM Course WHERE courseID='?'";
+			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_BY_COURSEID);
+			stmt.setInt(1, course.getCourseID());
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				int tempCourseID = rs.getInt("courseID");
+				int tempProfID = rs.getInt("professorID");
+				if (tempProfID == -1) {
+					//sql = "UPDATE Course SET professorID='?' WHERE courseID='?'";
+					stmt = conn.prepareStatement(SQLConstants.COURSE_UPDATE);
+					stmt.setString(1, course.getName());
+					stmt.setString(2, course.getDepartment());
+					stmt.setString(3, course.getDescription());
+					stmt.setInt(4, course.getPrereqCourseID());
+					stmt.setInt(5, course.getCourseID());
+					stmt.executeUpdate();
+					changed = true;
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return changed;
+	}
 }

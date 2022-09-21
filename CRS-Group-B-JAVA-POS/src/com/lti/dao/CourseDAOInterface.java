@@ -55,4 +55,11 @@ public interface CourseDAOInterface {
 	 * @return the course with provided id or null if not found
 	 */
 	public Course viewCourse(int courseID);
+	
+	/**
+	 * 
+	 * @param course the course with the required changes made already
+	 * @return if the course was updated
+	 */
+	public boolean updateCourse(Course course);
 }
