@@ -66,8 +66,8 @@ public class CRSStudentMenu {
 			System.out.println("You selected Check Grades");
 			Map<Course, Double> courseAndGrades = studentService.checkGrades(studentId);
 			for (Course c : courseAndGrades.keySet()) {
-				System.out.println("Id: " + c.getCourseID() + "\nName: " + c.getName() + "\nDepartment: "
-						+ c.getDepartment() + "\nGrade" + courseAndGrades.get(c));
+				System.out.println("Id: " + c.getCourseID() + "\tName: " + c.getName() + "\tDepartment: "
+						+ c.getDepartment() + "\tGrade" + courseAndGrades.get(c));
 			}
 			break;
 		case 6:

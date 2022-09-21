@@ -156,7 +156,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		try {
 			Connection conn = DBUtils.getConnection();
 			
-			//String sql_SELECT_GRADES = "SELECT courseID, studentID, grade WHERE studentID='?'";
+			//String sql_SELECT_GRADES = "SELECT courseID, studentID, grade WHERE studentID=?";
 			stmt = conn.prepareStatement(SQLConstants.REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID);
 			stmt.setInt(1, studentID);
 			
