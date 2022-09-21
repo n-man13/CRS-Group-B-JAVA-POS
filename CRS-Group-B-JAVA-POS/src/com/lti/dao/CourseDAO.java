@@ -84,8 +84,7 @@ public class CourseDAO implements CourseDAOInterface {
 			stmt.setString(1, course.getName());
 			stmt.setString(2, course.getDepartment());
 			stmt.setString(3, course.getDescription());
-			stmt.setInt(4, course.getProf().getProfID());
-			stmt.setInt(5, course.getPrereqCourseID());
+			stmt.setInt(4, course.getPrereqCourseID());
 
 			// Step 6 execute statement
 

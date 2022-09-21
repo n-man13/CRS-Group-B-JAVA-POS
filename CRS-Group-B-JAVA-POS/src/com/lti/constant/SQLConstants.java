@@ -18,7 +18,7 @@ public class SQLConstants {
 	public static final String COURSE_DELETE = "DELETE FROM Course WHERE courseID=?";
 	public static final String COURSE_UPDATE = "UPDATE Course SET name=?, department=?, description=?, prereqID=? WHERE courseID=?";
 	public static final String COURSE_UPDATE_PROFESSORID = "UPDATE Course SET professorID=? WHERE courseID=?";
-	public static final String COURSE_INSERT = "INSERT INTO Course VALUES(?,?,?,?,?)";
+	public static final String COURSE_INSERT = "INSERT INTO Course VALUES(?,?,?,?)";
 	public static final String ADMIN_INSERT = "INSERT INTO Admin VALUES(?)";
 	public static final String ADMIN_SELECT = "SELECT adminID FROM Admin WHERE adminID=?";
 	public static final String REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID = "SELECT courseID, studentID FROM RegisteredCourse WHERE courseID=?";
