@@ -20,6 +20,8 @@ public interface RegisteredCourseDAOInterface {
 	
 	public ArrayList<Course> viewAllPaidCourses(int studentID);
 	
+	public Map<Student, Double> viewStudentsAndGrades(int courseId);
+	
 	public Map<Course, Double> viewGrades(int studentID);
 	
 	public boolean addStudentRegistration(int studentID, int courseID);
