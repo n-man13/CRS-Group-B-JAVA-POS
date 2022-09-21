@@ -137,7 +137,7 @@ public class CRSAdminMenu {
 		System.out.println(
 				"StudentID \t Student Name");
 		for (Student s : students) {
-			System.out.println(s.getUserID() + "\t\t" + s.getName());
+			System.out.println(s.getStudentID() + "\t\t" + s.getName());
 		}
 	}
 	

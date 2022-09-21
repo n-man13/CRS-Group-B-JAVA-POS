@@ -46,7 +46,7 @@ public class UserDAO implements UserDAOInterface {
 
 			while (rs.next()) {
 				// Retrieve by column name
-				int tempUserID = rs.getInt("id");
+				int tempUserID = rs.getInt("userID");
 				String tempUsername = rs.getString("username");
 				String tempPassword = rs.getString("password");
 				int tempRole = rs.getInt("role");

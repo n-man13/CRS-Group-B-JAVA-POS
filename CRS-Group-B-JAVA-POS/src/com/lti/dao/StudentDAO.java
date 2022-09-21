@@ -68,9 +68,11 @@ public class StudentDAO implements StudentDAOInterface {
 				// Retrieve by column name
 				int tempUserID  = rs.getInt("studentID");
 				String tempName = rs.getString("name");
+				boolean tempRegistered = rs.getBoolean("registrationApproved");
 				if (tempUserID == studentID) {
 					student = new Student(studentID);
 					student.setName(tempName);
+					student.setRegistered(tempRegistered);
 				}
 			}
 

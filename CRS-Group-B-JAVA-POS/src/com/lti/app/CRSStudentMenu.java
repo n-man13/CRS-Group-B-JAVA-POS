@@ -18,7 +18,7 @@ public class CRSStudentMenu {
 		CourseServiceInterface courseService = new CourseService();
 		int studentId = student.getStudentID();
 
-		System.out.println("*****Welcome Student " + student.getUsername() + "*****");
+		System.out.println("*****Welcome Student " + student.getName() + "*****");
 		System.out.println("Enter your choice: ");
 		System.out.println("1. Apply to course");
 		System.out.println("2. Drop course");

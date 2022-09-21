@@ -108,7 +108,7 @@ public class CRSApplicationMenu {
 		    case 3: 
 		    	System.out.println("*****Welcome to password reset*****");
 		    	System.out.println("Please enter your ID: ");
-		    	int userId = scan.nextInt();
+		    	int userId = Integer.parseInt(scan.nextLine());
 		    	System.out.println("Please enter your username: ");
 		    	String username = scan.nextLine();
 		    	boolean passwordReset = userService.verifyPasswordResetCredentials(userId, username);
