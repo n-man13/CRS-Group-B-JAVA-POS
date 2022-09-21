@@ -8,6 +8,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.lti.bean.Student;
 import com.lti.bean.User;
 import com.lti.constant.SQLConstants;
@@ -113,5 +116,32 @@ public class StudentDAO implements StudentDAOInterface {
 			e.printStackTrace();
 		}
 		return changed;
+	}
+
+	public List<Student> viewUnregisteredStudents(){
+		ArrayList<Student> students = new ArrayList<Student>();
+		try {
+			Connection conn = DBUtils.getConnection();
+			
+			stmt = conn.prepareStatement(SQLConstants.STUDENT_SELECT_UNREGISTERED);
+			stmt.setBoolean(1, false);
+			Student student = null;
+			
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				int tempStudentID = rs.getInt("studentID");
+				String tempStudentName = rs.getString("name");
+				boolean tempRegistered = rs.getBoolean("registrationApproved");
+				student = new Student(tempStudentID);
+				student.setName(tempStudentName);
+				student.setRegistered(tempRegistered);
+				students.add(student);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return students;
 	}
 }

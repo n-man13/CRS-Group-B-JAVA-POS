@@ -3,6 +3,8 @@
  */
 package com.lti.dao;
 
+import java.util.List;
+
 import com.lti.bean.*;
 
 /**
@@ -38,4 +40,5 @@ public interface StudentDAOInterface {
 	 */
 	public boolean updateStudent(Student student);
 	
+	public List<Student> viewUnregisteredStudents();
 }
