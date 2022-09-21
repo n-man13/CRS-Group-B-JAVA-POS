@@ -58,4 +58,11 @@ public class StudentService implements StudentServiceInterface {
 		
 	}
 
+	@Override
+	public void createStudent(Student student) {
+		student.setRegistered(false);
+		studentDAO.createStudent(student);
+				
+	}
+
 }

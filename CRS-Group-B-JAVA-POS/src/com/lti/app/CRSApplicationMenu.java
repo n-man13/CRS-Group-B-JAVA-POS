@@ -44,6 +44,9 @@ public class CRSApplicationMenu {
 		
 		while (homeMenu) {
 			boolean loginMenu = true;
+			Student student = new Student();
+			Professor professor = new Professor();
+			Admin admin = new Admin();
 			System.out.println("*****Welcome to CRS Application*****");
 			System.out.println("Enter your choice: ");
 			System.out.println("1. Login");
@@ -58,8 +61,6 @@ public class CRSApplicationMenu {
 		    	boolean userMenu = true;
 		    	System.out.println("Enter Username: ");
 		    	String username = scan.nextLine();
-		    
-		    	
 		    	System.out.println("Enter Password: ");
 		    	String password = scan.nextLine();
 		    	System.out.println("Enter Role: ");
@@ -72,15 +73,15 @@ public class CRSApplicationMenu {
 			    	while(userMenu) {
 			    		switch(role) {
 			    		case 3:
-			    			Student student = studentService.getStudentByUsername(username);
+			    			student = studentService.getStudentByUsername(username);
 			    			userMenu = studentMenu.studentMenu(student, scan);	
 		    			break;
 			    		case 2:
-			    			Professor professor = professorService.getProfessorByUsername(username);
+			    			professor = professorService.getProfessorByUsername(username);
 			    			userMenu = professorMenu.professorMenu(professor, scan);
 	    				break;
 			    		case 1:
-			    			Admin admin = adminService.getAdminByUsername(username);
+			    			admin = adminService.getAdminByUsername(username);
 			    			userMenu = adminMenu.adminMenu(admin, scan);
 		    			break;
 		    			default: System.out.println("Invalid Role");
@@ -97,22 +98,28 @@ public class CRSApplicationMenu {
 		    case 2: 
 		    	System.out.println("*****Welcome to student registration*****");
 		    	System.out.println("Enter Username: ");
-		    	String username = scan.nextLine();
-		    	System.out.println("Enter email");
-		    	String email = scan.nextLine();
+		    	student.setUsername(scan.nextLine());
 		    	System.out.println("Enter Password: ");
-		    	String password = scan.nextLine();
-		    	System.out.println("Repeat Password: ");
-		    	String passwordCheck = scan.nextLine();
-		    	System.out.println("Thank you for your registration, an email is sent to the admin for approval");
+		    	student.setPassword(scan.nextLine());
+		    	System.out.println("Enter Name: ");
+		    	student.setName(scan.nextLine());
+		    	studentService.createStudent(student);
 		    break;  
 		    case 3: 
 		    	System.out.println("*****Welcome to password reset*****");
-		    	System.out.println("Please enter your email");
-		    	String emailCheck = scan.nextLine();
-		    	System.out.println("Please enter your username");
-		    	String usernameCheck = scan.nextLine();
-		    	System.out.println("An email has sent to your address to reset password");
+		    	System.out.println("Please enter your ID: ");
+		    	int userId = scan.nextInt();
+		    	System.out.println("Please enter your username: ");
+		    	String username = scan.nextLine();
+		    	boolean passwordReset = userService.verifyPasswordResetCredentials(userId, username);
+		    	if (passwordReset) {
+		    		System.out.println("Please enter new password: ");
+		    		String newPassword = scan.nextLine();
+		    		userService.updatePassword(username, newPassword);
+		    	}
+		    	else {
+		    		System.out.println("Credentials are invalid");
+		    	}
 		    break;
 		    case 4:
 		    	System.out.println("Press enter to exit");

@@ -17,6 +17,10 @@ public class Admin extends User {
 		this.adminID = adminID;
 	}
 	
+	public Admin() {
+		super();
+	}
+	
 	/**
 	 * @return the adminID
 	 */

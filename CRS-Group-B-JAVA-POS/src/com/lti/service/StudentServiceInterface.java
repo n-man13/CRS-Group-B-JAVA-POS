@@ -35,4 +35,6 @@ public interface StudentServiceInterface {
 	public List<Course> viewUnpayedCourses(int studentId);
 	
 	public Student getStudentByUsername(String username);
+	
+	public void createStudent(Student student);
 }
