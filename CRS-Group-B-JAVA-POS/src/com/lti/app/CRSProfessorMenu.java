@@ -36,7 +36,7 @@ public class CRSProfessorMenu {
 			this.displayCourses(courseService.viewAllCourses());
 			System.out.println("Please select the course ID");
 			int courseId = scan.nextInt();
-			professorService.applyToCourse(professorChoice, courseId);
+			professorService.applyToCourse(professor.getProfID(), courseId);
 		break;
 		case 2:
 			System.out.println("You have selected Record grade");

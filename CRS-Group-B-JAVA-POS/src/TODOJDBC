@@ -85,6 +85,6 @@ Professor
 
 
 Make payment doesn't show unpayed courses
-add professor to course throws key exception error
+add professor to course throws key exception error -- Done??
 admin creating course: Column count doesn't match value count at row 1
 need to add on delete cascade on update cascade;

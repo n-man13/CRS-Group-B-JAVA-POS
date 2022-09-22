@@ -23,6 +23,7 @@ public class Professor extends User {
 	public Professor(int profID, String name) {
 		super();
 		this.name = name;
+		this.profID = profID;
 		courses = new ArrayList<Course>();
 	}
 	/**
