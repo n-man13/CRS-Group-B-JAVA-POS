@@ -21,13 +21,25 @@ public class ProfessorService implements ProfessorServiceInterface {
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private RegisteredCourseDAOInterface registeredCourseDAO =  new RegisteredCourseDAO();
 	
+	/**
+	 * call courseDAO to set professorId to course
+	 * @param int professorid, int courseid
+	 * thorws CourseNotFoundException if courseId doesn't exits
+	 */	
 	public void applyToCourse(int professorId, int courseId) throws CourseNotFoundException{
 		// apply to specific course
 
 		if (!courseDAO.addProfessorToCourse(courseId, professorId)) 
 			throw new CourseNotFoundException("This course was not found, Id: " , courseId);
 	}
-
+	
+	/**
+	 * view students that are enrolled in a course
+	 * @param int courseid
+	 * @return list of students
+	 * thorws CourseNotFoundException if courseId doesn't exits
+	 * throws NoStudentsEnrolledException if there are not studens
+	 */	
 	public List<Student> viewStudents(int courseId) throws CourseNotFoundException, NoStudentsEnrolledException{
 		
 		List <Student> students = registeredCourseDAO.viewAllStudents(courseId);
@@ -36,7 +48,14 @@ public class ProfessorService implements ProfessorServiceInterface {
 		return students;
 		
 	}
-
+	
+	/**
+	 * records a grade of a student of a particular course
+	 * @param int courseid, studentid, grade
+	 * throws CourseNotFoundException if courseId doesn't exits
+	 * throws StudentNotFoundException if provided studentId doesn't exist
+	 * throws NoStudentsEnrolledException if there are not student
+	 */	
 	public void recordGrade(double grade, int studentId, int courseId) throws StudentNotFoundException, CourseNotFoundException, NoStudentsEnrolledException{
 		// record grade for student in class
 		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
@@ -44,19 +63,34 @@ public class ProfessorService implements ProfessorServiceInterface {
 		if (registeredCourseDAO.setGrade(studentId, courseId, grade)) throw new StudentNotFoundException("This student was not found, ID: " , studentId);
 
 	}
-
+	
+	/**
+	 * returns a professor by providing a username
+	 * @param string username
+	 * 
+	 */	
 	@Override
 	public Professor getProfessorByUsername(String username) {
 		
 		return professorDAO.viewProfessor(username);
 	}
-
+	
+	/**
+	 * returns a list of courses that a professor is teaching
+	 * @param professorID
+	 * 
+	 */	
 	@Override
 	public List<Course> viewProfessorCourses(int professorId) {
 		// TODO Auto-generated method stub
 		return courseDAO.viewCoursesByProfessor(professorId);
 	}
 
+	/**
+	 * returns a map of student to grade 
+	 * @param int courseId
+	 * throws courseNotFoundException if can't 
+	 */	
 	@Override
 	public Map<Student, Double> viewStudentsGrades(int courseId) throws CourseNotFoundException, NoStudentsEnrolledException{
 		

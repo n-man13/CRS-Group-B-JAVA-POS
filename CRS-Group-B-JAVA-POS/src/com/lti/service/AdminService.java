@@ -30,57 +30,109 @@ public class AdminService implements AdminServiceInterface {
 	private AdminDAOInterface adminDAO = new AdminDAO();
 	private UserDAOInterface userDAO = new UserDAO();
 	
+	
+	/**
+	 * call courseDAO to create a course
+	 * @param course
+	 */
 	@Override
 	public void createCourse(Course course) {
 		
 		courseDAO.createCourse(course);
 		
 	}
+	
+	/**
+	 * call professorDAO to create a professor
+	 * @param course
+	 * throws UsernameUsedException if username already exists
+	 */
 	@Override
 	public void createProfessor(Professor professor) throws UsernameUsedException{
-		// TODO Auto-generated method stub
+
 		if (userDAO.viewUser(professor.getUsername()) != null) throw new UsernameUsedException("Username already taken, username: ", professor.getUsername());
 		professorDAO.createProfessor(professor);
 	}
+	
+	/**
+	 * call courseDAO to create a course
+	 * @param course
+	 * throws CourseNotFoundException if courseID provided doesn't exist
+	 */
 	@Override
 	public void updateCourse(Course course) throws CourseNotFoundException {
-		// TODO Auto-generated method stub
+
 		if (courseDAO.viewCourse(course.getCourseID()) == null) throw new CourseNotFoundException("This course was not found, ID: " , course.getCourseID());
 		courseDAO.updateCourse(course);
 	}
+	
+	/**
+	 * call courseDAO to delete a course
+	 * @param int courseID
+	 * throws CourseNotFoundException if courseID provided doesn't exist
+	 */
 	@Override
 	public void deleteCourse(int courseId) throws CourseNotFoundException{
-		// TODO Auto-generated method stub
+
 		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
 		courseDAO.deleteCourse(courseId);
 	}
+	
+	/**
+	 * call courseDAO to view all course
+	 * @param 
+	 * @return list of courses
+	 */
 	@Override
 	public void listAllCourse() {
-		// TODO Auto-generated method stub
+
 		courseDAO.viewAllCourses();
 	}
+	
+	/**
+	 * call studentDAO to set student attribute registrationApproved to true
+	 * @param student
+	 * throws StudentNotFoundException if student provided doesn't exist
+	 */
 	@Override
 	public void approveStudentRegistration(Student student) throws StudentNotFoundException {
 		
 		if (studentDAO.viewStudent(student.getStudentID()) == null) throw new StudentNotFoundException("This student was not found, ID: " , student.getStudentID());
 		student.setRegistered(true);
 		studentDAO.updateStudent(student);
-		// TODO Auto-generated method stub
-		
 	}
+	
+	/**
+	 * call adminDAO to get admin by username
+	 * @param String username
+	 * 
+	 */	
 	@Override
 	public Admin getAdminByUsername(String username) {
 		return adminDAO.viewAdmin(username);
 		
 	}
+	
+	/**
+	 * call studentDAO to get list of students that are not registered yet
+	 * @param 
+	 * @return list of students
+	 * throws allstudentRegisteredexception if list is empty
+	 */	
 	@Override
 	public List<Student> unregisteredStudent() throws AllStudentRegisteredException{
-		// TODO Auto-generated method stub
+
 		
 		List<Student> students = studentDAO.viewUnregisteredStudents();
 		if (students.isEmpty()) throw new AllStudentRegisteredException("There are no students to be registered");
 		return students;
 	}
+	
+	/**
+	 * call student to get student by id
+	 * @param int id
+	 * @return student
+	 */	
 	@Override
 	public Student getStudentById(int studentId) {
 		return studentDAO.viewStudent(studentId);

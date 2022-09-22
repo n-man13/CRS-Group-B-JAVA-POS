@@ -18,11 +18,13 @@ import com.lti.exception.CourseFullException;
 import com.lti.exception.CourseNotFoundException;
 
 public class StudentService implements StudentServiceInterface {
+	
 
 	private RegisteredCourseDAOInterface registeredCourseDAO = new RegisteredCourseDAO();
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private StudentDAOInterface studentDAO = new StudentDAO();
-
+	
+	
 	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException {
 		
 		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
@@ -32,17 +34,22 @@ public class StudentService implements StudentServiceInterface {
 	}
 
 	public void dropCourse(int studentId, int courseId) throws CourseNotFoundException{
-		
+		List <Course> courses = registeredCourseDAO.viewStudentCourses(studentId);
+		int i = 0;
+		for (Course c : courses) {
+			if (c.getCourseID() != courseId) i++;
+		}
+		if (courses.size()-1 == i) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
 		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
 		registeredCourseDAO.removeStudentRegistration(studentId, courseId);
 	}
 
 	public List<Course> viewAppliedCourses(int studentId) {
-
+		
 		return registeredCourseDAO.viewStudentCourses(studentId);
 	}
 
-	public void makePayment(int studentId, int courseId) throws AllCoursesPaidException{
+	public void makePayment(int studentId, int courseId) {
 		
 		registeredCourseDAO.payFee(studentId, courseId);
 	}
@@ -53,8 +60,10 @@ public class StudentService implements StudentServiceInterface {
 	}
 
 	
-	public List<Course> viewUnpayedCourses(int studentId) {
+	public List<Course> viewUnpayedCourses(int studentId) throws AllCoursesPaidException{
 		
+		List <Course> courses = registeredCourseDAO.viewUnpaidCourses(studentId);
+		if (courses.isEmpty()) throw new AllCoursesPaidException("There are no more courses to pay, student ID: ", studentId);
 		return registeredCourseDAO.viewUnpaidCourses(studentId);
 	}
 
