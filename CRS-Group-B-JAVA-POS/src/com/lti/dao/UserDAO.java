@@ -94,7 +94,8 @@ public class UserDAO implements UserDAOInterface {
 					thisUser.setPassword(tempPassword);
 					thisUser.setUsername(tempUsername);
 					thisUser.setRole(tempRole);
-					System.out.println(tempUsername + "/" + tempUserID + "/" + tempPassword + "/" + tempRole);
+					//System.out.println(tempUsername + "/" + tempUserID + "/" + tempPassword + "/" + tempRole);
+					// used for debugging
 				}
 			}
 

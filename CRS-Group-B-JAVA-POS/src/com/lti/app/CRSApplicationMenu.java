@@ -11,6 +11,7 @@ import com.lti.bean.Catalog;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
+import com.lti.exception.UsernameUsedException;
 import com.lti.service.AdminService;
 import com.lti.service.AdminServiceInterface;
 import com.lti.service.ProfessorService;
@@ -103,7 +104,11 @@ public class CRSApplicationMenu {
 		    	student.setPassword(scan.nextLine());
 		    	System.out.println("Enter Name: ");
 		    	student.setName(scan.nextLine());
+		    	try {
 		    	studentService.createStudent(student);
+		    	} catch (UsernameUsedException e) {
+		    		System.out.println(e.getMessage() + e.getUsername());
+		    	}
 		    break;  
 		    case 3: 
 		    	System.out.println("*****Welcome to password reset*****");

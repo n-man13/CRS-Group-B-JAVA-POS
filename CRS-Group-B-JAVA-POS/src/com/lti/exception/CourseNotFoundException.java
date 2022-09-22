@@ -8,7 +8,7 @@ public class CourseNotFoundException extends Exception {
 		this.courseID = courseID;
 	}
 
-	public double getCourseID() {
+	public int getCourseID() {
 		return courseID;
 	}
 }
