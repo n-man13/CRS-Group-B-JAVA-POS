@@ -39,7 +39,7 @@ public class StudentService implements StudentServiceInterface {
 		for (Course c : courses) {
 			if (c.getCourseID() != courseId) i++;
 		}
-		if (courses.size()-1 == i) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
+		if ((courses.size()-1) == i) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
 		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
 		registeredCourseDAO.removeStudentRegistration(studentId, courseId);
 	}
