@@ -16,6 +16,7 @@ import com.lti.dao.StudentDAOInterface;
 import com.lti.exception.AllCoursesPaidException;
 import com.lti.exception.CourseFullException;
 import com.lti.exception.CourseNotFoundException;
+import com.lti.exception.UsernameUsedException;
 
 public class StudentService implements StudentServiceInterface {
 	
@@ -74,7 +75,8 @@ public class StudentService implements StudentServiceInterface {
 	}
 
 	@Override
-	public void createStudent(Student student) {
+	public void createStudent(Student student) throws UsernameUsedException {
+		if (studentDAO.viewStudent(student.getUsername()) != null) throw new UsernameUsedException("Username already taken, username: ", student.getUsername());
 		student.setRegistered(false);
 		studentDAO.createStudent(student);
 				

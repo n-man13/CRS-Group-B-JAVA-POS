@@ -87,8 +87,9 @@ public class ProfessorService implements ProfessorServiceInterface {
 	}
 
 	/**
-	 * returns a map of student to grade 
+	 * gets a map of student to grade calls method courseDAO 
 	 * @param int courseId
+	 * @return map of student to grade 
 	 * throws courseNotFoundException if courseId doesn't exist
 	 * throws NoStudentsEnrolledException if there 
 	 */	
