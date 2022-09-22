@@ -13,7 +13,12 @@ public class UserService implements UserServiceInterface {
 	private StudentDAOInterface studentDAO = new StudentDAO();
 	private User user;
 	private Student student;
-
+	
+	/**
+	 * verify log in credentials
+	 * @param username, password, int role
+	 * @return true if credentials are correct, false if not
+	 */	
 	public boolean verifyCredetials(String username, String password, int role) {
 		
 		user = userDAO.viewUser(username);
@@ -41,7 +46,11 @@ public class UserService implements UserServiceInterface {
 
 	}
 
-
+	/**
+	 * verify password reset credentials
+	 * @param username, password, int role
+	 * @return true if credentials are correct, false if not
+	 */	
 	@Override
 	public boolean verifyPasswordResetCredentials(int id, String username) {
 		
@@ -55,7 +64,10 @@ public class UserService implements UserServiceInterface {
 		
 	}
 
-
+	/**
+	 * update password of user
+	 * @param username, password
+	 */	
 	@Override
 	public void updatePassword(String username, String newPassword) {
 		// TODO Auto-generated method stub
