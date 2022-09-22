@@ -78,16 +78,32 @@ public class StudentService implements StudentServiceInterface {
 	 */	
 	public void makePayment(int studentId, int courseId) throws CourseNotFoundException{
 		
+		List <Course> courses = registeredCourseDAO.viewStudentCourses(studentId);
+		int i = 0;
+		for (Course c : courses) {
+			if (c.getCourseID() != courseId) i++;
+		}
+		if (courses.size() == i) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
 		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
 		registeredCourseDAO.payFee(studentId, courseId);
 	}
 
+	/**
+	 * calls DAO method to view grades for a student
+	 * @param int studentId
+	 * @return map <course, double>
+	 */	
 	public Map<Course, Double> checkGrades(int studentId) {
+		
 		
 		return registeredCourseDAO.viewGrades(studentId);
 	}
 
-	
+	/**
+	 * calls DAO method to view unpaid courses
+	 * @param int studentId
+	 * @return map <course, double>
+	 */	
 	public List<Course> viewUnpayedCourses(int studentId) throws AllCoursesPaidException{
 		
 		List <Course> courses = registeredCourseDAO.viewUnpaidCourses(studentId);
