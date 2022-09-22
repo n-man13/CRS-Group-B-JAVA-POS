@@ -7,6 +7,10 @@ import com.lti.bean.Admin;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
+import com.lti.exception.AllStudentRegisteredException;
+import com.lti.exception.CourseNotFoundException;
+import com.lti.exception.StudentNotFoundException;
+import com.lti.exception.UsernameUsedException;
 import com.lti.service.AdminService;
 import com.lti.service.AdminServiceInterface;
 import com.lti.service.CourseService;
@@ -80,13 +84,21 @@ public class CRSAdminMenu {
 			prereqId = scan.nextLine();
 			if (!prereqId.isBlank())
 				course.setPrereqCourseID(Integer.parseInt(prereqId));
+			try {
 			adminService.updateCourse(course);
+			} catch(CourseNotFoundException e) {
+				System.out.println(e.getMessage() + e.getCourseID());
+			}
 		break;
 		case 3:
 			System.out.println("You have selected Delete course");
 			this.displayCourses(courseService.viewAllCourses());
 			System.out.println("Please select the course to edit");
+			try {
 			adminService.deleteCourse(scan.nextInt());
+			} catch(CourseNotFoundException e) {
+				System.out.println(e.getMessage() + e.getCourseID());
+			}
 		break;
 		case 4:
 			System.out.println("You have selected View all courses");
@@ -101,15 +113,25 @@ public class CRSAdminMenu {
 			professor.setPassword(scan.nextLine());
 			System.out.println("Please provide professor's name");
 			professor.setName(scan.nextLine());
+			try {
 			adminService.createProfessor(professor);
+			} catch(UsernameUsedException e) {
+				System.out.println(e.getMessage() + e.getUsername());
+			}
 		// TODO all cases with method called from service layer
 		break;
 		case 6:
 			System.out.println("You have selected Approve student registration");
+			try {
 			this.displayStudents(adminService.unregisteredStudent());
 			System.out.println("Select the student you want to register");
 			student = adminService.getStudentById(scan.nextInt());
 			adminService.approveStudentRegistration(student);
+			} catch(StudentNotFoundException e) {
+				System.out.println(e.getMessage() + e.getStudentID());
+			} catch (AllStudentRegisteredException e) {
+				System.out.println(e.getMessage()); // All students are already registered
+			}
 		break;
 		case 7:
 			System.out.println("Please press enter to log out");
