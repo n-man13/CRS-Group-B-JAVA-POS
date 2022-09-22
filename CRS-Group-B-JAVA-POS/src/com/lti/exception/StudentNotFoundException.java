@@ -4,7 +4,8 @@ public class StudentNotFoundException extends Exception {
 
 	private int studentID;
 
-	public StudentNotFoundException(int studentID) {
+	public StudentNotFoundException(String message, int studentID) {
+		super(message);
 		this.studentID = studentID;
 	}
 
