@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.lti.bean.*;
+import com.lti.exception.AllCoursesPaidException;
+import com.lti.exception.CourseFullException;
+import com.lti.exception.CourseNotFoundException;
 import com.lti.service.CourseService;
 import com.lti.service.CourseServiceInterface;
 import com.lti.service.StudentService;
@@ -36,7 +39,13 @@ public class CRSStudentMenu {
 			System.out.println("Please select the course ID");
 			int courseId = scan.nextInt();
 			// Parameters (studentId, courseId)
-			studentService.applyToCourse(studentId, courseId);
+			try {
+				studentService.applyToCourse(studentId, courseId);
+			} catch (CourseNotFoundException e) {
+				System.out.println(e.getMessage() + e.getCourseID());
+			} catch (CourseFullException e) {
+				System.out.println(e.getMessage() + e.getCourseID());
+			}
 			break;
 
 		case 2:
@@ -45,7 +54,11 @@ public class CRSStudentMenu {
 			System.out.println("Please select the course ID");
 			courseId = scan.nextInt();
 			// Parameters (studentId, courseId)
+			try {
 			studentService.dropCourse(studentId, courseId);
+			} catch (CourseNotFoundException e) {
+				System.out.println(e.getMessage() + e.getCourseID());
+			}
 			break;
 
 		case 3:
@@ -59,7 +72,11 @@ public class CRSStudentMenu {
 			this.displayCourses(studentService.viewUnpayedCourses(studentId));
 			System.out.println("Please select what course to pay");
 			courseId = scan.nextInt();
+			try {
 			studentService.makePayment(studentId, courseId);
+			} catch(AllCoursesPaidException e) {
+				System.out.println(e.getMessage());
+			}
 			break;
 
 		case 5:

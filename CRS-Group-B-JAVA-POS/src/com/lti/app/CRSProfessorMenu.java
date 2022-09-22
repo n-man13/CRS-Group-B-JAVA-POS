@@ -8,6 +8,7 @@ import com.lti.bean.Course;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
 import com.lti.exception.CourseNotFoundException;
+import com.lti.exception.NoStudentsEnrolledException;
 import com.lti.exception.StudentNotFoundException;
 import com.lti.service.CourseService;
 import com.lti.service.CourseServiceInterface;
@@ -65,6 +66,8 @@ public class CRSProfessorMenu {
 				}
 			} catch (CourseNotFoundException e) {
 				System.out.println(e.getMessage() + e.getCourseID());
+			} catch (NoStudentsEnrolledException e) {
+				System.out.println(e.getMessage() + e.getCourseID());
 			}
 			break;
 		// TODO all cases with method called from service layer
@@ -80,6 +83,8 @@ public class CRSProfessorMenu {
 							+ viewStudentGrades.get(s));
 				}
 			} catch (CourseNotFoundException e) {
+				System.out.println(e.getMessage() + e.getCourseID());
+			} catch (NoStudentsEnrolledException e) {
 				System.out.println(e.getMessage() + e.getCourseID());
 			}
 			break;

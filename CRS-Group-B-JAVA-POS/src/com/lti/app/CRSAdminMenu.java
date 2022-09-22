@@ -123,10 +123,10 @@ public class CRSAdminMenu {
 		case 6:
 			System.out.println("You have selected Approve student registration");
 			try {
-			this.displayStudents(adminService.unregisteredStudent());
-			System.out.println("Select the student you want to register");
-			student = adminService.getStudentById(scan.nextInt());
-			adminService.approveStudentRegistration(student);
+				this.displayStudents(adminService.unregisteredStudent());
+				System.out.println("Select the student you want to register");
+				student = adminService.getStudentById(scan.nextInt());
+				adminService.approveStudentRegistration(student);
 			} catch(StudentNotFoundException e) {
 				System.out.println(e.getMessage() + e.getStudentID());
 			} catch (AllStudentRegisteredException e) {
