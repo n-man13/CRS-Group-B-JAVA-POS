@@ -78,7 +78,7 @@ Professor
 	display students registered to course
 	ask for student id
 	ask for grade
-	call sercie method to update course roster
+	call service method to update course roster
 	parameters (grade, studentID, courseID)
 	
 	Problems
