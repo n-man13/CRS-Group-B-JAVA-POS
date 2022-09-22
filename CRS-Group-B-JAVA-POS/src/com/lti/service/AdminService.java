@@ -15,7 +15,10 @@ import com.lti.dao.ProfessorDAO;
 import com.lti.dao.ProfessorDAOInterface;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOInterface;
+import com.lti.exception.AllStudentRegisteredException;
+import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.StudentNotFoundException;
+import com.lti.exception.UsernameUsedException;
 
 public class AdminService implements AdminServiceInterface {
 	
@@ -31,18 +34,18 @@ public class AdminService implements AdminServiceInterface {
 		
 	}
 	@Override
-	public void createProfessor(Professor professor) {
+	public void createProfessor(Professor professor) throws UsernameUsedException{
 		// TODO Auto-generated method stub
 		professorDAO.createProfessor(professor);
 	}
 	@Override
-	public void updateCourse(Course course) {
+	public void updateCourse(Course course) throws CourseNotFoundException {
 		// TODO Auto-generated method stub
 		
 		System.out.println(courseDAO.updateCourse(course));
 	}
 	@Override
-	public void deleteCourse(int courseId) {
+	public void deleteCourse(int courseId) throws CourseNotFoundException{
 		// TODO Auto-generated method stub
 		courseDAO.deleteCourse(courseId);
 	}
@@ -52,7 +55,7 @@ public class AdminService implements AdminServiceInterface {
 		courseDAO.viewAllCourses();
 	}
 	@Override
-	public void approveStudentRegistration(Student student) throws StudentNotFoundException{
+	public void approveStudentRegistration(Student student) throws StudentNotFoundException {
 		
 		student.setRegistered(true);
 		studentDAO.updateStudent(student);
@@ -65,7 +68,7 @@ public class AdminService implements AdminServiceInterface {
 		
 	}
 	@Override
-	public List<Student> unregisteredStudent() {
+	public List<Student> unregisteredStudent() throws AllStudentRegisteredException{
 		// TODO Auto-generated method stub
 		return studentDAO.viewUnregisteredStudents();
 	}

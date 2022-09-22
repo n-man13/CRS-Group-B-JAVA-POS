@@ -11,6 +11,8 @@ import com.lti.dao.ProfessorDAO;
 import com.lti.dao.ProfessorDAOInterface;
 import com.lti.dao.RegisteredCourseDAO;
 import com.lti.dao.RegisteredCourseDAOInterface;
+import com.lti.exception.CourseNotFoundException;
+import com.lti.exception.StudentNotFoundException;
 
 public class ProfessorService implements ProfessorServiceInterface {
 	
@@ -18,18 +20,18 @@ public class ProfessorService implements ProfessorServiceInterface {
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private RegisteredCourseDAOInterface registeredCourseDAO =  new RegisteredCourseDAO();
 	
-	public void applyToCourse(int professorId, int courseId) {
+	public void applyToCourse(int professorId, int courseId) throws CourseNotFoundException{
 		// apply to specific course
 		courseDAO.addProfessorToCourse(courseId, professorId);
 	}
 
-	public List<Student> viewStudents(int courseId) {
+	public List<Student> viewStudents(int courseId) throws CourseNotFoundException{
 		
 		return registeredCourseDAO.viewAllStudents(courseId);
 		
 	}
 
-	public void recordGrade(double grade, int studentId, int courseId) {
+	public void recordGrade(double grade, int studentId, int courseId) throws StudentNotFoundException, CourseNotFoundException{
 		// record grade for student in class
 		registeredCourseDAO.setGrade(studentId, courseId, grade);
 

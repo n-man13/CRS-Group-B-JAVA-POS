@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.lti.bean.Course;
 import com.lti.bean.Student;
+import com.lti.exception.CourseNotFoundException;
 
 //student service interface
 public interface StudentServiceInterface {
@@ -13,14 +14,15 @@ public interface StudentServiceInterface {
 	 * @param student Student to add a course
 	 * @param course Course to add
 	 */
-	public void applyToCourse(int studentId, int courseId) ;
+	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException;
 	/**
 	 * Remove student from course
 	 * @param student Student to drop course
 	 * @param courseID Course to drop
 	 * @return Course if successful, else null
 	 */
-	public void dropCourse(int studentId, int courseId);
+	public void dropCourse(int studentId, int courseId) throws CourseNotFoundException;
+	
 	public  List<Course> viewAppliedCourses(int studentId);
 	/**
 	 * Makes payment for courses
