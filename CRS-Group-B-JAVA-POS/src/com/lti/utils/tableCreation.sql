@@ -71,7 +71,7 @@ CREATE TABLE RegisteredCourse(
 CREATE TABLE SemesterRegistration(
 	studentID int NOT NULL,
 	semester int NOT NULL,
-	CONSTRAINT PK_StudentSemester PRIMARYKEY (studentID, semester),
+	CONSTRAINT PK_StudentSemester PRIMARY KEY (studentID, semester),
 	CONSTRAINT FK_StudentID2 FOREIGN KEY (studentID)
 	REFERENCES Student(studentID) ON DELETE CASCADE ON UPDATE CASCADE
 );
