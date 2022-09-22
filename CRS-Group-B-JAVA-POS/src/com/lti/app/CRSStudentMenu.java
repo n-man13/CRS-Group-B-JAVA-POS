@@ -55,7 +55,7 @@ public class CRSStudentMenu {
 			courseId = scan.nextInt();
 			// Parameters (studentId, courseId)
 			try {
-			studentService.dropCourse(studentId, courseId);
+				studentService.dropCourse(studentId, courseId);
 			} catch (CourseNotFoundException e) {
 				System.out.println(e.getMessage() + e.getCourseID());
 			}
@@ -69,22 +69,27 @@ public class CRSStudentMenu {
 		case 4:
 			System.out.println("You have selected Make Payment");
 			System.out.println("List of unpayed courses");
-			this.displayCourses(studentService.viewUnpayedCourses(studentId));
-			System.out.println("Please select what course to pay");
-			courseId = scan.nextInt();
 			try {
-			studentService.makePayment(studentId, courseId);
-			} catch(AllCoursesPaidException e) {
-				System.out.println(e.getMessage());
+				this.displayCourses(studentService.viewUnpayedCourses(studentId));
+				System.out.println("Please select what course to pay");
+				courseId = scan.nextInt();
+
+				studentService.makePayment(studentId, courseId);
+			} catch (AllCoursesPaidException e) {
+				System.out.println(e.getMessage() + e.getStudentID());
 			}
 			break;
 
 		case 5:
 			System.out.println("You selected Check Grades");
 			Map<Course, Double> courseAndGrades = studentService.checkGrades(studentId);
-			for (Course c : courseAndGrades.keySet()) {
-				System.out.println("Id: " + c.getCourseID() + "\tName: " + c.getName() + "\tDepartment: "
-						+ c.getDepartment() + "\tGrade" + courseAndGrades.get(c));
+			if (courseAndGrades.isEmpty())
+				System.out.println("You have no courses");
+			else {
+				for (Course c : courseAndGrades.keySet()) {
+					System.out.println("Id: " + c.getCourseID() + "\tName: " + c.getName() + "\tDepartment: "
+							+ c.getDepartment() + "\tGrade" + courseAndGrades.get(c));
+				}
 			}
 			break;
 		case 6:

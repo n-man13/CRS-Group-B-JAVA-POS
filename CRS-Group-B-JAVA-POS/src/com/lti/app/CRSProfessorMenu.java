@@ -73,7 +73,12 @@ public class CRSProfessorMenu {
 		// TODO all cases with method called from service layer
 		case 3:
 			System.out.println("You have selected View students");
-			this.displayCourses(professorService.viewProfessorCourses(professorId));
+			List<Course> courses = professorService.viewProfessorCourses(professorId);
+			if (courses.isEmpty()) {
+				System.out.println("You have no courses");
+				break;
+			}
+			this.displayCourses(courses);
 			System.out.println("Please select the course ID to view students");
 			courseId = scan.nextInt();
 			try {
