@@ -5,7 +5,10 @@ import java.util.Map;
 
 import com.lti.bean.Course;
 import com.lti.bean.Student;
+import com.lti.exception.AllCoursesPaidException;
+import com.lti.exception.CourseFullException;
 import com.lti.exception.CourseNotFoundException;
+import com.lti.exception.UsernameUsedException;
 
 //student service interface
 public interface StudentServiceInterface {
@@ -14,7 +17,7 @@ public interface StudentServiceInterface {
 	 * @param student Student to add a course
 	 * @param course Course to add
 	 */
-	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException;
+	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException;
 	/**
 	 * Remove student from course
 	 * @param student Student to drop course
@@ -27,7 +30,7 @@ public interface StudentServiceInterface {
 	/**
 	 * Makes payment for courses
 	 */
-	public void makePayment(int studentId, int courseId);
+	public void makePayment(int studentId, int courseId) throws AllCoursesPaidException;
 	/**
 	 * Check grades for student
 	 * @param student Student to check grades for
@@ -38,5 +41,5 @@ public interface StudentServiceInterface {
 	
 	public Student getStudentByUsername(String username);
 	
-	public void createStudent(Student student);
+	public void createStudent(Student student) throws UsernameUsedException;
 }

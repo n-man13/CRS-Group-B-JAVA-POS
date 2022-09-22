@@ -13,6 +13,9 @@ import com.lti.dao.RegisteredCourseDAO;
 import com.lti.dao.RegisteredCourseDAOInterface;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOInterface;
+import com.lti.exception.AllCoursesPaidException;
+import com.lti.exception.CourseFullException;
+import com.lti.exception.CourseNotFoundException;
 
 public class StudentService implements StudentServiceInterface {
 
@@ -20,13 +23,13 @@ public class StudentService implements StudentServiceInterface {
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private StudentDAOInterface studentDAO = new StudentDAO();
 
-	public void applyToCourse(int studentId, int courseId) {
+	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException {
 		
 		courseRosterDAO.addStudentRegistration(studentId, courseId);
 		
 	}
 
-	public void dropCourse(int studentId, int courseID) {
+	public void dropCourse(int studentId, int courseID) throws CourseNotFoundException{
 		
 		courseRosterDAO.removeStudentRegistration(studentId, courseID);
 	}
@@ -36,7 +39,7 @@ public class StudentService implements StudentServiceInterface {
 		return courseRosterDAO.viewStudentCourses(studentId);
 	}
 
-	public void makePayment(int studentId, int courseId) {
+	public void makePayment(int studentId, int courseId) throws AllCoursesPaidException{
 		
 		courseRosterDAO.payFee(studentId, courseId);
 	}
