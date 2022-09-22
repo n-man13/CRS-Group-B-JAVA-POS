@@ -19,40 +19,43 @@ import com.lti.exception.CourseNotFoundException;
 
 public class StudentService implements StudentServiceInterface {
 
-	private RegisteredCourseDAOInterface courseRosterDAO = new RegisteredCourseDAO();
+	private RegisteredCourseDAOInterface registeredCourseDAO = new RegisteredCourseDAO();
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private StudentDAOInterface studentDAO = new StudentDAO();
 
 	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException {
 		
-		courseRosterDAO.addStudentRegistration(studentId, courseId);
+		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
+		if (registeredCourseDAO.viewAllStudents(courseId).size() >= 10) throw new CourseFullException("This course is full, ID: ", courseId);
+		registeredCourseDAO.addStudentRegistration(studentId, courseId);
 		
 	}
 
-	public void dropCourse(int studentId, int courseID) throws CourseNotFoundException{
+	public void dropCourse(int studentId, int courseId) throws CourseNotFoundException{
 		
-		courseRosterDAO.removeStudentRegistration(studentId, courseID);
+		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
+		registeredCourseDAO.removeStudentRegistration(studentId, courseId);
 	}
 
 	public List<Course> viewAppliedCourses(int studentId) {
 
-		return courseRosterDAO.viewStudentCourses(studentId);
+		return registeredCourseDAO.viewStudentCourses(studentId);
 	}
 
 	public void makePayment(int studentId, int courseId) throws AllCoursesPaidException{
 		
-		courseRosterDAO.payFee(studentId, courseId);
+		registeredCourseDAO.payFee(studentId, courseId);
 	}
 
 	public Map<Course, Double> checkGrades(int studentId) {
 		
-		return courseRosterDAO.viewGrades(studentId);
+		return registeredCourseDAO.viewGrades(studentId);
 	}
 
 	
 	public List<Course> viewUnpayedCourses(int studentId) {
 		
-		return courseRosterDAO.viewUnpaidCourses(studentId);
+		return registeredCourseDAO.viewUnpaidCourses(studentId);
 	}
 
 	public Student getStudentByUsername(String username) {
