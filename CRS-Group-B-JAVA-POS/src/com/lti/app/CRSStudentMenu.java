@@ -78,6 +78,8 @@ public class CRSStudentMenu {
 					studentService.makePayment(studentId, courseId);
 				} catch (AllCoursesPaidException e) {
 					System.out.println(e.getMessage() + e.getStudentID());
+				} catch (CourseNotFoundException e) {
+					System.out.println(e.getMessage() + e.getCourseID());
 				}
 				break;
 

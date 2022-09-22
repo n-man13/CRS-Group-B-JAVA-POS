@@ -40,5 +40,9 @@ public interface StudentDAOInterface {
 	 */
 	public boolean updateStudent(Student student);
 	
+	/**
+	 * 
+	 * @return list of all unregistered students
+	 */
 	public List<Student> viewUnregisteredStudents();
 }

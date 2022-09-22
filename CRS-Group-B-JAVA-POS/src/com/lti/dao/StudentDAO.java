@@ -24,6 +24,11 @@ public class StudentDAO implements StudentDAOInterface {
 
 	private PreparedStatement stmt = null;
 
+	/**
+	 * 
+	 * @param student  the student to add
+	 * @return new ID if created successfully, else -1
+	 */
 	@Override
 	public int createStudent(Student student) {
 		UserDAO userDAO = new UserDAO();
@@ -52,6 +57,11 @@ public class StudentDAO implements StudentDAOInterface {
 		return userID;
 	}
 
+	/**
+	 * 
+	 * @param studentID the id of the student to find
+	 * @return the student associated with the id
+	 */
 	public Student viewStudent(int studentID) {
 		Student student = null;
 		try {
@@ -84,6 +94,11 @@ public class StudentDAO implements StudentDAOInterface {
 		return student;
 	}
 	
+	/**
+	 * 
+	 * @param username the username of the User bean
+	 * @return the Student associated with the username
+	 */
 	@Override
 	public Student viewStudent(String username) {
 		UserDAO userDAO = new UserDAO();
@@ -120,6 +135,10 @@ public class StudentDAO implements StudentDAOInterface {
 		return changed;
 	}
 
+	/**
+	 * 
+	 * @return list of all unregistered students
+	 */
 	public List<Student> viewUnregisteredStudents(){
 		ArrayList<Student> students = new ArrayList<Student>();
 		try {

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.lti.bean.Admin;
-import com.lti.bean.Catalog;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
@@ -28,7 +27,7 @@ import com.lti.service.UserServiceInterface;
 public class CRSApplicationMenu {
 
 	/**
-	 * @param args
+	 * @param args unused
 	 */
 	public static void main(String[] args) {
 

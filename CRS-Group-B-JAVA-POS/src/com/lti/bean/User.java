@@ -15,6 +15,10 @@ public class User {
 	public User() {
 		userID = -1;
 	}
+	/**
+	 * 
+	 * @param userID the user's ID
+	 */
 	public User(int userID) {
 		this.userID = userID;
 	}
