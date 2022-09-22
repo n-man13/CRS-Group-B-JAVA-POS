@@ -13,6 +13,8 @@ import com.lti.dao.RegisteredCourseDAO;
 import com.lti.dao.RegisteredCourseDAOInterface;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOInterface;
+import com.lti.dao.UserDAO;
+import com.lti.dao.UserDAOInterface;
 import com.lti.exception.AllCoursesPaidException;
 import com.lti.exception.CourseFullException;
 import com.lti.exception.CourseNotFoundException;
@@ -24,8 +26,14 @@ public class StudentService implements StudentServiceInterface {
 	private RegisteredCourseDAOInterface registeredCourseDAO = new RegisteredCourseDAO();
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private StudentDAOInterface studentDAO = new StudentDAO();
-	
-	
+	private UserDAOInterface userDAO = new UserDAO();
+	/**
+	 * calls DAO method 
+	 * @param int courseId
+	 * @return map of student to grade 
+	 * throws courseNotFoundException if courseId doesn't exist
+	 * throws NoStudentsEnrolledException if there 
+	 */	
 	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException {
 		
 		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
@@ -76,7 +84,7 @@ public class StudentService implements StudentServiceInterface {
 
 	@Override
 	public void createStudent(Student student) throws UsernameUsedException {
-		if (studentDAO.viewStudent(student.getUsername()) != null) throw new UsernameUsedException("Username already taken, username: ", student.getUsername());
+		if (userDAO.viewUser(student.getUsername()) != null) throw new UsernameUsedException("Username already taken, username: ", student.getUsername());
 		student.setRegistered(false);
 		studentDAO.createStudent(student);
 				
