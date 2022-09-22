@@ -26,80 +26,84 @@ public class CRSProfessorMenu {
 		ProfessorServiceInterface professorService = new ProfessorService();
 		int professorId = professor.getProfID();
 
-		System.out.println("*****Welcome Professor*****");
-		System.out.println("Enter your choice: ");
-		System.out.println("1. Apply to course");
-		System.out.println("2. Record grade");
-		System.out.println("3. View students");
-		System.out.println("4. Log out");
-		int professorChoice = Integer.parseInt(scan.nextLine());
-		switch (professorChoice) {
-		case 1:
-			System.out.println("You have selected Apply to course");
-			this.displayCourses(courseService.viewAllCourses());
-			System.out.println("Please select the course ID");
-			int courseId = scan.nextInt();
-			try {
-				professorService.applyToCourse(professor.getProfID(), courseId);
-			} catch (CourseNotFoundException e) {
-				System.out.println(e.getMessage() + e.getCourseID());
-			}
-			break;
-		case 2:
-			System.out.println("You have selected Record grade");
-			this.displayCourses(professorService.viewProfessorCourses(professorId));
-			System.out.println("Please select the course ID to view students");
-			courseId = scan.nextInt();
-			try {
-				this.displayStudents(professorService.viewStudents(courseId));
-				System.out.println("Please select the student ID to add grade");
-				int studentId = scan.nextInt();
-				System.out.println("Please enter the grade");
-				double grade = scan.nextDouble();
-
+		try {
+			System.out.println("*****Welcome Professor*****");
+			System.out.println("Enter your choice: ");
+			System.out.println("1. Apply to course");
+			System.out.println("2. Record grade");
+			System.out.println("3. View students");
+			System.out.println("4. Log out");
+			int professorChoice = Integer.parseInt(scan.nextLine());
+			switch (professorChoice) {
+			case 1:
+				System.out.println("You have selected Apply to course");
+				this.displayCourses(courseService.viewAllCourses());
+				System.out.println("Please select the course ID");
+				int courseId = scan.nextInt();
 				try {
-					professorService.recordGrade(grade, studentId, courseId);
-				} catch (StudentNotFoundException e) {
-					System.out.println(e.getMessage() + e.getStudentID());
+					professorService.applyToCourse(professor.getProfID(), courseId);
 				} catch (CourseNotFoundException e) {
 					System.out.println(e.getMessage() + e.getCourseID());
 				}
-			} catch (CourseNotFoundException e) {
-				System.out.println(e.getMessage() + e.getCourseID());
-			} catch (NoStudentsEnrolledException e) {
-				System.out.println(e.getMessage() + e.getCourseID());
-			}
-			break;
-		// TODO all cases with method called from service layer
-		case 3:
-			System.out.println("You have selected View students");
-			List<Course> courses = professorService.viewProfessorCourses(professorId);
-			if (courses.isEmpty()) {
-				System.out.println("You have no courses");
 				break;
-			}
-			this.displayCourses(courses);
-			System.out.println("Please select the course ID to view students");
-			courseId = Integer.parseInt(scan.nextLine());
-			try {
-				Map<Student, Double> viewStudentGrades = professorService.viewStudentsGrades(courseId);
-				for (Student s : viewStudentGrades.keySet()) {
-					System.out.println("Id: " + s.getStudentID() + "\nName: " + s.getName() + "\nGrade"
-							+ viewStudentGrades.get(s));
-				}
-			} catch (CourseNotFoundException e) {
-				System.out.println(e.getMessage() + e.getCourseID());
-			} catch (NoStudentsEnrolledException e) {
-				System.out.println(e.getMessage() + e.getCourseID());
-			}
-			break;
-		case 4:
-			System.out.println("Please press enter to log out");
-			scan.nextLine();
-			return false;
-		default:
-			System.out.println("Method is not implemented or invalid input");
+			case 2:
+				System.out.println("You have selected Record grade");
+				this.displayCourses(professorService.viewProfessorCourses(professorId));
+				System.out.println("Please select the course ID to view students");
+				courseId = scan.nextInt();
+				try {
+					this.displayStudents(professorService.viewStudents(courseId));
+					System.out.println("Please select the student ID to add grade");
+					int studentId = scan.nextInt();
+					System.out.println("Please enter the grade");
+					double grade = scan.nextDouble();
 
+					try {
+						professorService.recordGrade(grade, studentId, courseId);
+					} catch (StudentNotFoundException e) {
+						System.out.println(e.getMessage() + e.getStudentID());
+					} catch (CourseNotFoundException e) {
+						System.out.println(e.getMessage() + e.getCourseID());
+					}
+				} catch (CourseNotFoundException e) {
+					System.out.println(e.getMessage() + e.getCourseID());
+				} catch (NoStudentsEnrolledException e) {
+					System.out.println(e.getMessage() + e.getCourseID());
+				}
+				break;
+			// TODO all cases with method called from service layer
+			case 3:
+				System.out.println("You have selected View students");
+				List<Course> courses = professorService.viewProfessorCourses(professorId);
+				if (courses.isEmpty()) {
+					System.out.println("You have no courses");
+					break;
+				}
+				this.displayCourses(courses);
+				System.out.println("Please select the course ID to view students");
+				courseId = Integer.parseInt(scan.nextLine());
+				try {
+					Map<Student, Double> viewStudentGrades = professorService.viewStudentsGrades(courseId);
+					for (Student s : viewStudentGrades.keySet()) {
+						System.out.println("Id: " + s.getStudentID() + "\nName: " + s.getName() + "\nGrade"
+								+ viewStudentGrades.get(s));
+					}
+				} catch (CourseNotFoundException e) {
+					System.out.println(e.getMessage() + e.getCourseID());
+				} catch (NoStudentsEnrolledException e) {
+					System.out.println(e.getMessage() + e.getCourseID());
+				}
+				break;
+			case 4:
+				System.out.println("Please press enter to log out");
+				scan.nextLine();
+				return false;
+			default:
+				System.out.println("Method is not implemented or invalid input");
+
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("Bad input");
 		}
 		return true;
 	}
