@@ -103,6 +103,7 @@ public class StudentService implements StudentServiceInterface {
 	 * calls DAO method to view unpaid courses
 	 * @param int studentId
 	 * @return map <course, double>
+	 * throws allCoursed AllCoursesPaidException
 	 */	
 	public List<Course> viewUnpayedCourses(int studentId) throws AllCoursesPaidException{
 		
@@ -110,13 +111,25 @@ public class StudentService implements StudentServiceInterface {
 		if (courses.isEmpty()) throw new AllCoursesPaidException("There are no more courses to pay, student ID: ", studentId);
 		return registeredCourseDAO.viewUnpaidCourses(studentId);
 	}
-
+	
+	/**
+	 * gets a student by username
+	 * @param string username
+	 * @return student
+	 * 
+	 */	
 	public Student getStudentByUsername(String username) {
 		
 		return studentDAO.viewStudent(username);
 		
 	}
-
+	
+	/**
+	 * creates a student
+	 * @param stuednt
+	 * @return 
+	 * throws UsernameUsedException if user already exists
+	 */	
 	@Override
 	public void createStudent(Student student) throws UsernameUsedException {
 		if (userDAO.viewUser(student.getUsername()) != null) throw new UsernameUsedException("Username already taken, username: ", student.getUsername());
