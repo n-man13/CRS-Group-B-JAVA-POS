@@ -89,7 +89,8 @@ public class ProfessorService implements ProfessorServiceInterface {
 	/**
 	 * returns a map of student to grade 
 	 * @param int courseId
-	 * throws courseNotFoundException if can't 
+	 * throws courseNotFoundException if courseId doesn't exist
+	 * throws NoStudentsEnrolledException if there 
 	 */	
 	@Override
 	public Map<Student, Double> viewStudentsGrades(int courseId) throws CourseNotFoundException, NoStudentsEnrolledException{

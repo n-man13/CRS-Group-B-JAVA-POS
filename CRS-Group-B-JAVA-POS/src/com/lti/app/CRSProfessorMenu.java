@@ -75,7 +75,7 @@ public class CRSProfessorMenu {
 			System.out.println("You have selected View students");
 			this.displayCourses(professorService.viewProfessorCourses(professorId));
 			System.out.println("Please select the course ID to view students");
-			courseId = scan.nextInt();
+			courseId = Integer.parseInt(scan.nextLine());
 			try {
 				Map<Student, Double> viewStudentGrades = professorService.viewStudentsGrades(courseId);
 				for (Student s : viewStudentGrades.keySet()) {
