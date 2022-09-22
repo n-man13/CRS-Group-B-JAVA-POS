@@ -1,0 +1,28 @@
+1. StudentNotFound
+	Professor -> recordGrade
+	admin -> registerStudent
+	
+2. CourseNotFound
+	student -> applyToCourse, dropCourse
+	professor -> applyToCourse, checkStudents, recordGrade
+	admin -> updateCourse(selectid Id, prereqID), deleteCourse, createCourse(prereqID), 
+	
+3. UsernameUsed
+	student -> studentRegistration
+	admin -> createProfessor
+	
+4. CourseAlreadyRegistered
+	professor -> applyToCourse
+	student -> applyToCourse
+	
+5. CourseFull
+	student -> applyToCourse
+
+6. PaymentAllPaid
+	student -> makePayment
+	(should check amout once implemented)
+	 
+	
+7. Handle in app scanner errors.  and change the nextInt into nextLine()
+
+	

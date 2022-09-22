@@ -15,8 +15,9 @@ import com.lti.dao.ProfessorDAO;
 import com.lti.dao.ProfessorDAOInterface;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOInterface;
+import com.lti.exception.StudentNotFoundException;
 
-public class AdminService implements AdminServiceInterface{
+public class AdminService implements AdminServiceInterface {
 	
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private ProfessorDAOInterface professorDAO = new ProfessorDAO();
@@ -51,7 +52,7 @@ public class AdminService implements AdminServiceInterface{
 		courseDAO.viewAllCourses();
 	}
 	@Override
-	public void approveStudentRegistration(Student student) {
+	public void approveStudentRegistration(Student student) throws StudentNotFoundException{
 		
 		student.setRegistered(true);
 		studentDAO.updateStudent(student);

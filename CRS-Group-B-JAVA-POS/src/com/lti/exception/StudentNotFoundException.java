@@ -8,7 +8,7 @@ public class StudentNotFoundException extends Exception {
 		this.studentID = studentID;
 	}
 
-	public double getStudentID() {
+	public int getStudentID() {
 		return studentID;
 	}
 
