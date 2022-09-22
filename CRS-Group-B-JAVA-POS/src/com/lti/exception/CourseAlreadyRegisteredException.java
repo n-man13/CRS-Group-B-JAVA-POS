@@ -8,4 +8,8 @@ public class CourseAlreadyRegisteredException extends Exception {
 		super(message);
 		this.courseID = courseID;
 	}
+	
+	public int getCourseID() {
+		return courseID;
+	}
 }
