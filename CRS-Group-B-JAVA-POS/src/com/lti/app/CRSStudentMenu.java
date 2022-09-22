@@ -21,94 +21,97 @@ public class CRSStudentMenu {
 		CourseServiceInterface courseService = new CourseService();
 		int studentId = student.getStudentID();
 
-		System.out.println("*****Welcome Student " + student.getName() + "*****");
-		System.out.println("Enter your choice: ");
-		System.out.println("1. Apply to course");
-		System.out.println("2. Drop course");
-		System.out.println("3. View applied courses");
-		System.out.println("4. Make payment");
-		System.out.println("5. Check grades");
-		System.out.println("6. View all courses");
-		System.out.println("7. Log out");
-		int studentChoice = scan.nextInt();
-		switch (studentChoice) {
-		case 1:
+		try {
+			System.out.println("*****Welcome Student " + student.getName() + "*****");
+			System.out.println("Enter your choice: ");
+			System.out.println("1. Apply to course");
+			System.out.println("2. Drop course");
+			System.out.println("3. View applied courses");
+			System.out.println("4. Make payment");
+			System.out.println("5. Check grades");
+			System.out.println("6. View all courses");
+			System.out.println("7. Log out");
+			int studentChoice = scan.nextInt();
+			switch (studentChoice) {
+			case 1:
 
-			System.out.println("You have selected apply to course");
-			this.displayCourses(courseService.viewAllCourses());
-			System.out.println("Please select the course ID");
-			int courseId = scan.nextInt();
-			// Parameters (studentId, courseId)
-			try {
-				studentService.applyToCourse(studentId, courseId);
-			} catch (CourseNotFoundException e) {
-				System.out.println(e.getMessage() + e.getCourseID());
-			} catch (CourseFullException e) {
-				System.out.println(e.getMessage() + e.getCourseID());
-			}
-			break;
-
-		case 2:
-			System.out.println("You have selected Drop Course");
-			this.displayCourses(studentService.viewAppliedCourses(studentId));
-			System.out.println("Please select the course ID");
-			courseId = scan.nextInt();
-			// Parameters (studentId, courseId)
-			try {
-				studentService.dropCourse(studentId, courseId);
-			} catch (CourseNotFoundException e) {
-				System.out.println(e.getMessage() + e.getCourseID());
-			}
-			break;
-
-		case 3:
-			System.out.println("You have selected Display applied Courses");
-			this.displayCourses(studentService.viewAppliedCourses(studentId));
-			break;
-
-		case 4:
-			System.out.println("You have selected Make Payment");
-			System.out.println("List of unpayed courses");
-			try {
-				this.displayCourses(studentService.viewUnpayedCourses(studentId));
-				System.out.println("Please select what course to pay");
-				courseId = scan.nextInt();
-
-				studentService.makePayment(studentId, courseId);
-			} catch (AllCoursesPaidException e) {
-				System.out.println(e.getMessage() + e.getStudentID());
-			}
-			break;
-
-		case 5:
-			System.out.println("You selected Check Grades");
-			Map<Course, Double> courseAndGrades = studentService.checkGrades(studentId);
-			if (courseAndGrades.isEmpty())
-				System.out.println("You have no courses");
-			else {
-				for (Course c : courseAndGrades.keySet()) {
-					System.out.println("Id: " + c.getCourseID() + "\tName: " + c.getName() + "\tDepartment: "
-							+ c.getDepartment() + "\tGrade" + courseAndGrades.get(c));
+				System.out.println("You have selected apply to course");
+				this.displayCourses(courseService.viewAllCourses());
+				System.out.println("Please select the course ID");
+				int courseId = scan.nextInt();
+				// Parameters (studentId, courseId)
+				try {
+					studentService.applyToCourse(studentId, courseId);
+				} catch (CourseNotFoundException e) {
+					System.out.println(e.getMessage() + e.getCourseID());
+				} catch (CourseFullException e) {
+					System.out.println(e.getMessage() + e.getCourseID());
 				}
+				break;
+
+			case 2:
+				System.out.println("You have selected Drop Course");
+				this.displayCourses(studentService.viewAppliedCourses(studentId));
+				System.out.println("Please select the course ID");
+				courseId = scan.nextInt();
+				// Parameters (studentId, courseId)
+				try {
+					studentService.dropCourse(studentId, courseId);
+				} catch (CourseNotFoundException e) {
+					System.out.println(e.getMessage() + e.getCourseID());
+				}
+				break;
+
+			case 3:
+				System.out.println("You have selected Display applied Courses");
+				this.displayCourses(studentService.viewAppliedCourses(studentId));
+				break;
+
+			case 4:
+				System.out.println("You have selected Make Payment");
+				System.out.println("List of unpayed courses");
+				try {
+					this.displayCourses(studentService.viewUnpayedCourses(studentId));
+					System.out.println("Please select what course to pay");
+					courseId = scan.nextInt();
+
+					studentService.makePayment(studentId, courseId);
+				} catch (AllCoursesPaidException e) {
+					System.out.println(e.getMessage() + e.getStudentID());
+				}
+				break;
+
+			case 5:
+				System.out.println("You selected Check Grades");
+				Map<Course, Double> courseAndGrades = studentService.checkGrades(studentId);
+				if (courseAndGrades.isEmpty())
+					System.out.println("You have no courses");
+				else {
+					for (Course c : courseAndGrades.keySet()) {
+						System.out.println("Id: " + c.getCourseID() + "\tName: " + c.getName() + "\tDepartment: "
+								+ c.getDepartment() + "\tGrade" + courseAndGrades.get(c));
+					}
+				}
+				break;
+			case 6:
+				System.out.println("You selected Display all Courses");
+				List<Course> courses = courseService.viewAllCourses();
+				displayCourses(courses);
+
+				break;
+
+			case 7:
+				System.out.println("Please press enter to log out");
+				scan.nextLine();
+
+				return false;
+
+			default:
+				System.out.println("Method is not implemented or invalid input");
 			}
-			break;
-		case 6:
-			System.out.println("You selected Display all Courses");
-			List<Course> courses = courseService.viewAllCourses();
-			displayCourses(courses);
-
-			break;
-
-		case 7:
-			System.out.println("Please press enter to log out");
-			scan.nextLine();
-
-			return false;
-
-		default:
-			System.out.println("Method is not implemented or invalid input");
+		} catch (NumberFormatException e) {
+			System.out.println("Bad input");
 		}
-
 		return true;
 	}
 

@@ -30,6 +30,7 @@ public class CRSAdminMenu {
 		String courseDescription;
 		String prereqId;
 		
+		try {
 		System.out.println("*****Welcome Admin*****");
 		System.out.println("Enter your choice: ");
 		System.out.println("1. Create course");
@@ -139,6 +140,9 @@ public class CRSAdminMenu {
 			return false;
 		default: System.out.println("Method is not implemented or invalid input");
 			
+		}
+		} catch(NumberFormatException e) {
+			System.out.println("Bad input");
 		}
 		return true;
 	}
