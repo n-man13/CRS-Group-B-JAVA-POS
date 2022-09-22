@@ -30,7 +30,7 @@ public interface StudentServiceInterface {
 	/**
 	 * Makes payment for courses
 	 */
-	public void makePayment(int studentId, int courseId) throws AllCoursesPaidException;
+	public void makePayment(int studentId, int courseId) throws CourseNotFoundException;
 	/**
 	 * Check grades for student
 	 * @param student Student to check grades for

@@ -28,11 +28,11 @@ public class StudentService implements StudentServiceInterface {
 	private StudentDAOInterface studentDAO = new StudentDAO();
 	private UserDAOInterface userDAO = new UserDAO();
 	/**
-	 * calls DAO method 
-	 * @param int courseId
-	 * @return map of student to grade 
+	 * calls DAO method to register student in registeredcourse
+	 * @param int courseId, studentId
+	 * @return
 	 * throws courseNotFoundException if courseId doesn't exist
-	 * throws NoStudentsEnrolledException if there 
+	 * throws CourseFullException if there are more then 10 students
 	 */	
 	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException {
 		
@@ -41,7 +41,13 @@ public class StudentService implements StudentServiceInterface {
 		registeredCourseDAO.addStudentRegistration(studentId, courseId);
 		
 	}
-
+	
+	/**
+	 * calls DAO method to remove student in registeredCourse
+	 * @param int courseId, studentId
+	 * @return
+	 * throws courseNotFoundException if courseId doesn't exist
+	 */	
 	public void dropCourse(int studentId, int courseId) throws CourseNotFoundException{
 		List <Course> courses = registeredCourseDAO.viewStudentCourses(studentId);
 		int i = 0;
@@ -52,14 +58,27 @@ public class StudentService implements StudentServiceInterface {
 		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
 		registeredCourseDAO.removeStudentRegistration(studentId, courseId);
 	}
-
+	
+	/**
+	 * calls DAO method to view all courses student have applied
+	 * @param int courseId, studentId
+	 * @return
+	 */	
 	public List<Course> viewAppliedCourses(int studentId) {
 		
 		return registeredCourseDAO.viewStudentCourses(studentId);
 	}
-
-	public void makePayment(int studentId, int courseId) {
+	
+	/**
+	 * calls DAO method to payFee
+	 * @param int courseId, studentId
+	 * @return
+	 * throws courseNotFoundException if courseId doesn't exist
+	 * throws CourseFullException if there are more then 10 students
+	 */	
+	public void makePayment(int studentId, int courseId) throws CourseNotFoundException{
 		
+		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
 		registeredCourseDAO.payFee(studentId, courseId);
 	}
 
