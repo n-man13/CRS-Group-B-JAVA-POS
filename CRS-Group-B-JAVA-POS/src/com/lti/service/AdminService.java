@@ -2,6 +2,8 @@ package com.lti.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.lti.bean.Admin;
 import com.lti.bean.Course;
@@ -23,64 +25,71 @@ import com.lti.exception.StudentNotFoundException;
 import com.lti.exception.UsernameUsedException;
 
 public class AdminService implements AdminServiceInterface {
-	
+
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private ProfessorDAOInterface professorDAO = new ProfessorDAO();
 	private StudentDAOInterface studentDAO = new StudentDAO();
 	private AdminDAOInterface adminDAO = new AdminDAO();
 	private UserDAOInterface userDAO = new UserDAO();
-	
-	
+
 	/**
 	 * call courseDAO to create a course
+	 * 
 	 * @param course
 	 */
 	@Override
 	public void createCourse(Course course) {
-		
+
 		courseDAO.createCourse(course);
-		
+
 	}
-	
+
 	/**
 	 * call professorDAO to create a professor
+	 * 
 	 * @param course
 	 * @throws UsernameUsedException if username already exists
 	 */
 	@Override
-	public void createProfessor(Professor professor) throws UsernameUsedException{
+	public void createProfessor(Professor professor) throws UsernameUsedException {
 
-		if (userDAO.viewUser(professor.getUsername()) != null) throw new UsernameUsedException("Username already taken, username: ", professor.getUsername());
+		if (userDAO.viewUser(professor.getUsername()) != null)
+			throw new UsernameUsedException("Username already taken, username: ", professor.getUsername());
 		professorDAO.createProfessor(professor);
 	}
-	
+
 	/**
 	 * call courseDAO to create a course
+	 * 
 	 * @param course
 	 * @throws CourseNotFoundException if courseID provided doesn't exist
 	 */
 	@Override
 	public void updateCourse(Course course) throws CourseNotFoundException {
 
-		if (courseDAO.viewCourse(course.getCourseID()) == null) throw new CourseNotFoundException("This course was not found, ID: " , course.getCourseID());
+		if (courseDAO.viewCourse(course.getCourseID()) == null)
+			throw new CourseNotFoundException("This course was not found, ID: ", course.getCourseID());
 		courseDAO.updateCourse(course);
 	}
-	
+
 	/**
 	 * call courseDAO to delete a course
+	 * 
 	 * @param int courseID
 	 * @throws CourseNotFoundException if courseID provided doesn't exist
 	 */
 	@Override
-	public void deleteCourse(int courseId) throws CourseNotFoundException{
+	public void deleteCourse(int courseId) throws CourseNotFoundException {
 
-		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
+		if (courseDAO.viewCourse(courseId) == null)
+			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
 		courseDAO.deleteCourse(courseId);
 	}
-	
+
 	/**
 	 * call courseDAO to view all course
-	 * @param 
+	 * 
+	 * @param
 	 * @return list of courses
 	 */
 	@Override
@@ -88,67 +97,73 @@ public class AdminService implements AdminServiceInterface {
 
 		courseDAO.viewAllCourses();
 	}
-	
+
 	/**
 	 * call studentDAO to set student attribute registrationApproved to true
+	 * 
 	 * @param student
 	 * @throws StudentNotFoundException if student provided doesn't exist
 	 */
 	@Override
 	public void approveStudentRegistration(Student student) throws StudentNotFoundException {
-		
-		if (studentDAO.viewStudent(student.getStudentID()) == null) throw new StudentNotFoundException("This student was not found, ID: " , student.getStudentID());
-		int i = 0;
-		for (Student s : studentDAO.viewUnregisteredStudents()) {
-			if (s.getStudentID() != student.getStudentID()) i++;
-		}
-		if (i == studentDAO.viewUnregisteredStudents().size()) throw new StudentNotFoundException("This student is already registerd, ID: " , student.getStudentID());
+
+		if (studentDAO.viewStudent(student.getStudentID()) == null)
+			throw new StudentNotFoundException("This student was not found, ID: ", student.getStudentID());
+//		Old method without streams
+//		int i = 0;
+//		for (Student s : studentDAO.viewUnregisteredStudents()) {
+//			if (s.getStudentID() != student.getStudentID())
+//				i++;
+//		}
+		List <Student> result = studentDAO.viewUnregisteredStudents().stream()
+				.filter(s -> s.getStudentID() == student.getStudentID()).collect(Collectors.toList());
+		if (result.isEmpty())
+			throw new StudentNotFoundException("This student is already registerd, ID: ", student.getStudentID());
 		student.setRegistered(true);
 		studentDAO.updateStudent(student);
 	}
-	
+
 	/**
 	 * call adminDAO to get admin by username
+	 * 
 	 * @param String username
 	 * 
-	 */	
+	 */
 	@Override
 	public Admin getAdminByUsername(String username) {
 		return adminDAO.viewAdmin(username);
-		
+
 	}
-	
+
 	/**
 	 * call studentDAO to get list of students that are not registered yet
-	 * @param 
+	 * 
+	 * @param
 	 * @return list of students
 	 * @throws allstudentRegisteredexception if list is empty
-	 */	
+	 */
 	@Override
-	public List<Student> unregisteredStudent() throws AllStudentRegisteredException{
+	public List<Student> unregisteredStudent() throws AllStudentRegisteredException {
 
-		
 		List<Student> students = studentDAO.viewUnregisteredStudents();
-		if (students.isEmpty()) throw new AllStudentRegisteredException("There are no students to be registered");
+		if (students.isEmpty())
+			throw new AllStudentRegisteredException("There are no students to be registered");
 		return students;
 	}
-	
+
 	/**
 	 * call student to get student by id
+	 * 
 	 * @param int id
 	 * @return student
 	 * @throws StudentNotFoundException if student was not found
-	 */	
+	 */
 	@Override
-	public Student getStudentById(int studentId) throws StudentNotFoundException{
+	public Student getStudentById(int studentId) throws StudentNotFoundException {
 		Student student = studentDAO.viewStudent(studentId);
 		if (student == null)
 			throw new StudentNotFoundException("This student was not found, ID: ", studentId);
 		return student;
 	}
-	
-	
-	
-	
-	
+
 }
