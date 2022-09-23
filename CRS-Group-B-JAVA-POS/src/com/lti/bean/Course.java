@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * Course: Id, Students, professor, department, prerequisites
+ * 
  * @author Nikhil, Luca
  *
  */
@@ -16,39 +17,60 @@ public class Course {
 	private String description;
 	private int prereqCourseID;
 	private Map<Student, Double> studentGrades;
+
 	/**
+	 * creates a course with set id
 	 * 
-	 * @param courseID
+	 * @param courseID the id of the course
 	 */
 	public Course(int courseID) {
 		this.courseID = courseID;
 	}
-	
+
+	/**
+	 * creates a course with all information set
+	 * 
+	 * @param courseID       the id of the course
+	 * @param name           the name of the course
+	 * @param department     the department this course belongs to
+	 * @param prereqCourseID the prerequisite course id
+	 */
 	public Course(int courseID, String name, String department, int prereqCourseID) {
 		this.courseID = courseID;
 		this.name = name;
 		this.department = department;
 		this.prereqCourseID = prereqCourseID;
-		
+
 	}
-	
+
+	/**
+	 * creates an empty course
+	 */
 	public Course() {
 		super();
 	}
 
 	/**
+	 * returns the course id
+	 * 
 	 * @return the courseID
 	 */
 	public int getCourseID() {
 		return courseID;
 	}
+
 	/**
+	 * sets the course id
+	 * 
 	 * @param courseID the courseID to set
 	 */
 	public void setCourseID(int courseID) {
 		this.courseID = courseID;
 	}
+
 	/**
+	 * returns the name
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
@@ -56,6 +78,8 @@ public class Course {
 	}
 
 	/**
+	 * sets the name
+	 * 
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -63,54 +87,80 @@ public class Course {
 	}
 
 	/**
+	 * returns the students (unused)
+	 * 
 	 * @return the students
 	 */
 	public ArrayList<Student> getStudents() {
 		return students;
 	}
+
 	/**
+	 * sets the students (unused)
+	 * 
 	 * @param students the students to set
 	 */
 	public void setStudents(ArrayList<Student> students) {
 		this.students = students;
 	}
+
 	/**
-	 * @return the prof
+	 * returns the professor
+	 * 
+	 * @return the professor
 	 */
 	public Professor getProf() {
 		return prof;
 	}
+
 	/**
+	 * sets the professor to teach
+	 * 
 	 * @param prof the prof to set
 	 */
 	public void setProf(Professor prof) {
 		this.prof = prof;
 	}
+
 	/**
+	 * returns the department
+	 * 
 	 * @return the department
 	 */
 	public String getDepartment() {
 		return department;
 	}
+
 	/**
+	 * sets the department
+	 * 
 	 * @param department the department to set
 	 */
 	public void setDepartment(String department) {
 		this.department = department;
 	}
+
 	/**
+	 * returns the prerequisite course id
+	 * 
 	 * @return the prereqCourseID
 	 */
 	public int getPrereqCourseID() {
 		return prereqCourseID;
 	}
+
 	/**
+	 * sets the prerequisite course id
+	 * 
 	 * @param prereqCourseID the prereqCourseID to set
 	 */
 	public void setPrereqCourseID(int prereqCourseID) {
 		this.prereqCourseID = prereqCourseID;
 	}
 
+	/**
+	 * creates a string representation of this object
+	 */
 	@Override
 	public String toString() {
 		return "Course [courseID=" + courseID + ", students=" + students + ", prof=" + prof + ", department="
@@ -138,6 +188,5 @@ public class Course {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+
 }
