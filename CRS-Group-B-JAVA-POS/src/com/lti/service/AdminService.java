@@ -45,7 +45,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call professorDAO to create a professor
 	 * @param course
-	 * throws UsernameUsedException if username already exists
+	 * @throws UsernameUsedException if username already exists
 	 */
 	@Override
 	public void createProfessor(Professor professor) throws UsernameUsedException{
@@ -57,7 +57,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call courseDAO to create a course
 	 * @param course
-	 * throws CourseNotFoundException if courseID provided doesn't exist
+	 * @throws CourseNotFoundException if courseID provided doesn't exist
 	 */
 	@Override
 	public void updateCourse(Course course) throws CourseNotFoundException {
@@ -69,7 +69,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call courseDAO to delete a course
 	 * @param int courseID
-	 * throws CourseNotFoundException if courseID provided doesn't exist
+	 * @throws CourseNotFoundException if courseID provided doesn't exist
 	 */
 	@Override
 	public void deleteCourse(int courseId) throws CourseNotFoundException{
@@ -92,7 +92,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call studentDAO to set student attribute registrationApproved to true
 	 * @param student
-	 * throws StudentNotFoundException if student provided doesn't exist
+	 * @throws StudentNotFoundException if student provided doesn't exist
 	 */
 	@Override
 	public void approveStudentRegistration(Student student) throws StudentNotFoundException {
@@ -117,7 +117,7 @@ public class AdminService implements AdminServiceInterface {
 	 * call studentDAO to get list of students that are not registered yet
 	 * @param 
 	 * @return list of students
-	 * throws allstudentRegisteredexception if list is empty
+	 * @throws allstudentRegisteredexception if list is empty
 	 */	
 	@Override
 	public List<Student> unregisteredStudent() throws AllStudentRegisteredException{

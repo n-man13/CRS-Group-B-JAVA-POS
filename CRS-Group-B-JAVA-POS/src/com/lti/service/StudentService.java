@@ -31,8 +31,8 @@ public class StudentService implements StudentServiceInterface {
 	 * calls DAO method to register student in registeredcourse
 	 * @param int courseId, studentId
 	 * @return
-	 * throws courseNotFoundException if courseId doesn't exist
-	 * throws CourseFullException if there are more then 10 students
+	 * @throws courseNotFoundException if courseId doesn't exist
+	 * @throws CourseFullException if there are more then 10 students
 	 */	
 	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException {
 		
@@ -46,7 +46,7 @@ public class StudentService implements StudentServiceInterface {
 	 * calls DAO method to remove student in registeredCourse
 	 * @param int courseId, studentId
 	 * @return
-	 * throws courseNotFoundException if courseId doesn't exist
+	 * @throws courseNotFoundException if courseId doesn't exist
 	 */	
 	public void dropCourse(int studentId, int courseId) throws CourseNotFoundException{
 		List <Course> courses = registeredCourseDAO.viewStudentCourses(studentId);
@@ -73,8 +73,7 @@ public class StudentService implements StudentServiceInterface {
 	 * calls DAO method to payFee
 	 * @param int courseId, studentId
 	 * @return
-	 * throws courseNotFoundException if courseId doesn't exist
-	 * throws CourseFullException if there are more then 10 students
+	 * @throws courseNotFoundException if courseId doesn't exist
 	 */	
 	public void makePayment(int studentId, int courseId) throws CourseNotFoundException{
 		
@@ -103,7 +102,7 @@ public class StudentService implements StudentServiceInterface {
 	 * calls DAO method to view unpaid courses
 	 * @param int studentId
 	 * @return map <course, double>
-	 * throws allCoursed AllCoursesPaidException
+	 * @throws allCoursed AllCoursesPaidException
 	 */	
 	public List<Course> viewUnpayedCourses(int studentId) throws AllCoursesPaidException{
 		
@@ -128,7 +127,7 @@ public class StudentService implements StudentServiceInterface {
 	 * creates a student
 	 * @param stuednt
 	 * @return 
-	 * throws UsernameUsedException if user already exists
+	 * @throws UsernameUsedException if user already exists
 	 */	
 	@Override
 	public void createStudent(Student student) throws UsernameUsedException {
