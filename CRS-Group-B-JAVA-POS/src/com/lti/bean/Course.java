@@ -12,7 +12,7 @@ public class Course {
 	private int courseID;
 	private String name;
 	private ArrayList<Student> students;
-	private Professor prof;
+	private int professorID;
 	private String department;
 	private String description;
 	private int prereqCourseID;
@@ -109,8 +109,8 @@ public class Course {
 	 * 
 	 * @return the professor
 	 */
-	public Professor getProf() {
-		return prof;
+	public int getProf() {
+		return professorID;
 	}
 
 	/**
@@ -118,8 +118,8 @@ public class Course {
 	 * 
 	 * @param prof the prof to set
 	 */
-	public void setProf(Professor prof) {
-		this.prof = prof;
+	public void setProf(int prof) {
+		this.professorID = prof;
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class Course {
 	 */
 	@Override
 	public String toString() {
-		return "Course [courseID=" + courseID + ", students=" + students + ", prof=" + prof + ", department="
+		return "Course [courseID=" + courseID + ", students=" + students + ", prof=" + professorID + ", department="
 				+ department + ", prereqCourseID=" + prereqCourseID + "]";
 	}
 

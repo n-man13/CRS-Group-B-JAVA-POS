@@ -31,7 +31,10 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 */
 	public void applyToCourse(int professorId, int courseId) throws CourseNotFoundException {
 		// apply to specific course
-		
+		if (courseDAO.viewCourse(courseId).getProf() != 0)
+			throw new CourseNotFoundException("This course is already being taught, ID: ", courseId);
+		if (courseDAO.viewCourse(courseId).getProf() == professorId)
+			throw new CourseNotFoundException("You are already enrolled in this course, ID: ", courseId);
 		if (!courseDAO.addProfessorToCourse(courseId, professorId))
 			throw new CourseNotFoundException("This course was not found, Id: ", courseId);
 	}
