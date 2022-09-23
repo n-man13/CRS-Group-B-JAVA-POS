@@ -132,10 +132,14 @@ public class AdminService implements AdminServiceInterface {
 	 * call student to get student by id
 	 * @param int id
 	 * @return student
+	 * @throws StudentNotFoundException if student was not found
 	 */	
 	@Override
-	public Student getStudentById(int studentId) {
-		return studentDAO.viewStudent(studentId);
+	public Student getStudentById(int studentId) throws StudentNotFoundException{
+		Student student = studentDAO.viewStudent(studentId);
+		if (student == null)
+			throw new StudentNotFoundException("This student was not found, ID: ", studentId);
+		return student;
 	}
 	
 	

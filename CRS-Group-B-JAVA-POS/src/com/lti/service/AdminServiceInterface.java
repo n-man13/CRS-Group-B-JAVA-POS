@@ -74,6 +74,7 @@ public interface AdminServiceInterface  {
 	 * call student to get student by id
 	 * @param int id
 	 * @return student
+	 * @throws StudentNotFoundException if student was not found
 	 */	
-	public Student getStudentById(int stuedentId) throws StudentNotFoundException;
+	public Student getStudentById(int studentId) throws StudentNotFoundException;
 }
