@@ -25,4 +25,10 @@
 	
 7. Handle in app scanner errors.  and change the nextInt into nextLine()
 
-	
+
+handle different messages when student types wrong credentials vs unregistered
+handle throw clause on getStudentID in service professor -> if course is not found throw error
+handle student registration -> student not found
+put commends in the constants by adding spacing.
+add @ where throws in service layer
+add back option when you you login to screen* 
