@@ -8,25 +8,29 @@ package com.lti.bean;
 public class Admin extends User {
 	private int adminID;
 
-	
 	/**
+	 * creates a new admin with set id
 	 * 
 	 * @param adminID
 	 */
 	public Admin(int adminID) {
 		this.adminID = adminID;
 	}
-	
+
+	/**
+	 * creates an empty admin
+	 */
 	public Admin() {
 		super();
 	}
-	
+
 	/**
+	 * returns the admin's id
+	 * 
 	 * @return the adminID
 	 */
 	public int getAdminID() {
 		return adminID;
 	}
-	
-	
+
 }
