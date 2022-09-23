@@ -10,6 +10,7 @@ import com.lti.bean.Admin;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
+import com.lti.exception.StudentNotFoundException;
 import com.lti.exception.UsernameUsedException;
 import com.lti.service.AdminService;
 import com.lti.service.AdminServiceInterface;
@@ -69,6 +70,7 @@ public class CRSApplicationMenu {
 						System.out.println("2. Professor");
 						System.out.println("3. Student");
 						int role = Integer.parseInt(scan.nextLine());
+						try {
 						boolean logInSuccess = userService.verifyCredetials(username, password, role);
 						if (logInSuccess) {
 							while (userMenu) {
@@ -93,6 +95,9 @@ public class CRSApplicationMenu {
 							}
 						} else {
 							System.out.println("You entered the wrong credentials");
+						}
+						} catch (StudentNotFoundException e) {
+							System.out.println(e.getMessage() + e.getStudentID());
 						}
 					}
 					break;
