@@ -138,7 +138,7 @@ public class AdminService implements AdminServiceInterface {
 	 * call studentDAO to get list of students that are not registered yet
 	 * 
 	 * @return list of students
-	 * @throws AllstudentRegisteredexception if list is empty
+	 * @throws AllStudentRegisteredException if list is empty
 	 */
 	@Override
 	public List<Student> unregisteredStudent() throws AllStudentRegisteredException {

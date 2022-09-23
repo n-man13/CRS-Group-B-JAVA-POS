@@ -95,7 +95,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	/**
 	 * calls courseDAO to get courses that a particular professor is teaching
 	 * 
-	 * @param professorID the id of the professor
+	 * @param professorId the id of the professor
 	 * @return Returns a list of courses that a professor is teaching
 	 */
 	@Override

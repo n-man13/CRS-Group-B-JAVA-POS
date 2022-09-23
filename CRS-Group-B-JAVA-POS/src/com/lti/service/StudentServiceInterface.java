@@ -19,7 +19,7 @@ public interface StudentServiceInterface {
 	 * 
 	 * @param courseId  courseId to be applied
 	 * @param studentId studentId of the student that applies to course
-	 * @throws courseNotFoundException if courseId doesn't exist
+	 * @throws CourseNotFoundException if courseId doesn't exist
 	 * @throws CourseFullException     if there are more then 10 students
 	 */
 	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException;
