@@ -148,7 +148,7 @@ public class CRSAdminMenu {
 		}
 		return true;
 	}
-
+	//
 	private void displayCourses(List<Course> courses) {
 		System.out.println(
 				"CourseID \t Course Name \t Department \t Description \t\t Professor \t Prerequisite CourseID");
