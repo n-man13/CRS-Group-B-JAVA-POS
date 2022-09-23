@@ -8,9 +8,9 @@ public interface UserServiceInterface {
 	/**
 	 * verify log in credentials
 	 * 
-	 * @param String username
-	 * @param String password, 
-	 * @param int role
+	 * @param username the username of the user
+	 * @param password the password of the user 
+	 * @param role the role of the user
 	 * @return true if credentials are correct, false if not
 	 * @throws StudentNotFoundException if the student needs to be approved
 	 */
@@ -19,9 +19,9 @@ public interface UserServiceInterface {
 	/**
 	 * verify password reset credentials
 	 * 
-	 * @param String username
-	 * @param String password, 
-	 * @param int role
+	 * @param username the username of the user
+	 * @param password the password of the user 
+	 * @param role the role of the user
 	 * @return true if credentials are correct, false if not
 	 */
 	public boolean verifyPasswordResetCredentials(int id, String username);
@@ -29,8 +29,8 @@ public interface UserServiceInterface {
 	/**
 	 * update password of user
 	 * 
-	 * @param String username 
-	 * @paramn String password
+	 * @param username the username of the user
+	 * @param password the password of the user 
 	 */
 	public void updatePassword(String username, String newPassword);
 	

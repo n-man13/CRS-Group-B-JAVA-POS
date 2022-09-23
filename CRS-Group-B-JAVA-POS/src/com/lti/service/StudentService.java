@@ -32,8 +32,8 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * calls DAO method to register student in registeredcourse
 	 * 
-	 * @param int courseId
-	 * @param int studentId
+	 * @param courseId courseId to be applied
+	 * @param studentId studentId of the student that applies to course
 	 * @throws courseNotFoundException if courseId doesn't exist
 	 * @throws CourseFullException     if there are more then 10 students
 	 */
@@ -50,7 +50,8 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * calls DAO method to remove student in registeredCourse
 	 * 
-	 * @param int courseId, studentId
+	 * @param courseId the courseId of what course is to be dropped
+	 * @param studentId the studentId that is dropping a course
 	 * @throws courseNotFoundException if courseId doesn't exist
 	 */
 	public void dropCourse(int studentId, int courseId) throws CourseNotFoundException {
@@ -71,7 +72,7 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * calls DAO method to view all courses student have applied
 	 * 
-	 * @param int courseId, studentId
+	 * @param studentId the studentId of the courses that he applied to
 	 * @return a list of courses where the student is enrolled
 	 */
 	public List<Course> viewAppliedCourses(int studentId) {
@@ -82,8 +83,8 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * calls DAO method to payFee
 	 * 
-	 * @param int courseId
-	 * @param int studentId
+	 * @param courseId the courseId to pay the fee
+	 * @param studentId the student who is paying
 	 * @throws courseNotFoundException if courseId doesn't exist
 	 */
 	public void makePayment(int studentId, int courseId) throws CourseNotFoundException {
@@ -111,7 +112,7 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * calls DAO method to view grades for a student
 	 * 
-	 * @param int studentId
+	 * @param studentId the studentId that wants to check his grades
 	 * @return Returns a map course to grade
 	 */
 	public Map<Course, Double> checkGrades(int studentId) {
@@ -122,7 +123,7 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * calls DAO method to view unpaid courses
 	 * 
-	 * @param int studentId
+	 * @param studentId the studentId that views the unpaid courses
 	 * @return Map <Course, Double>
 	 * @throws allCoursed AllCoursesPaidException
 	 */
@@ -137,7 +138,7 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * gets a student by username
 	 * 
-	 * @param string username
+	 * @param username
 	 * @return student
 	 * @throws StudentNotFoundException if student is not found
 	 */
@@ -155,7 +156,6 @@ public class StudentService implements StudentServiceInterface {
 	 * creates a student
 	 * 
 	 * @param student
-	 * @return
 	 * @throws UsernameUsedException if user already exists
 	 */
 	@Override
