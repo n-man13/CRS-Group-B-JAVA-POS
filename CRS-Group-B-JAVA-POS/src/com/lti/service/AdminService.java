@@ -89,8 +89,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call courseDAO to view all course
 	 * 
-	 * @param
-	 * @return list of courses
+	 * @return Returns a list of courses
 	 */
 	@Override
 	public void listAllCourse() {
@@ -127,7 +126,7 @@ public class AdminService implements AdminServiceInterface {
 	 * call adminDAO to get admin by username
 	 * 
 	 * @param String username
-	 * 
+	 * @return Returns an admin
 	 */
 	@Override
 	public Admin getAdminByUsername(String username) {
@@ -138,7 +137,6 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call studentDAO to get list of students that are not registered yet
 	 * 
-	 * @param
 	 * @return list of students
 	 * @throws allstudentRegisteredexception if list is empty
 	 */
@@ -155,7 +153,7 @@ public class AdminService implements AdminServiceInterface {
 	 * call student to get student by id
 	 * 
 	 * @param int id
-	 * @return student
+	 * @return Returns student if is not found then returns null
 	 * @throws StudentNotFoundException if student was not found
 	 */
 	@Override

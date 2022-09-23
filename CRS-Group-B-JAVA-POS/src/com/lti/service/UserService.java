@@ -18,7 +18,9 @@ public class UserService implements UserServiceInterface {
 	/**
 	 * verify log in credentials
 	 * 
-	 * @param username, password, int role
+	 * @param String username
+	 * @param String password, 
+	 * @param int role
 	 * @return true if credentials are correct, false if not
 	 * @throws StudentNotFoundException if the student needs to be approved
 	 */
@@ -56,7 +58,9 @@ public class UserService implements UserServiceInterface {
 	/**
 	 * verify password reset credentials
 	 * 
-	 * @param username, password, int role
+	 * @param String username
+	 * @param String password, 
+	 * @param int role
 	 * @return true if credentials are correct, false if not
 	 */
 	@Override
@@ -76,7 +80,8 @@ public class UserService implements UserServiceInterface {
 	/**
 	 * update password of user
 	 * 
-	 * @param username, password
+	 * @param String username 
+	 * @paramn String password
 	 */
 	@Override
 	public void updatePassword(String username, String newPassword) {

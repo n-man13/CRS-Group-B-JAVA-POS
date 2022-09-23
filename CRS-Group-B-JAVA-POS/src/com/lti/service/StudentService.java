@@ -32,8 +32,8 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * calls DAO method to register student in registeredcourse
 	 * 
-	 * @param int courseId, studentId
-	 * @return
+	 * @param int courseId
+	 * @param int studentId
 	 * @throws courseNotFoundException if courseId doesn't exist
 	 * @throws CourseFullException     if there are more then 10 students
 	 */
@@ -51,7 +51,6 @@ public class StudentService implements StudentServiceInterface {
 	 * calls DAO method to remove student in registeredCourse
 	 * 
 	 * @param int courseId, studentId
-	 * @return
 	 * @throws courseNotFoundException if courseId doesn't exist
 	 */
 	public void dropCourse(int studentId, int courseId) throws CourseNotFoundException {
@@ -73,7 +72,7 @@ public class StudentService implements StudentServiceInterface {
 	 * calls DAO method to view all courses student have applied
 	 * 
 	 * @param int courseId, studentId
-	 * @return
+	 * @return a list of courses where the student is enrolled
 	 */
 	public List<Course> viewAppliedCourses(int studentId) {
 
@@ -83,8 +82,8 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * calls DAO method to payFee
 	 * 
-	 * @param int courseId, studentId
-	 * @return
+	 * @param int courseId
+	 * @param int studentId
 	 * @throws courseNotFoundException if courseId doesn't exist
 	 */
 	public void makePayment(int studentId, int courseId) throws CourseNotFoundException {
@@ -113,7 +112,7 @@ public class StudentService implements StudentServiceInterface {
 	 * calls DAO method to view grades for a student
 	 * 
 	 * @param int studentId
-	 * @return map <course, double>
+	 * @return Returns a map course to grade
 	 */
 	public Map<Course, Double> checkGrades(int studentId) {
 
@@ -124,7 +123,7 @@ public class StudentService implements StudentServiceInterface {
 	 * calls DAO method to view unpaid courses
 	 * 
 	 * @param int studentId
-	 * @return map <course, double>
+	 * @return Map <Course, Double>
 	 * @throws allCoursed AllCoursesPaidException
 	 */
 	public List<Course> viewUnpayedCourses(int studentId) throws AllCoursesPaidException {
@@ -140,7 +139,7 @@ public class StudentService implements StudentServiceInterface {
 	 * 
 	 * @param string username
 	 * @return student
-	 * 
+	 * @throws StudentNotFoundException if student is not found
 	 */
 	public Student getStudentByUsername(String username) throws StudentNotFoundException {
 

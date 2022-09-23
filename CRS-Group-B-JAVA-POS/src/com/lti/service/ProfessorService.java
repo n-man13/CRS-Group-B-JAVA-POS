@@ -25,12 +25,13 @@ public class ProfessorService implements ProfessorServiceInterface {
 	/**
 	 * call courseDAO to set professorId to course
 	 * 
-	 * @param int professorid, int courseid
+	 * @param int professorid
+	 * @oaram int courseid
 	 * @thorws CourseNotFoundException if courseId doesn't exits
 	 */
 	public void applyToCourse(int professorId, int courseId) throws CourseNotFoundException {
 		// apply to specific course
-
+		
 		if (!courseDAO.addProfessorToCourse(courseId, professorId))
 			throw new CourseNotFoundException("This course was not found, Id: ", courseId);
 	}
@@ -39,7 +40,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 * view students that are enrolled in a course
 	 * 
 	 * @param int courseid
-	 * @return list of students
+	 * @return Returns a list of students
 	 * @throws CourseNotFoundException     if courseId doesn't exits
 	 * @throws NoStudentsEnrolledException if there are not studens
 	 */
@@ -78,7 +79,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 * returns a professor by providing a username
 	 * 
 	 * @param string username
-	 * 
+	 * @return Returns a professor, null if username doesn't exist
 	 */
 	@Override
 	public Professor getProfessorByUsername(String username) {
@@ -87,10 +88,10 @@ public class ProfessorService implements ProfessorServiceInterface {
 	}
 
 	/**
-	 * returns a list of courses that a professor is teaching
+	 * calls courseDAO to get courses that a particular professor is teaching
 	 * 
 	 * @param professorID
-	 * 
+	 * @return Returns a list of courses that a professor is teaching
 	 */
 	@Override
 	public List<Course> viewProfessorCourses(int professorId) {
@@ -102,7 +103,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 * gets a map of student to grade calls method courseDAO
 	 * 
 	 * @param int courseId
-	 * @return map of student to grade
+	 * @return Returns a map of student to grade
 	 * @throws courseNotFoundException     if courseId doesn't exist
 	 * @throws NoStudentsEnrolledException if there
 	 */

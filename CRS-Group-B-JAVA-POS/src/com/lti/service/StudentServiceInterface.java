@@ -16,65 +16,71 @@ public interface StudentServiceInterface {
 	
 	/**
 	 * calls DAO method to register student in registeredcourse
-	 * @param int courseId, studentId
-	 * @return
+	 * 
+	 * @param int courseId
+	 * @param int studentId
 	 * @throws courseNotFoundException if courseId doesn't exist
-	 * @throws CourseFullException if there are more then 10 students
-	 */	
+	 * @throws CourseFullException     if there are more then 10 students
+	 */
 	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException;
 	
 	/**
 	 * calls DAO method to remove student in registeredCourse
+	 * 
 	 * @param int courseId, studentId
-	 * @return
 	 * @throws courseNotFoundException if courseId doesn't exist
-	 */	
+	 */
 	public void dropCourse(int studentId, int courseId) throws CourseNotFoundException;
 	
 	/**
 	 * calls DAO method to view all courses student have applied
+	 * 
 	 * @param int courseId, studentId
-	 * @return
-	 */	
+	 * @return a list of courses where the student is enrolled
+	 */
 	public  List<Course> viewAppliedCourses(int studentId);
 	
 	/**
 	 * calls DAO method to payFee
-	 * @param int courseId, studentId
-	 * @return
+	 * 
+	 * @param int courseId
+	 * @param int studentId
 	 * @throws courseNotFoundException if courseId doesn't exist
-	 */	
+	 */
 	public void makePayment(int studentId, int courseId) throws CourseNotFoundException;
 	
 	/**
 	 * calls DAO method to view grades for a student
+	 * 
 	 * @param int studentId
-	 * @return map <course, double>
-	 */	
+	 * @return Returns a map course to grade
+	 */
 	public Map<Course, Double> checkGrades(int studentId);
 	
 	/**
 	 * calls DAO method to view unpaid courses
+	 * 
 	 * @param int studentId
-	 * @return map <course, double>
+	 * @return Map <Course, Double>
 	 * @throws allCoursed AllCoursesPaidException
-	 */	
+	 */
 	public List<Course> viewUnpayedCourses(int studentId) throws AllCoursesPaidException;
 	
 	/**
 	 * gets a student by username
+	 * 
 	 * @param string username
 	 * @return student
-	 * @throws StudentNotFoundException if student was not found
 	 * 
-	 */	
+	 */
 	public Student getStudentByUsername(String username) throws StudentNotFoundException;
 	
 	/**
 	 * creates a student
-	 * @param stuednt
-	 * @return 
+	 * 
+	 * @param student
+	 * @return
 	 * @throws UsernameUsedException if user already exists
-	 */	
+	 */
 	public void createStudent(Student student) throws UsernameUsedException;
 }
