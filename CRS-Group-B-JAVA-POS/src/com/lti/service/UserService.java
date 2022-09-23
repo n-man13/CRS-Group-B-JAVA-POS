@@ -30,13 +30,16 @@ public class UserService implements UserServiceInterface {
 			return false;
 		if (role == 3) {
 			student = studentDAO.viewStudent(user.getUserID());
-			//System.out.println(student.isRegistered());
-			if (password.equals(user.getPassword()) && role == user.getRole() && student.isRegistered()) {
-				return true;
-			} else
-				throw new StudentNotFoundException(
-						"This student is not registered. Please inform Admin and supply StudentID: ",
-						student.getStudentID());
+			// System.out.println(student.isRegistered());
+			if (role == user.getRole())
+				if (password.equals(user.getPassword()) && student.isRegistered()) {
+					return true;
+				} else
+					throw new StudentNotFoundException(
+							"This student is not registered. Please inform Admin and supply StudentID: ",
+							student.getStudentID());
+			else
+				return false;
 		} else {
 			if (password.equals(user.getPassword()) && role == user.getRole()) {
 				return true;
