@@ -17,22 +17,22 @@ public interface AdminServiceInterface {
 	/**
 	 * call courseDAO to create a course
 	 * 
-	 * @param course
+	 * @param course the course to create
 	 */
 	public void createCourse(Course course);
 
 	/**
 	 * call professorDAO to create a professor
 	 * 
-	 * @param course
+	 * @param professor the professor to create
 	 * @throws UsernameUsedException if username already exists
 	 */
 	public void createProfessor(Professor professor) throws UsernameUsedException;
 
 	/**
-	 * call courseDAO to create a course
+	 * call courseDAO to update a course
 	 * 
-	 * @param course
+	 * @param course the course updated
 	 * @throws CourseNotFoundException if courseID provided doesn't exist
 	 */
 	public void updateCourse(Course course) throws CourseNotFoundException;
@@ -40,7 +40,7 @@ public interface AdminServiceInterface {
 	/**
 	 * call courseDAO to delete a course
 	 * 
-	 * @param int courseID
+	 * @param courseID the course to delete
 	 * @throws CourseNotFoundException if courseID provided doesn't exist
 	 */
 	public void deleteCourse(int courseId) throws CourseNotFoundException;
@@ -55,7 +55,7 @@ public interface AdminServiceInterface {
 	/**
 	 * call studentDAO to set student attribute registrationApproved to true
 	 * 
-	 * @param student
+	 * @param student the student to approve
 	 * @throws StudentNotFoundException if student provided doesn't exist
 	 */
 	public void approveStudentRegistration(Student student) throws StudentNotFoundException;
@@ -63,7 +63,7 @@ public interface AdminServiceInterface {
 	/**
 	 * call adminDAO to get admin by username
 	 * 
-	 * @param String username
+	 * @param username the username
 	 * @return Returns an admin
 	 */
 	public Admin getAdminByUsername(String username);
@@ -77,10 +77,10 @@ public interface AdminServiceInterface {
 	public List<Student> unregisteredStudent() throws AllStudentRegisteredException;
 
 	/**
-	 * call student to get student by id
+	 * call studentDAO to get student by id
 	 * 
-	 * @param int id
-	 * @return Returns student if is not found then returns null
+	 * @param studentId
+	 * @return student if is not found then returns null
 	 * @throws StudentNotFoundException if student was not found
 	 */
 	public Student getStudentById(int studentId) throws StudentNotFoundException;

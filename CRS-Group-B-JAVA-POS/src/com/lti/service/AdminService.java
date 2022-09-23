@@ -35,7 +35,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call courseDAO to create a course
 	 * 
-	 * @param course
+	 * @param course the course to create
 	 */
 	@Override
 	public void createCourse(Course course) {
@@ -47,7 +47,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call professorDAO to create a professor
 	 * 
-	 * @param course
+	 * @param professor the professor to create
 	 * @throws UsernameUsedException if username already exists
 	 */
 	@Override
@@ -59,9 +59,9 @@ public class AdminService implements AdminServiceInterface {
 	}
 
 	/**
-	 * call courseDAO to create a course
+	 * call courseDAO to update a course
 	 * 
-	 * @param course
+	 * @param course the course updated
 	 * @throws CourseNotFoundException if courseID provided doesn't exist
 	 */
 	@Override
@@ -75,7 +75,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call courseDAO to delete a course
 	 * 
-	 * @param int courseID
+	 * @param courseID the course to delete
 	 * @throws CourseNotFoundException if courseID provided doesn't exist
 	 */
 	@Override
@@ -100,7 +100,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call studentDAO to set student attribute registrationApproved to true
 	 * 
-	 * @param student
+	 * @param student the student to approve
 	 * @throws StudentNotFoundException if student provided doesn't exist
 	 */
 	@Override
@@ -114,7 +114,7 @@ public class AdminService implements AdminServiceInterface {
 //			if (s.getStudentID() != student.getStudentID())
 //				i++;
 //		}
-		List <Student> result = studentDAO.viewUnregisteredStudents().stream()
+		List<Student> result = studentDAO.viewUnregisteredStudents().stream()
 				.filter(s -> s.getStudentID() == student.getStudentID()).collect(Collectors.toList());
 		if (result.isEmpty())
 			throw new StudentNotFoundException("This student is already registerd, ID: ", student.getStudentID());
@@ -125,7 +125,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call adminDAO to get admin by username
 	 * 
-	 * @param String username
+	 * @param username the username
 	 * @return Returns an admin
 	 */
 	@Override
@@ -150,10 +150,10 @@ public class AdminService implements AdminServiceInterface {
 	}
 
 	/**
-	 * call student to get student by id
+	 * call studentDAO to get student by id
 	 * 
-	 * @param int id
-	 * @return Returns student if is not found then returns null
+	 * @param studentId
+	 * @return student if is not found then returns null
 	 * @throws StudentNotFoundException if student was not found
 	 */
 	@Override

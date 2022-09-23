@@ -15,16 +15,18 @@ public interface ProfessorServiceInterface {
 	/**
 	 * call courseDAO to set professorId to course
 	 * 
-	 * @param int professorid
-	 * @oaram int courseid
-	 * @thorws CourseNotFoundException if courseId doesn't exits
+	 * @param professorId the professor to apply
+	 * @param courseId    the course to teach
+	 * @throws CourseNotFoundException if courseId doesn't exits
 	 */
 	public void applyToCourse(int professorId, int courseId) throws CourseNotFoundException;
 
 	/**
 	 * records a grade of a student of a particular course
 	 * 
-	 * @param int courseid, studentid, grade
+	 * @param courseId  the course to set the grade
+	 * @param studentId the student to set the grade for
+	 * @param grade     the grade to record
 	 * @throws CourseNotFoundException     if courseId doesn't exits
 	 * @throws StudentNotFoundException    if provided studentId doesn't exist
 	 * @throws NoStudentsEnrolledException if there are not student
@@ -35,17 +37,17 @@ public interface ProfessorServiceInterface {
 	/**
 	 * view students that are enrolled in a course
 	 * 
-	 * @param int courseid
+	 * @param courseId the course to view
 	 * @return Returns a list of students
 	 * @throws CourseNotFoundException     if courseId doesn't exits
-	 * @throws NoStudentsEnrolledException if there are not studens
+	 * @throws NoStudentsEnrolledException if there are not students
 	 */
 	public List<Student> viewStudents(int courseId) throws CourseNotFoundException, NoStudentsEnrolledException;
 
 	/**
 	 * returns a professor by providing a username
 	 * 
-	 * @param string username
+	 * @param username the username of the professor
 	 * @return Returns a professor, null if username doesn't exist
 	 */
 	public Professor getProfessorByUsername(String username);
@@ -53,7 +55,7 @@ public interface ProfessorServiceInterface {
 	/**
 	 * calls courseDAO to get courses that a particular professor is teaching
 	 * 
-	 * @param professorID
+	 * @param professorID the id of the professor
 	 * @return Returns a list of courses that a professor is teaching
 	 */
 	public List<Course> viewProfessorCourses(int professorId);
@@ -61,7 +63,7 @@ public interface ProfessorServiceInterface {
 	/**
 	 * gets a map of student to grade calls method courseDAO
 	 * 
-	 * @param int courseId
+	 * @param courseId the id of the course
 	 * @return Returns a map of student to grade
 	 * @throws courseNotFoundException     if courseId doesn't exist
 	 * @throws NoStudentsEnrolledException if there
