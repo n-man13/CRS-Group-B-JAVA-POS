@@ -98,6 +98,11 @@ public class AdminService implements AdminServiceInterface {
 	public void approveStudentRegistration(Student student) throws StudentNotFoundException {
 		
 		if (studentDAO.viewStudent(student.getStudentID()) == null) throw new StudentNotFoundException("This student was not found, ID: " , student.getStudentID());
+		int i = 0;
+		for (Student s : studentDAO.viewUnregisteredStudents()) {
+			if (s.getStudentID() != student.getStudentID()) i++;
+		}
+		if (i == studentDAO.viewUnregisteredStudents().size()) throw new StudentNotFoundException("This student is already registerd, ID: " , student.getStudentID());
 		student.setRegistered(true);
 		studentDAO.updateStudent(student);
 	}
