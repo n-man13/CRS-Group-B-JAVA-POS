@@ -61,16 +61,22 @@ public class CRSApplicationMenu {
 				case 1:
 					while (loginMenu) {
 						boolean userMenu = true;
-						System.out.println("Enter Username: ");
-						String username = scan.nextLine();
-						System.out.println("Enter Password: ");
-						String password = scan.nextLine();
 						System.out.println("Enter Role: ");
 						System.out.println("1. Admin");
 						System.out.println("2. Professor");
 						System.out.println("3. Student");
 						System.out.println("4. Back");
 						int role = Integer.parseInt(scan.nextLine());
+						if (role == 4) {
+							System.out.println("Press enter to go back");
+							scan.nextLine();
+							loginMenu = false;
+							break;
+						}
+						System.out.println("Enter Username: ");
+						String username = scan.nextLine();
+						System.out.println("Enter Password: ");
+						String password = scan.nextLine();
 						try {
 							boolean logInSuccess = userService.verifyCredetials(username, password, role);
 							if (logInSuccess) {
@@ -88,10 +94,6 @@ public class CRSApplicationMenu {
 										student = studentService.getStudentByUsername(username);
 										userMenu = studentMenu.studentMenu(student, scan);
 										break;
-									case 4:
-										System.out.println("Press enter to go back");
-										scan.nextLine();
-										loginMenu = false;
 									default:
 										System.out.println("Invalid Role");
 									}
