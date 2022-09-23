@@ -18,6 +18,7 @@ import com.lti.dao.UserDAOInterface;
 import com.lti.exception.AllCoursesPaidException;
 import com.lti.exception.CourseFullException;
 import com.lti.exception.CourseNotFoundException;
+import com.lti.exception.StudentNotFoundException;
 import com.lti.exception.UsernameUsedException;
 
 public class StudentService implements StudentServiceInterface {
@@ -117,15 +118,19 @@ public class StudentService implements StudentServiceInterface {
 	 * @return student
 	 * 
 	 */	
-	public Student getStudentByUsername(String username) {
+	public Student getStudentByUsername(String username) throws StudentNotFoundException{
 		
-		return studentDAO.viewStudent(username);
+		Student student = studentDAO.viewStudent(username);
+		
+		if (student == null)
+			throw new StudentNotFoundException("The student does not exist", 0);
+		return student;
 		
 	}
 	
 	/**
 	 * creates a student
-	 * @param stuednt
+	 * @param student
 	 * @return 
 	 * @throws UsernameUsedException if user already exists
 	 */	

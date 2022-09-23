@@ -8,6 +8,7 @@ import com.lti.bean.Student;
 import com.lti.exception.AllCoursesPaidException;
 import com.lti.exception.CourseFullException;
 import com.lti.exception.CourseNotFoundException;
+import com.lti.exception.StudentNotFoundException;
 import com.lti.exception.UsernameUsedException;
 
 //student service interface
@@ -64,9 +65,10 @@ public interface StudentServiceInterface {
 	 * gets a student by username
 	 * @param string username
 	 * @return student
+	 * @throws StudentNotFoundException if student was not found
 	 * 
 	 */	
-	public Student getStudentByUsername(String username);
+	public Student getStudentByUsername(String username) throws StudentNotFoundException;
 	
 	/**
 	 * creates a student
