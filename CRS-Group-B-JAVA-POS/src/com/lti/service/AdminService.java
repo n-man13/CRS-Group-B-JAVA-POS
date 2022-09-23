@@ -75,7 +75,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call courseDAO to delete a course
 	 * 
-	 * @param courseID the course to delete
+	 * @param courseId the course to delete
 	 * @throws CourseNotFoundException if courseID provided doesn't exist
 	 */
 	@Override
@@ -92,9 +92,9 @@ public class AdminService implements AdminServiceInterface {
 	 * @return Returns a list of courses
 	 */
 	@Override
-	public void listAllCourse() {
+	public List<Course> listAllCourse() {
 
-		courseDAO.viewAllCourses();
+		return courseDAO.viewAllCourses();
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class AdminService implements AdminServiceInterface {
 	 * call studentDAO to get list of students that are not registered yet
 	 * 
 	 * @return list of students
-	 * @throws allstudentRegisteredexception if list is empty
+	 * @throws AllstudentRegisteredexception if list is empty
 	 */
 	@Override
 	public List<Student> unregisteredStudent() throws AllStudentRegisteredException {
@@ -152,7 +152,7 @@ public class AdminService implements AdminServiceInterface {
 	/**
 	 * call studentDAO to get student by id
 	 * 
-	 * @param studentId
+	 * @param studentId the id of the student
 	 * @return student if is not found then returns null
 	 * @throws StudentNotFoundException if student was not found
 	 */

@@ -40,7 +40,7 @@ public interface AdminServiceInterface {
 	/**
 	 * call courseDAO to delete a course
 	 * 
-	 * @param courseID the course to delete
+	 * @param courseId the course to delete
 	 * @throws CourseNotFoundException if courseID provided doesn't exist
 	 */
 	public void deleteCourse(int courseId) throws CourseNotFoundException;
@@ -50,7 +50,7 @@ public interface AdminServiceInterface {
 	 * 
 	 * @return Returns a list of courses
 	 */
-	public void listAllCourse();
+	public List<Course> listAllCourse();
 
 	/**
 	 * call studentDAO to set student attribute registrationApproved to true
@@ -72,14 +72,14 @@ public interface AdminServiceInterface {
 	 * call studentDAO to get list of students that are not registered yet
 	 * 
 	 * @return list of students
-	 * @throws allstudentRegisteredexception if list is empty
+	 * @throws AllstudentRegisteredexception if list is empty
 	 */
 	public List<Student> unregisteredStudent() throws AllStudentRegisteredException;
 
 	/**
 	 * call studentDAO to get student by id
 	 * 
-	 * @param studentId
+	 * @param studentId the id of the student
 	 * @return student if is not found then returns null
 	 * @throws StudentNotFoundException if student was not found
 	 */

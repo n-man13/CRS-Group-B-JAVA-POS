@@ -11,7 +11,7 @@ public class Admin extends User {
 	/**
 	 * creates a new admin with set id
 	 * 
-	 * @param adminID
+	 * @param adminID the id to set
 	 */
 	public Admin(int adminID) {
 		this.adminID = adminID;
