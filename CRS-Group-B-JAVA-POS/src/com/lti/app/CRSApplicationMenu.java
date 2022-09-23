@@ -71,31 +71,31 @@ public class CRSApplicationMenu {
 						System.out.println("3. Student");
 						int role = Integer.parseInt(scan.nextLine());
 						try {
-						boolean logInSuccess = userService.verifyCredetials(username, password, role);
-						if (logInSuccess) {
-							while (userMenu) {
-								switch (role) {
-								case 3:
-									student = studentService.getStudentByUsername(username);
-									userMenu = studentMenu.studentMenu(student, scan);
-									break;
-								case 2:
-									professor = professorService.getProfessorByUsername(username);
-									userMenu = professorMenu.professorMenu(professor, scan);
-									break;
-								case 1:
-									admin = adminService.getAdminByUsername(username);
-									userMenu = adminMenu.adminMenu(admin, scan);
-									break;
-								default:
-									System.out.println("Invalid Role");
-								}
+							boolean logInSuccess = userService.verifyCredetials(username, password, role);
+							if (logInSuccess) {
+								while (userMenu) {
+									switch (role) {
+									case 3:
+										student = studentService.getStudentByUsername(username);
+										userMenu = studentMenu.studentMenu(student, scan);
+										break;
+									case 2:
+										professor = professorService.getProfessorByUsername(username);
+										userMenu = professorMenu.professorMenu(professor, scan);
+										break;
+									case 1:
+										admin = adminService.getAdminByUsername(username);
+										userMenu = adminMenu.adminMenu(admin, scan);
+										break;
+									default:
+										System.out.println("Invalid Role");
+									}
 
-								loginMenu = false;
+									loginMenu = false;
+								}
+							} else {
+								System.out.println("You entered the wrong credentials");
 							}
-						} else {
-							System.out.println("You entered the wrong credentials");
-						}
 						} catch (StudentNotFoundException e) {
 							System.out.println(e.getMessage() + e.getStudentID());
 						}
