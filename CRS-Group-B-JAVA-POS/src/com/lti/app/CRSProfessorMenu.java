@@ -83,10 +83,12 @@ public class CRSProfessorMenu {
 				System.out.println("Please select the course ID to view students");
 				courseId = Integer.parseInt(scan.nextLine());
 				try {
-					Map<Student, Double> viewStudentGrades = professorService.viewStudentsGrades(courseId);
-					for (Student s : viewStudentGrades.keySet()) {
-						System.out.println("Id: " + s.getStudentID() + "\nName: " + s.getName() + "\nGrade"
-								+ viewStudentGrades.get(s));
+					Map<Student, Double> viewStudentGrades = professorService.viewStudentsGrades(professorId, courseId);
+					if (!viewStudentGrades.isEmpty()) {
+						for (Student s : viewStudentGrades.keySet()) {
+							System.out.println("Id: " + s.getStudentID() + "\nName: " + s.getName() + "\nGrade"
+									+ viewStudentGrades.get(s));
+						}
 					}
 				} catch (CourseNotFoundException e) {
 					System.out.println(e.getMessage() + e.getCourseID());

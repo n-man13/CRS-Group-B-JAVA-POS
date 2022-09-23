@@ -24,7 +24,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	/**
 	 * call courseDAO to set professorId to course
 	 * @param int professorid, int courseid
-	 * thorws CourseNotFoundException if courseId doesn't exits
+	 * @thorws CourseNotFoundException if courseId doesn't exits
 	 */	
 	public void applyToCourse(int professorId, int courseId) throws CourseNotFoundException{
 		// apply to specific course
@@ -37,8 +37,8 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 * view students that are enrolled in a course
 	 * @param int courseid
 	 * @return list of students
-	 * thorws CourseNotFoundException if courseId doesn't exits
-	 * throws NoStudentsEnrolledException if there are not studens
+	 * @throws CourseNotFoundException if courseId doesn't exits
+	 * @throws NoStudentsEnrolledException if there are not studens
 	 */	
 	public List<Student> viewStudents(int courseId) throws CourseNotFoundException, NoStudentsEnrolledException{
 		
@@ -52,9 +52,9 @@ public class ProfessorService implements ProfessorServiceInterface {
 	/**
 	 * records a grade of a student of a particular course
 	 * @param int courseid, studentid, grade
-	 * throws CourseNotFoundException if courseId doesn't exits
-	 * throws StudentNotFoundException if provided studentId doesn't exist
-	 * throws NoStudentsEnrolledException if there are not student
+	 * @throws CourseNotFoundException if courseId doesn't exits
+	 * @throws StudentNotFoundException if provided studentId doesn't exist
+	 * @throws NoStudentsEnrolledException if there are not student
 	 */	
 	public void recordGrade(double grade, int studentId, int courseId) throws StudentNotFoundException, CourseNotFoundException, NoStudentsEnrolledException{
 		// record grade for student in class
@@ -90,12 +90,17 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 * gets a map of student to grade calls method courseDAO 
 	 * @param int courseId
 	 * @return map of student to grade 
-	 * throws courseNotFoundException if courseId doesn't exist
-	 * throws NoStudentsEnrolledException if there 
+	 * @throws courseNotFoundException if courseId doesn't exist
+	 * @throws NoStudentsEnrolledException if there 
 	 */	
 	@Override
-	public Map<Student, Double> viewStudentsGrades(int courseId) throws CourseNotFoundException, NoStudentsEnrolledException{
-		
+	public Map<Student, Double> viewStudentsGrades(int professorId, int courseId) throws CourseNotFoundException, NoStudentsEnrolledException{
+		List <Course> courses = courseDAO.viewCoursesByProfessor(professorId);
+		int i = 0;
+		for (Course c : courses) {
+			if (c.getCourseID() != courseId) i++;
+		}
+		if (i == courses.size()) throw new CourseNotFoundException("You are not enrolled in this course, ID: " , courseId);
 		if (courseDAO.viewCourse(courseId) == null) throw new CourseNotFoundException("This course was not found, ID: " , courseId);
 		Map<Student, Double> studentsAndGrades = registeredCourseDAO.viewStudentsAndGrades(courseId);
 		if (studentsAndGrades.isEmpty()) throw new NoStudentsEnrolledException("This course has no students, ID: ", courseId);

@@ -28,6 +28,7 @@
 
 handle different messages when student types wrong credentials vs unregistered
 handle throw clause on getStudentID in service professor -> if course is not found throw error
+professorService.checkStudents ->handle different message between no student in course and course that hasn't been enrolled
 handle student registration -> student not found
 put commends in the constants by adding spacing.
 add @ where throws in service layer
