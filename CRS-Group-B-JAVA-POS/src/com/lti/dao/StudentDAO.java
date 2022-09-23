@@ -25,8 +25,9 @@ public class StudentDAO implements StudentDAOInterface {
 	private PreparedStatement stmt = null;
 
 	/**
+	 * Creates a new student
 	 * 
-	 * @param student  the student to add
+	 * @param student the student to add
 	 * @return new ID if created successfully, else -1
 	 */
 	@Override
@@ -38,7 +39,7 @@ public class StudentDAO implements StudentDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			//String sql = "INSERT INTO Student VALUES(?,?)";
+			// String sql = "INSERT INTO Student VALUES(?,?)";
 			stmt = conn.prepareStatement(SQLConstants.STUDENT_INSERT);
 			stmt.setInt(1, userID);
 			stmt.setString(2, student.getName());
@@ -47,7 +48,6 @@ public class StudentDAO implements StudentDAOInterface {
 			// Step 6 execute statement
 
 			stmt.executeUpdate();
-			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -58,6 +58,7 @@ public class StudentDAO implements StudentDAOInterface {
 	}
 
 	/**
+	 * find a student based on ID
 	 * 
 	 * @param studentID the id of the student to find
 	 * @return the student associated with the id
@@ -68,15 +69,15 @@ public class StudentDAO implements StudentDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			//String sql = "SELECT studentID, name FROM Student"; // TODO add where clause
-			
+			// String sql = "SELECT studentID, name FROM Student"; // TODO add where clause
+
 			stmt = conn.prepareStatement(SQLConstants.STUDENT_SELECT);
 			// Step 6 execute statement
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name
-				int tempUserID  = rs.getInt("studentID");
+				int tempUserID = rs.getInt("studentID");
 				String tempName = rs.getString("name");
 				boolean tempRegistered = rs.getBoolean("registrationApproved");
 				if (tempUserID == studentID) {
@@ -90,11 +91,12 @@ public class StudentDAO implements StudentDAOInterface {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return student;
 	}
-	
+
 	/**
+	 * find a student based on username
 	 * 
 	 * @param username the username of the User bean
 	 * @return the Student associated with the username
@@ -105,10 +107,11 @@ public class StudentDAO implements StudentDAOInterface {
 		User us = userDAO.viewUser(username);
 		int studentID = us.getUserID();
 		return viewStudent(studentID);
-		
+
 	}
 
 	/**
+	 * updates information of a student
 	 * 
 	 * @param student student with updated information associated with studentID
 	 * @return if update occurred
@@ -117,16 +120,15 @@ public class StudentDAO implements StudentDAOInterface {
 		boolean changed = false;
 		try {
 			Connection conn = DBUtils.getConnection();
-			
-			//UPDATE Student SET name='?', registrationApproved='?' WHERE studentID='?'
+
+			// UPDATE Student SET name='?', registrationApproved='?' WHERE studentID='?'
 			stmt = conn.prepareStatement(SQLConstants.STUDENT_UPDATE);
 			stmt.setString(1, student.getName());
 			stmt.setBoolean(2, student.isRegistered());
 			stmt.setInt(3, student.getStudentID());
 			stmt.executeUpdate();
 			changed = true;
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -136,20 +138,21 @@ public class StudentDAO implements StudentDAOInterface {
 	}
 
 	/**
+	 * finds all unregistered students
 	 * 
 	 * @return list of all unregistered students
 	 */
-	public List<Student> viewUnregisteredStudents(){
+	public List<Student> viewUnregisteredStudents() {
 		ArrayList<Student> students = new ArrayList<Student>();
 		try {
 			Connection conn = DBUtils.getConnection();
-			
+
 			stmt = conn.prepareStatement(SQLConstants.STUDENT_SELECT_UNREGISTERED);
 			stmt.setBoolean(1, false);
 			Student student = null;
-			
+
 			ResultSet rs = stmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				int tempStudentID = rs.getInt("studentID");
 				String tempStudentName = rs.getString("name");
 				boolean tempRegistered = rs.getBoolean("registrationApproved");

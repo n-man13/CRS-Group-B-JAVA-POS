@@ -20,12 +20,12 @@ import com.lti.utils.DBUtils;
  */
 public class ProfessorDAO implements ProfessorDAOInterface {
 
-	
 	private PreparedStatement stmt = null;
 
 	private UserDAOInterface userDAO = new UserDAO();
 
 	/**
+	 * creates a new professor
 	 * 
 	 * @param prof new professor to add
 	 * @return new ID if created successfully, else -1
@@ -39,7 +39,7 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			//String sql = "insert into Professor values(?,?)";
+			// String sql = "insert into Professor values(?,?)";
 			stmt = conn.prepareStatement(SQLConstants.PROFESSOR_INSERT);
 			stmt.setInt(1, userID);
 			stmt.setString(2, prof.getName());
@@ -58,6 +58,7 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 	}
 
 	/**
+	 * views a professor given the id
 	 * 
 	 * @param profID the professor to view
 	 * @return the professor object
@@ -69,15 +70,15 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			//String sql = "SELECT professorID, name FROM Professor";
-			
+			// String sql = "SELECT professorID, name FROM Professor";
+
 			stmt = conn.prepareStatement(SQLConstants.PROFESSOR_SELECT);
 			// Step 6 execute statement
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name
-				int tempUserID  = rs.getInt("professorID");
+				int tempUserID = rs.getInt("professorID");
 				String tempName = rs.getString("name");
 				if (tempUserID == profID) {
 					prof = new Professor(tempUserID, tempName);
@@ -91,8 +92,9 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 		}
 		return prof;
 	}
-	
+
 	/**
+	 * views a professor given the username
 	 * 
 	 * @param username the username of the User
 	 * @return the professor object associated with the username

@@ -15,12 +15,12 @@ import com.lti.utils.DBUtils;
 
 public class CourseDAO implements CourseDAOInterface {
 
-	
 	private PreparedStatement stmt = null;
 	private ProfessorDAOInterface profDAO = new ProfessorDAO();
-	
+
 	/**
 	 * returns all courses in an ArrayList
+	 * 
 	 * @return all courses
 	 */
 	@Override
@@ -32,16 +32,17 @@ public class CourseDAO implements CourseDAOInterface {
 
 			// Step 5 create and populate statement
 
-			//String sql = "SELECT courseID, name , department, description, professorID, prereqID FROM Course";
+			// String sql = "SELECT courseID, name , department, description, professorID,
+			// prereqID FROM Course";
 			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_ALL_COURSES);
-			
+
 			// Step 6 execute statement
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name
-				
-				int tempCourseID  = rs.getInt("courseID");
+
+				int tempCourseID = rs.getInt("courseID");
 				Course tempCourse = new Course(tempCourseID);
 				String tempName = rs.getString("name");
 				tempCourse.setName(tempName);
@@ -49,10 +50,10 @@ public class CourseDAO implements CourseDAOInterface {
 				tempCourse.setDepartment(tempDepartment);
 				String tempDescription = rs.getString("description");
 				tempCourse.setDescription(tempDescription);
-				int tempProfID= rs.getInt("professorID");
+				int tempProfID = rs.getInt("professorID");
 				Professor pro = profDAO.viewProfessor(tempProfID);
 				tempCourse.setProf(pro);
-				int tempPrereqID= rs.getInt("prereqID");
+				int tempPrereqID = rs.getInt("prereqID");
 				tempCourse.setPrereqCourseID(tempPrereqID);
 				courses.add(tempCourse);
 			}
@@ -66,6 +67,7 @@ public class CourseDAO implements CourseDAOInterface {
 	}
 
 	/**
+	 * Creates a new course
 	 * 
 	 * @param course course to create
 	 * @return if course was created
@@ -78,9 +80,9 @@ public class CourseDAO implements CourseDAOInterface {
 
 			// Step 5 create and populate statement
 
-			//String sql = "insert into Course values(?,?,?,?,?,?)";
+			// String sql = "insert into Course values(?,?,?,?,?,?)";
 			stmt = conn.prepareStatement(SQLConstants.COURSE_INSERT);
-			//stmt.setInt(1, course.getCourseID());
+			// stmt.setInt(1, course.getCourseID());
 			stmt.setString(1, course.getName());
 			stmt.setString(2, course.getDepartment());
 			stmt.setString(3, course.getDescription());
@@ -103,9 +105,10 @@ public class CourseDAO implements CourseDAOInterface {
 	}
 
 	/**
+	 * adds a professor to teach a course
 	 * 
 	 * @param courseID the course to modify
-	 * @param profID the professor to teach
+	 * @param profID   the professor to teach
 	 * @return if course was updated
 	 */
 	@Override
@@ -113,16 +116,16 @@ public class CourseDAO implements CourseDAOInterface {
 		boolean changed = false;
 		try {
 			Connection conn = DBUtils.getConnection();
-			//String sql = "SELECT courseID, professorID FROM Course WHERE courseID='?'";
+			// String sql = "SELECT courseID, professorID FROM Course WHERE courseID='?'";
 			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_BY_COURSEID);
 			stmt.setInt(1, courseID);
 			ResultSet rs = stmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				int tempCourseID = rs.getInt("courseID");
 				int tempProfID = rs.getInt("professorID");
 				if (tempProfID == 0) {
-					//sql = "UPDATE Course SET professorID='?' WHERE courseID='?'";
+					// sql = "UPDATE Course SET professorID='?' WHERE courseID='?'";
 					stmt = conn.prepareStatement(SQLConstants.COURSE_UPDATE_PROFESSORID);
 					stmt.setInt(1, profID);
 					stmt.setInt(2, courseID);
@@ -130,7 +133,7 @@ public class CourseDAO implements CourseDAOInterface {
 					changed = true;
 				}
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -140,21 +143,23 @@ public class CourseDAO implements CourseDAOInterface {
 	}
 
 	/**
+	 * provides the courses a professor is teaching
 	 * 
 	 * @param profID the professor teaching
 	 * @return the courses that a professor is teaching
 	 */
-	public ArrayList<Course> viewCoursesByProfessor(int profID){
+	public ArrayList<Course> viewCoursesByProfessor(int profID) {
 		ArrayList<Course> courses = new ArrayList<Course>();
 		Course course = null;
 		try {
 			Connection conn = DBUtils.getConnection();
-			
+
 			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_BY_PROFESSORID);
 			stmt.setInt(1, profID);
 			ResultSet rs = stmt.executeQuery();
-			//SELECT courseID, name , department, description, professorID, prereqID FROM Course WHERE professorID='?'
-			while(rs.next()) {
+			// SELECT courseID, name , department, description, professorID, prereqID FROM
+			// Course WHERE professorID='?'
+			while (rs.next()) {
 				int tempCourseID = rs.getInt("courseID");
 				String tempName = rs.getString("name");
 				int tempProfID = rs.getInt("professorID");
@@ -167,12 +172,12 @@ public class CourseDAO implements CourseDAOInterface {
 					course.setDescription(tempDescription);
 					Professor pro = profDAO.viewProfessor(tempProfID);
 					course.setProf(pro);
-					int tempPrereqID= rs.getInt("prereqID");
+					int tempPrereqID = rs.getInt("prereqID");
 					course.setPrereqCourseID(tempPrereqID);
 					courses.add(course);
 				}
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -180,8 +185,9 @@ public class CourseDAO implements CourseDAOInterface {
 		}
 		return courses;
 	}
-	
+
 	/**
+	 * deletes a course
 	 * 
 	 * @param courseID the course to delete
 	 * @return the course that was deleted, else null
@@ -194,17 +200,18 @@ public class CourseDAO implements CourseDAOInterface {
 
 			// Step 5 create and populate statement
 
-			//String sql = "SELECT courseID, name , department, description, professorID, prereqID FROM Course WHERE courseID='?'";
+			// String sql = "SELECT courseID, name , department, description, professorID,
+			// prereqID FROM Course WHERE courseID='?'";
 			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_BY_COURSEID);
 			stmt.setInt(1, courseID);
-			
+
 			// Step 6 execute statement
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name
-				
-				int tempCourseID  = rs.getInt("courseID");
+
+				int tempCourseID = rs.getInt("courseID");
 				course = new Course(tempCourseID);
 				String tempName = rs.getString("name");
 				course.setName(tempName);
@@ -212,14 +219,14 @@ public class CourseDAO implements CourseDAOInterface {
 				course.setDepartment(tempDepartment);
 				String tempDescription = rs.getString("description");
 				course.setDescription(tempDescription);
-				int tempProfID= rs.getInt("professorID");
+				int tempProfID = rs.getInt("professorID");
 				Professor pro = profDAO.viewProfessor(tempProfID);
 				course.setProf(pro);
-				int tempPrereqID= rs.getInt("prereqID");
+				int tempPrereqID = rs.getInt("prereqID");
 				course.setPrereqCourseID(tempPrereqID);
-				
+
 			}
-			//sql = "DELETE FROM Course WHERE courseID='?'";
+			// sql = "DELETE FROM Course WHERE courseID='?'";
 			stmt = conn.prepareStatement(SQLConstants.COURSE_DELETE);
 			stmt.setInt(1, courseID);
 			stmt.executeUpdate();
@@ -228,11 +235,12 @@ public class CourseDAO implements CourseDAOInterface {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return course;
 	}
 
 	/**
+	 * selects a course with provided id
 	 * 
 	 * @param courseID the identifier of the course
 	 * @return the course with provided id or null if not found
@@ -244,17 +252,18 @@ public class CourseDAO implements CourseDAOInterface {
 
 			// Step 5 create and populate statement
 
-			//String sql = "SELECT courseID, name , department, description, professorID, prereqID FROM Course WHERE courseID='?'";
+			// String sql = "SELECT courseID, name , department, description, professorID,
+			// prereqID FROM Course WHERE courseID='?'";
 			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_BY_COURSEID);
 			stmt.setInt(1, courseID);
-			
+
 			// Step 6 execute statement
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				// Retrieve by column name
-				
-				int tempCourseID  = rs.getInt("courseID");
+
+				int tempCourseID = rs.getInt("courseID");
 				course = new Course(tempCourseID);
 				String tempName = rs.getString("name");
 				course.setName(tempName);
@@ -262,23 +271,24 @@ public class CourseDAO implements CourseDAOInterface {
 				course.setDepartment(tempDepartment);
 				String tempDescription = rs.getString("description");
 				course.setDescription(tempDescription);
-				int tempProfID= rs.getInt("professorID");
+				int tempProfID = rs.getInt("professorID");
 				Professor pro = profDAO.viewProfessor(tempProfID);
 				course.setProf(pro);
-				int tempPrereqID= rs.getInt("prereqID");
+				int tempPrereqID = rs.getInt("prereqID");
 				course.setPrereqCourseID(tempPrereqID);
-				
+
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return course;
 	}
-	
+
 	/**
+	 * updates a courses information
 	 * 
 	 * @param course the course with the required changes made already
 	 * @return if the course was updated
@@ -287,16 +297,16 @@ public class CourseDAO implements CourseDAOInterface {
 		boolean changed = false;
 		try {
 			Connection conn = DBUtils.getConnection();
-			//String sql = "SELECT courseID, professorID FROM Course WHERE courseID='?'";
+			// String sql = "SELECT courseID, professorID FROM Course WHERE courseID='?'";
 			stmt = conn.prepareStatement(SQLConstants.COURSE_SELECT_BY_COURSEID);
 			stmt.setInt(1, course.getCourseID());
 			ResultSet rs = stmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				int tempCourseID = rs.getInt("courseID");
 				int tempProfID = rs.getInt("professorID");
 				if (tempProfID == -1) {
-					//sql = "UPDATE Course SET professorID='?' WHERE courseID='?'";
+					// sql = "UPDATE Course SET professorID='?' WHERE courseID='?'";
 					stmt = conn.prepareStatement(SQLConstants.COURSE_UPDATE);
 					stmt.setString(1, course.getName());
 					stmt.setString(2, course.getDepartment());
@@ -307,7 +317,7 @@ public class CourseDAO implements CourseDAOInterface {
 					changed = true;
 				}
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

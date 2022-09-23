@@ -12,33 +12,32 @@ import com.lti.utils.DBUtils;
 
 public class AdminDAO implements AdminDAOInterface {
 
-	
 	private PreparedStatement stmt = null;
 
 	private UserDAOInterface userDAO = new UserDAO();
-	
+
 	/**
+	 * Creates a new Admin
 	 * 
 	 * @param admin the admin to create
 	 * @return new ID if created successfully, else -1
 	 */
 	@Override
 	public int createAdmin(Admin admin) {
-		
+
 		int userID = userDAO.createNewUser(admin.getUsername(), admin.getPassword(), 1);
 
 		try {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
 
-			//String sql = "insert into Admin values(?)";
+			// String sql = "insert into Admin values(?)";
 			stmt = conn.prepareStatement(SQLConstants.ADMIN_INSERT);
 			stmt.setInt(1, userID);
 
 			// Step 6 execute statement
 
 			stmt.executeUpdate();
-			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,8 +46,9 @@ public class AdminDAO implements AdminDAOInterface {
 		}
 		return userID;
 	}
-	
+
 	/**
+	 * finds the admin with the supplied username
 	 * 
 	 * @param username username associated with the admin
 	 * @return the Admin object
@@ -61,8 +61,8 @@ public class AdminDAO implements AdminDAOInterface {
 		return viewAdmin(adminID);
 	}
 
-	
 	/**
+	 * finds the admin with the supplied id
 	 * 
 	 * @param adminID the id of the admin
 	 * @return the Admin object
@@ -72,11 +72,11 @@ public class AdminDAO implements AdminDAOInterface {
 		Admin admin = null;
 		try {
 			Connection conn = DBUtils.getConnection();
-			
+
 			stmt = conn.prepareStatement(SQLConstants.ADMIN_SELECT);
 			stmt.setInt(1, adminID);
 			ResultSet rs = stmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				int tempID = rs.getInt("adminID");
 				admin = new Admin(tempID);
 			}
