@@ -39,7 +39,7 @@ public class CRSProfessorMenu {
 				System.out.println("You have selected Apply to course");
 				this.displayCourses(courseService.viewAllCourses());
 				System.out.println("Please select the course ID");
-				int courseId = scan.nextInt();
+				int courseId = Integer.parseInt(scan.nextLine());
 				try {
 					professorService.applyToCourse(professor.getProfID(), courseId);
 				} catch (CourseNotFoundException e) {
@@ -50,13 +50,13 @@ public class CRSProfessorMenu {
 				System.out.println("You have selected Record grade");
 				this.displayCourses(professorService.viewProfessorCourses(professorId));
 				System.out.println("Please select the course ID to view students");
-				courseId = scan.nextInt();
+				courseId = Integer.parseInt(scan.nextLine());
 				try {
 					this.displayStudents(professorService.viewStudents(courseId));
 					System.out.println("Please select the student ID to add grade");
-					int studentId = scan.nextInt();
+					int studentId = Integer.parseInt(scan.nextLine());
 					System.out.println("Please enter the grade");
-					double grade = scan.nextDouble();
+					double grade = Double.parseDouble(scan.nextLine());
 
 					try {
 						professorService.recordGrade(grade, studentId, courseId);

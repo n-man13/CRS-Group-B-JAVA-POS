@@ -69,24 +69,29 @@ public class CRSApplicationMenu {
 						System.out.println("1. Admin");
 						System.out.println("2. Professor");
 						System.out.println("3. Student");
+						System.out.println("4. Back");
 						int role = Integer.parseInt(scan.nextLine());
 						try {
 							boolean logInSuccess = userService.verifyCredetials(username, password, role);
 							if (logInSuccess) {
 								while (userMenu) {
 									switch (role) {
-									case 3:
-										student = studentService.getStudentByUsername(username);
-										userMenu = studentMenu.studentMenu(student, scan);
+									case 1:
+										admin = adminService.getAdminByUsername(username);
+										userMenu = adminMenu.adminMenu(admin, scan);
 										break;
 									case 2:
 										professor = professorService.getProfessorByUsername(username);
 										userMenu = professorMenu.professorMenu(professor, scan);
 										break;
-									case 1:
-										admin = adminService.getAdminByUsername(username);
-										userMenu = adminMenu.adminMenu(admin, scan);
+									case 3:
+										student = studentService.getStudentByUsername(username);
+										userMenu = studentMenu.studentMenu(student, scan);
 										break;
+									case 4:
+										System.out.println("Press enter to go back");
+										scan.nextLine();
+										loginMenu = false;
 									default:
 										System.out.println("Invalid Role");
 									}
