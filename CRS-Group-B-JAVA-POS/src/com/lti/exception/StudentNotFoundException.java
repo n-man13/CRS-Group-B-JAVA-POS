@@ -5,8 +5,9 @@ public class StudentNotFoundException extends Exception {
 	private int studentID;
 
 	/**
+	 * creates a new exception with set information
 	 * 
-	 * @param message the message to be written
+	 * @param message   the message to be written
 	 * @param studentID the student id
 	 */
 	public StudentNotFoundException(String message, int studentID) {
@@ -15,6 +16,7 @@ public class StudentNotFoundException extends Exception {
 	}
 
 	/**
+	 * returns the student id
 	 * 
 	 * @return the student id
 	 */
