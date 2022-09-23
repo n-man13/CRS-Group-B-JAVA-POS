@@ -1,5 +1,6 @@
 package com.lti.app;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class CRSStudentMenu {
 		int studentId = student.getStudentID();
 
 		try {
-			System.out.println("*****Welcome Student " + student.getName() + "*****");
+			System.out.println("*****Welcome Student " + student.getName() + " " + LocalDateTime.now() + "*****");
 			System.out.println("Enter your choice: ");
 			System.out.println("1. Apply to course");
 			System.out.println("2. Drop course");

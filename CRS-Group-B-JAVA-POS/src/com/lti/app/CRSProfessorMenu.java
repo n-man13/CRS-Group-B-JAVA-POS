@@ -1,5 +1,6 @@
 package com.lti.app;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -27,7 +28,7 @@ public class CRSProfessorMenu {
 		int professorId = professor.getProfID();
 
 		try {
-			System.out.println("*****Welcome Professor*****");
+			System.out.println("*****Welcome Professor " + LocalDateTime.now() + "*****");
 			System.out.println("Enter your choice: ");
 			System.out.println("1. Apply to course");
 			System.out.println("2. Record grade");
