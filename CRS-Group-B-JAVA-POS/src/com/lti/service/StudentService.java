@@ -32,9 +32,9 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * calls DAO method to register student in registeredcourse
 	 * 
-	 * @param courseId courseId to be applied
+	 * @param courseId  courseId to be applied
 	 * @param studentId studentId of the student that applies to course
-	 * @throws courseNotFoundException if courseId doesn't exist
+	 * @throws CourseNotFoundException if courseId doesn't exist
 	 * @throws CourseFullException     if there are more then 10 students
 	 */
 	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException {
@@ -50,9 +50,9 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * calls DAO method to remove student in registeredCourse
 	 * 
-	 * @param courseId the courseId of what course is to be dropped
+	 * @param courseId  the courseId of what course is to be dropped
 	 * @param studentId the studentId that is dropping a course
-	 * @throws courseNotFoundException if courseId doesn't exist
+	 * @throws CourseNotFoundException if courseId doesn't exist
 	 */
 	public void dropCourse(int studentId, int courseId) throws CourseNotFoundException {
 		List<Course> courses = registeredCourseDAO.viewStudentCourses(studentId);
@@ -83,9 +83,9 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * calls DAO method to payFee
 	 * 
-	 * @param courseId the courseId to pay the fee
+	 * @param courseId  the courseId to pay the fee
 	 * @param studentId the student who is paying
-	 * @throws courseNotFoundException if courseId doesn't exist
+	 * @throws CourseNotFoundException if courseId doesn't exist
 	 */
 	public void makePayment(int studentId, int courseId) throws CourseNotFoundException {
 
@@ -124,8 +124,8 @@ public class StudentService implements StudentServiceInterface {
 	 * calls DAO method to view unpaid courses
 	 * 
 	 * @param studentId the studentId that views the unpaid courses
-	 * @return Map <Course, Double>
-	 * @throws allCoursed AllCoursesPaidException
+	 * @return a list of courses to be paid
+	 * @throws AllCoursesPaidException if all courses are already paid for
 	 */
 	public List<Course> viewUnpayedCourses(int studentId) throws AllCoursesPaidException {
 
@@ -138,8 +138,8 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * gets a student by username
 	 * 
-	 * @param username
-	 * @return student
+	 * @param username the user's username
+	 * @return student the student object
 	 * @throws StudentNotFoundException if student is not found
 	 */
 	public Student getStudentByUsername(String username) throws StudentNotFoundException {
@@ -155,7 +155,7 @@ public class StudentService implements StudentServiceInterface {
 	/**
 	 * creates a student
 	 * 
-	 * @param student
+	 * @param student the student to create
 	 * @throws UsernameUsedException if user already exists
 	 */
 	@Override

@@ -95,7 +95,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	/**
 	 * calls courseDAO to get courses that a particular professor is teaching
 	 * 
-	 * @param professorID the id of the professor
+	 * @param professorId the id of the professor
 	 * @return Returns a list of courses that a professor is teaching
 	 */
 	@Override
@@ -107,9 +107,10 @@ public class ProfessorService implements ProfessorServiceInterface {
 	/**
 	 * gets a map of student to grade calls method courseDAO
 	 * 
-	 * @param courseId the id of the course
+	 * @param courseId    the id of the course
+	 * @param professorId the id of the professor
 	 * @return Returns a map of student to grade
-	 * @throws courseNotFoundException     if courseId doesn't exist
+	 * @throws CourseNotFoundException     if courseId doesn't exist
 	 * @throws NoStudentsEnrolledException if there
 	 */
 	@Override
