@@ -3,6 +3,7 @@
  */
 package com.lti.app;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ import com.lti.service.StudentService;
 import com.lti.service.StudentServiceInterface;
 import com.lti.service.UserService;
 import com.lti.service.UserServiceInterface;
+import com.lti.utils.DBUtils;
 
 /**
  * @author Nikhil, Luca, Muhammad
@@ -151,7 +153,11 @@ public class CRSApplicationMenu {
 			}
 		}
 		System.out.println("Thank you for using CRS, have a great day!");
-
+		try {
+			DBUtils.closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		scan.close();
 	}
 
