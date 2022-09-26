@@ -127,7 +127,7 @@ public class CRSAdminMenu {
 				try {
 					this.displayStudents(adminService.unregisteredStudent());
 					System.out.println("Select the student you want to register");
-					student = adminService.getStudentById(scan.nextInt());
+					student = adminService.getStudentById(Integer.parseInt(scan.nextLine()));
 					adminService.approveStudentRegistration(student);
 				} catch (StudentNotFoundException e) {
 					System.out.println(e.getMessage() + e.getStudentID());
