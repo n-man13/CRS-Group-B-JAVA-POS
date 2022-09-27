@@ -42,6 +42,11 @@ public class CourseService implements CourseServiceInterface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Course viewCourseByID(int id) {
+		return courseDAO.viewCourse(id);
+	}
 	
 
 }
