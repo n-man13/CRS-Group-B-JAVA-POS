@@ -17,7 +17,7 @@ public class StudentController {
 
 	@Autowired
 	StudentService studentService;
-	
+
 	@RequestMapping(value = "/applyToCourseStudent/{studentID}/{courseID}", method = RequestMethod.PUT)
 	public ResponseEntity applyToCourse(@PathVariable int studentID, @PathVariable int courseID) {
 		try {
@@ -28,10 +28,10 @@ public class StudentController {
 			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity(HttpStatus.OK);
-		
+
 	}
-	
-	@RequestMapping(value = "/dropCourse/{studentID}/{courseID}")
+
+	@RequestMapping(value = "/dropCourse/{studentID}/{courseID}", method = RequestMethod.DELETE)
 	public ResponseEntity dropCourse(@PathVariable int studentID, @PathVariable int courseID) {
 		try {
 			studentService.dropCourse(studentID, courseID);
@@ -40,14 +40,14 @@ public class StudentController {
 		}
 		return new ResponseEntity(HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = "/viewAppliedCourses/{studentID}")
+
+	@RequestMapping(value = "/viewAppliedCourses/{studentID}", method = RequestMethod.GET)
 	public ResponseEntity viewAppliedCourses(@PathVariable int studentID) {
 		studentService.viewAppliedCourses(studentID);
 		return new ResponseEntity(HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = "/makePayment/{studentID}/{courseID}")
+
+	@RequestMapping(value = "/makePayment/{studentID}/{courseID}", method = RequestMethod.PUT)
 	public ResponseEntity makePayment(@PathVariable int studentID, @PathVariable int courseID) {
 		try {
 			studentService.makePayment(studentID, courseID);
@@ -56,8 +56,8 @@ public class StudentController {
 		}
 		return new ResponseEntity(HttpStatus.OK);
 	}
-	
-	
+
+	@RequestMapping(value = "/checkGrades/{studentID", method = RequestMethod.GET)
 	public ResponseEntity checkGrades(@PathVariable int studentID) {
 		studentService.checkGrades(studentID);
 		return new ResponseEntity(HttpStatus.OK);
