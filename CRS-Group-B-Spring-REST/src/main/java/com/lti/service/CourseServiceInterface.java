@@ -11,5 +11,5 @@ public interface CourseServiceInterface {
 	public void notifyStudent();
 	public List<Course> viewAllCourses();
 	public List<Course> viewUnpayedCourses();
-	
+	public Course viewCourseByID(int id);
 }
