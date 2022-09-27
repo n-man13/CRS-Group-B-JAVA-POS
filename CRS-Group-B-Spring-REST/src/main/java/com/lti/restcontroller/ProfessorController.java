@@ -45,7 +45,7 @@ public class ProfessorController {
 		} catch (NoStudentsEnrolledException e) {
 			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity(HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/viewStudents/{courseID}", method = RequestMethod.GET)
