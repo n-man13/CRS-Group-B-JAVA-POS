@@ -1,5 +1,7 @@
 package com.lti.service;
 
+import org.springframework.stereotype.Service;
+
 import com.lti.bean.Student;
 import com.lti.bean.User;
 import com.lti.dao.StudentDAO;
@@ -8,6 +10,7 @@ import com.lti.dao.UserDAO;
 import com.lti.dao.UserDAOInterface;
 import com.lti.exception.StudentNotFoundException;
 
+@Service
 public class UserService implements UserServiceInterface {
 
 	private UserDAOInterface userDAO = new UserDAO();

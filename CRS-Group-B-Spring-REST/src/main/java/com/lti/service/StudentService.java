@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
 import com.lti.bean.Course;
 import com.lti.bean.Student;
 import com.lti.dao.CourseDAO;
@@ -22,6 +24,7 @@ import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.StudentNotFoundException;
 import com.lti.exception.UsernameUsedException;
 
+@Service
 public class StudentService implements StudentServiceInterface {
 
 	private RegisteredCourseDAOInterface registeredCourseDAO = new RegisteredCourseDAO();

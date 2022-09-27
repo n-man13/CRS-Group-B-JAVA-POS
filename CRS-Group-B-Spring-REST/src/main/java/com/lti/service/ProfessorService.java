@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
 import com.lti.bean.*;
 import com.lti.dao.CourseDAO;
 import com.lti.dao.CourseDAOInterface;
@@ -16,6 +18,7 @@ import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.NoStudentsEnrolledException;
 import com.lti.exception.StudentNotFoundException;
 
+@Service
 public class ProfessorService implements ProfessorServiceInterface {
 
 	private ProfessorDAOInterface professorDAO = new ProfessorDAO();

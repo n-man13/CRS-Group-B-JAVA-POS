@@ -2,10 +2,13 @@ package com.lti.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.lti.bean.Course;
 import com.lti.dao.CourseDAO;
 import com.lti.dao.CourseDAOInterface;
 
+@Service
 public class CourseService implements CourseServiceInterface{
 	
 	private Course course;
