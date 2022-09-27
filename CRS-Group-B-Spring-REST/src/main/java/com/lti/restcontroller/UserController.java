@@ -44,7 +44,7 @@ public class UserController {
 		try {
 			studentService.createStudent(student);
 		} catch (UsernameUsedException e) {
-			return new ResponseEntity(e.getMessage() + e.getUsername(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity(e.getMessage() + e.getUsername(), HttpStatus.I_AM_A_TEAPOT);
 		}
 		return new ResponseEntity(HttpStatus.CREATED);
 	}
