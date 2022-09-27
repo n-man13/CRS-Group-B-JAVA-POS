@@ -13,27 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.service.*;
 import com.lti.bean.*;
-
-
-
+import com.lti.exception.*;
 
 @RestController
 public class AdminController {
-	
+
 	@Autowired
 	AdminService adminService;
-	
+
 	@Autowired
 	CourseService courseService;
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/createCourse")
 	public ResponseEntity createCourse(@RequestBody Course course) {
-		
+
 		adminService.createCourse(course);
-		
-		return new ResponseEntity(course, HttpStatus.OK);
+
+		return new ResponseEntity(course, HttpStatus.CREATED);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.PUT, value = "/updateCourse/{id}")
 	public ResponseEntity updateCourse(@RequestBody Course course, @PathVariable int courseID) {
 		
@@ -43,9 +41,59 @@ public class AdminController {
 			oldCourse.setDepartment(course.getDepartment());
 			oldCourse.setName(course.getName());
 			oldCourse.setPrereqCourseID(course.getPrereqCourseID());
+			try {
+				adminService.updateCourse(oldCourse);
+				return new ResponseEntity(oldCourse, HttpStatus.OK);
+			}
+			catch (CourseNotFoundException e) {
+				return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
+			}
 		}
-		adminService.updateCourse(oldCourse);
+		else {
+			return new ResponseEntity(courseID, HttpStatus.NOT_FOUND);
+		}
 		
-		return new ResponseEntity(course, HttpStatus.OK);
+		
+	}
+
+	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteCourse/{id}")
+	public ResponseEntity deleteCourse(@PathVariable int courseID) {
+		
+		try {
+			adminService.deleteCourse(courseID);
+			return new ResponseEntity(courseID, HttpStatus.OK);
+		}
+		catch (CourseNotFoundException e) {
+			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
+		}
+		
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/createProfessor")
+	public ResponseEntity createProfessor(@RequestBody Professor professor) {
+		
+		try {
+			adminService.createProfessor(professor);
+			return new ResponseEntity(professor, HttpStatus.CREATED);
+		} catch (UsernameUsedException e) {
+			return new ResponseEntity(e.getMessage() + e.getUsername(), HttpStatus.I_AM_A_TEAPOT);
+		}
+			
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT, value = "/approveRegistration/{id}")
+	public ResponseEntity approveRegistration(@PathVariable int studentID) {
+		try {
+			Student student = adminService.getStudentById(studentID);
+			try {
+				adminService.approveStudentRegistration(student);
+				return new ResponseEntity(student, HttpStatus.CREATED);
+			} catch (StudentNotFoundException e) {
+				return new ResponseEntity(e.getMessage() + e.getStudentID(), HttpStatus.NOT_FOUND);
+			}
+		} catch (StudentNotFoundException e) {
+			return new ResponseEntity(e.getMessage() + e.getStudentID(), HttpStatus.NOT_FOUND);
+		}
+		
 	}
 }
