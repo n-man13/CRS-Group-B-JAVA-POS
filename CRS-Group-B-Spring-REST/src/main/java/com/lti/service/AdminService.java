@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
 import com.lti.bean.Admin;
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
@@ -24,6 +26,7 @@ import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.StudentNotFoundException;
 import com.lti.exception.UsernameUsedException;
 
+@Service
 public class AdminService implements AdminServiceInterface {
 
 	private CourseDAOInterface courseDAO = new CourseDAO();
