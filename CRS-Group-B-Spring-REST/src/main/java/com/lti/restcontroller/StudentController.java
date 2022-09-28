@@ -1,5 +1,8 @@
 package com.lti.restcontroller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lti.bean.Course;
 import com.lti.exception.CourseFullException;
 import com.lti.exception.CourseNotFoundException;
 import com.lti.service.StudentService;
+import com.lti.bean.*;
 
 @RestController
 public class StudentController {
@@ -43,7 +48,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/viewAppliedCourses/{studentID}", method = RequestMethod.GET)
 	public ResponseEntity viewAppliedCourses(@PathVariable int studentID) {
-		studentService.viewAppliedCourses(studentID);
+		displayCourses(studentService.viewAppliedCourses(studentID));
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
@@ -58,8 +63,21 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/checkGrades/{studentID}", method = RequestMethod.GET)
-	public ResponseEntity checkGrades(@PathVariable int studentID) {
-		studentService.checkGrades(studentID);
-		return new ResponseEntity(HttpStatus.OK);
+	public Map<Course, Double> checkGrades(@PathVariable int studentID) {
+		return studentService.checkGrades(studentID);
+		//return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	private void displayCourses(List<Course> courses) {
+		System.out.println(
+				"CourseID \t Course Name \t Department \t Description \t\t Professor \t Prerequisite CourseID");
+		for (Course c : courses) {
+			if (c.getProf() != null)
+				System.out.println(c.getCourseID() + "\t\t" + c.getName() + "\t" + c.getDepartment() + "\t\t"
+						+ c.getDescription() + "\t" + c.getProf().getName() + "\t" + c.getPrereqCourseID());
+			else
+				System.out.println(c.getCourseID() + "\t\t" + c.getName() + "\t" + c.getDepartment() + "\t\t"
+						+ c.getDescription() + "\t" + "No Professor" + "\t" + c.getPrereqCourseID());
+		}
 	}
 }
