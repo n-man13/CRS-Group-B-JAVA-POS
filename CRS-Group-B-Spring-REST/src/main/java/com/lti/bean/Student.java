@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Student extends User {
-
+	
 	private int studentID;
 	private String name;
-	private ArrayList<Course> registeredCourses = new ArrayList<Course>();
-	private ArrayList<Course> alternateCourses = new ArrayList<Course>();
-	private ArrayList<Double> grades = new ArrayList<Double>(); // move elsewhere in the future
+//	private ArrayList<Course> registeredCourses = new ArrayList<Course>();
+//	private ArrayList<Course> alternateCourses = new ArrayList<Course>();
+	//private ArrayList<Double> grades = new ArrayList<Double>(); // move elsewhere in the future
 	private boolean registered = false;
-	private int coursesPaid = 0;
+	//private int coursesPaid = 0;
 
 	/**
 	 * creates a student with set id
@@ -63,36 +63,36 @@ public class Student extends User {
 	 * 
 	 * @return the registeredCourses
 	 */
-	public ArrayList<Course> getRegisteredCourses() {
-		return registeredCourses;
-	}
+//	public ArrayList<Course> getRegisteredCourses() {
+//		return registeredCourses;
+//	}
 
 	/**
 	 * sets the registered courses (unused)
 	 * 
 	 * @param registeredCourses the registeredCourses to set
 	 */
-	public void setRegisteredCourses(ArrayList<Course> registeredCourses) {
-		this.registeredCourses = registeredCourses;
-	}
+//	public void setRegisteredCourses(ArrayList<Course> registeredCourses) {
+//		this.registeredCourses = registeredCourses;
+//	}
 
 	/**
 	 * returns the alternate courses (unused)
 	 * 
 	 * @return the alternateCourses
 	 */
-	public ArrayList<Course> getAlternateCourses() {
-		return alternateCourses;
-	}
+//	public ArrayList<Course> getAlternateCourses() {
+//		return alternateCourses;
+//	}
 
 	/**
 	 * sets the alternate courses (unused)
 	 * 
 	 * @param alternateCourses the alternateCourses to set
 	 */
-	public void setAlternateCourses(ArrayList<Course> alternateCourses) {
-		this.alternateCourses = alternateCourses;
-	}
+//	public void setAlternateCourses(ArrayList<Course> alternateCourses) {
+//		this.alternateCourses = alternateCourses;
+//	}
 
 	/**
 	 * returns the student id
@@ -108,9 +108,9 @@ public class Student extends User {
 	 * 
 	 * @return the grades
 	 */
-	public ArrayList<Double> getGrades() {
-		return grades;
-	}
+//	public ArrayList<Double> getGrades() {
+//		return grades;
+//	}
 
 	/**
 	 * returns if the student is registered
@@ -135,26 +135,26 @@ public class Student extends User {
 	 * 
 	 * @return the coursesPaid
 	 */
-	public int getCoursesPaid() {
-		return coursesPaid;
-	}
-
-	/**
-	 * sets the courses paid (unused)
-	 * 
-	 * @param coursesPaid the coursesPaid to set
-	 */
-	public void setCoursesPaid(int coursesPaid) {
-		this.coursesPaid = coursesPaid;
-	}
+//	public int getCoursesPaid() {
+//		return coursesPaid;
+//	}
+//
+//	/**
+//	 * sets the courses paid (unused)
+//	 * 
+//	 * @param coursesPaid the coursesPaid to set
+//	 */
+//	public void setCoursesPaid(int coursesPaid) {
+//		this.coursesPaid = coursesPaid;
+//	}
 
 	/**
 	 * creates a string to represent the object
 	 */
-	@Override
-	public String toString() {
-		return "Student [studentID=" + studentID + ", registeredCourses=" + registeredCourses + ", alternateCourses="
-				+ alternateCourses + ", grades=" + grades + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Student [studentID=" + studentID + ", registeredCourses=" + registeredCourses + ", alternateCourses="
+//				+ alternateCourses + ", grades=" + grades + "]";
+//	}
 
 }
