@@ -1,5 +1,7 @@
 package com.lti.restcontroller;
 
+import javax.ws.rs.core.MediaType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ public class UserController {
 	@Autowired
 	StudentService studentService;
 	
-	@RequestMapping(method = RequestMethod.POST, value="/login")
+	@RequestMapping(consumes = MediaType.APPLICATION_JSON, method = RequestMethod.POST, value="/login")
 	public ResponseEntity login(@RequestBody User user) {
 		if (user == null)
 			return new ResponseEntity("User information not provided", HttpStatus.NOT_FOUND);

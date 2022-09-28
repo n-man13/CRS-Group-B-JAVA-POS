@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
 public class Course {
 	private int courseID;
 	private String name;
-	private ArrayList<Student> students;
+	//private ArrayList<Student> students;
 	private Professor prof;
 	private String department;
 	private String description;
 	private int prereqCourseID;
-	private Map<Student, Double> studentGrades;
+	//private Map<Student, Double> studentGrades;
 
 	/**
 	 * creates a course with set id
@@ -94,19 +94,19 @@ public class Course {
 	 * 
 	 * @return the students
 	 */
-	public ArrayList<Student> getStudents() {
-		return students;
-	}
+	/*
+	 * public ArrayList<Student> getStudents() { return students; }
+	 */
 
 	/**
 	 * sets the students (unused)
 	 * 
 	 * @param students the students to set
 	 */
-	public void setStudents(ArrayList<Student> students) {
-		this.students = students;
-	}
-
+	/*
+	 * public void setStudents(ArrayList<Student> students) { this.students =
+	 * students; }
+	 */
 	/**
 	 * returns the professor
 	 * 
@@ -166,17 +166,17 @@ public class Course {
 	 */
 	@Override
 	public String toString() {
-		return "Course [courseID=" + courseID + ", students=" + students + ", prof=" + prof + ", department="
+		return "Course [courseID=" + courseID + ", students=" + ", prof=" + prof + ", department="
 				+ department + ", prereqCourseID=" + prereqCourseID + "]";
 	}
 
-	public Map<Student, Double> getStudentGrades() {
-		return studentGrades;
-	}
+//	public Map<Student, Double> getStudentGrades() {
+//		return studentGrades;
+//	}
 
-	public void setStudentGrades(Map<Student, Double> studentGrades) {
-		this.studentGrades = studentGrades;
-	}
+//	public void setStudentGrades(Map<Student, Double> studentGrades) {
+//		this.studentGrades = studentGrades;
+//	}
 
 	/**
 	 * @return the description
