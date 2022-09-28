@@ -32,7 +32,7 @@ public class AdminController {
 		return new ResponseEntity(course, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/updateCourse/{id}")
+	@RequestMapping(method = RequestMethod.PUT, value = "/updateCourse/{courseID}")
 	public ResponseEntity updateCourse(@RequestBody Course course, @PathVariable int courseID) {
 		
 		Course oldCourse = courseService.viewCourseByID(courseID);
@@ -56,7 +56,7 @@ public class AdminController {
 		
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteCourse/{id}")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteCourse/{courseID}")
 	public ResponseEntity deleteCourse(@PathVariable int courseID) {
 		
 		try {
@@ -81,7 +81,7 @@ public class AdminController {
 			
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "/approveRegistration/{id}")
+	@RequestMapping(method = RequestMethod.PUT, value = "/approveRegistration/{studentID}")
 	public ResponseEntity approveRegistration(@PathVariable int studentID) {
 		try {
 			Student student = adminService.getStudentById(studentID);

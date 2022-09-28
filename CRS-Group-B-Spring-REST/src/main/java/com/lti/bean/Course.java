@@ -5,7 +5,7 @@ import java.util.*;
 import org.springframework.stereotype.Component;
 
 /**
- * Course: Id, Students, professor, department, prerequisites
+ * Course: Id, name, professor, department, description, prerequisites
  * 
  * @author Nikhil, Luca
  *
