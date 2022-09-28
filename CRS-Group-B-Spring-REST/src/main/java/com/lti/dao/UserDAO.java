@@ -26,6 +26,7 @@ public class UserDAO implements UserDAOInterface {
 	public int createNewUser(String username, String password, int role) {
 		int userID = -1;
 		try {
+			
 			Connection conn = DBUtils.getConnection();
 
 			// Step 5 create and populate statement
