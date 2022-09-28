@@ -57,7 +57,7 @@ public class StudentController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/checkGrades/{studentID", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkGrades/{studentID}", method = RequestMethod.GET)
 	public ResponseEntity checkGrades(@PathVariable int studentID) {
 		studentService.checkGrades(studentID);
 		return new ResponseEntity(HttpStatus.OK);
