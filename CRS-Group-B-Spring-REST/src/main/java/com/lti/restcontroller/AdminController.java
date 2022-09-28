@@ -15,6 +15,13 @@ import com.lti.service.*;
 import com.lti.bean.*;
 import com.lti.exception.*;
 
+/**
+ * createCourse, updateCourse, deleteCourse, createProfessor,
+ * approveRegistration
+ * 
+ * @author Nikhil, Luca
+ *
+ */
 @RestController
 public class AdminController {
 
@@ -24,6 +31,12 @@ public class AdminController {
 	@Autowired
 	CourseService courseService;
 
+	/**
+	 * creates a new course
+	 * 
+	 * @param course the course to create
+	 * @return an HTTP response
+	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/createCourse")
 	public ResponseEntity createCourse(@RequestBody Course course) {
 
@@ -32,11 +45,18 @@ public class AdminController {
 		return new ResponseEntity(course, HttpStatus.CREATED);
 	}
 
+	/**
+	 * updates a course with specific id
+	 * 
+	 * @param course   the updated information
+	 * @param courseID the course to update
+	 * @return an HTTP response
+	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/updateCourse/{courseID}")
 	public ResponseEntity updateCourse(@RequestBody Course course, @PathVariable int courseID) {
-		
+
 		Course oldCourse = courseService.viewCourseByID(courseID);
-		if(oldCourse != null) {
+		if (oldCourse != null) {
 			oldCourse.setDescription(course.getDescription());
 			oldCourse.setDepartment(course.getDepartment());
 			oldCourse.setName(course.getName());
@@ -44,43 +64,57 @@ public class AdminController {
 			try {
 				adminService.updateCourse(oldCourse);
 				return new ResponseEntity(oldCourse, HttpStatus.OK);
-			}
-			catch (CourseNotFoundException e) {
+			} catch (CourseNotFoundException e) {
 				return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
 			}
-		}
-		else {
+		} else {
 			return new ResponseEntity(courseID, HttpStatus.NOT_FOUND);
 		}
-		
-		
+
 	}
 
+	/**
+	 * deletes a course
+	 * 
+	 * @param courseID the course
+	 * @return an HTTP response whether deleted
+	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteCourse/{courseID}")
 	public ResponseEntity deleteCourse(@PathVariable int courseID) {
-		
+
 		try {
 			adminService.deleteCourse(courseID);
 			return new ResponseEntity(courseID, HttpStatus.OK);
-		}
-		catch (CourseNotFoundException e) {
+		} catch (CourseNotFoundException e) {
 			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
 		}
-		
+
 	}
-	
+
+	/**
+	 * creates a professor and sets the username and password
+	 * 
+	 * @param professor the professor to create
+	 * @return an HTTP response
+	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/createProfessor")
 	public ResponseEntity createProfessor(@RequestBody Professor professor) {
-		
+
 		try {
 			adminService.createProfessor(professor);
 			return new ResponseEntity(professor, HttpStatus.CREATED);
 		} catch (UsernameUsedException e) {
 			return new ResponseEntity(e.getMessage() + e.getUsername(), HttpStatus.I_AM_A_TEAPOT);
 		}
-			
+
 	}
-	
+
+	/**
+	 * Approves a student's registration
+	 * 
+	 * @param studentID the student to registered
+	 * @return an HTTP response
+	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/approveRegistration/{studentID}")
 	public ResponseEntity approveRegistration(@PathVariable int studentID) {
 		try {
@@ -94,6 +128,6 @@ public class AdminController {
 		} catch (StudentNotFoundException e) {
 			return new ResponseEntity(e.getMessage() + e.getStudentID(), HttpStatus.NOT_FOUND);
 		}
-		
+
 	}
 }

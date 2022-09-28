@@ -18,14 +18,25 @@ import com.lti.exception.NoStudentsEnrolledException;
 import com.lti.exception.StudentNotFoundException;
 import com.lti.service.ProfessorService;
 
-
-
+/**
+ * applyToCourseProfessor, recordGrade, viewStudents
+ * 
+ * @author Nikhil, Luca
+ *
+ */
 @RestController
 public class ProfessorController {
 
 	@Autowired
 	ProfessorService professorService;
-	
+
+	/**
+	 * adds the professor to the course
+	 * 
+	 * @param courseID    the course
+	 * @param professorID the professor to add
+	 * @return a response whether the professor was added
+	 */
 	@RequestMapping(value = "/applyToCourseProfessor/{courseID}/{professorID}", method = RequestMethod.PUT)
 	public ResponseEntity applyToCourse(@PathVariable int courseID, @PathVariable int professorID) {
 
@@ -36,9 +47,18 @@ public class ProfessorController {
 		}
 		return new ResponseEntity(HttpStatus.OK);
 	}
-	
+
+	/**
+	 * records a grade for a student in a course
+	 * 
+	 * @param courseID  the course
+	 * @param studentID the student
+	 * @param grade     the grade to record
+	 * @return an HTTP response
+	 */
 	@RequestMapping(value = "/recordGrade/{courseID}/{studentID}/{grade}", method = RequestMethod.PUT)
-	public ResponseEntity recordGrade(@PathVariable int courseID, @PathVariable int studentID, @PathVariable double grade) {
+	public ResponseEntity recordGrade(@PathVariable int courseID, @PathVariable int studentID,
+			@PathVariable double grade) {
 		try {
 			professorService.recordGrade(grade, studentID, courseID);
 		} catch (CourseNotFoundException e) {
@@ -50,7 +70,13 @@ public class ProfessorController {
 		}
 		return new ResponseEntity(HttpStatus.OK);
 	}
-	
+
+	/**
+	 * returns a list of students registered to a course
+	 * 
+	 * @param courseID the course
+	 * @return an HTTP response
+	 */
 	@RequestMapping(value = "/viewStudents/{courseID}", method = RequestMethod.GET)
 	public ResponseEntity viewStudents(@PathVariable int courseID) {
 		try {
@@ -61,6 +87,6 @@ public class ProfessorController {
 		} catch (NoStudentsEnrolledException e) {
 			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
 		}
-		
+
 	}
 }
