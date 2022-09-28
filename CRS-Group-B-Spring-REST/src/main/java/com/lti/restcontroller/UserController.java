@@ -25,7 +25,7 @@ public class UserController {
 	@Autowired
 	StudentService studentService;
 	
-	@RequestMapping(value="/login", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, value="/login")
 	public ResponseEntity login(@RequestBody User user) {
 		if (user == null)
 			return new ResponseEntity("User information not provided", HttpStatus.NOT_FOUND);
