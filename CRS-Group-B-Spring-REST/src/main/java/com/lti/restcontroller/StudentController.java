@@ -22,7 +22,14 @@ public class StudentController {
 
 	@Autowired
 	StudentService studentService;
-
+	
+	
+	/**
+	 * Method to applyToStudent the password
+	 * 
+	 * @param user the user that resets the password
+	 * @return ResponseEntity the ResponseEntity if the login is successful or not
+	 */
 	@RequestMapping(value = "/applyToCourseStudent/{studentID}/{courseID}", method = RequestMethod.PUT)
 	public ResponseEntity applyToCourse(@PathVariable int studentID, @PathVariable int courseID) {
 		try {
