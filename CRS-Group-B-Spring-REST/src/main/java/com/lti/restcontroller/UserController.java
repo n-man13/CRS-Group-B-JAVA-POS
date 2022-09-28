@@ -26,7 +26,12 @@ public class UserController {
 	
 	@Autowired
 	StudentService studentService;
-	
+	/**
+	 * Method to Login
+	 * 
+	 * @param user the user to login
+	 * @return ResponseEntity the ResponseEntity if the login is successful or not
+	 */
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON, method = RequestMethod.POST, value="/login")
 	public ResponseEntity login(@RequestBody User user) {
 		if (user == null)
@@ -39,6 +44,12 @@ public class UserController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
+	/**
+	 * Method to register a student
+	 * 
+	 * @param student the student that has to be registered
+	 * @return ResponseEntity the ResponseEntity if the login is successful or not
+	 */
 	@RequestMapping(value = "/studentRegistration", method = RequestMethod.POST)
 	public ResponseEntity studentRegistration(@RequestBody Student student) {
 		if (student == null)
@@ -51,6 +62,12 @@ public class UserController {
 		return new ResponseEntity(HttpStatus.CREATED);
 	}
 	
+	/**
+	 * Method to update the password
+	 * 
+	 * @param user the user that resets the password
+	 * @return ResponseEntity the ResponseEntity if the login is successful or not
+	 */
 	@RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
 	public ResponseEntity updatePassword(@RequestBody User user) {
 		if (user == null)
