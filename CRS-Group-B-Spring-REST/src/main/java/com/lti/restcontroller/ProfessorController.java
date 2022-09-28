@@ -2,6 +2,8 @@ package com.lti.restcontroller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,8 @@ import com.lti.service.ProfessorService;
 @RestController
 public class ProfessorController {
 
+	Logger logger = LoggerFactory.getLogger(ProfessorController.class);
+	
 	@Autowired
 	ProfessorService professorService;
 
@@ -39,7 +43,8 @@ public class ProfessorController {
 	 */
 	@RequestMapping(value = "/applyToCourseProfessor/{courseID}/{professorID}", method = RequestMethod.PUT)
 	public ResponseEntity applyToCourse(@PathVariable int courseID, @PathVariable int professorID) {
-
+		logger.info("applyToCourse in ProfessorController");
+		
 		try {
 			professorService.applyToCourse(professorID, courseID);
 		} catch (CourseNotFoundException e) {
@@ -59,6 +64,7 @@ public class ProfessorController {
 	@RequestMapping(value = "/recordGrade/{courseID}/{studentID}/{grade}", method = RequestMethod.PUT)
 	public ResponseEntity recordGrade(@PathVariable int courseID, @PathVariable int studentID,
 			@PathVariable double grade) {
+		logger.info("recordGrade in ProfessorController");
 		try {
 			professorService.recordGrade(grade, studentID, courseID);
 		} catch (CourseNotFoundException e) {
@@ -79,6 +85,7 @@ public class ProfessorController {
 	 */
 	@RequestMapping(value = "/viewStudents/{courseID}", method = RequestMethod.GET)
 	public ResponseEntity viewStudents(@PathVariable int courseID) {
+		logger.info("viewStudents in ProfessorController");
 		try {
 			List<Student> students = professorService.viewStudents(courseID);
 			return new ResponseEntity(students, HttpStatus.OK);

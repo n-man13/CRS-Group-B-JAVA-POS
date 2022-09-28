@@ -2,6 +2,8 @@ package com.lti.restcontroller;
 
 import javax.ws.rs.core.MediaType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,7 @@ import com.lti.exception.*;
 @RestController
 public class AdminController {
 
+	Logger logger = LoggerFactory.getLogger(AdminController.class);
 	@Autowired
 	AdminService adminService;
 
@@ -41,7 +44,7 @@ public class AdminController {
 	public ResponseEntity createCourse(@RequestBody Course course) {
 
 		adminService.createCourse(course);
-
+		logger.info("createCourse in AdminController");
 		return new ResponseEntity(course, HttpStatus.CREATED);
 	}
 
@@ -54,7 +57,8 @@ public class AdminController {
 	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/updateCourse/{courseID}")
 	public ResponseEntity updateCourse(@RequestBody Course course, @PathVariable int courseID) {
-
+		logger.info("updateCourse in AdminController");
+		
 		Course oldCourse = courseService.viewCourseByID(courseID);
 		if (oldCourse != null) {
 			oldCourse.setDescription(course.getDescription());
@@ -81,6 +85,7 @@ public class AdminController {
 	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteCourse/{courseID}")
 	public ResponseEntity deleteCourse(@PathVariable int courseID) {
+		logger.info("deleteCourse in AdminController");
 
 		try {
 			adminService.deleteCourse(courseID);
@@ -99,6 +104,7 @@ public class AdminController {
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/createProfessor")
 	public ResponseEntity createProfessor(@RequestBody Professor professor) {
+		logger.info("createProfessor in AdminController");
 
 		try {
 			adminService.createProfessor(professor);
@@ -117,6 +123,7 @@ public class AdminController {
 	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/approveRegistration/{studentID}")
 	public ResponseEntity approveRegistration(@PathVariable int studentID) {
+		logger.info("approveRegistration in AdminController");
 		try {
 			Student student = adminService.getStudentById(studentID);
 			try {
