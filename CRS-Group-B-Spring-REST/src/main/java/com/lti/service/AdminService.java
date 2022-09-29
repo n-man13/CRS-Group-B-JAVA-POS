@@ -60,7 +60,7 @@ public class AdminService implements AdminServiceInterface {
 	public void createProfessor(Professor professor) throws UsernameUsedException {
 		logger.info("createProfessor in AdminService");
 		if (userDAO.viewUser(professor.getUsername()) != null)
-			throw new UsernameUsedException("Username already taken, username: ", professor.getUsername());
+			throw new UsernameUsedException("Username already taken, username: "+professor.getUsername(), professor.getUsername());
 		professorDAO.createProfessor(professor);
 	}
 
@@ -74,7 +74,7 @@ public class AdminService implements AdminServiceInterface {
 	public void updateCourse(Course course) throws CourseNotFoundException {
 		logger.info("updateCourse in AdminService");
 		if (courseDAO.viewCourse(course.getCourseID()) == null)
-			throw new CourseNotFoundException("This course was not found, ID: ", course.getCourseID());
+			throw new CourseNotFoundException("This course was not found, ID: "+course.getCourseID(), course.getCourseID());
 		courseDAO.updateCourse(course);
 	}
 
@@ -88,7 +88,7 @@ public class AdminService implements AdminServiceInterface {
 	public void deleteCourse(int courseId) throws CourseNotFoundException {
 		logger.info("deleteCourse in AdminService");
 		if (courseDAO.viewCourse(courseId) == null)
-			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
+			throw new CourseNotFoundException("This course was not found, ID: "+courseId, courseId);
 		courseDAO.deleteCourse(courseId);
 	}
 
@@ -113,7 +113,7 @@ public class AdminService implements AdminServiceInterface {
 	public void approveStudentRegistration(Student student) throws StudentNotFoundException {
 		logger.info("approveStudentRegistration in AdminService");
 		if (studentDAO.viewStudent(student.getStudentID()) == null)
-			throw new StudentNotFoundException("This student was not found, ID: ", student.getStudentID());
+			throw new StudentNotFoundException("This student was not found, ID: "+student.getStudentID(), student.getStudentID());
 //		Old method without streams
 //		int i = 0;
 //		for (Student s : studentDAO.viewUnregisteredStudents()) {
@@ -123,7 +123,7 @@ public class AdminService implements AdminServiceInterface {
 		List<Student> result = studentDAO.viewUnregisteredStudents().stream()
 				.filter(s -> s.getStudentID() == student.getStudentID()).collect(Collectors.toList());
 		if (result.isEmpty())
-			throw new StudentNotFoundException("This student is already registerd, ID: ", student.getStudentID());
+			throw new StudentNotFoundException("This student is already registerd, ID: "+student.getStudentID(), student.getStudentID());
 		student.setRegistered(true);
 		studentDAO.updateStudent(student);
 	}
@@ -168,7 +168,7 @@ public class AdminService implements AdminServiceInterface {
 		logger.info("getStudentById in AdminService");
 		Student student = studentDAO.viewStudent(studentId);
 		if (student == null)
-			throw new StudentNotFoundException("This student was not found, ID: ", studentId);
+			throw new StudentNotFoundException("This student was not found, ID: "+studentId, studentId);
 		return student;
 	}
 

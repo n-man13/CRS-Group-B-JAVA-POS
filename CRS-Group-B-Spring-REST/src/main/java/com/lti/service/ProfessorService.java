@@ -40,14 +40,14 @@ public class ProfessorService implements ProfessorServiceInterface {
 		// apply to specific course
 		if (courseDAO.viewCourse(courseId).getProf() == null) {
 			if (!courseDAO.addProfessorToCourse(courseId, professorId))
-				throw new CourseNotFoundException("This course was not found, Id: ", courseId);
+				throw new CourseNotFoundException("This course was not found, Id: " + courseId, courseId);
 		} else {
 			if (courseDAO.viewCourse(courseId).getProf().getProfID() != 0)
-				throw new CourseNotFoundException("This course is already being taught, ID: ", courseId);
+				throw new CourseNotFoundException("This course is already being taught, ID: " +courseId, courseId);
 			if (courseDAO.viewCourse(courseId).getProf().getProfID() == professorId)
-				throw new CourseNotFoundException("You are already enrolled in this course, ID: ", courseId);
+				throw new CourseNotFoundException("You are already enrolled in this course, ID: "+ courseId, courseId);
 			if (!courseDAO.addProfessorToCourse(courseId, professorId))
-				throw new CourseNotFoundException("This course was not found, Id: ", courseId);
+				throw new CourseNotFoundException("This course was not found, Id: "+ courseId, courseId);
 		}
 	}
 
@@ -63,9 +63,9 @@ public class ProfessorService implements ProfessorServiceInterface {
 		logger.info("viewStudents in ProfessorService");
 		List<Student> students = registeredCourseDAO.viewAllStudents(courseId);
 		if (courseDAO.viewCourse(courseId) == null)
-			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
+			throw new CourseNotFoundException("This course was not found, ID: "+ courseId, courseId);
 		if (students.isEmpty())
-			throw new NoStudentsEnrolledException("This course has no students, ID: ", courseId);
+			throw new NoStudentsEnrolledException("This course has no students, ID: "+courseId, courseId);
 		return students;
 
 	}
@@ -85,11 +85,11 @@ public class ProfessorService implements ProfessorServiceInterface {
 		logger.info("recordGrade in ProfessorService");
 		// record grade for student in class
 		if (courseDAO.viewCourse(courseId) == null)
-			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
+			throw new CourseNotFoundException("This course was not found, ID: "+courseId, courseId);
 		if (registeredCourseDAO.viewAllStudents(courseId).isEmpty())
-			throw new NoStudentsEnrolledException("This course has no students, ID: ", courseId);
+			throw new NoStudentsEnrolledException("This course has no students, ID: "+courseId, courseId);
 		if (!registeredCourseDAO.setGrade(studentId, courseId, grade))
-			throw new StudentNotFoundException("This student was not found, ID: ", studentId);
+			throw new StudentNotFoundException("This student was not found, ID: "+studentId, studentId);
 
 	}
 
@@ -138,12 +138,12 @@ public class ProfessorService implements ProfessorServiceInterface {
 		List<Course> result = courseDAO.viewCoursesByProfessor(professorId).stream()
 				.filter(c -> c.getCourseID() == courseId).collect(Collectors.toList());
 		if (result.isEmpty())
-			throw new CourseNotFoundException("You are not enrolled in this course, ID: ", courseId);
+			throw new CourseNotFoundException("You are not enrolled in this course, ID: "+courseId, courseId);
 		if (courseDAO.viewCourse(courseId) == null)
-			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
+			throw new CourseNotFoundException("This course was not found, ID: "+courseId, courseId);
 		Map<Student, Double> studentsAndGrades = registeredCourseDAO.viewStudentsAndGrades(courseId);
 		if (studentsAndGrades.isEmpty())
-			throw new NoStudentsEnrolledException("This course has no students, ID: ", courseId);
+			throw new NoStudentsEnrolledException("This course has no students, ID: "+courseId, courseId);
 		return studentsAndGrades;
 
 	}

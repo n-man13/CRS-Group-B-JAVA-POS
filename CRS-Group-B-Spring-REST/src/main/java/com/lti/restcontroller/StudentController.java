@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,17 +33,21 @@ public class StudentController {
 	 * 
 	 * @param user the user that resets the password
 	 * @return ResponseEntity the ResponseEntity if the login is successful or not
+	 * @throws CourseFullException 
+	 * @throws CourseNotFoundException 
 	 */
+	@ExceptionHandler({ CourseNotFoundException.class})
 	@RequestMapping(value = "/applyToCourseStudent/{studentID}/{courseID}", method = RequestMethod.PUT)
-	public ResponseEntity applyToCourse(@PathVariable int studentID, @PathVariable int courseID) {
+	public ResponseEntity applyToCourse(@PathVariable int studentID, @PathVariable int courseID) throws CourseNotFoundException, CourseFullException {
 		logger.info("applayToCourse in StudentController");
-		try {
-			studentService.applyToCourse(studentID, courseID);
-		} catch (CourseNotFoundException e) {
-			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
-		} catch (CourseFullException e) {
-			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
-		}
+		studentService.applyToCourse(studentID, courseID);
+//		try {
+//			
+//		} catch (CourseNotFoundException e) {
+//			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
+//		} catch (CourseFullException e) {
+//			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
+//		}
 		return new ResponseEntity(HttpStatus.OK);
 
 	}

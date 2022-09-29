@@ -46,10 +46,14 @@ public class StudentService implements StudentServiceInterface {
 	 */
 	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException {
 		logger.info("applayToCourse in StudentService");
+		List<Course> result = registeredCourseDAO.viewStudentCourses(studentId).stream()
+				.filter(c -> c.getCourseID() == courseId).collect(Collectors.toList());
+		if (!result.isEmpty())
+			throw new CourseNotFoundException("You are enrolled in this course, ID: " + courseId, courseId);
 		if (courseDAO.viewCourse(courseId) == null)
-			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
+			throw new CourseNotFoundException("This course was not found, ID: " + courseId, courseId);
 		if (registeredCourseDAO.viewAllStudents(courseId).size() >= 10)
-			throw new CourseFullException("This course is full, ID: ", courseId);
+			throw new CourseFullException("This course is full, ID: " + courseId, courseId);
 		registeredCourseDAO.addStudentRegistration(studentId, courseId);
 
 	}
@@ -71,9 +75,9 @@ public class StudentService implements StudentServiceInterface {
 		List<Course> result = registeredCourseDAO.viewStudentCourses(studentId).stream()
 				.filter(c -> c.getCourseID() == courseId).collect(Collectors.toList());
 		if (result.isEmpty())
-			throw new CourseNotFoundException("You are not enrolled in this course, ID: ", courseId);
+			throw new CourseNotFoundException("You are not enrolled in this course, ID: " + courseId, courseId);
 		if (courseDAO.viewCourse(courseId) == null)
-			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
+			throw new CourseNotFoundException("This course was not found, ID: " + courseId, courseId);
 		registeredCourseDAO.removeStudentRegistration(studentId, courseId);
 	}
 
@@ -107,13 +111,13 @@ public class StudentService implements StudentServiceInterface {
 		List<Course> result = registeredCourseDAO.viewStudentCourses(studentId).stream()
 				.filter(c -> c.getCourseID() == courseId).collect(Collectors.toList());
 		if (result.isEmpty())
-			throw new CourseNotFoundException("You are not enrolled in this course, ID: ", courseId);
+			throw new CourseNotFoundException("You are not enrolled in this course, ID: " + courseId, courseId);
 		result = registeredCourseDAO.viewUnpaidCourses(studentId).stream().filter(c -> c.getCourseID() == courseId)
 				.collect(Collectors.toList());
 		if (result.isEmpty())
-			throw new CourseNotFoundException("You already paid for this course, ID: ", courseId);
+			throw new CourseNotFoundException("You already paid for this course, ID: " + courseId, courseId);
 		if (courseDAO.viewCourse(courseId) == null)
-			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
+			throw new CourseNotFoundException("This course was not found, ID: " + courseId, courseId);
 		registeredCourseDAO.payFee(studentId, courseId);
 	}
 
@@ -139,7 +143,7 @@ public class StudentService implements StudentServiceInterface {
 		logger.info("viewUnpayedCourses in StudentService");
 		List<Course> courses = registeredCourseDAO.viewUnpaidCourses(studentId);
 		if (courses.isEmpty())
-			throw new AllCoursesPaidException("There are no more courses to pay, student ID: ", studentId);
+			throw new AllCoursesPaidException("There are no more courses to pay, student ID: "+ studentId, studentId);
 		return registeredCourseDAO.viewUnpaidCourses(studentId);
 	}
 
@@ -155,7 +159,7 @@ public class StudentService implements StudentServiceInterface {
 		Student student = studentDAO.viewStudent(username);
 
 		if (student == null)
-			throw new StudentNotFoundException("The student does not exist", 0);
+			throw new StudentNotFoundException("The student"+username+" does not exist", 0);
 		return student;
 
 	}
@@ -170,7 +174,7 @@ public class StudentService implements StudentServiceInterface {
 	public void createStudent(Student student) throws UsernameUsedException {
 		logger.info("createStudent in StudentService");
 		if (userDAO.viewUser(student.getUsername()) != null)
-			throw new UsernameUsedException("Username already taken, username: ", student.getUsername());
+			throw new UsernameUsedException("Username already taken, username: " + student.getUsername(), student.getUsername());
 		student.setRegistered(false);
 		studentDAO.createStudent(student);
 
