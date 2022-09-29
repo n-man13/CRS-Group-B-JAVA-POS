@@ -28,7 +28,7 @@ public class StudentController {
 	StudentService studentService;
 	
 	/**
-	 * Method to applyToStudent the password
+	 * Method to applyToCourseStudent
 	 * 
 	 * @param user the user that resets the password
 	 * @return ResponseEntity the ResponseEntity if the login is successful or not
@@ -46,7 +46,14 @@ public class StudentController {
 		return new ResponseEntity(HttpStatus.OK);
 
 	}
-
+	
+	/**
+	 * Method to dropCourse
+	 * 
+	 * @param studentID the ID of the student
+	 * @param courseID the id of the course
+	 * @return ResponseEntity the ResponseEntity if dropping the course is successful or not
+	 */
 	@RequestMapping(value = "/dropCourse/{studentID}/{courseID}", method = RequestMethod.DELETE)
 	public ResponseEntity dropCourse(@PathVariable int studentID, @PathVariable int courseID) {
 		logger.info("dropCourse in StudentController");
@@ -58,6 +65,12 @@ public class StudentController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
+	/**
+	 * Method to viewAppliedCoures for a student
+	 * 
+	 * @param studentID the ID of the student
+	 * @return ResponseEntity the ResponseEntity if viewAppiedCourses is successful
+	 */
 	@RequestMapping(value = "/viewAppliedCourses/{studentID}", method = RequestMethod.GET)
 	public ResponseEntity viewAppliedCourses(@PathVariable int studentID) {
 		logger.info("viewAppliedCourses in StudentController");
@@ -65,6 +78,13 @@ public class StudentController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
+	/**
+	 * Method to makePayment
+	 * 
+	 * @param studentID the ID of the student
+	 * @param courseID the id of the course
+	 * @return ResponseEntity the ResponseEntity if the login is successful or not
+	 */
 	@RequestMapping(value = "/makePayment/{studentID}/{courseID}", method = RequestMethod.PUT)
 	public ResponseEntity makePayment(@PathVariable int studentID, @PathVariable int courseID) {
 		logger.info("makePayment in StudentController");
@@ -76,6 +96,12 @@ public class StudentController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
+	/**
+	 * Method to checkGrades
+	 * 
+	 * @param studentID the ID of the student
+	 * @return ResponseEntity the ResponseEntity if the login is successful or not
+	 */
 	@RequestMapping(value = "/checkGrades/{studentID}", method = RequestMethod.GET)
 	public Map<Course, Double> checkGrades(@PathVariable int studentID) {
 		logger.info("makePayment in StudentController");
@@ -84,6 +110,11 @@ public class StudentController {
 		//return new ResponseEntity(HttpStatus.OK);
 	}
 	
+	/**
+	 * Method to display courses
+	 * 
+	 * @param courses a lit of Course
+	 */
 	private void displayCourses(List<Course> courses) {
 		System.out.println(
 				"CourseID \t Course Name \t Department \t Description \t\t Professor \t Prerequisite CourseID");
