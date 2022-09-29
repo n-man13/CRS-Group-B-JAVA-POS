@@ -35,17 +35,19 @@ public class UserController {
 	 * 
 	 * @param user the user to login
 	 * @return ResponseEntity the ResponseEntity if the login is successful or not
+	 * @throws StudentNotFoundException if student is not found
 	 */
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON, method = RequestMethod.POST, value="/login")
-	public ResponseEntity login(@RequestBody User user) {
+	public ResponseEntity login(@RequestBody User user) throws StudentNotFoundException {
 		logger.info("login in userController");
+		userService.verifyCredetials(user.getUsername(), user.getPassword(), user.getRole());
 		if (user == null)
 			return new ResponseEntity("User information not provided", HttpStatus.NOT_FOUND);
-		try {
-			userService.verifyCredetials(user.getUsername(), user.getPassword(), user.getRole());
-		} catch (StudentNotFoundException e) {
-			return new ResponseEntity(e.getMessage() + e.getStudentID(), HttpStatus.NOT_FOUND);
-		}
+//		try {
+//			userService.verifyCredetials(user.getUsername(), user.getPassword(), user.getRole());
+//		} catch (StudentNotFoundException e) {
+//			return new ResponseEntity(e.getMessage() + e.getStudentID(), HttpStatus.NOT_FOUND);
+//		}
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
@@ -54,17 +56,19 @@ public class UserController {
 	 * 
 	 * @param student the student that has to be registered
 	 * @return ResponseEntity the ResponseEntity if the login is successful or not
+	 * @throws UsernameUsedException if username already taken
 	 */
 	@RequestMapping(value = "/studentRegistration", method = RequestMethod.POST)
-	public ResponseEntity studentRegistration(@RequestBody Student student) {
+	public ResponseEntity studentRegistration(@RequestBody Student student) throws UsernameUsedException {
 		logger.info("studentRegistration in userController");
+		studentService.createStudent(student);
 		if (student == null)
 			return new ResponseEntity("New Student information not provided", HttpStatus.NOT_FOUND);
-		try {
-			studentService.createStudent(student);
-		} catch (UsernameUsedException e) {
-			return new ResponseEntity(e.getMessage() + e.getUsername(), HttpStatus.I_AM_A_TEAPOT);
-		}
+//		try {
+//			studentService.createStudent(student);
+//		} catch (UsernameUsedException e) {
+//			return new ResponseEntity(e.getMessage() + e.getUsername(), HttpStatus.I_AM_A_TEAPOT);
+//		}
 		return new ResponseEntity(HttpStatus.CREATED);
 	}
 	

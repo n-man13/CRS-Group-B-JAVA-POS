@@ -36,7 +36,6 @@ public class StudentController {
 	 * @throws CourseFullException 
 	 * @throws CourseNotFoundException 
 	 */
-	@ExceptionHandler({ CourseNotFoundException.class})
 	@RequestMapping(value = "/applyToCourseStudent/{studentID}/{courseID}", method = RequestMethod.PUT)
 	public ResponseEntity applyToCourse(@PathVariable int studentID, @PathVariable int courseID) throws CourseNotFoundException, CourseFullException {
 		logger.info("applayToCourse in StudentController");
@@ -58,15 +57,17 @@ public class StudentController {
 	 * @param studentID the ID of the student
 	 * @param courseID the id of the course
 	 * @return ResponseEntity the ResponseEntity if dropping the course is successful or not
+	 * @throws CourseNotFoundException if course is not found
 	 */
 	@RequestMapping(value = "/dropCourse/{studentID}/{courseID}", method = RequestMethod.DELETE)
-	public ResponseEntity dropCourse(@PathVariable int studentID, @PathVariable int courseID) {
+	public ResponseEntity dropCourse(@PathVariable int studentID, @PathVariable int courseID) throws CourseNotFoundException {
 		logger.info("dropCourse in StudentController");
-		try {
-			studentService.dropCourse(studentID, courseID);
-		} catch (CourseNotFoundException e) {
-			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
-		}
+		studentService.dropCourse(studentID, courseID);
+//		try {
+//			
+//		} catch (CourseNotFoundException e) {
+//			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
+//		}
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
@@ -89,15 +90,17 @@ public class StudentController {
 	 * @param studentID the ID of the student
 	 * @param courseID the id of the course
 	 * @return ResponseEntity the ResponseEntity if the login is successful or not
+	 * @throws CourseNotFoundException 
 	 */
 	@RequestMapping(value = "/makePayment/{studentID}/{courseID}", method = RequestMethod.PUT)
-	public ResponseEntity makePayment(@PathVariable int studentID, @PathVariable int courseID) {
+	public ResponseEntity makePayment(@PathVariable int studentID, @PathVariable int courseID) throws CourseNotFoundException {
 		logger.info("makePayment in StudentController");
-		try {
-			studentService.makePayment(studentID, courseID);
-		} catch (CourseNotFoundException e) {
-			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
-		}
+		studentService.makePayment(studentID, courseID);
+//		try {
+//			
+//		} catch (CourseNotFoundException e) {
+//			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
+//		}
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
