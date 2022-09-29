@@ -35,7 +35,7 @@ public class ProfessorController {
 	ProfessorService professorService;
 
 	/**
-	 * adds the professor to the course
+	 * Adds the professor to the course
 	 * 
 	 * @param courseID    the course
 	 * @param professorID the professor to add
@@ -54,7 +54,7 @@ public class ProfessorController {
 	}
 
 	/**
-	 * records a grade for a student in a course
+	 * Records a grade for a student in a course
 	 * 
 	 * @param courseID  the course
 	 * @param studentID the student

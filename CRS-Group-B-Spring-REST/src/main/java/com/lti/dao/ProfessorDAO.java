@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.lti.bean.Professor;
 import com.lti.bean.Student;
 import com.lti.constant.SQLConstants;
@@ -20,6 +23,7 @@ import com.lti.utils.DBUtils;
  */
 public class ProfessorDAO implements ProfessorDAOInterface {
 
+	Logger logger = LoggerFactory.getLogger(ProfessorDAO.class);
 	private PreparedStatement stmt = null;
 
 	private UserDAOInterface userDAO = new UserDAO();
@@ -32,7 +36,7 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 	 */
 	@Override
 	public int createProfessor(Professor prof) {
-
+		logger.info("createProfessor in ProfessorDAO");
 		int userID = userDAO.createNewUser(prof.getUsername(), prof.getPassword(), 2);
 
 		try {
@@ -47,7 +51,8 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 			// Step 6 execute statement
 
 			stmt.executeUpdate();
-			return userID;
+			
+			//return userID;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,6 +70,7 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 	 */
 	@Override
 	public Professor viewProfessor(int profID) {
+		logger.info("viewProfessor in ProfessorDAO");
 		Professor prof = null;
 		try {
 			Connection conn = DBUtils.getConnection();
@@ -101,6 +107,7 @@ public class ProfessorDAO implements ProfessorDAOInterface {
 	 */
 	@Override
 	public Professor viewProfessor(String username) {
+		logger.info("viewProfessor in ProfessorDAO");
 		UserDAO userDAO = new UserDAO();
 		int profID = userDAO.viewUser(username).getUserID();
 		return viewProfessor(profID);

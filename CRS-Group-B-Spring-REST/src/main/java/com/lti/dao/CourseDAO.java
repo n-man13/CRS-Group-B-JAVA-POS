@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.lti.bean.Course;
 import com.lti.bean.Professor;
 import com.lti.bean.User;
@@ -15,6 +18,7 @@ import com.lti.utils.DBUtils;
 
 public class CourseDAO implements CourseDAOInterface {
 
+	Logger logger = LoggerFactory.getLogger(CourseDAO.class);
 	private PreparedStatement stmt = null;
 	private ProfessorDAOInterface profDAO = new ProfessorDAO();
 
@@ -25,6 +29,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public ArrayList<Course> viewAllCourses() {
+		logger.info("viewAllCourses in CourseDAO");
 		ArrayList<Course> courses = new ArrayList<Course>();
 		try {
 
@@ -56,9 +61,11 @@ public class CourseDAO implements CourseDAOInterface {
 				int tempPrereqID = rs.getInt("prereqID");
 				tempCourse.setPrereqCourseID(tempPrereqID);
 				courses.add(tempCourse);
+				logger.debug("Course " + tempCourse + " added.");
 			}
 
 		} catch (SQLException e) {
+			logger.error("SQL Exception in CourseDAO");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,6 +81,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public boolean createCourse(Course course) {
+		logger.info("createCourse in CourseDAO");
 		boolean created = false;
 		try {
 			Connection conn = DBUtils.getConnection();
@@ -97,6 +105,7 @@ public class CourseDAO implements CourseDAOInterface {
 			created = true;
 
 		} catch (SQLException e) {
+			logger.error("SQL Exception in CourseDAO");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -113,6 +122,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public boolean addProfessorToCourse(int courseID, int profID) {
+		logger.info("addProfessorToCourse in CourseDAO");
 		boolean changed = false;
 		try {
 			Connection conn = DBUtils.getConnection();
@@ -135,6 +145,7 @@ public class CourseDAO implements CourseDAOInterface {
 			}
 
 		} catch (SQLException e) {
+			logger.error("SQL Exception in CourseDAO");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -149,6 +160,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 * @return the courses that a professor is teaching
 	 */
 	public ArrayList<Course> viewCoursesByProfessor(int profID) {
+		logger.info("viewCoursesByProfessor in CourseDAO");
 		ArrayList<Course> courses = new ArrayList<Course>();
 		Course course = null;
 		try {
@@ -179,6 +191,7 @@ public class CourseDAO implements CourseDAOInterface {
 			}
 
 		} catch (SQLException e) {
+			logger.error("SQL Exception in CourseDAO");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -194,6 +207,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public Course deleteCourse(int courseID) {
+		logger.info("deleteCourse in CourseDAO");
 		Course course = null;
 		try {
 			Connection conn = DBUtils.getConnection();
@@ -232,6 +246,7 @@ public class CourseDAO implements CourseDAOInterface {
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
+			logger.error("SQL Exception in CourseDAO");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -246,6 +261,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 * @return the course with provided id or null if not found
 	 */
 	public Course viewCourse(int courseID) {
+		logger.info("viewCourse in CourseDAO");
 		Course course = null;
 		try {
 			Connection conn = DBUtils.getConnection();
@@ -280,6 +296,7 @@ public class CourseDAO implements CourseDAOInterface {
 			}
 
 		} catch (SQLException e) {
+			logger.error("SQL Exception in CourseDAO");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -294,6 +311,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 * @return if the course was updated
 	 */
 	public boolean updateCourse(Course course) {
+		logger.info("updateCourse in CourseDAO");
 		boolean changed = false;
 		try {
 			Connection conn = DBUtils.getConnection();
@@ -319,6 +337,7 @@ public class CourseDAO implements CourseDAOInterface {
 			}
 
 		} catch (SQLException e) {
+			logger.error("SQL Exception in CourseDAO");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();

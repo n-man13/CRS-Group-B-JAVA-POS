@@ -6,12 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.lti.bean.Admin;
 import com.lti.constant.SQLConstants;
 import com.lti.utils.DBUtils;
 
 public class AdminDAO implements AdminDAOInterface {
-
+	Logger logger = LoggerFactory.getLogger(AdminDAO.class);
 	private PreparedStatement stmt = null;
 
 	private UserDAOInterface userDAO = new UserDAO();
@@ -24,9 +27,9 @@ public class AdminDAO implements AdminDAOInterface {
 	 */
 	@Override
 	public int createAdmin(Admin admin) {
-
+		logger.info("createAdmin in AdminDAO");
 		int userID = userDAO.createNewUser(admin.getUsername(), admin.getPassword(), 1);
-
+		logger.debug("Admin created with ID:" + userID);
 		try {
 			Connection conn = DBUtils.getConnection();
 			// Step 5 create and populate statement
@@ -56,6 +59,7 @@ public class AdminDAO implements AdminDAOInterface {
 
 	@Override
 	public Admin viewAdmin(String username) {
+		logger.info("viewAdmin in AdminDAO");
 		UserDAO userDAO = new UserDAO();
 		int adminID = userDAO.viewUser(username).getUserID();
 		return viewAdmin(adminID);
@@ -69,6 +73,7 @@ public class AdminDAO implements AdminDAOInterface {
 	 */
 	@Override
 	public Admin viewAdmin(int adminID) {
+		logger.info("viewAdmin in AdminDAO");
 		Admin admin = null;
 		try {
 			Connection conn = DBUtils.getConnection();

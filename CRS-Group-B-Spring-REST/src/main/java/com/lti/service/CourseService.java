@@ -8,6 +8,11 @@ import com.lti.bean.Course;
 import com.lti.dao.CourseDAO;
 import com.lti.dao.CourseDAOInterface;
 
+/**
+ * unused class
+ * @author Nikhil, Luca
+ *
+ */
 @Service
 public class CourseService implements CourseServiceInterface{
 	
@@ -19,6 +24,9 @@ public class CourseService implements CourseServiceInterface{
 		//this.course.getStudents().size();
 	}
 	
+	/**
+	 * unused method
+	 */
 	public void checkAvailability() {
 		//check if course is not full (>10)
 		//if(this.course.getStudents().size() < 10) {

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.lti.bean.*;
@@ -21,6 +23,7 @@ import com.lti.exception.StudentNotFoundException;
 @Service
 public class ProfessorService implements ProfessorServiceInterface {
 
+	Logger logger = LoggerFactory.getLogger(ProfessorService.class);
 	private ProfessorDAOInterface professorDAO = new ProfessorDAO();
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private RegisteredCourseDAOInterface registeredCourseDAO = new RegisteredCourseDAO();
@@ -33,6 +36,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 * @throws CourseNotFoundException if courseId doesn't exits
 	 */
 	public void applyToCourse(int professorId, int courseId) throws CourseNotFoundException {
+		logger.info("applyToCourse in ProfessorService");
 		// apply to specific course
 		if (courseDAO.viewCourse(courseId).getProf() == null) {
 			if (!courseDAO.addProfessorToCourse(courseId, professorId))
@@ -56,7 +60,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 * @throws NoStudentsEnrolledException if there are not students
 	 */
 	public List<Student> viewStudents(int courseId) throws CourseNotFoundException, NoStudentsEnrolledException {
-
+		logger.info("viewStudents in ProfessorService");
 		List<Student> students = registeredCourseDAO.viewAllStudents(courseId);
 		if (courseDAO.viewCourse(courseId) == null)
 			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
@@ -78,6 +82,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 */
 	public void recordGrade(double grade, int studentId, int courseId)
 			throws StudentNotFoundException, CourseNotFoundException, NoStudentsEnrolledException {
+		logger.info("recordGrade in ProfessorService");
 		// record grade for student in class
 		if (courseDAO.viewCourse(courseId) == null)
 			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
@@ -96,7 +101,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 */
 	@Override
 	public Professor getProfessorByUsername(String username) {
-
+		logger.info("getProfessorByUsername in ProfessorService");
 		return professorDAO.viewProfessor(username);
 	}
 
@@ -108,7 +113,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 */
 	@Override
 	public List<Course> viewProfessorCourses(int professorId) {
-		// TODO Auto-generated method stub
+		logger.info("getProfessorCourses in ProfessorService");
 		return courseDAO.viewCoursesByProfessor(professorId);
 	}
 
@@ -124,6 +129,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	@Override
 	public Map<Student, Double> viewStudentsGrades(int professorId, int courseId)
 			throws CourseNotFoundException, NoStudentsEnrolledException {
+		logger.info("viewStudentsGrades in ProfessorService");
 		List<Course> courses = courseDAO.viewCoursesByProfessor(professorId);
 		/*
 		 * int i = 0; for (Course c : courses) { if (c.getCourseID() != courseId) i++; }

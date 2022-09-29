@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.lti.bean.Admin;
@@ -29,6 +31,7 @@ import com.lti.exception.UsernameUsedException;
 @Service
 public class AdminService implements AdminServiceInterface {
 
+	Logger logger = LoggerFactory.getLogger(AdminService.class);
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private ProfessorDAOInterface professorDAO = new ProfessorDAO();
 	private StudentDAOInterface studentDAO = new StudentDAO();
@@ -42,7 +45,7 @@ public class AdminService implements AdminServiceInterface {
 	 */
 	@Override
 	public void createCourse(Course course) {
-
+		logger.info("createCourse in AdminService");
 		courseDAO.createCourse(course);
 
 	}
@@ -55,7 +58,7 @@ public class AdminService implements AdminServiceInterface {
 	 */
 	@Override
 	public void createProfessor(Professor professor) throws UsernameUsedException {
-
+		logger.info("createProfessor in AdminService");
 		if (userDAO.viewUser(professor.getUsername()) != null)
 			throw new UsernameUsedException("Username already taken, username: ", professor.getUsername());
 		professorDAO.createProfessor(professor);
@@ -69,7 +72,7 @@ public class AdminService implements AdminServiceInterface {
 	 */
 	@Override
 	public void updateCourse(Course course) throws CourseNotFoundException {
-
+		logger.info("updateCourse in AdminService");
 		if (courseDAO.viewCourse(course.getCourseID()) == null)
 			throw new CourseNotFoundException("This course was not found, ID: ", course.getCourseID());
 		courseDAO.updateCourse(course);
@@ -83,7 +86,7 @@ public class AdminService implements AdminServiceInterface {
 	 */
 	@Override
 	public void deleteCourse(int courseId) throws CourseNotFoundException {
-
+		logger.info("deleteCourse in AdminService");
 		if (courseDAO.viewCourse(courseId) == null)
 			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
 		courseDAO.deleteCourse(courseId);
@@ -96,7 +99,7 @@ public class AdminService implements AdminServiceInterface {
 	 */
 	@Override
 	public List<Course> listAllCourse() {
-
+		logger.info("listAllCourses in AdminService");
 		return courseDAO.viewAllCourses();
 	}
 
@@ -108,7 +111,7 @@ public class AdminService implements AdminServiceInterface {
 	 */
 	@Override
 	public void approveStudentRegistration(Student student) throws StudentNotFoundException {
-
+		logger.info("approveStudentRegistration in AdminService");
 		if (studentDAO.viewStudent(student.getStudentID()) == null)
 			throw new StudentNotFoundException("This student was not found, ID: ", student.getStudentID());
 //		Old method without streams
@@ -133,6 +136,7 @@ public class AdminService implements AdminServiceInterface {
 	 */
 	@Override
 	public Admin getAdminByUsername(String username) {
+		logger.info("getAdminByUsername in AdminService");
 		return adminDAO.viewAdmin(username);
 
 	}
@@ -145,7 +149,7 @@ public class AdminService implements AdminServiceInterface {
 	 */
 	@Override
 	public List<Student> unregisteredStudent() throws AllStudentRegisteredException {
-
+		logger.info("unregisteredStudent in AdminService");
 		List<Student> students = studentDAO.viewUnregisteredStudents();
 		if (students.isEmpty())
 			throw new AllStudentRegisteredException("There are no students to be registered");
@@ -161,6 +165,7 @@ public class AdminService implements AdminServiceInterface {
 	 */
 	@Override
 	public Student getStudentById(int studentId) throws StudentNotFoundException {
+		logger.info("getStudentById in AdminService");
 		Student student = studentDAO.viewStudent(studentId);
 		if (student == null)
 			throw new StudentNotFoundException("This student was not found, ID: ", studentId);
