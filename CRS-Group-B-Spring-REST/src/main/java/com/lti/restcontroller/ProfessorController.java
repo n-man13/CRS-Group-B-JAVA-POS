@@ -30,7 +30,7 @@ import com.lti.service.ProfessorService;
 public class ProfessorController {
 
 	Logger logger = LoggerFactory.getLogger(ProfessorController.class);
-	
+
 	@Autowired
 	ProfessorService professorService;
 
@@ -40,16 +40,15 @@ public class ProfessorController {
 	 * @param courseID    the course
 	 * @param professorID the professor to add
 	 * @return a response whether the professor was added
+	 * @throws CourseNotFoundException if the course is not found
 	 */
 	@RequestMapping(value = "/applyToCourseProfessor/{courseID}/{professorID}", method = RequestMethod.PUT)
-	public ResponseEntity applyToCourse(@PathVariable int courseID, @PathVariable int professorID) {
+	public ResponseEntity applyToCourse(@PathVariable int courseID, @PathVariable int professorID)
+			throws CourseNotFoundException {
 		logger.info("applyToCourse in ProfessorController");
-		
-		try {
-			professorService.applyToCourse(professorID, courseID);
-		} catch (CourseNotFoundException e) {
-			return new ResponseEntity("Course not found with id " + e.getCourseID(), HttpStatus.NOT_FOUND);
-		}
+
+		professorService.applyToCourse(professorID, courseID);
+
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
@@ -60,20 +59,20 @@ public class ProfessorController {
 	 * @param studentID the student
 	 * @param grade     the grade to record
 	 * @return an HTTP response
+	 * @throws NoStudentsEnrolledException if no students are enrolled in this
+	 *                                     course
+	 * @throws CourseNotFoundException     if the course is not found
+	 * @throws StudentNotFoundException    if the student was not found in the
+	 *                                     registered course
 	 */
 	@RequestMapping(value = "/recordGrade/{courseID}/{studentID}/{grade}", method = RequestMethod.PUT)
 	public ResponseEntity recordGrade(@PathVariable int courseID, @PathVariable int studentID,
-			@PathVariable double grade) {
+			@PathVariable double grade)
+			throws StudentNotFoundException, CourseNotFoundException, NoStudentsEnrolledException {
 		logger.info("recordGrade in ProfessorController");
-		try {
-			professorService.recordGrade(grade, studentID, courseID);
-		} catch (CourseNotFoundException e) {
-			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
-		} catch (StudentNotFoundException e) {
-			return new ResponseEntity(e.getMessage() + e.getStudentID(), HttpStatus.NOT_FOUND);
-		} catch (NoStudentsEnrolledException e) {
-			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
-		}
+
+		professorService.recordGrade(grade, studentID, courseID);
+
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
@@ -82,18 +81,16 @@ public class ProfessorController {
 	 * 
 	 * @param courseID the course
 	 * @return an HTTP response
+	 * @throws NoStudentsEnrolledException if no students are enrolled in the course
+	 * @throws CourseNotFoundException     if the course was not found
 	 */
 	@RequestMapping(value = "/viewStudents/{courseID}", method = RequestMethod.GET)
-	public ResponseEntity viewStudents(@PathVariable int courseID) {
+	public ResponseEntity viewStudents(@PathVariable int courseID)
+			throws CourseNotFoundException, NoStudentsEnrolledException {
 		logger.info("viewStudents in ProfessorController");
-		try {
-			List<Student> students = professorService.viewStudents(courseID);
-			return new ResponseEntity(students, HttpStatus.OK);
-		} catch (CourseNotFoundException e) {
-			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
-		} catch (NoStudentsEnrolledException e) {
-			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
-		}
+
+		List<Student> students = professorService.viewStudents(courseID);
+		return new ResponseEntity(students, HttpStatus.OK);
 
 	}
 }

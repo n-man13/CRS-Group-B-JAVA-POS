@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,23 +55,24 @@ public class AdminController {
 	 * @param course   the updated information
 	 * @param courseID the course to update
 	 * @return an HTTP response
+	 * @throws CourseNotFoundException if course was not found
 	 */
+	@ExceptionHandler(CourseNotFoundException.class)
 	@RequestMapping(method = RequestMethod.PUT, value = "/updateCourse/{courseID}")
-	public ResponseEntity updateCourse(@RequestBody Course course, @PathVariable int courseID) {
+	public ResponseEntity updateCourse(@RequestBody Course course, @PathVariable int courseID)
+			throws CourseNotFoundException {
 		logger.info("updateCourse in AdminController");
-		
+
 		Course oldCourse = courseService.viewCourseByID(courseID);
 		if (oldCourse != null) {
 			oldCourse.setDescription(course.getDescription());
 			oldCourse.setDepartment(course.getDepartment());
 			oldCourse.setName(course.getName());
 			oldCourse.setPrereqCourseID(course.getPrereqCourseID());
-			try {
-				adminService.updateCourse(oldCourse);
-				return new ResponseEntity(oldCourse, HttpStatus.OK);
-			} catch (CourseNotFoundException e) {
-				return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
-			}
+
+			adminService.updateCourse(oldCourse);
+			return new ResponseEntity(oldCourse, HttpStatus.OK);
+
 		} else {
 			return new ResponseEntity(courseID, HttpStatus.NOT_FOUND);
 		}
@@ -82,17 +84,14 @@ public class AdminController {
 	 * 
 	 * @param courseID the course
 	 * @return an HTTP response whether deleted
+	 * @throws CourseNotFoundException if course is not found
 	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteCourse/{courseID}")
-	public ResponseEntity deleteCourse(@PathVariable int courseID) {
+	public ResponseEntity deleteCourse(@PathVariable int courseID) throws CourseNotFoundException {
 		logger.info("deleteCourse in AdminController");
 
-		try {
-			adminService.deleteCourse(courseID);
-			return new ResponseEntity(courseID, HttpStatus.OK);
-		} catch (CourseNotFoundException e) {
-			return new ResponseEntity(e.getMessage() + e.getCourseID(), HttpStatus.NOT_FOUND);
-		}
+		adminService.deleteCourse(courseID);
+		return new ResponseEntity(courseID, HttpStatus.OK);
 
 	}
 
@@ -101,17 +100,14 @@ public class AdminController {
 	 * 
 	 * @param professor the professor to create
 	 * @return an HTTP response
+	 * @throws UsernameUsedException if the username is already in use
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/createProfessor")
-	public ResponseEntity createProfessor(@RequestBody Professor professor) {
+	public ResponseEntity createProfessor(@RequestBody Professor professor) throws UsernameUsedException {
 		logger.info("createProfessor in AdminController");
 
-		try {
-			adminService.createProfessor(professor);
-			return new ResponseEntity(professor, HttpStatus.CREATED);
-		} catch (UsernameUsedException e) {
-			return new ResponseEntity(e.getMessage() + e.getUsername(), HttpStatus.I_AM_A_TEAPOT);
-		}
+		adminService.createProfessor(professor);
+		return new ResponseEntity(professor, HttpStatus.CREATED);
 
 	}
 
@@ -120,21 +116,16 @@ public class AdminController {
 	 * 
 	 * @param studentID the student to registered
 	 * @return an HTTP response
+	 * @throws StudentNotFoundException if the student is not found
 	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/approveRegistration/{studentID}")
-	public ResponseEntity approveRegistration(@PathVariable int studentID) {
+	public ResponseEntity approveRegistration(@PathVariable int studentID) throws StudentNotFoundException {
 		logger.info("approveRegistration in AdminController");
-		try {
-			Student student = adminService.getStudentById(studentID);
-			try {
-				adminService.approveStudentRegistration(student);
-				return new ResponseEntity(student, HttpStatus.CREATED);
-			} catch (StudentNotFoundException e) {
-				return new ResponseEntity(e.getMessage() + e.getStudentID(), HttpStatus.NOT_FOUND);
-			}
-		} catch (StudentNotFoundException e) {
-			return new ResponseEntity(e.getMessage() + e.getStudentID(), HttpStatus.NOT_FOUND);
-		}
+
+		Student student = adminService.getStudentById(studentID);
+
+		adminService.approveStudentRegistration(student);
+		return new ResponseEntity(student, HttpStatus.CREATED);
 
 	}
 }
