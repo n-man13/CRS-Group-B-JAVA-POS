@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.lti.bean.Course;
@@ -23,6 +25,7 @@ import com.lti.exception.CourseFullException;
 import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.StudentNotFoundException;
 import com.lti.exception.UsernameUsedException;
+import com.lti.restcontroller.StudentController;
 
 @Service
 public class StudentService implements StudentServiceInterface {
@@ -31,7 +34,8 @@ public class StudentService implements StudentServiceInterface {
 	private CourseDAOInterface courseDAO = new CourseDAO();
 	private StudentDAOInterface studentDAO = new StudentDAO();
 	private UserDAOInterface userDAO = new UserDAO();
-
+	
+	Logger logger = LoggerFactory.getLogger(StudentService.class);
 	/**
 	 * calls DAO method to register student in registeredcourse
 	 * 
@@ -41,7 +45,7 @@ public class StudentService implements StudentServiceInterface {
 	 * @throws CourseFullException     if there are more then 10 students
 	 */
 	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException {
-
+		logger.info("applayToCourse in StudentService");
 		if (courseDAO.viewCourse(courseId) == null)
 			throw new CourseNotFoundException("This course was not found, ID: ", courseId);
 		if (registeredCourseDAO.viewAllStudents(courseId).size() >= 10)
@@ -58,6 +62,7 @@ public class StudentService implements StudentServiceInterface {
 	 * @throws CourseNotFoundException if courseId doesn't exist
 	 */
 	public void dropCourse(int studentId, int courseId) throws CourseNotFoundException {
+		logger.info("dropCourse in StudentService");
 		List<Course> courses = registeredCourseDAO.viewStudentCourses(studentId);
 //		int i = 0;
 //		for (Course c : courses) {
@@ -79,7 +84,7 @@ public class StudentService implements StudentServiceInterface {
 	 * @return a list of courses where the student is enrolled
 	 */
 	public List<Course> viewAppliedCourses(int studentId) {
-
+		logger.info("viewAppliedCourses in StudentService");
 		return registeredCourseDAO.viewStudentCourses(studentId);
 	}
 
@@ -91,7 +96,7 @@ public class StudentService implements StudentServiceInterface {
 	 * @throws CourseNotFoundException if courseId doesn't exist
 	 */
 	public void makePayment(int studentId, int courseId) throws CourseNotFoundException {
-
+		logger.info("makePayment in StudentService");
 //		List <Course> courses = registeredCourseDAO.viewStudentCourses(studentId);
 //		int i = 0;
 //		for (Course c : courses) {
@@ -119,7 +124,7 @@ public class StudentService implements StudentServiceInterface {
 	 * @return Returns a map course to grade
 	 */
 	public Map<Course, Double> checkGrades(int studentId) {
-
+		logger.info("checkGrades in StudentService");
 		return registeredCourseDAO.viewGrades(studentId);
 	}
 
@@ -131,7 +136,7 @@ public class StudentService implements StudentServiceInterface {
 	 * @throws AllCoursesPaidException if all courses are already paid for
 	 */
 	public List<Course> viewUnpayedCourses(int studentId) throws AllCoursesPaidException {
-
+		logger.info("viewUnpayedCourses in StudentService");
 		List<Course> courses = registeredCourseDAO.viewUnpaidCourses(studentId);
 		if (courses.isEmpty())
 			throw new AllCoursesPaidException("There are no more courses to pay, student ID: ", studentId);
@@ -146,7 +151,7 @@ public class StudentService implements StudentServiceInterface {
 	 * @throws StudentNotFoundException if student is not found
 	 */
 	public Student getStudentByUsername(String username) throws StudentNotFoundException {
-
+		logger.info("getStudentByUsername in StudentService");
 		Student student = studentDAO.viewStudent(username);
 
 		if (student == null)
@@ -163,6 +168,7 @@ public class StudentService implements StudentServiceInterface {
 	 */
 	@Override
 	public void createStudent(Student student) throws UsernameUsedException {
+		logger.info("createStudent in StudentService");
 		if (userDAO.viewUser(student.getUsername()) != null)
 			throw new UsernameUsedException("Username already taken, username: ", student.getUsername());
 		student.setRegistered(false);

@@ -1,5 +1,7 @@
 package com.lti.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.lti.bean.Student;
@@ -9,6 +11,7 @@ import com.lti.dao.StudentDAOInterface;
 import com.lti.dao.UserDAO;
 import com.lti.dao.UserDAOInterface;
 import com.lti.exception.StudentNotFoundException;
+import com.lti.restcontroller.StudentController;
 
 @Service
 public class UserService implements UserServiceInterface {
@@ -18,6 +21,7 @@ public class UserService implements UserServiceInterface {
 	private User user;
 	private Student student;
 
+	Logger logger = LoggerFactory.getLogger(UserService.class);
 	/**
 	 * verify log in credentials
 	 * 
@@ -28,7 +32,7 @@ public class UserService implements UserServiceInterface {
 	 * @throws StudentNotFoundException if the student needs to be approved
 	 */
 	public boolean verifyCredetials(String username, String password, int role) throws StudentNotFoundException {
-
+		logger.info("verifyCredetials in userService");
 		user = userDAO.viewUser(username);
 
 		if (user == null)
@@ -67,7 +71,7 @@ public class UserService implements UserServiceInterface {
 	 */
 	@Override
 	public boolean verifyPasswordResetCredentials(int id, String username) {
-
+		logger.info("verifyPasswordResetCredetials in userService");
 		user = userDAO.viewUser(username);
 		if (user == null)
 			return false;
@@ -88,6 +92,7 @@ public class UserService implements UserServiceInterface {
 	@Override
 	public void updatePassword(String username, String newPassword) {
 		// TODO Auto-generated method stub
+		logger.info("updatePassword in userService");
 		userDAO.updatePassword(username, newPassword);
 	}
 }

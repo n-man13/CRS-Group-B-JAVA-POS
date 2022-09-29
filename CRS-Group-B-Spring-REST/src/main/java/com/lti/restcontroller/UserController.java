@@ -2,6 +2,8 @@ package com.lti.restcontroller;
 
 import javax.ws.rs.core.MediaType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,8 @@ import com.lti.service.UserService;
 @RestController
 public class UserController {
 	
+	Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired
 	UserService userService;
 	
@@ -34,6 +38,7 @@ public class UserController {
 	 */
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON, method = RequestMethod.POST, value="/login")
 	public ResponseEntity login(@RequestBody User user) {
+		logger.info("login in userController");
 		if (user == null)
 			return new ResponseEntity("User information not provided", HttpStatus.NOT_FOUND);
 		try {
@@ -52,6 +57,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/studentRegistration", method = RequestMethod.POST)
 	public ResponseEntity studentRegistration(@RequestBody Student student) {
+		logger.info("studentRegistration in userController");
 		if (student == null)
 			return new ResponseEntity("New Student information not provided", HttpStatus.NOT_FOUND);
 		try {
@@ -70,6 +76,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
 	public ResponseEntity updatePassword(@RequestBody User user) {
+		logger.info("updatePassword in userController");
 		if (user == null)
 			return new ResponseEntity("User information not provided", HttpStatus.NOT_FOUND);
 		userService.updatePassword(user.getUsername(), user.getPassword());

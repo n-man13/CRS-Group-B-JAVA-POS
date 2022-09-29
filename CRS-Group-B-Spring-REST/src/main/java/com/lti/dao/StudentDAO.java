@@ -11,17 +11,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.lti.bean.Student;
 import com.lti.bean.User;
 import com.lti.constant.SQLConstants;
+import com.lti.restcontroller.UserController;
 import com.lti.utils.DBUtils;
+
 
 /**
  * @author user101
  *
  */
 public class StudentDAO implements StudentDAOInterface {
-
+	Logger logger = LoggerFactory.getLogger(StudentDAO.class);
 	private PreparedStatement stmt = null;
 
 	/**
@@ -32,6 +37,7 @@ public class StudentDAO implements StudentDAOInterface {
 	 */
 	@Override
 	public int createStudent(Student student) {
+		logger.info("createStudent in studentDAO");
 		UserDAO userDAO = new UserDAO();
 		int userID = userDAO.createNewUser(student.getUsername(), student.getPassword(), 3);
 
@@ -54,6 +60,7 @@ public class StudentDAO implements StudentDAOInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.debug("New user userID: " + userID);
 		return userID;
 	}
 
@@ -64,6 +71,7 @@ public class StudentDAO implements StudentDAOInterface {
 	 * @return the student associated with the id
 	 */
 	public Student viewStudent(int studentID) {
+		logger.info("viewStudent by ID in StudentDAO");
 		Student student = null;
 		try {
 			Connection conn = DBUtils.getConnection();
@@ -92,6 +100,7 @@ public class StudentDAO implements StudentDAOInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.debug("student: " + student);
 		return student;
 	}
 
@@ -103,6 +112,7 @@ public class StudentDAO implements StudentDAOInterface {
 	 */
 	@Override
 	public Student viewStudent(String username) {
+		logger.info("viewStudent by username in StudentDAO");
 		UserDAO userDAO = new UserDAO();
 		User us = userDAO.viewUser(username);
 		int studentID = us.getUserID();
@@ -134,6 +144,7 @@ public class StudentDAO implements StudentDAOInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.debug("student: " + student);
 		return changed;
 	}
 
@@ -143,6 +154,7 @@ public class StudentDAO implements StudentDAOInterface {
 	 * @return list of all unregistered students
 	 */
 	public List<Student> viewUnregisteredStudents() {
+		logger.info("viewUnregisteredStudents by username in StudentDAO");
 		ArrayList<Student> students = new ArrayList<Student>();
 		try {
 			Connection conn = DBUtils.getConnection();

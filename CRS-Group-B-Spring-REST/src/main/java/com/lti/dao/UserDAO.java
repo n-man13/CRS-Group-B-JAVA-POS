@@ -6,14 +6,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.lti.bean.User;
 import com.lti.constant.SQLConstants;
+import com.lti.restcontroller.StudentController;
 import com.lti.utils.DBUtils;
 
 public class UserDAO implements UserDAOInterface {
 
 	private PreparedStatement stmt = null;
-
+	
+	Logger logger = LoggerFactory.getLogger(UserDAO.class);
 	/**
 	 * Creates a new user and returns the userID
 	 * 
@@ -24,6 +29,7 @@ public class UserDAO implements UserDAOInterface {
 	 */
 	@Override
 	public int createNewUser(String username, String password, int role) {
+		logger.info("createNewUser in userDao");
 		int userID = -1;
 		try {
 			
@@ -61,6 +67,7 @@ public class UserDAO implements UserDAOInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.debug("Created userID: " + userID);
 		return userID;
 	}
 
@@ -72,6 +79,7 @@ public class UserDAO implements UserDAOInterface {
 	 */
 	@Override
 	public User viewUser(String username) {
+		logger.info("viewUser in userDao");
 		User thisUser = null;
 		try {
 			Connection conn = DBUtils.getConnection();
@@ -106,6 +114,7 @@ public class UserDAO implements UserDAOInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.debug("Created userID: " + thisUser);
 		return thisUser;
 	}
 
@@ -117,6 +126,7 @@ public class UserDAO implements UserDAOInterface {
 	 * @return if the password was changed successfully
 	 */
 	public boolean updatePassword(String username, String password) {
+		logger.info("updatePassword in userDao");
 		boolean changed = false;
 		try {
 			Connection conn = DBUtils.getConnection();

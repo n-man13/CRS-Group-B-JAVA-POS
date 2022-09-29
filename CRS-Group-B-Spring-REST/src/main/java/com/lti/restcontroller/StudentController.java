@@ -3,6 +3,8 @@ package com.lti.restcontroller;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,11 @@ import com.lti.bean.*;
 
 @RestController
 public class StudentController {
+	
+	Logger logger = LoggerFactory.getLogger(StudentController.class);
 
 	@Autowired
 	StudentService studentService;
-	
 	
 	/**
 	 * Method to applyToStudent the password
@@ -32,6 +35,7 @@ public class StudentController {
 	 */
 	@RequestMapping(value = "/applyToCourseStudent/{studentID}/{courseID}", method = RequestMethod.PUT)
 	public ResponseEntity applyToCourse(@PathVariable int studentID, @PathVariable int courseID) {
+		logger.info("applayToCourse in StudentController");
 		try {
 			studentService.applyToCourse(studentID, courseID);
 		} catch (CourseNotFoundException e) {
@@ -45,6 +49,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/dropCourse/{studentID}/{courseID}", method = RequestMethod.DELETE)
 	public ResponseEntity dropCourse(@PathVariable int studentID, @PathVariable int courseID) {
+		logger.info("dropCourse in StudentController");
 		try {
 			studentService.dropCourse(studentID, courseID);
 		} catch (CourseNotFoundException e) {
@@ -55,12 +60,14 @@ public class StudentController {
 
 	@RequestMapping(value = "/viewAppliedCourses/{studentID}", method = RequestMethod.GET)
 	public ResponseEntity viewAppliedCourses(@PathVariable int studentID) {
+		logger.info("viewAppliedCourses in StudentController");
 		displayCourses(studentService.viewAppliedCourses(studentID));
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/makePayment/{studentID}/{courseID}", method = RequestMethod.PUT)
 	public ResponseEntity makePayment(@PathVariable int studentID, @PathVariable int courseID) {
+		logger.info("makePayment in StudentController");
 		try {
 			studentService.makePayment(studentID, courseID);
 		} catch (CourseNotFoundException e) {
@@ -71,6 +78,8 @@ public class StudentController {
 
 	@RequestMapping(value = "/checkGrades/{studentID}", method = RequestMethod.GET)
 	public Map<Course, Double> checkGrades(@PathVariable int studentID) {
+		logger.info("makePayment in StudentController");
+		logger.debug("Map students to grade " + studentService.checkGrades(studentID));
 		return studentService.checkGrades(studentID);
 		//return new ResponseEntity(HttpStatus.OK);
 	}
