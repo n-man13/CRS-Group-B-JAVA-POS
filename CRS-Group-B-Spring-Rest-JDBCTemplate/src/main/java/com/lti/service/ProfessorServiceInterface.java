@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.lti.bean.*;
+import com.lti.dto.*;
 import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.NoStudentsEnrolledException;
 import com.lti.exception.StudentNotFoundException;

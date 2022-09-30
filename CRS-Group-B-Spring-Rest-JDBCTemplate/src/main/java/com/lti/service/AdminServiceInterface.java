@@ -3,14 +3,14 @@ package com.lti.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lti.bean.Admin;
-import com.lti.bean.Student;
+import com.lti.dto.Admin;
+import com.lti.dto.Course;
+import com.lti.dto.Professor;
+import com.lti.dto.Student;
 import com.lti.exception.AllStudentRegisteredException;
 import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.StudentNotFoundException;
 import com.lti.exception.UsernameUsedException;
-import com.lti.bean.Course;
-import com.lti.bean.Professor;
 
 public interface AdminServiceInterface {
 

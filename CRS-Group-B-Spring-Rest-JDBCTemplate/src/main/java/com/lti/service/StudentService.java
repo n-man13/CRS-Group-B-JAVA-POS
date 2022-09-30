@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.lti.bean.Course;
-import com.lti.bean.Student;
 import com.lti.dao.CourseDAO;
 import com.lti.dao.CourseDAOInterface;
 import com.lti.dao.RegisteredCourseDAO;
@@ -20,6 +18,8 @@ import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOInterface;
 import com.lti.dao.UserDAO;
 import com.lti.dao.UserDAOInterface;
+import com.lti.dto.Course;
+import com.lti.dto.Student;
 import com.lti.exception.AllCoursesPaidException;
 import com.lti.exception.CourseFullException;
 import com.lti.exception.CourseNotFoundException;

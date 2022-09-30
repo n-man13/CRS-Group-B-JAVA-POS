@@ -12,10 +12,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableAutoConfiguration
 @ComponentScan({"com.lti.*"})
 @EnableWebMvc
-public class DemoSpringJdbcTemplatePractice1Application {
+public class CRSGroupBSpringRestJDBCTemplateApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoSpringJdbcTemplatePractice1Application.class, args);
+		SpringApplication.run(CRSGroupBSpringRestJDBCTemplateApplication.class, args);
 	}
 
 }

@@ -4,12 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.lti.bean.Student;
-import com.lti.bean.User;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOInterface;
 import com.lti.dao.UserDAO;
 import com.lti.dao.UserDAOInterface;
+import com.lti.dto.Student;
+import com.lti.dto.User;
 import com.lti.exception.StudentNotFoundException;
 import com.lti.restcontroller.StudentController;
 

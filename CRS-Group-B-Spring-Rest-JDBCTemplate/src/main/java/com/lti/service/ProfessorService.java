@@ -9,13 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.lti.bean.*;
 import com.lti.dao.CourseDAO;
 import com.lti.dao.CourseDAOInterface;
 import com.lti.dao.ProfessorDAO;
 import com.lti.dao.ProfessorDAOInterface;
 import com.lti.dao.RegisteredCourseDAO;
 import com.lti.dao.RegisteredCourseDAOInterface;
+import com.lti.dto.*;
 import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.NoStudentsEnrolledException;
 import com.lti.exception.StudentNotFoundException;

@@ -3,8 +3,8 @@ package com.lti.service;
 import java.util.List;
 import java.util.Map;
 
-import com.lti.bean.Course;
-import com.lti.bean.Student;
+import com.lti.dto.Course;
+import com.lti.dto.Student;
 import com.lti.exception.AllCoursesPaidException;
 import com.lti.exception.CourseFullException;
 import com.lti.exception.CourseNotFoundException;

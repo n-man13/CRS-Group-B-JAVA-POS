@@ -2,7 +2,7 @@ package com.lti.service;
 
 import java.util.List;
 
-import com.lti.bean.Course;
+import com.lti.dto.Course;
 
 public interface CourseServiceInterface {
 	

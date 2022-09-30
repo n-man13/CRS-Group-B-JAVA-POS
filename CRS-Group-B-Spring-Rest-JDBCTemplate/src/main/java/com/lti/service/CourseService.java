@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.lti.bean.Course;
 import com.lti.dao.CourseDAO;
 import com.lti.dao.CourseDAOInterface;
+import com.lti.dto.Course;
 
 /**
  * unused class
