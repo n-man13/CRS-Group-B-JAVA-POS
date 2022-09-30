@@ -11,7 +11,7 @@ public interface UserDAOInterface {
 	 * @param role     the role number
 	 * @return userID generated or -1 if already exists
 	 */
-	public int createNewUser(String username, String password, int role);
+	public int createUser(String username, String password, int role);
 
 	/**
 	 * returns the user with the associated username
@@ -19,7 +19,7 @@ public interface UserDAOInterface {
 	 * @param username the users username
 	 * @return the user or null if no user exists
 	 */
-	public User viewUser(String username);
+	public User findUser(String username);
 
 	/**
 	 * changes the password of a specific user
