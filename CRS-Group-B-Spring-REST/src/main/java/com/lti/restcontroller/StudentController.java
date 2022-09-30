@@ -36,6 +36,7 @@ public class StudentController {
 	 * @throws CourseFullException 
 	 * @throws CourseNotFoundException 
 	 */
+	@ExceptionHandler({CourseNotFoundException.class, CourseFullException.class})
 	@RequestMapping(value = "/applyToCourseStudent/{studentID}/{courseID}", method = RequestMethod.PUT)
 	public ResponseEntity applyToCourse(@PathVariable int studentID, @PathVariable int courseID) throws CourseNotFoundException, CourseFullException {
 		logger.info("applayToCourse in StudentController");
