@@ -44,7 +44,7 @@ public class CourseService implements CourseServiceInterface{
 	
 	public List <Course> viewAllCourses() {
 		
-		return courseDAO.viewAllCourses();
+		return courseDAO.findAllCourses();
 		
 	}
 
@@ -56,7 +56,7 @@ public class CourseService implements CourseServiceInterface{
 
 	@Override
 	public Course viewCourseByID(int id) {
-		return courseDAO.viewCourse(id);
+		return courseDAO.findCourseByCourseID(id);
 	}
 	
 

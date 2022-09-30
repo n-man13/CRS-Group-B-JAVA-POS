@@ -59,7 +59,7 @@ public class AdminService implements AdminServiceInterface {
 	@Override
 	public void createProfessor(Professor professor) throws UsernameUsedException {
 		logger.info("createProfessor in AdminService");
-		if (userDAO.viewUser(professor.getUsername()) != null)
+		if (userDAO.findUser(professor.getUsername()) != null)
 			throw new UsernameUsedException("Username already taken, username: "+professor.getUsername(), professor.getUsername());
 		professorDAO.createProfessor(professor);
 	}
@@ -73,7 +73,7 @@ public class AdminService implements AdminServiceInterface {
 	@Override
 	public void updateCourse(Course course) throws CourseNotFoundException {
 		logger.info("updateCourse in AdminService");
-		if (courseDAO.viewCourse(course.getCourseID()) == null)
+		if (courseDAO.findCourseByCourseID(course.getCourseID()) == null)
 			throw new CourseNotFoundException("This course was not found, ID: "+course.getCourseID(), course.getCourseID());
 		courseDAO.updateCourse(course);
 	}
@@ -87,7 +87,7 @@ public class AdminService implements AdminServiceInterface {
 	@Override
 	public void deleteCourse(int courseId) throws CourseNotFoundException {
 		logger.info("deleteCourse in AdminService");
-		if (courseDAO.viewCourse(courseId) == null)
+		if (courseDAO.findCourseByCourseID(courseId) == null)
 			throw new CourseNotFoundException("This course was not found, ID: "+courseId, courseId);
 		courseDAO.deleteCourse(courseId);
 	}
@@ -100,7 +100,7 @@ public class AdminService implements AdminServiceInterface {
 	@Override
 	public List<Course> listAllCourse() {
 		logger.info("listAllCourses in AdminService");
-		return courseDAO.viewAllCourses();
+		return courseDAO.findAllCourses();
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class AdminService implements AdminServiceInterface {
 	@Override
 	public void approveStudentRegistration(Student student) throws StudentNotFoundException {
 		logger.info("approveStudentRegistration in AdminService");
-		if (studentDAO.viewStudent(student.getStudentID()) == null)
+		if (studentDAO.findStudent(student.getStudentID()) == null)
 			throw new StudentNotFoundException("This student was not found, ID: "+student.getStudentID(), student.getStudentID());
 //		Old method without streams
 //		int i = 0;
@@ -120,7 +120,7 @@ public class AdminService implements AdminServiceInterface {
 //			if (s.getStudentID() != student.getStudentID())
 //				i++;
 //		}
-		List<Student> result = studentDAO.viewUnregisteredStudents().stream()
+		List<Student> result = studentDAO.findUnregisteredStudents().stream()
 				.filter(s -> s.getStudentID() == student.getStudentID()).collect(Collectors.toList());
 		if (result.isEmpty())
 			throw new StudentNotFoundException("This student is already registerd, ID: "+student.getStudentID(), student.getStudentID());
@@ -137,7 +137,7 @@ public class AdminService implements AdminServiceInterface {
 	@Override
 	public Admin getAdminByUsername(String username) {
 		logger.info("getAdminByUsername in AdminService");
-		return adminDAO.viewAdmin(username);
+		return adminDAO.findAdminByUsername(username);
 
 	}
 
@@ -150,7 +150,7 @@ public class AdminService implements AdminServiceInterface {
 	@Override
 	public List<Student> unregisteredStudent() throws AllStudentRegisteredException {
 		logger.info("unregisteredStudent in AdminService");
-		List<Student> students = studentDAO.viewUnregisteredStudents();
+		List<Student> students = studentDAO.findUnregisteredStudents();
 		if (students.isEmpty())
 			throw new AllStudentRegisteredException("There are no students to be registered");
 		return students;
@@ -166,7 +166,7 @@ public class AdminService implements AdminServiceInterface {
 	@Override
 	public Student getStudentById(int studentId) throws StudentNotFoundException {
 		logger.info("getStudentById in AdminService");
-		Student student = studentDAO.viewStudent(studentId);
+		Student student = studentDAO.findStudent(studentId);
 		if (student == null)
 			throw new StudentNotFoundException("This student was not found, ID: "+studentId, studentId);
 		return student;
