@@ -17,7 +17,7 @@ public interface ProfessorDAOInterface {
 	 * @param prof new professor to add
 	 * @return new ID if created successfully, else -1
 	 */
-	public int createProfessor(Professor prof);
+	public int createProfessor(Professor professor);
 
 	/**
 	 * views a professor given the id
@@ -25,7 +25,7 @@ public interface ProfessorDAOInterface {
 	 * @param profID the professor to view
 	 * @return the professor object
 	 */
-	public Professor viewProfessor(int profID);
+	public Professor findProfessorByProfessorID(int professorID);
 
 	/**
 	 * views a professor given the username
@@ -33,5 +33,5 @@ public interface ProfessorDAOInterface {
 	 * @param username the username of the User
 	 * @return the professor object associated with the username
 	 */
-	public Professor viewProfessor(String username);
+	public Professor findProfessorByUsername(String username);
 }

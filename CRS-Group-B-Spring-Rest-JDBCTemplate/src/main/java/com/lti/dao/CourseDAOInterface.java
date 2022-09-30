@@ -18,7 +18,7 @@ public interface CourseDAOInterface {
 	 * 
 	 * @return all courses
 	 */
-	public ArrayList<Course> viewAllCourses();
+	public ArrayList<Course> findAllCourses();
 
 	/**
 	 * Creates a new course
@@ -35,7 +35,7 @@ public interface CourseDAOInterface {
 	 * @param profID   the professor to teach
 	 * @return if course was updated
 	 */
-	public boolean addProfessorToCourse(int courseID, int profID);
+	public boolean updateProfessorToCourse(int courseID, int professorID);
 
 	/**
 	 * provides the courses a professor is teaching
@@ -43,7 +43,7 @@ public interface CourseDAOInterface {
 	 * @param profID the professor teaching
 	 * @return the courses that a professor is teaching
 	 */
-	public ArrayList<Course> viewCoursesByProfessor(int profID);
+	public ArrayList<Course> findCourseByProfessorID(int professorID);
 
 	/**
 	 * deletes a course
@@ -59,7 +59,7 @@ public interface CourseDAOInterface {
 	 * @param courseID the identifier of the course
 	 * @return the course with provided id or null if not found
 	 */
-	public Course viewCourse(int courseID);
+	public Course findCourseByCourseID(int courseID);
 
 	/**
 	 * updates a courses information

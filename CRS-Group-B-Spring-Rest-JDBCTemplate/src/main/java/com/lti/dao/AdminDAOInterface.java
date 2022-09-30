@@ -17,7 +17,7 @@ public interface AdminDAOInterface {
 	 * @param username username associated with the admin
 	 * @return the Admin object
 	 */
-	public Admin viewAdmin(String username);
+	public Admin findAdminByUsername(String username);
 
 	/**
 	 * finds the admin with the supplied id
@@ -25,5 +25,5 @@ public interface AdminDAOInterface {
 	 * @param adminID the id of the admin
 	 * @return the Admin object
 	 */
-	public Admin viewAdmin(int adminID);
+	public Admin findAdminByAdminID(int adminID);
 }
