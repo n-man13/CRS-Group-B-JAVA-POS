@@ -3,7 +3,7 @@
  */
 package com.lti.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.lti.dto.Course;
@@ -16,19 +16,19 @@ import com.lti.dto.Student;
 public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 
 	@Override
-	public ArrayList<Course> findCoursesByStudentID(int studentID) {
+	public List<Course> findCoursesByStudentID(int studentID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Student> findStudentsByCourseID(int courseID) {
+	public List<Student> findStudentsByCourseID(int courseID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Course> findUnpaidCoursesByStudentID(int studentID) {
+	public List<Course> findUnpaidCoursesByStudentID(int studentID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

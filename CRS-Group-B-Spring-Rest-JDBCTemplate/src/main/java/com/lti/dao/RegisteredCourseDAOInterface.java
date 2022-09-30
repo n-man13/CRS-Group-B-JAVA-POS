@@ -3,7 +3,7 @@
  */
 package com.lti.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.lti.dto.*;
@@ -20,7 +20,7 @@ public interface RegisteredCourseDAOInterface {
 	 * @param studentID the id of the student
 	 * @return the courses registered by the student
 	 */
-	public ArrayList<Course> findCoursesByStudentID(int studentID);
+	public List<Course> findCoursesByStudentID(int studentID);
 
 	/**
 	 * view the students in a course
@@ -28,7 +28,7 @@ public interface RegisteredCourseDAOInterface {
 	 * @param courseID the course to view
 	 * @return the students registered to this course
 	 */
-	public ArrayList<Student> findStudentsByCourseID(int courseID);
+	public List<Student> findStudentsByCourseID(int courseID);
 
 	/**
 	 * Gives a list of all courses yet to be paid
@@ -36,7 +36,7 @@ public interface RegisteredCourseDAOInterface {
 	 * @param studentID the student
 	 * @return list of all unpaid courses
 	 */
-	public ArrayList<Course> findUnpaidCoursesByStudentID(int studentID);
+	public List<Course> findUnpaidCoursesByStudentID(int studentID);
 
 	/**
 	 * views the students and their grades in a course
