@@ -32,7 +32,7 @@ public class UserDAO implements UserDAOInterface {
 
 	@Override
 	public User findUser(String username) {
-		String sql = "SELECT * FROM User WHERE username = ?";
+		//String sql = "SELECT * FROM User WHERE username = ?";
 		User user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT, new Object[] { username },
 				new UserMapper());
 		return user;
