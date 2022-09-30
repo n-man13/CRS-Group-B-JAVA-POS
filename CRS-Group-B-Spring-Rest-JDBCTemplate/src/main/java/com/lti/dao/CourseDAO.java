@@ -1,25 +1,53 @@
 package com.lti.dao;
 
+import java.util.List;
+
 import com.lti.dto.Admin;
+import com.lti.dto.Course;
 
-public class CourseDAO implements AdminDAOInterface{
-
-	@Override
-	public int createAdmin(Admin admin) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+public class CourseDAO implements CourseDAOInterface{
 
 	@Override
-	public Admin findAdminByUsername(String username) {
+	public List<Course> findAllCourses() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Admin findAdminByAdminID(int adminID) {
+	public boolean createCourse(Course course) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateProfessorToCourse(int courseID, int professorID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Course> findCourseByProfessorID(int professorID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public Course deleteCourse(int courseID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Course findCourseByCourseID(int courseID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean updateCourse(Course course) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
 }

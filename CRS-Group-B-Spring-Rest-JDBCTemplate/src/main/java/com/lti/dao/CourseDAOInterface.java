@@ -4,6 +4,7 @@
 package com.lti.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.lti.dto.*;
 
@@ -18,7 +19,7 @@ public interface CourseDAOInterface {
 	 * 
 	 * @return all courses
 	 */
-	public ArrayList<Course> findAllCourses();
+	public List<Course> findAllCourses();
 
 	/**
 	 * Creates a new course
@@ -43,7 +44,7 @@ public interface CourseDAOInterface {
 	 * @param profID the professor teaching
 	 * @return the courses that a professor is teaching
 	 */
-	public ArrayList<Course> findCourseByProfessorID(int professorID);
+	public List<Course> findCourseByProfessorID(int professorID);
 
 	/**
 	 * deletes a course
