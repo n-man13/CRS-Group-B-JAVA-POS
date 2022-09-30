@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.lti.configuration.JDBCConfiguration;
 import com.lti.dto.Student;
@@ -17,6 +18,7 @@ import com.lti.mapper.StudentMapper;
  * @author user101
  *
  */
+@Repository
 public class StudentDAO implements StudentDAOInterface {
 
 	@Autowired

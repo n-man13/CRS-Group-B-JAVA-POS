@@ -1,7 +1,10 @@
 package com.lti.dao;
 
+import org.springframework.stereotype.Repository;
+
 import com.lti.dto.Admin;
 
+@Repository
 public class AdminDAO implements AdminDAOInterface{
 
 	@Override

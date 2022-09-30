@@ -5,6 +5,7 @@ package com.lti.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.lti.configuration.JDBCConfiguration;
 import com.lti.dto.User;
@@ -14,6 +15,7 @@ import com.lti.mapper.UserMapper;
  * @author user101
  *
  */
+@Repository
 public class UserDAO implements UserDAOInterface {
 
 	@Autowired
