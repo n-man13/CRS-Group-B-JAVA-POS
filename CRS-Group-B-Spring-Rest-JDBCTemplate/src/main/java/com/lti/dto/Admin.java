@@ -38,4 +38,8 @@ public class Admin extends User implements  Serializable{
 		return adminID;
 	}
 
+	public void setAdminID(int adminID) {
+		this.adminID = adminID;
+	}
+
 }

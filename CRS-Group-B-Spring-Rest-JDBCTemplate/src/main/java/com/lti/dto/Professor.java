@@ -14,9 +14,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Professor extends User implements  Serializable{
-	private int profID;
+	private int professorID;
 	private String name;
-	private ArrayList<Course> courses;
 
 	/**
 	 * creates a professor with the set information
@@ -27,8 +26,7 @@ public class Professor extends User implements  Serializable{
 	public Professor(int profID, String name) {
 		super();
 		this.name = name;
-		this.profID = profID;
-		courses = new ArrayList<Course>();
+		this.professorID = profID;
 	}
 
 	/**
@@ -39,7 +37,6 @@ public class Professor extends User implements  Serializable{
 	public Professor(String name) {
 		super();
 		this.name = name;
-		courses = new ArrayList<Course>();
 	}
 
 	/**
@@ -50,30 +47,12 @@ public class Professor extends User implements  Serializable{
 	}
 
 	/**
-	 * returns the courses taught (unused)
-	 * 
-	 * @return the courses
-	 */
-	public ArrayList<Course> getCourses() {
-		return courses;
-	}
-
-	/**
-	 * sets the courses taught (unused)
-	 * 
-	 * @param courses the courses to set
-	 */
-	public void setCourses(ArrayList<Course> courses) {
-		this.courses = courses;
-	}
-
-	/**
 	 * returns the professor id
 	 * 
 	 * @return the profID
 	 */
 	public int getProfID() {
-		return profID;
+		return professorID;
 	}
 
 	/**
@@ -92,6 +71,14 @@ public class Professor extends User implements  Serializable{
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getProfessorID() {
+		return professorID;
+	}
+
+	public void setProfessorID(int professorID) {
+		this.professorID = professorID;
 	}
 
 }
