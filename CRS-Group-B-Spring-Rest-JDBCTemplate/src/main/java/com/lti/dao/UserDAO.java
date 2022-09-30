@@ -21,6 +21,7 @@ public class UserDAO implements UserDAOInterface {
 	// Queries for User table
 	public static final String USER_INSERT = "INSERT INTO User(username, password, role) VALUES(%s,%s,%o)";
 	public static final String USER_SELECT = "SELECT userID, username , password, role FROM User WHERE username = ?";
+	public static final String USER_SELECT_ID = "SELECT userID, username , password, role FROM User WHERE userID = ?";
 	public static final String USER_UPDATE_PASSWORD = "UPDATE User SET password=%s WHERE username=%s";
 
 	@Override
@@ -34,6 +35,12 @@ public class UserDAO implements UserDAOInterface {
 	public User findUser(String username) {
 		//String sql = "SELECT * FROM User WHERE username = ?";
 		User user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT, new Object[] { username },
+				new UserMapper());
+		return user;
+	}
+	
+	public User findUser(int userID) {
+		User user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT_ID, new Object[] { userID },
 				new UserMapper());
 		return user;
 	}

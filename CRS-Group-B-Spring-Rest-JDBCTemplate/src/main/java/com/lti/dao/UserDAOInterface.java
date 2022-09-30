@@ -20,6 +20,14 @@ public interface UserDAOInterface {
 	 * @return the user or null if no user exists
 	 */
 	public User findUser(String username);
+	
+	/**
+	 * returns the user with the associated id
+	 * 
+	 * @param userID the users id
+	 * @return the user or null if no user exists
+	 */
+	public User findUser(int userID);
 
 	/**
 	 * changes the password of a specific user
