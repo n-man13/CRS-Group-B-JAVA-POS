@@ -33,12 +33,12 @@ public class UserService implements UserServiceInterface {
 	 */
 	public boolean verifyCredetials(String username, String password, int role) throws StudentNotFoundException {
 		logger.info("verifyCredetials in userService");
-		user = userDAO.viewUser(username);
+		user = userDAO.findUser(username);
 
 		if (user == null)
 			return false;
 		if (role == 3) {
-			student = studentDAO.viewStudent(user.getUserID());
+			student = studentDAO.findStudent(user.getUserID());
 			// System.out.println(student.isRegistered());
 			if (role == user.getRole())
 				if (password.equals(user.getPassword()) && student.isRegistered()) {
@@ -72,7 +72,7 @@ public class UserService implements UserServiceInterface {
 	@Override
 	public boolean verifyPasswordResetCredentials(int id, String username) {
 		logger.info("verifyPasswordResetCredetials in userService");
-		user = userDAO.viewUser(username);
+		user = userDAO.findUser(username);
 		if (user == null)
 			return false;
 		if (username.equals(user.getUsername()) && id == user.getUserID()) {

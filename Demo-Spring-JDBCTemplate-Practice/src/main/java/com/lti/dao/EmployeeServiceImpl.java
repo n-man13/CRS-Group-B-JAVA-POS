@@ -19,7 +19,7 @@ import com.lti.configuration.JDBCConfiguration;
 public class EmployeeServiceImpl implements EmployeeDAO{
 	
 	
-// create the reference of looger here
+// create the reference of logger here
 	
 	 Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 	

@@ -131,6 +131,14 @@ public class Student extends User implements  Serializable{
 		this.registered = registered;
 	}
 
+
+	public void setStudentID(int studentID) {
+		// TODO Auto-generated method stub
+		this.studentID = studentID;
+	}
+
+
+
 	/**
 	 * returns the courses paid (unused)
 	 * 
