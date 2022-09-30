@@ -1,6 +1,6 @@
 package com.lti.dao;
 
-import com.lti.bean.User;
+import com.lti.dto.User;
 
 public interface UserDAOInterface {
 	/**

@@ -1,6 +1,6 @@
 package com.lti.dao;
 
-import com.lti.bean.Admin;
+import com.lti.dto.Admin;
 
 public interface AdminDAOInterface {
 	/**

@@ -5,7 +5,7 @@ package com.lti.dao;
 
 import java.util.ArrayList;
 
-import com.lti.bean.*;
+import com.lti.dto.*;
 
 /**
  * @author user101

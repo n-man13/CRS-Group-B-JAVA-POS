@@ -3,7 +3,7 @@
  */
 package com.lti.dao;
 
-import com.lti.bean.Professor;
+import com.lti.dto.Professor;
 
 /**
  * @author user101
