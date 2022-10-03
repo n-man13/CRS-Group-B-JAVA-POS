@@ -19,6 +19,8 @@ public class CourseDAO implements CourseDAOInterface{
 	JDBCConfiguration jdbcTemplateObject;
 	
 	public static final String COURSE_SELECT = "SELECT * FROM Course";
+	public static final String COURSE_INSERT = "INSERT INTO Course(name,department,description,professorID,prereqID) VALUES(?,?,?,NULL,?)";
+
 
 	@Override
 	public List<Course> findAllCourses() {
