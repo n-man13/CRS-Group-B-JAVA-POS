@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.lti.configuration.JDBCConfiguration;
@@ -42,13 +43,22 @@ public class StudentDAO implements StudentDAOInterface {
 	@Override
 	public Student findStudent(String username) {
 		User user = userDAO.findUser(username);
-		return findStudent(user.getUserID());
+		Student student = findStudent(user.getUserID());
+		student.setUsername(user.getUsername());
+		student.setPassword(user.getPassword());
+		student.setRole(user.getRole());
+		return student;
 	}
 
 	@Override
 	public Student findStudent(int studentID) {
-		Student student = jdbcTemplateObject.jdbcTemplate().queryForObject(STUDENT_SELECT, new Object[] { studentID },
-				new StudentMapper());
+		JdbcTemplate template = jdbcTemplateObject.jdbcTemplate();
+		Student student = null;
+		try {
+			student = template.queryForObject(STUDENT_SELECT, new Object[] { studentID }, new StudentMapper());
+		} catch (Exception e) {
+			System.err.println(e.getMessage() + " ERRORS EXIST HERE SOMEHOW");
+		}
 		return student;
 	}
 
