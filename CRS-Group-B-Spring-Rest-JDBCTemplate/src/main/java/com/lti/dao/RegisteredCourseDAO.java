@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.lti.configuration.JDBCConfiguration;
@@ -41,13 +42,18 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID_AND_COURSEID = "SELECT courseID, studentID, grade FROM RegisteredCourse WHERE courseID=? AND studentID=?";
 	public static final String REGISTEREDCOURSE_SELECT_BY_STUDENTID_AND_COURSEID = "SELECT courseID, studentID FROM RegisteredCourse WHERE courseID=? AND studentID=?";
 	public static final String REGISTEREDCOURSE_UPDATE_GRADES = "UPDATE RegisteredCourse SET grade=? WHERE courseID=? AND studentID=?";
-	public static final String REGISTEREDCOURSE_SELECT_COURSES_BY_STUDENTID = "SELECT courseID FROM RegisteredCourse WHERE studentID=%o";
+	public static final String REGISTEREDCOURSE_SELECT_COURSES_BY_STUDENTID = "SELECT courseID FROM RegisteredCourse WHERE studentID=?";
 	public static final String REGISTEREDCOURSE_DELETE = "DELETE FROM RegisteredCourse WHERE courseID=? AND studentID=?";
 	public static final String REGISTEREDCOURSE_INSERT = "INSERT INTO RegisteredCourse VALUES(?,?,0,-1)";
 
 	@Override
 	public List<Course> findCoursesByStudentID(int studentID) {
-		return jdbcConfiguration.jdbcTemplate().query(String.format(REGISTEREDCOURSE_SELECT_COURSES_BY_STUDENTID, studentID), new CourseMapper());
+		try {
+			return jdbcConfiguration.jdbcTemplate().query(REGISTEREDCOURSE_SELECT_COURSES_BY_STUDENTID, new CourseMapper(), studentID);
+		}
+		catch (DataAccessException e) {
+			return null;
+		}
 	}
 
 	@Override
