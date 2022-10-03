@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.lti.configuration.JDBCConfiguration;
@@ -27,7 +28,7 @@ public class StudentDAO implements StudentDAOInterface {
 	private UserDAO userDAO;
 	// Queries for Student table
 	public static final String STUDENT_INSERT = "INSERT INTO Student(studentID, name, registrationApproved) VALUES(%o,%s,?)";
-	public static final String STUDENT_SELECT = "SELECT studentID, name, registrationApproved FROM Student WHERE studentID = ?";
+	public static final String STUDENT_SELECT = "SELECT * FROM Student WHERE studentID = ?";
 	public static final String STUDENT_SELECT_UNREGISTERED = "SELECT studentID, name, registrationApproved FROM Student WHERE registrationApproved=?";
 	public static final String STUDENT_UPDATE = "UPDATE Student SET name=%s, registrationApproved=%b WHERE studentID=%o";
 
@@ -47,9 +48,11 @@ public class StudentDAO implements StudentDAOInterface {
 
 	@Override
 	public Student findStudent(int studentID) {
-		Student student = jdbcTemplateObject.jdbcTemplate().queryForObject(STUDENT_SELECT, new Object[] { studentID },
-				new StudentMapper());
-		return student;
+		try {
+			return jdbcTemplateObject.jdbcTemplate().queryForObject(STUDENT_SELECT, new StudentMapper(), studentID);
+		} catch (DataAccessException e) {
+			return null;
+		}
 	}
 
 	@Override

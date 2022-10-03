@@ -21,9 +21,9 @@ public class ProfessorMapper implements RowMapper<Professor>{
 		Professor professor = new Professor();
 		
 		professor.setProfessorID(rs.getInt("professorID"));
-		professor.setUsername(userDAO.findUser(rs.getInt("professorID")).getUsername());
-		professor.setPassword(userDAO.findUser(rs.getInt("professorID")).getPassword());
-		professor.setRole(userDAO.findUser(rs.getInt("professorID")).getRole());
+//		professor.setUsername(userDAO.findUser(rs.getInt("professorID")).getUsername());
+//		professor.setPassword(userDAO.findUser(rs.getInt("professorID")).getPassword());
+//		professor.setRole(userDAO.findUser(rs.getInt("professorID")).getRole());
 		professor.setName(rs.getString("name"));
 		return professor;
 		

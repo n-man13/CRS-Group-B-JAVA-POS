@@ -26,6 +26,7 @@ public class UserService implements UserServiceInterface {
 	private StudentDAO studentDAO;
 
 	private User user;
+	
 	private Student student;
 
 	Logger logger = LoggerFactory.getLogger(UserService.class);
@@ -51,17 +52,15 @@ public class UserService implements UserServiceInterface {
 		if (user == null)
 			return false;
 		if (role == 3) {
-			student = studentDAO.findStudent(username);
+			student = studentDAO.findStudent(user.getUserID());
 			// System.out.println(student.isRegistered());
-			if (role == user.getRole())
-				if (password.equals(user.getPassword()) && student.isRegistered()) {
-					return true;
-				} else
-					throw new StudentNotFoundException(
-							"This student is not registered. Please inform Admin and supply StudentID: ",
-							student.getStudentID());
-			else
-				return false;
+			if (password.equals(user.getPassword()) && student.isRegistered()) {
+				logger.info("student succesfully logged in");
+				return true;
+			} else
+				throw new StudentNotFoundException(
+						"This student is not registered. Please inform Admin and supply StudentID: ",
+						student.getStudentID());
 		} else {
 			if (password.equals(user.getPassword()) && role == user.getRole()) {
 				return true;

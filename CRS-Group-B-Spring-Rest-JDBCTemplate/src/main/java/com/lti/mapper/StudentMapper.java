@@ -12,9 +12,6 @@ import com.lti.dto.Student;
 import com.lti.dto.User;
 
 public class StudentMapper implements RowMapper<Student>{
-	
-	@Autowired
-	UserDAO userDAO;
 
 	@Override
 	public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -22,9 +19,9 @@ public class StudentMapper implements RowMapper<Student>{
 		Student student = new Student();
 		
 		student.setStudentID(rs.getInt("studentID"));
-		student.setUsername(userDAO.findUser(rs.getInt("studentID")).getUsername());
-		student.setPassword(userDAO.findUser(rs.getInt("studentID")).getPassword());
-		student.setRole(userDAO.findUser(rs.getInt("studentID")).getRole());
+//		student.setUsername(userDAO.findUser(rs.getInt("studentID")).getUsername());
+//		student.setPassword(userDAO.findUser(rs.getInt("studentID")).getPassword());
+//		student.setRole(userDAO.findUser(rs.getInt("studentID")).getRole());
 		student.setName(rs.getString("name"));
 		student.setRegistered(rs.getBoolean("registrationApproved"));
 		return student;
