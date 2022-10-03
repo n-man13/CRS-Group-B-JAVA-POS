@@ -2,37 +2,43 @@ package com.lti.dto;
 
 import java.io.Serializable;
 
-public class RegisteredCourse implements Serializable{
+public class RegisteredCourse implements Serializable {
 
-	private Student student;
-	private Course course;
+	private int studentID;
+	private int courseID;
 	private boolean feePaid;
 	private double grade;
-	
-	public Student getStudent() {
-		return student;
+
+	public int getStudentID() {
+		return studentID;
 	}
-	public void setStudent(Student student) {
-		this.student = student;
+
+	public void setStudentID(int studentID) {
+		this.studentID = studentID;
 	}
-	public Course getCourse() {
-		return course;
+
+	public int getCourseID() {
+		return courseID;
 	}
-	public void setCourse(Course course) {
-		this.course = course;
+
+	public void setCourseID(int course) {
+		this.courseID = course;
 	}
+
 	public boolean isFeePaid() {
 		return feePaid;
 	}
+
 	public void setFeePaid(boolean feePaid) {
 		this.feePaid = feePaid;
 	}
+
 	public double getGrade() {
 		return grade;
 	}
+
 	public void setGrade(double grade) {
 		this.grade = grade;
 	}
-	
-	
+
 }

@@ -25,8 +25,8 @@ public class RegisteredCourseMapper implements RowMapper<RegisteredCourse>{
 		
 		RegisteredCourse registeredCourse = new RegisteredCourse();
 		
-		registeredCourse.setStudent(studentDAO.findStudent(rs.getInt("studentID")));
-		registeredCourse.setCourse(courseDAO.findCourseByCourseID(rs.getInt("courseID")));
+		registeredCourse.setStudentID(rs.getInt("studentID"));
+		registeredCourse.setCourseID(rs.getInt("courseID"));
 		registeredCourse.setFeePaid(rs.getBoolean("feePaid"));
 		registeredCourse.setGrade(rs.getDouble("grade"));
 		
