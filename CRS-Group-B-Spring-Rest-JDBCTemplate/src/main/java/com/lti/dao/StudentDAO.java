@@ -27,16 +27,15 @@ public class StudentDAO implements StudentDAOInterface {
 	@Autowired
 	private UserDAO userDAO;
 	// Queries for Student table
-	public static final String STUDENT_INSERT = "INSERT INTO Student(studentID, name, registrationApproved) VALUES(%o,%s,?)";
+	public static final String STUDENT_INSERT = "INSERT INTO Student(studentID, name, registrationApproved) VALUES(?,?,?)";
 	public static final String STUDENT_SELECT = "SELECT studentID, name, registrationApproved FROM Student WHERE studentID = ?";
 	public static final String STUDENT_SELECT_UNREGISTERED = "SELECT studentID, name, registrationApproved FROM Student WHERE registrationApproved=?";
-	public static final String STUDENT_UPDATE = "UPDATE Student SET name=%s, registrationApproved=%b WHERE studentID=%o";
+	public static final String STUDENT_UPDATE = "UPDATE Student SET name=?, registrationApproved=? WHERE studentID=?";
 
 	@Override
 	public int createStudent(Student student) {
 		int userID = userDAO.createUser(student.getUsername(), student.getPassword(), 3);
-		jdbcTemplateObject.jdbcTemplate()
-				.execute(String.format(STUDENT_INSERT, userID, student.getName(), student.isRegistered()));
+		jdbcTemplateObject.jdbcTemplate().update(STUDENT_INSERT, userID, student.getName(), student.isRegistered());
 		return userID;
 	}
 
@@ -57,8 +56,8 @@ public class StudentDAO implements StudentDAOInterface {
 
 	@Override
 	public boolean updateStudent(Student student) {
-		jdbcTemplateObject.jdbcTemplate().execute(
-				String.format(STUDENT_UPDATE, student.getName(), student.isRegistered(), student.getStudentID()));
+		jdbcTemplateObject.jdbcTemplate().update(STUDENT_UPDATE, student.getName(), student.isRegistered(),
+				student.getStudentID());
 		return true;
 	}
 
