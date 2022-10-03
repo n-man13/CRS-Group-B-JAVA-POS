@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.lti.dao.ProfessorDAO;
 import com.lti.dao.ProfessorDAOInterface;
 import com.lti.dto.Course;
 import com.lti.dto.Student;
@@ -13,7 +14,7 @@ import com.lti.dto.Student;
 public class CourseMapper implements RowMapper<Course>{
 	
 	@Autowired
-	ProfessorDAOInterface professorDAO;
+	ProfessorDAO professorDAO;
 	
 	@Override
 	public Course mapRow(ResultSet rs, int rowNum) throws SQLException {
