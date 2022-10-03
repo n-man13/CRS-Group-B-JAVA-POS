@@ -28,7 +28,7 @@ public class StudentDAO implements StudentDAOInterface {
 	private UserDAO userDAO;
 	// Queries for Student table
 	public static final String STUDENT_INSERT = "INSERT INTO Student(studentID, name, registrationApproved) VALUES(%o,%s,?)";
-	public static final String STUDENT_SELECT = "SELECT * FROM Student WHERE studentID = ?";
+	public static final String STUDENT_SELECT = "SELECT studentID, name, registrationApproved FROM Student WHERE studentID = ?";
 	public static final String STUDENT_SELECT_UNREGISTERED = "SELECT studentID, name, registrationApproved FROM Student WHERE registrationApproved=?";
 	public static final String STUDENT_UPDATE = "UPDATE Student SET name=%s, registrationApproved=%b WHERE studentID=%o";
 
