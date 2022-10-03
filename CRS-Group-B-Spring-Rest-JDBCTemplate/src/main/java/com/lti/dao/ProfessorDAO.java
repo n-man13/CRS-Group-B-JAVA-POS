@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lti.configuration.JDBCConfiguration;
 import com.lti.dto.Professor;
+import com.lti.dto.User;
 import com.lti.mapper.ProfessorMapper;
 import com.lti.mapper.StudentMapper;
 
@@ -20,7 +21,6 @@ public class ProfessorDAO implements ProfessorDAOInterface{
 	
 	public static final String PROFESSOR_INSERT = "INSERT INTO Professor(professorID, name) VALUES(%o,%s)";
 	public static final String PROFESSOR_SELECT = "SELECT * FROM Professor WHERE professorID = ?";
-	public static final String PROFESSOR_SELECT_USERNAME = "SELECT * FROM Professor WHERE username = ?";
 	
 	@Override
 	public int createProfessor(Professor professor) {
@@ -41,11 +41,8 @@ public class ProfessorDAO implements ProfessorDAOInterface{
 
 	@Override
 	public Professor findProfessorByUsername(String username) {
-		try {
-			return jdbcTemplateObject.jdbcTemplate().queryForObject(PROFESSOR_SELECT_USERNAME, new ProfessorMapper(), username);
-		} catch (DataAccessException e) {
-			return null;
-		}
+		User user = userDAO.findUser(username);
+		return findProfessorByProfessorID(user.getUserID());
 	}
 
 }

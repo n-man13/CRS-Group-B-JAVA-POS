@@ -2,18 +2,31 @@ package com.lti.dao;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.lti.configuration.JDBCConfiguration;
 import com.lti.dto.Admin;
 import com.lti.dto.Course;
+import com.lti.mapper.CourseMapper;
+import com.lti.mapper.StudentMapper;
 
 @Repository
 public class CourseDAO implements CourseDAOInterface{
+	
+	@Autowired
+	JDBCConfiguration jdbcTemplateObject;
+	
+	public static final String COURSE_SELECT = "SELECT * FROM Course";
 
 	@Override
 	public List<Course> findAllCourses() {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return jdbcTemplateObject.jdbcTemplate().query(COURSE_SELECT, new CourseMapper());
+		} catch (DataAccessException e) {
+			return null;
+		}
 	}
 
 	@Override
