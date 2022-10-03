@@ -107,7 +107,7 @@ public class AdminController {
 		logger.info("createProfessor in AdminController");
 
 		adminService.createProfessor(professor);
-		return new ResponseEntity(professor, HttpStatus.CREATED);
+		return new ResponseEntity(HttpStatus.CREATED);
 
 	}
 

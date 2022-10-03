@@ -19,14 +19,14 @@ public class ProfessorDAO implements ProfessorDAOInterface{
 	@Autowired
 	private UserDAO userDAO;
 	
-	public static final String PROFESSOR_INSERT = "INSERT INTO Professor(professorID, name) VALUES(%o,%s)";
+	public static final String PROFESSOR_INSERT = "INSERT INTO Professor(professorID, name) VALUES(?,?)";
 	public static final String PROFESSOR_SELECT = "SELECT * FROM Professor WHERE professorID = ?";
 	
 	@Override
 	public int createProfessor(Professor professor) {
 		int userID = userDAO.createUser(professor.getUsername(), professor.getPassword(), 2);
 		jdbcTemplateObject.jdbcTemplate()
-				.execute(String.format(PROFESSOR_INSERT, userID, professor.getName()));
+				.update(PROFESSOR_INSERT, userID, professor.getName());
 		return userID;
 	}
 
