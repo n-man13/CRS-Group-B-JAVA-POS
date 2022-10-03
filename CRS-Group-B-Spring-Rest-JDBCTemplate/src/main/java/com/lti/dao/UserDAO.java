@@ -4,7 +4,7 @@
 package com.lti.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.dao.DataAccessException;
 
 import org.springframework.stereotype.Repository;
 
@@ -31,7 +31,7 @@ public class UserDAO implements UserDAOInterface {
 	public UserDAO() {
 		System.out.println("This is the UserDAO constructor");
 	}
-	
+
 	@Override
 	public int createUser(String username, String password, int role) {
 		jdbcTemplateObject.jdbcTemplate().execute(String.format(USER_INSERT, username, password, role));
@@ -44,9 +44,8 @@ public class UserDAO implements UserDAOInterface {
 		// String sql = "SELECT * FROM User WHERE username = ?";
 		User user = null;
 		try {
-			user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT, new Object[] { username },
-					new UserMapper());
-		} catch (IncorrectResultSizeDataAccessException e) {
+			user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT, new UserMapper(), username);
+		} catch (DataAccessException e) {
 			return null;
 		}
 		return user;
@@ -55,9 +54,8 @@ public class UserDAO implements UserDAOInterface {
 	public User findUser(int userID) {
 		User user = null;
 		try {
-			user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT_ID, new Object[] { userID },
-					new UserMapper());
-		} catch (IncorrectResultSizeDataAccessException e) {
+			user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT_ID, new UserMapper(), userID);
+		} catch (DataAccessException e) {
 			return null;
 		}
 		return user;
