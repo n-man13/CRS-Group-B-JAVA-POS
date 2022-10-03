@@ -26,7 +26,7 @@ public class UserDAO implements UserDAOInterface {
 	public static final String USER_INSERT = "INSERT INTO User(username, password, role) VALUES(?,?,?)";
 	public static final String USER_SELECT = "SELECT userID, username , password, role FROM User WHERE username = ?";
 	public static final String USER_SELECT_ID = "SELECT userID, username , password, role FROM User WHERE userID = ?";
-	public static final String USER_UPDATE_PASSWORD = "UPDATE User SET password=%s WHERE username=%s";
+	public static final String USER_UPDATE_PASSWORD = "UPDATE User SET password=? WHERE username=?";
 
 	public UserDAO() {
 		System.out.println("This is the UserDAO constructor");
@@ -63,7 +63,7 @@ public class UserDAO implements UserDAOInterface {
 
 	@Override
 	public boolean updatePassword(String username, String password) {
-		jdbcTemplateObject.jdbcTemplate().execute(String.format(USER_UPDATE_PASSWORD, password, username));
+		jdbcTemplateObject.jdbcTemplate().update(USER_UPDATE_PASSWORD, password, username);
 		return true;
 	}
 

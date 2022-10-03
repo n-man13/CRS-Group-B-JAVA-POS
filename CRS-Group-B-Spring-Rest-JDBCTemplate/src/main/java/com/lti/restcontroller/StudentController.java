@@ -80,8 +80,9 @@ public class StudentController {
 	@RequestMapping(value = "/viewAppliedCourses/{studentID}", method = RequestMethod.GET)
 	public ResponseEntity viewAppliedCourses(@PathVariable int studentID) {
 		logger.info("viewAppliedCourses in StudentController");
-		displayCourses(studentService.viewAppliedCourses(studentID));
-		return new ResponseEntity(HttpStatus.OK);
+		List<Course> courses = studentService.viewAppliedCourses(studentID);
+
+		return new ResponseEntity(courses, HttpStatus.OK);
 	}
 
 	/**
