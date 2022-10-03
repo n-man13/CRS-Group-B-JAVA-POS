@@ -55,6 +55,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 			courses.add(courseDAO.findCourseByCourseID(courseID));
 		}
 		return courses;
+		//temp comment
 	}
 
 	@Override
