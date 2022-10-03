@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.CourseDAO;
@@ -30,10 +31,14 @@ import com.lti.restcontroller.StudentController;
 @Service
 public class StudentService implements StudentServiceInterface {
 
-	private RegisteredCourseDAOInterface registeredCourseDAO = new RegisteredCourseDAO();
-	private CourseDAOInterface courseDAO = new CourseDAO();
-	private StudentDAOInterface studentDAO = new StudentDAO();
-	private UserDAOInterface userDAO = new UserDAO();
+	@Autowired
+	private RegisteredCourseDAO registeredCourseDAO;
+	@Autowired
+	private CourseDAO courseDAO;
+	@Autowired
+	private StudentDAO studentDAO;
+	@Autowired
+	private UserDAO userDAO;
 	
 	Logger logger = LoggerFactory.getLogger(StudentService.class);
 	/**

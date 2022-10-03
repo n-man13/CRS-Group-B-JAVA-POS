@@ -4,7 +4,8 @@
 package com.lti.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
+
 import org.springframework.stereotype.Repository;
 
 import com.lti.configuration.JDBCConfiguration;
@@ -20,12 +21,17 @@ public class UserDAO implements UserDAOInterface {
 
 	@Autowired
 	private JDBCConfiguration jdbcTemplateObject;
+
 	// Queries for User table
 	public static final String USER_INSERT = "INSERT INTO User(username, password, role) VALUES(%s,%s,%o)";
 	public static final String USER_SELECT = "SELECT userID, username , password, role FROM User WHERE username = ?";
 	public static final String USER_SELECT_ID = "SELECT userID, username , password, role FROM User WHERE userID = ?";
 	public static final String USER_UPDATE_PASSWORD = "UPDATE User SET password=%s WHERE username=%s";
 
+	public UserDAO() {
+		System.out.println("This is the UserDAO constructor");
+	}
+	
 	@Override
 	public int createUser(String username, String password, int role) {
 		jdbcTemplateObject.jdbcTemplate().execute(String.format(USER_INSERT, username, password, role));
@@ -35,15 +41,25 @@ public class UserDAO implements UserDAOInterface {
 
 	@Override
 	public User findUser(String username) {
-		//String sql = "SELECT * FROM User WHERE username = ?";
-		User user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT, new Object[] { username },
-				new UserMapper());
+		// String sql = "SELECT * FROM User WHERE username = ?";
+		User user = null;
+		try {
+			user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT, new Object[] { username },
+					new UserMapper());
+		} catch (IncorrectResultSizeDataAccessException e) {
+			return null;
+		}
 		return user;
 	}
-	
+
 	public User findUser(int userID) {
-		User user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT_ID, new Object[] { userID },
-				new UserMapper());
+		User user = null;
+		try {
+			user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT_ID, new Object[] { userID },
+					new UserMapper());
+		} catch (IncorrectResultSizeDataAccessException e) {
+			return null;
+		}
 		return user;
 	}
 

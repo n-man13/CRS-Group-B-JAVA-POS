@@ -26,10 +26,10 @@ public class UserController {
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	@Autowired
-	StudentService studentService;
+	private StudentService studentService;
 	/**
 	 * Method to Login
 	 * 

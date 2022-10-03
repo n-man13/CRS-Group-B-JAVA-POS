@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.CourseDAO;
@@ -24,9 +25,12 @@ import com.lti.exception.StudentNotFoundException;
 public class ProfessorService implements ProfessorServiceInterface {
 
 	Logger logger = LoggerFactory.getLogger(ProfessorService.class);
-	private ProfessorDAOInterface professorDAO = new ProfessorDAO();
-	private CourseDAOInterface courseDAO = new CourseDAO();
-	private RegisteredCourseDAOInterface registeredCourseDAO = new RegisteredCourseDAO();
+	@Autowired
+	private ProfessorDAO professorDAO;
+	@Autowired
+	private CourseDAO courseDAO;
+	@Autowired
+	private RegisteredCourseDAO registeredCourseDAO;
 
 	/**
 	 * call courseDAO to set professorId to course

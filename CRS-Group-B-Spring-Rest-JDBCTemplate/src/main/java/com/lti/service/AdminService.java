@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.AdminDAO;
@@ -32,11 +33,16 @@ import com.lti.exception.UsernameUsedException;
 public class AdminService implements AdminServiceInterface {
 
 	Logger logger = LoggerFactory.getLogger(AdminService.class);
-	private CourseDAOInterface courseDAO = new CourseDAO();
-	private ProfessorDAOInterface professorDAO = new ProfessorDAO();
-	private StudentDAOInterface studentDAO = new StudentDAO();
-	private AdminDAOInterface adminDAO = new AdminDAO();
-	private UserDAOInterface userDAO = new UserDAO();
+	@Autowired
+	private CourseDAO courseDAO;
+	@Autowired
+	private ProfessorDAO professorDAO;
+	@Autowired
+	private StudentDAO studentDAO;
+	@Autowired
+	private AdminDAO adminDAO;
+	@Autowired
+	private UserDAO userDAO;
 
 	/**
 	 * call courseDAO to create a course

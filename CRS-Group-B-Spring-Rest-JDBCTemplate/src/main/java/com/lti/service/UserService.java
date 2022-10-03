@@ -2,6 +2,8 @@ package com.lti.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.StudentDAO;
@@ -14,14 +16,20 @@ import com.lti.exception.StudentNotFoundException;
 import com.lti.restcontroller.StudentController;
 
 @Service
+@ComponentScan(basePackages = "...")
 public class UserService implements UserServiceInterface {
 
-	private UserDAOInterface userDAO = new UserDAO();
-	private StudentDAOInterface studentDAO = new StudentDAO();
+	@Autowired
+	private UserDAO userDAO;
+
+	@Autowired
+	private StudentDAO studentDAO;
+
 	private User user;
 	private Student student;
 
 	Logger logger = LoggerFactory.getLogger(UserService.class);
+
 	/**
 	 * verify log in credentials
 	 * 
@@ -33,12 +41,17 @@ public class UserService implements UserServiceInterface {
 	 */
 	public boolean verifyCredetials(String username, String password, int role) throws StudentNotFoundException {
 		logger.info("verifyCredetials in userService");
-		user = userDAO.findUser(username);
-
+		try {
+		//	logger.debug(userDAO.toString());
+			user = userDAO.findUser(username);
+			logger.debug(user.getUsername() + user.getUserID());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		if (user == null)
 			return false;
 		if (role == 3) {
-			student = studentDAO.findStudent(user.getUserID());
+			student = studentDAO.findStudent(username);
 			// System.out.println(student.isRegistered());
 			if (role == user.getRole())
 				if (password.equals(user.getPassword()) && student.isRegistered()) {
