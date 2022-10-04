@@ -63,8 +63,7 @@ public class StudentDAO implements StudentDAOInterface {
 
 	@Override
 	public List<Student> findUnregisteredStudents() {
-		return jdbcTemplateObject.jdbcTemplate().query(STUDENT_SELECT_UNREGISTERED, new Object[] { false },
-				new StudentMapper());
+		return jdbcTemplateObject.jdbcTemplate().query(STUDENT_SELECT_UNREGISTERED, new StudentMapper(), false);
 	}
 
 }
