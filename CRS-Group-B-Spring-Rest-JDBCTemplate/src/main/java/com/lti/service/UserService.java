@@ -51,7 +51,7 @@ public class UserService implements UserServiceInterface {
 		}
 		if (user == null)
 			return false;
-		if (role == 3) {
+		if (role == 3 && user.getRole() == 3) {
 			student = studentDAO.findStudent(user.getUserID());
 			// System.out.println(student.isRegistered());
 			if (password.equals(user.getPassword()) && student.isRegistered()) {
