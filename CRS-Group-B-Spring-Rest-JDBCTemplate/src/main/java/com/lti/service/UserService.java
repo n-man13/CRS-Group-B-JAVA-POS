@@ -58,9 +58,16 @@ public class UserService implements UserServiceInterface {
 				logger.info("student succesfully logged in");
 				return true;
 			} else
+			if (!student.isRegistered()) {
 				throw new StudentNotFoundException(
 						"This student is not registered. Please inform Admin and supply StudentID: ",
 						student.getStudentID());
+			}
+			else {
+				throw new StudentNotFoundException(
+						"You entered the wrong credentials: ",
+						student.getStudentID());
+			}
 		} else {
 			if (password.equals(user.getPassword()) && role == user.getRole()) {
 				return true;

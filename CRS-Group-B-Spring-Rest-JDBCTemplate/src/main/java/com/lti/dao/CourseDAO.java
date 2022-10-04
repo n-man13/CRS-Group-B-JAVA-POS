@@ -24,7 +24,11 @@ public class CourseDAO implements CourseDAOInterface {
 	ProfessorDAO professorDAO;
 
 	
-
+	/**
+	 * returns all courses in an ArrayList
+	 * 
+	 * @return all courses
+	 */
 	@Override
 	public List<Course> findAllCourses() {
 		try {
@@ -33,7 +37,13 @@ public class CourseDAO implements CourseDAOInterface {
 			return null;
 		}
 	}
-
+	
+	/**
+	 * Creates a new course
+	 * 
+	 * @param course course to create
+	 * @return if course was created
+	 */
 	@Override
 	public boolean createCourse(Course course) {
 		if (course.getPrereqCourseID() == -1) {
@@ -47,12 +57,25 @@ public class CourseDAO implements CourseDAOInterface {
 		return true;
 	}
 
+	/**
+	 * adds a professor to teach a course
+	 * 
+	 * @param courseID the course to modify
+	 * @param profID   the professor to teach
+	 * @return if course was updated
+	 */
 	@Override
 	public boolean updateProfessorToCourse(int courseID, int professorID) {
 		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.COURSE_UPDATE_PROFESSORID, professorID, courseID);
 		return true;
 	}
 
+	/**
+	 * provides the courses a professor is teaching
+	 * 
+	 * @param profID the professor teaching
+	 * @return the courses that a professor is teaching
+	 */
 	@Override
 	public List<Course> findCourseByProfessorID(int professorID) {
 		try {
@@ -68,12 +91,25 @@ public class CourseDAO implements CourseDAOInterface {
 		}
 	}
 
+	/**
+	 * saves professor information in a course
+	 * 
+	 * @param course the course to save information
+	 * @param professorID the professorID to save information
+	 * @return the newly updated course
+	 */
 	private Course saveProfessorIntoCourse(Course course, int professorID) {
 		Professor professor = professorDAO.findProfessorByProfessorID(professorID);
 		course.setProf(professor);
 		return course;
 	}
 
+	/**
+	 * deletes a course
+	 * 
+	 * @param courseID the course to delete
+	 * @return the course that was deleted, else null
+	 */
 	@Override
 	public Course deleteCourse(int courseID) {
 		Course course = findCourseByCourseID(courseID);
@@ -81,6 +117,12 @@ public class CourseDAO implements CourseDAOInterface {
 		return course;
 	}
 
+	/**
+	 * selects a course with provided id
+	 * 
+	 * @param courseID the identifier of the course
+	 * @return the course with provided id or null if not found
+	 */
 	@Override
 	public Course findCourseByCourseID(int courseID) {
 		try {
@@ -92,7 +134,13 @@ public class CourseDAO implements CourseDAOInterface {
 			return null;
 		}
 	}
-
+	
+	/**
+	 * updates a courses information
+	 * 
+	 * @param course the course with the required changes made already
+	 * @return if the course was updated
+	 */
 	@Override
 	public boolean updateCourse(Course course) {
 		if (course.getPrereqCourseID() == -1) {

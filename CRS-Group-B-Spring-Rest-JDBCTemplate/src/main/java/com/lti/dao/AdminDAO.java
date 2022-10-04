@@ -21,7 +21,12 @@ public class AdminDAO implements AdminDAOInterface{
 	UserDAO userDAO;
 	
 	
-
+	/**
+	 * Creates a new Admin
+	 * 
+	 * @param admin the admin to create
+	 * @return new ID if created successfully, else -1
+	 */
 	@Override
 	public int createAdmin(Admin admin) {
 		int userID = userDAO.createUser(admin.getUsername(), admin.getPassword(), 3);
@@ -29,13 +34,25 @@ public class AdminDAO implements AdminDAOInterface{
 				.update(SQLConstants.ADMIN_INSERT, userID);
 		return userID;
 	}
-
+	
+	/**
+	 * finds the admin with the supplied username
+	 * 
+	 * @param username username associated with the admin
+	 * @return the Admin object
+	 */
 	@Override
 	public Admin findAdminByUsername(String username) {
 		User user = userDAO.findUser(username);
 		return findAdminByAdminID(user.getUserID());
 	}
 
+	/**
+	 * finds the admin with the supplied id
+	 * 
+	 * @param adminID the id of the admin
+	 * @return the Admin object
+	 */
 	@Override
 	public Admin findAdminByAdminID(int adminID) {
 		try {
