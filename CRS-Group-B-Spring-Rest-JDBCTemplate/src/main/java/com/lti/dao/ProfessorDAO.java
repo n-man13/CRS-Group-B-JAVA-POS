@@ -5,6 +5,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.lti.configuration.JDBCConfiguration;
+import com.lti.constants.SQLConstants;
 import com.lti.dto.Professor;
 import com.lti.dto.User;
 import com.lti.mapper.ProfessorMapper;
@@ -19,21 +20,20 @@ public class ProfessorDAO implements ProfessorDAOInterface{
 	@Autowired
 	private UserDAO userDAO;
 	
-	public static final String PROFESSOR_INSERT = "INSERT INTO Professor(professorID, name) VALUES(?,?)";
-	public static final String PROFESSOR_SELECT = "SELECT * FROM Professor WHERE professorID = ?";
+	
 	
 	@Override
 	public int createProfessor(Professor professor) {
 		int userID = userDAO.createUser(professor.getUsername(), professor.getPassword(), 2);
 		jdbcTemplateObject.jdbcTemplate()
-				.update(PROFESSOR_INSERT, userID, professor.getName());
+				.update(SQLConstants.PROFESSOR_INSERT, userID, professor.getName());
 		return userID;
 	}
 
 	@Override
 	public Professor findProfessorByProfessorID(int professorID) {
 		try {
-			return jdbcTemplateObject.jdbcTemplate().queryForObject(PROFESSOR_SELECT, new ProfessorMapper(), professorID);
+			return jdbcTemplateObject.jdbcTemplate().queryForObject(SQLConstants.PROFESSOR_SELECT, new ProfessorMapper(), professorID);
 		} catch (DataAccessException e) {
 			return null;
 		}

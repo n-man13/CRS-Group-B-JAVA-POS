@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.lti.configuration.JDBCConfiguration;
+import com.lti.constants.SQLConstants;
 import com.lti.dto.User;
 import com.lti.mapper.UserMapper;
 
@@ -23,18 +24,15 @@ public class UserDAO implements UserDAOInterface {
 	private JDBCConfiguration jdbcTemplateObject;
 
 	// Queries for User table
-	public static final String USER_INSERT = "INSERT INTO User(username, password, role) VALUES(?,?,?)";
-	public static final String USER_SELECT = "SELECT userID, username , password, role FROM User WHERE username = ?";
-	public static final String USER_SELECT_ID = "SELECT userID, username , password, role FROM User WHERE userID = ?";
-	public static final String USER_UPDATE_PASSWORD = "UPDATE User SET password=? WHERE username=?";
+	
 
 	public UserDAO() {
-		System.out.println("This is the UserDAO constructor");
+		// used for testing only
 	}
 
 	@Override
 	public int createUser(String username, String password, int role) {
-		jdbcTemplateObject.jdbcTemplate().update(USER_INSERT, username, password, role);
+		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.USER_INSERT, username, password, role);
 		User user = findUser(username);
 		return user.getUserID();
 	}
@@ -44,7 +42,7 @@ public class UserDAO implements UserDAOInterface {
 		// String sql = "SELECT * FROM User WHERE username = ?";
 		User user = null;
 		try {
-			user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT, new UserMapper(), username);
+			user = jdbcTemplateObject.jdbcTemplate().queryForObject(SQLConstants.USER_SELECT, new UserMapper(), username);
 		} catch (DataAccessException e) {
 			return null;
 		}
@@ -54,7 +52,7 @@ public class UserDAO implements UserDAOInterface {
 	public User findUser(int userID) {
 		User user = null;
 		try {
-			user = jdbcTemplateObject.jdbcTemplate().queryForObject(USER_SELECT_ID, new UserMapper(), userID);
+			user = jdbcTemplateObject.jdbcTemplate().queryForObject(SQLConstants.USER_SELECT_ID, new UserMapper(), userID);
 		} catch (DataAccessException e) {
 			return null;
 		}
@@ -63,7 +61,7 @@ public class UserDAO implements UserDAOInterface {
 
 	@Override
 	public boolean updatePassword(String username, String password) {
-		jdbcTemplateObject.jdbcTemplate().update(USER_UPDATE_PASSWORD, password, username);
+		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.USER_UPDATE_PASSWORD, password, username);
 		return true;
 	}
 

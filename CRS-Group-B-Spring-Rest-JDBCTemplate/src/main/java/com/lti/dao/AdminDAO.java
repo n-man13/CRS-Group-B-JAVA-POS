@@ -5,6 +5,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.lti.configuration.JDBCConfiguration;
+import com.lti.constants.SQLConstants;
 import com.lti.dto.Admin;
 import com.lti.dto.User;
 import com.lti.mapper.AdminMapper;
@@ -19,14 +20,13 @@ public class AdminDAO implements AdminDAOInterface{
 	@Autowired
 	UserDAO userDAO;
 	
-	public static final String ADMIN_INSERT = "INSERT INTO Admin(adminID) VALUES(?)";
-	public static final String ADMIN_SELECT = "SELECT * FROM Admin WHERE adminID = ?";
+	
 
 	@Override
 	public int createAdmin(Admin admin) {
 		int userID = userDAO.createUser(admin.getUsername(), admin.getPassword(), 3);
 		jdbcTemplateObject.jdbcTemplate()
-				.update(ADMIN_INSERT, userID);
+				.update(SQLConstants.ADMIN_INSERT, userID);
 		return userID;
 	}
 
@@ -39,7 +39,7 @@ public class AdminDAO implements AdminDAOInterface{
 	@Override
 	public Admin findAdminByAdminID(int adminID) {
 		try {
-			return jdbcTemplateObject.jdbcTemplate().queryForObject(ADMIN_SELECT, new AdminMapper(), adminID);
+			return jdbcTemplateObject.jdbcTemplate().queryForObject(SQLConstants.ADMIN_SELECT, new AdminMapper(), adminID);
 		} catch (DataAccessException e) {
 			return null;
 		}

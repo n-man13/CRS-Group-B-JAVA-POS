@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.lti.configuration.JDBCConfiguration;
+import com.lti.constants.SQLConstants;
 import com.lti.dto.Course;
 import com.lti.dto.RegisteredCourse;
 import com.lti.dto.Student;
@@ -30,24 +31,13 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	private StudentDAO studentDAO;
 
 	// Queries for RegisteredCourse table
-	public static final String REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID = "SELECT studentID FROM RegisteredCourse WHERE courseID=?";
-	public static final String REGISTEREDCOURSE_SELECT_FEE_UNPAID = "SELECT courseID, studentID, feePaid FROM RegisteredCourse WHERE courseID=? AND studentID=? AND feePaid=0";
-	public static final String REGISTEREDCOURSE_SELECT_ALL_FEE_UNPAID = "SELECT courseID FROM RegisteredCourse WHERE studentID=? AND feePaid=0";
-	public static final String REGISTEREDCOURSE_UPDATE = "UPDATE RegisteredCourse SET feePaid=? WHERE courseID=? AND studentID=?";
-	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_COURSEID = "SELECT courseID, studentID, grade FROM RegisteredCourse WHERE courseID=?";
-	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID = "SELECT * FROM RegisteredCourse WHERE studentID=?";
-	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID_AND_COURSEID = "SELECT courseID, studentID, grade FROM RegisteredCourse WHERE courseID=? AND studentID=?";
-	public static final String REGISTEREDCOURSE_SELECT_BY_STUDENTID_AND_COURSEID = "SELECT courseID, studentID FROM RegisteredCourse WHERE courseID=? AND studentID=?";
-	public static final String REGISTEREDCOURSE_UPDATE_GRADES = "UPDATE RegisteredCourse SET grade=? WHERE courseID=? AND studentID=?";
-	public static final String REGISTEREDCOURSE_SELECT_COURSES_BY_STUDENTID = "SELECT courseID FROM RegisteredCourse WHERE studentID=?";
-	public static final String REGISTEREDCOURSE_DELETE = "DELETE FROM RegisteredCourse WHERE courseID=? AND studentID=?";
-	public static final String REGISTEREDCOURSE_INSERT = "INSERT INTO RegisteredCourse VALUES(?,?,0,-1)";
+	
 
 	@Override
 	public List<Course> findCoursesByStudentID(int studentID) {
 		List<Course> courses = new ArrayList<Course>();
 		List<Integer> courseIDs = jdbcConfiguration.jdbcTemplate()
-				.queryForList(REGISTEREDCOURSE_SELECT_COURSES_BY_STUDENTID, Integer.class, studentID);
+				.queryForList(SQLConstants.REGISTEREDCOURSE_SELECT_COURSES_BY_STUDENTID, Integer.class, studentID);
 		for (int courseID : courseIDs) {
 			courses.add(courseDAO.findCourseByCourseID(courseID));
 		}
@@ -59,7 +49,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	public List<Student> findStudentsByCourseID(int courseID) {
 		List<Student> students = new ArrayList<Student>();
 		List<Integer> studentIDs = jdbcConfiguration.jdbcTemplate()
-				.queryForList(REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID, Integer.class, courseID);
+				.queryForList(SQLConstants.REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID, Integer.class, courseID);
 		for (int studentID : studentIDs) {
 			students.add(studentDAO.findStudent(studentID));
 		}
@@ -70,7 +60,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	public List<Course> findUnpaidCoursesByStudentID(int studentID) {
 		List<Course> courses = new ArrayList<Course>();
 		List<Integer> courseIDs = jdbcConfiguration.jdbcTemplate()
-				.queryForList(REGISTEREDCOURSE_SELECT_ALL_FEE_UNPAID, Integer.class, studentID);
+				.queryForList(SQLConstants.REGISTEREDCOURSE_SELECT_ALL_FEE_UNPAID, Integer.class, studentID);
 		for (int courseID : courseIDs) {
 			courses.add(courseDAO.findCourseByCourseID(courseID));
 		}
@@ -81,7 +71,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	public Map<Student, Double> findStudentsAndGradesByCourseID(int courseID) {
 		Map<Student, Double> studentGrades = new HashMap<Student, Double>();
 		List<RegisteredCourse> registeredCourses = jdbcConfiguration.jdbcTemplate()
-				.query(REGISTEREDCOURSE_SELECT_GRADES_BY_COURSEID, new RegisteredCourseMapper(), courseID);
+				.query(SQLConstants.REGISTEREDCOURSE_SELECT_GRADES_BY_COURSEID, new RegisteredCourseMapper(), courseID);
 
 		for (RegisteredCourse registeredCourse : registeredCourses) {
 			studentGrades.put(studentDAO.findStudent(registeredCourse.getStudentID()), registeredCourse.getGrade());
@@ -94,7 +84,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	public Map<Course, Double> findGradesByStudentID(int studentID) {
 		Map<Course, Double> courseGrades = new HashMap<Course, Double>();
 		List<RegisteredCourse> registeredCourses = jdbcConfiguration.jdbcTemplate()
-				.query(REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID, new RegisteredCourseMapper(), studentID);
+				.query(SQLConstants.REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID, new RegisteredCourseMapper(), studentID);
 
 		for (RegisteredCourse registeredCourse : registeredCourses) {
 			courseGrades.put(courseDAO.findCourseByCourseID(registeredCourse.getCourseID()),
@@ -106,26 +96,26 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 
 	@Override
 	public boolean updateStudentRegistration(int studentID, int courseID) {
-		jdbcConfiguration.jdbcTemplate().update(REGISTEREDCOURSE_INSERT, studentID, courseID);
+		jdbcConfiguration.jdbcTemplate().update(SQLConstants.REGISTEREDCOURSE_INSERT, studentID, courseID);
 		return true;
 	}
 
 	@Override
 	public boolean updateFeePaid(int studentID, int courseID) {
-		jdbcConfiguration.jdbcTemplate().update(REGISTEREDCOURSE_UPDATE, true, courseID, studentID);
+		jdbcConfiguration.jdbcTemplate().update(SQLConstants.REGISTEREDCOURSE_UPDATE, true, courseID, studentID);
 		return true;
 	}
 
 	@Override
 	public boolean updateGrade(int studentID, int courseID, double grade) {
 		jdbcConfiguration.jdbcTemplate()
-				.update(REGISTEREDCOURSE_UPDATE_GRADES, grade, courseID, studentID);
+				.update(SQLConstants.REGISTEREDCOURSE_UPDATE_GRADES, grade, courseID, studentID);
 		return true;
 	}
 
 	@Override
 	public boolean deleteStudentRegistration(int studentID, int courseID) {
-		jdbcConfiguration.jdbcTemplate().update(REGISTEREDCOURSE_DELETE, courseID, studentID);
+		jdbcConfiguration.jdbcTemplate().update(SQLConstants.REGISTEREDCOURSE_DELETE, courseID, studentID);
 		return true;
 	}
 

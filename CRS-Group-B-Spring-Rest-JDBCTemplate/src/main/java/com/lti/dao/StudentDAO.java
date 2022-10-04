@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.lti.configuration.JDBCConfiguration;
+import com.lti.constants.SQLConstants;
 import com.lti.dto.Student;
 import com.lti.dto.User;
 import com.lti.mapper.StudentMapper;
@@ -27,15 +28,12 @@ public class StudentDAO implements StudentDAOInterface {
 	@Autowired
 	private UserDAO userDAO;
 	// Queries for Student table
-	public static final String STUDENT_INSERT = "INSERT INTO Student(studentID, name, registrationApproved) VALUES(?,?,?)";
-	public static final String STUDENT_SELECT = "SELECT studentID, name, registrationApproved FROM Student WHERE studentID = ?";
-	public static final String STUDENT_SELECT_UNREGISTERED = "SELECT studentID, name, registrationApproved FROM Student WHERE registrationApproved=?";
-	public static final String STUDENT_UPDATE = "UPDATE Student SET name=?, registrationApproved=? WHERE studentID=?";
+	
 
 	@Override
 	public int createStudent(Student student) {
 		int userID = userDAO.createUser(student.getUsername(), student.getPassword(), 3);
-		jdbcTemplateObject.jdbcTemplate().update(STUDENT_INSERT, userID, student.getName(), student.isRegistered());
+		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.STUDENT_INSERT, userID, student.getName(), student.isRegistered());
 		return userID;
 	}
 
@@ -48,7 +46,7 @@ public class StudentDAO implements StudentDAOInterface {
 	@Override
 	public Student findStudent(int studentID) {
 		try {
-			return jdbcTemplateObject.jdbcTemplate().queryForObject(STUDENT_SELECT, new StudentMapper(), studentID);
+			return jdbcTemplateObject.jdbcTemplate().queryForObject(SQLConstants.STUDENT_SELECT, new StudentMapper(), studentID);
 		} catch (DataAccessException e) {
 			return null;
 		}
@@ -56,14 +54,14 @@ public class StudentDAO implements StudentDAOInterface {
 
 	@Override
 	public boolean updateStudent(Student student) {
-		jdbcTemplateObject.jdbcTemplate().update(STUDENT_UPDATE, student.getName(), student.isRegistered(),
+		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.STUDENT_UPDATE, student.getName(), student.isRegistered(),
 				student.getStudentID());
 		return true;
 	}
 
 	@Override
 	public List<Student> findUnregisteredStudents() {
-		return jdbcTemplateObject.jdbcTemplate().query(STUDENT_SELECT_UNREGISTERED, new StudentMapper(), false);
+		return jdbcTemplateObject.jdbcTemplate().query(SQLConstants.STUDENT_SELECT_UNREGISTERED, new StudentMapper(), false);
 	}
 
 }
