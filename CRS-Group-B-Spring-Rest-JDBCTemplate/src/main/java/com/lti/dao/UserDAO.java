@@ -30,6 +30,14 @@ public class UserDAO implements UserDAOInterface {
 		// used for testing only
 	}
 
+	/**
+	 * Creates a new user and returns the userID
+	 * 
+	 * @param username the users username
+	 * @param password the users password
+	 * @param role     the role number
+	 * @return userID generated or -1 if already exists
+	 */
 	@Override
 	public int createUser(String username, String password, int role) {
 		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.USER_INSERT, username, password, role);
@@ -37,6 +45,12 @@ public class UserDAO implements UserDAOInterface {
 		return user.getUserID();
 	}
 
+	/**
+	 * returns the user with the associated username
+	 * 
+	 * @param username the users username
+	 * @return the user or null if no user exists
+	 */
 	@Override
 	public User findUser(String username) {
 		// String sql = "SELECT * FROM User WHERE username = ?";
@@ -49,6 +63,12 @@ public class UserDAO implements UserDAOInterface {
 		return user;
 	}
 
+	/**
+	 * returns the user with the associated id
+	 * 
+	 * @param userID the users id
+	 * @return the user or null if no user exists
+	 */
 	public User findUser(int userID) {
 		User user = null;
 		try {
@@ -59,6 +79,13 @@ public class UserDAO implements UserDAOInterface {
 		return user;
 	}
 
+	/**
+	 * changes the password of a specific user
+	 * 
+	 * @param username the username of the User to change
+	 * @param password the new password
+	 * @return if the password was changed successfully
+	 */
 	@Override
 	public boolean updatePassword(String username, String password) {
 		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.USER_UPDATE_PASSWORD, password, username);

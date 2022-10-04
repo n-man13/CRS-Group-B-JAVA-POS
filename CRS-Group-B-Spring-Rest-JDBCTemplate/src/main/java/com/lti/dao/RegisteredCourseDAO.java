@@ -33,6 +33,12 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	// Queries for RegisteredCourse table
 	
 
+	/**
+	 * view the courses of a student given id
+	 * 
+	 * @param studentID the id of the student
+	 * @return the courses registered by the student
+	 */
 	@Override
 	public List<Course> findCoursesByStudentID(int studentID) {
 		List<Course> courses = new ArrayList<Course>();
@@ -45,6 +51,12 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		
 	}
 
+	/**
+	 * view the students in a course
+	 * 
+	 * @param courseID the course to view
+	 * @return the students registered to this course
+	 */
 	@Override
 	public List<Student> findStudentsByCourseID(int courseID) {
 		List<Student> students = new ArrayList<Student>();
@@ -56,6 +68,12 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		return students;
 	}
 
+	/**
+	 * Gives a list of all courses yet to be paid
+	 * 
+	 * @param studentID the student
+	 * @return list of all unpaid courses
+	 */
 	@Override
 	public List<Course> findUnpaidCoursesByStudentID(int studentID) {
 		List<Course> courses = new ArrayList<Course>();
@@ -67,6 +85,12 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		return courses;
 	}
 
+	/**
+	 * views the students and their grades in a course
+	 * 
+	 * @param courseID the course to look up
+	 * @return a map of students to their grades in the specified class
+	 */
 	@Override
 	public Map<Student, Double> findStudentsAndGradesByCourseID(int courseID) {
 		Map<Student, Double> studentGrades = new HashMap<Student, Double>();
@@ -80,6 +104,12 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		return studentGrades;
 	}
 
+	/**
+	 * views the courses and the grades of a student
+	 * 
+	 * @param studentID the student to look at
+	 * @return a map of courses to their grades by the student
+	 */
 	@Override
 	public Map<Course, Double> findGradesByStudentID(int studentID) {
 		Map<Course, Double> courseGrades = new HashMap<Course, Double>();
@@ -94,18 +124,40 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		return courseGrades;
 	}
 
+	/**
+	 * updates a student's course registration information
+	 * 
+	 * @param studentID the student to add
+	 * @param courseID  the course to add
+	 * @return if the student was registered or not
+	 */
 	@Override
 	public boolean updateStudentRegistration(int studentID, int courseID) {
 		jdbcConfiguration.jdbcTemplate().update(SQLConstants.REGISTEREDCOURSE_INSERT, studentID, courseID);
 		return true;
 	}
 
+	/**
+	 * pays the student's course fee
+	 * 
+	 * @param studentID the id of the student that has paid
+	 * @param courseID  the course that has been paid for
+	 * @return if the update was successful
+	 */
 	@Override
 	public boolean updateFeePaid(int studentID, int courseID) {
 		jdbcConfiguration.jdbcTemplate().update(SQLConstants.REGISTEREDCOURSE_UPDATE, true, courseID, studentID);
 		return true;
 	}
 
+	/**
+	 * sets the grade of a student in a class
+	 * 
+	 * @param studentID the id of the student
+	 * @param courseID  the id of the course
+	 * @param grade     the grade to be added
+	 * @return if the grade was set
+	 */
 	@Override
 	public boolean updateGrade(int studentID, int courseID, double grade) {
 		jdbcConfiguration.jdbcTemplate()
@@ -113,6 +165,13 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		return true;
 	}
 
+	/**
+	 * removes a student from a course
+	 * 
+	 * @param studentID the student to remove from class
+	 * @param courseID  the id of the class
+	 * @return if the student was removed
+	 */
 	@Override
 	public boolean deleteStudentRegistration(int studentID, int courseID) {
 		jdbcConfiguration.jdbcTemplate().update(SQLConstants.REGISTEREDCOURSE_DELETE, courseID, studentID);
