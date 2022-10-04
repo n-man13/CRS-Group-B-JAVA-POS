@@ -35,7 +35,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	public static final String REGISTEREDCOURSE_SELECT_ALL_FEE_UNPAID = "SELECT courseID, studentID, feePaid FROM RegisteredCourse WHERE studentID=%o AND feePaid=0";
 	public static final String REGISTEREDCOURSE_UPDATE = "UPDATE RegisteredCourse SET feePaid=? WHERE courseID=? AND studentID=?";
 	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_COURSEID = "SELECT courseID, studentID, grade FROM RegisteredCourse WHERE courseID=?";
-	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID = "SELECT courseID, studentID, grade FROM RegisteredCourse WHERE studentID=?";
+	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID = "SELECT * FROM RegisteredCourse WHERE studentID=?";
 	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID_AND_COURSEID = "SELECT courseID, studentID, grade FROM RegisteredCourse WHERE courseID=? AND studentID=?";
 	public static final String REGISTEREDCOURSE_SELECT_BY_STUDENTID_AND_COURSEID = "SELECT courseID, studentID FROM RegisteredCourse WHERE courseID=? AND studentID=?";
 	public static final String REGISTEREDCOURSE_UPDATE_GRADES = "UPDATE RegisteredCourse SET grade=? WHERE courseID=? AND studentID=?";
