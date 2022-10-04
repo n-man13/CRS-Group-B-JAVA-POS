@@ -30,16 +30,16 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	private StudentDAO studentDAO;
 
 	// Queries for RegisteredCourse table
-	public static final String REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID = "SELECT courseID, studentID FROM RegisteredCourse WHERE courseID=%o";
+	public static final String REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID = "SELECT studentID FROM RegisteredCourse WHERE courseID=?";
 	public static final String REGISTEREDCOURSE_SELECT_FEE_UNPAID = "SELECT courseID, studentID, feePaid FROM RegisteredCourse WHERE courseID=? AND studentID=? AND feePaid=0";
-	public static final String REGISTEREDCOURSE_SELECT_ALL_FEE_UNPAID = "SELECT courseID, studentID, feePaid FROM RegisteredCourse WHERE studentID=%o AND feePaid=0";
+	public static final String REGISTEREDCOURSE_SELECT_ALL_FEE_UNPAID = "SELECT courseID FROM RegisteredCourse WHERE studentID=? AND feePaid=0";
 	public static final String REGISTEREDCOURSE_UPDATE = "UPDATE RegisteredCourse SET feePaid=? WHERE courseID=? AND studentID=?";
 	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_COURSEID = "SELECT courseID, studentID, grade FROM RegisteredCourse WHERE courseID=?";
 	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID = "SELECT * FROM RegisteredCourse WHERE studentID=?";
 	public static final String REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID_AND_COURSEID = "SELECT courseID, studentID, grade FROM RegisteredCourse WHERE courseID=? AND studentID=?";
 	public static final String REGISTEREDCOURSE_SELECT_BY_STUDENTID_AND_COURSEID = "SELECT courseID, studentID FROM RegisteredCourse WHERE courseID=? AND studentID=?";
 	public static final String REGISTEREDCOURSE_UPDATE_GRADES = "UPDATE RegisteredCourse SET grade=? WHERE courseID=? AND studentID=?";
-	public static final String REGISTEREDCOURSE_SELECT_COURSES_BY_STUDENTID = "SELECT courseID FROM RegisteredCourse WHERE studentID=%o";
+	public static final String REGISTEREDCOURSE_SELECT_COURSES_BY_STUDENTID = "SELECT courseID FROM RegisteredCourse WHERE studentID=?";
 	public static final String REGISTEREDCOURSE_DELETE = "DELETE FROM RegisteredCourse WHERE courseID=? AND studentID=?";
 	public static final String REGISTEREDCOURSE_INSERT = "INSERT INTO RegisteredCourse VALUES(?,?,0,-1)";
 
@@ -47,7 +47,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	public List<Course> findCoursesByStudentID(int studentID) {
 		List<Course> courses = new ArrayList<Course>();
 		List<Integer> courseIDs = jdbcConfiguration.jdbcTemplate()
-				.queryForList(String.format(REGISTEREDCOURSE_SELECT_COURSES_BY_STUDENTID, studentID), Integer.class);
+				.queryForList(REGISTEREDCOURSE_SELECT_COURSES_BY_STUDENTID, Integer.class, studentID);
 		for (int courseID : courseIDs) {
 			courses.add(courseDAO.findCourseByCourseID(courseID));
 		}
@@ -59,7 +59,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	public List<Student> findStudentsByCourseID(int courseID) {
 		List<Student> students = new ArrayList<Student>();
 		List<Integer> studentIDs = jdbcConfiguration.jdbcTemplate()
-				.queryForList(String.format(REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID, courseID), Integer.class);
+				.queryForList(REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID, Integer.class, courseID);
 		for (int studentID : studentIDs) {
 			students.add(studentDAO.findStudent(studentID));
 		}
@@ -70,7 +70,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	public List<Course> findUnpaidCoursesByStudentID(int studentID) {
 		List<Course> courses = new ArrayList<Course>();
 		List<Integer> courseIDs = jdbcConfiguration.jdbcTemplate()
-				.queryForList(String.format(REGISTEREDCOURSE_SELECT_ALL_FEE_UNPAID, studentID), Integer.class);
+				.queryForList(REGISTEREDCOURSE_SELECT_ALL_FEE_UNPAID, Integer.class, studentID);
 		for (int courseID : courseIDs) {
 			courses.add(courseDAO.findCourseByCourseID(courseID));
 		}
