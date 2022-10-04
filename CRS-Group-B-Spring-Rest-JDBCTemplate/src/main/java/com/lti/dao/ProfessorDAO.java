@@ -21,7 +21,12 @@ public class ProfessorDAO implements ProfessorDAOInterface{
 	private UserDAO userDAO;
 	
 	
-	
+	/**
+	 * creates a new professor
+	 * 
+	 * @param prof new professor to add
+	 * @return new ID if created successfully, else -1
+	 */
 	@Override
 	public int createProfessor(Professor professor) {
 		int userID = userDAO.createUser(professor.getUsername(), professor.getPassword(), 2);
@@ -30,6 +35,12 @@ public class ProfessorDAO implements ProfessorDAOInterface{
 		return userID;
 	}
 
+	/**
+	 * views a professor given the id
+	 * 
+	 * @param profID the professor to view
+	 * @return the professor object
+	 */
 	@Override
 	public Professor findProfessorByProfessorID(int professorID) {
 		try {
@@ -39,6 +50,12 @@ public class ProfessorDAO implements ProfessorDAOInterface{
 		}
 	}
 
+	/**
+	 * views a professor given the username
+	 * 
+	 * @param username the username of the User
+	 * @return the professor object associated with the username
+	 */
 	@Override
 	public Professor findProfessorByUsername(String username) {
 		User user = userDAO.findUser(username);
