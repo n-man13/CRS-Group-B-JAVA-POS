@@ -16,6 +16,7 @@ import com.lti.dao.ProfessorDAO;
 import com.lti.dao.ProfessorDAOInterface;
 import com.lti.dao.RegisteredCourseDAO;
 import com.lti.dao.RegisteredCourseDAOInterface;
+import com.lti.dao.UserDAO;
 import com.lti.dto.*;
 import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.NoStudentsEnrolledException;
@@ -31,6 +32,8 @@ public class ProfessorService implements ProfessorServiceInterface {
 	private CourseDAO courseDAO;
 	@Autowired
 	private RegisteredCourseDAO registeredCourseDAO;
+	@Autowired
+	private UserDAO userDAO;
 
 	/**
 	 * call courseDAO to set professorId to course
@@ -42,6 +45,8 @@ public class ProfessorService implements ProfessorServiceInterface {
 	public void applyToCourse(int professorId, int courseId) throws CourseNotFoundException {
 		logger.info("applyToCourse in ProfessorService");
 		// apply to specific course
+		if (userDAO.findUser(professorId).getRole() != 2)
+			throw new CourseNotFoundException("You are not a professor, Id: " + professorId, professorId);
 		if (courseDAO.findCourseByCourseID(courseId).getProf() == null) {
 			if (!courseDAO.updateProfessorToCourse(courseId, professorId))
 				throw new CourseNotFoundException("This course was not found, Id: " + courseId, courseId);
