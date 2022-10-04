@@ -50,7 +50,7 @@ public class StudentService implements StudentServiceInterface {
 	 * @throws CourseFullException     if there are more then 10 students
 	 */
 	public void applyToCourse(int studentId, int courseId) throws CourseNotFoundException, CourseFullException {
-		logger.info("applayToCourse in StudentService");
+		logger.info("applyToCourse in StudentService");
 		List<Course> result = registeredCourseDAO.findCoursesByStudentID(studentId).stream()
 				.filter(c -> c.getCourseID() == courseId).collect(Collectors.toList());
 		if (!result.isEmpty())
