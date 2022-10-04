@@ -41,8 +41,14 @@ public class CourseDAO implements CourseDAOInterface {
 
 	@Override
 	public boolean createCourse(Course course) {
+		if (course.getPrereqCourseID() == -1) {
+			jdbcTemplateObject.jdbcTemplate().update(COURSE_INSERT, course.getName(), course.getDepartment(),
+					course.getDescription(), null);
+		}
+		else {
 		jdbcTemplateObject.jdbcTemplate().update(COURSE_INSERT, course.getName(), course.getDepartment(),
 				course.getDescription(), course.getPrereqCourseID());
+		}
 		return true;
 	}
 
@@ -94,9 +100,16 @@ public class CourseDAO implements CourseDAOInterface {
 
 	@Override
 	public boolean updateCourse(Course course) {
+		if (course.getPrereqCourseID() == -1) {
+			jdbcTemplateObject.jdbcTemplate().update(COURSE_UPDATE, course.getName(), course.getDepartment(),
+					course.getDescription(), null, course.getCourseID());
+		}
+		else {
 		jdbcTemplateObject.jdbcTemplate().update(COURSE_UPDATE, course.getName(), course.getDepartment(),
-				course.getDescription(), course.getPrereqCourseID());
+				course.getDescription(), course.getPrereqCourseID(), course.getCourseID());
+		}
 		return true;
+
 	}
 
 }
