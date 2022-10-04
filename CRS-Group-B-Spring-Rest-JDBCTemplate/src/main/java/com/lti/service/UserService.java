@@ -66,7 +66,7 @@ public class UserService implements UserServiceInterface {
 				return true;
 			}
 		}
-
+		//should throw exception called properly instead of returning a boolean
 		return false;
 	}
 

@@ -40,7 +40,10 @@ public class UserController {
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON, method = RequestMethod.POST, value="/login")
 	public ResponseEntity login(@RequestBody User user) throws StudentNotFoundException {
 		logger.info("login in userController");
-		userService.verifyCredetials(user.getUsername(), user.getPassword(), user.getRole());
+		if (userService.verifyCredetials(user.getUsername(), user.getPassword(), user.getRole())) {
+			return new ResponseEntity("Login succesful", HttpStatus.OK);
+		}
+		
 		if (user == null)
 			return new ResponseEntity("User information not provided", HttpStatus.NOT_FOUND);
 //		try {
@@ -48,7 +51,7 @@ public class UserController {
 //		} catch (StudentNotFoundException e) {
 //			return new ResponseEntity(e.getMessage() + e.getStudentID(), HttpStatus.NOT_FOUND);
 //		}
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity("Login failed",HttpStatus.UNAUTHORIZED);
 	}
 	
 	/**
