@@ -1,8 +1,6 @@
 package com.lti.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -11,14 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.AdminDAO;
-import com.lti.dao.AdminDAOInterface;
 import com.lti.dao.CourseDAO;
-import com.lti.dao.CourseDAOInterface;
 import com.lti.dao.ProfessorDAO;
-import com.lti.dao.ProfessorDAOInterface;
 import com.lti.dao.StudentDAO;
-import com.lti.dao.StudentDAOInterface;
-import com.lti.dao.UserDAOInterface;
 import com.lti.dto.Admin;
 import com.lti.dto.Course;
 import com.lti.dto.Professor;
