@@ -2,9 +2,6 @@ package com.lti.constants;
 
 public class SQLConstants {
 	
-	// Admin SQL
-	public static final String ADMIN_INSERT = "INSERT INTO Admin(adminID) VALUES(?)";
-	public static final String ADMIN_SELECT = "SELECT * FROM Admin WHERE adminID = ?";
 	
 	// Course SQL
 	public static final String COURSE_SELECT_BY_COURSEID = "SELECT courseID, name , department, description, professorID, prereqID FROM Course WHERE courseID=?";
