@@ -1,9 +1,8 @@
 package com.lti.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -12,13 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.CourseDAO;
-import com.lti.dao.CourseDAOInterface;
 import com.lti.dao.RegisteredCourseDAO;
-import com.lti.dao.RegisteredCourseDAOInterface;
 import com.lti.dao.StudentDAO;
-import com.lti.dao.StudentDAOInterface;
 import com.lti.dao.UserDAO;
-import com.lti.dao.UserDAOInterface;
 import com.lti.dto.Course;
 import com.lti.dto.Student;
 import com.lti.exception.AllCoursesPaidException;
@@ -26,7 +21,6 @@ import com.lti.exception.CourseFullException;
 import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.StudentNotFoundException;
 import com.lti.exception.UsernameUsedException;
-import com.lti.restcontroller.StudentController;
 
 @Service
 public class StudentService implements StudentServiceInterface {
@@ -72,7 +66,7 @@ public class StudentService implements StudentServiceInterface {
 	 */
 	public void dropCourse(int studentId, int courseId) throws CourseNotFoundException {
 		logger.info("dropCourse in StudentService");
-		List<Course> courses = registeredCourseDAO.findCoursesByStudentID(studentId);
+		//List<Course> courses = registeredCourseDAO.findCoursesByStudentID(studentId);
 //		int i = 0;
 //		for (Course c : courses) {
 //			if (c.getCourseID() != courseId) i++;
