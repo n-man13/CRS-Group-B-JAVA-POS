@@ -42,28 +42,28 @@
 
       <hr>
        <button class="btn btn-block btn-light">
-         <a type="button" href="#apply-course" data-toggle="modal" data-target="#apply-course" style="font-size: 20px;" title="Create Game" >
+         <a type="button" href="#apply-course" data-toggle="modal" data-target="#apply-course" style="font-size: 20px;" title="Apply to course" >
            <div class="mb-1" style="text-align: center;">
              Apply to course <i class="fa fa-plus"></i>
            </div>
          </a>
        </button>
 	   <button class="btn btn-block btn-light">
-         <a type="button" href="#drop-course" data-toggle="modal" data-target="#drop-course" style="font-size: 20px;" title="Create Game" >
+         <a type="button" href="#drop-course" data-toggle="modal" data-target="#drop-course" style="font-size: 20px;" title="Drop course" >
            <div class="mb-1" style="text-align: center;">
              Drop course <i class="fa fa-trash"></i>
            </div>
          </a>
        </button>
        <button class="btn btn-block btn-light">
-         <a type="button"  href="#record-grade" data-toggle="modal" data-target="#record-grade" style="font-size: 20px;" title="Create Game" >
+         <a type="button"  href="#view-grade" data-toggle="modal" data-target="#view-grade" style="font-size: 20px;" title="View grade" >
            <div class="mb-1" style="text-align: center;">
              View Grade <i class="fa fa-edit"></i>
            </div>
          </a>
        </button>
 	   <button class="btn btn-block btn-light">
-         <a type="button"  href="#pay-fee" data-toggle="modal" data-target="#pay-fee" style="font-size: 20px;" title="Create Game" >
+         <a type="button"  href="#pay-fee" data-toggle="modal" data-target="#pay-fee" style="font-size: 20px;" title="Pay fees" >
            <div class="mb-1" style="text-align: center;">
              Pay for course <i class="fa fa-edit"></i>
            </div>
@@ -153,89 +153,56 @@
     </div>
   </div>
 
-  <!-- record grade -->
+  <!-- view grade -->
   <div id="record-grade" class="modal fade login">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header myheader">
-          <h2 class="modal-title">Record Grade</h2>
+          <h2 class="modal-title">View Grade</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <!--action form-->
           <form action="" method="POST" id="login">
             <div class="form-group">
-              <label>Student ID</label>
-              <input class="form-control" id="courseID" name="courseID" type="number" placeholder="Enter Course ID"  required>
-            </div>
-            <div class="form-group">
               <label>Course ID</label>
               <input class="form-control" id="courseID" name="courseID" type="number" placeholder="Enter Course ID"  required>
             </div>
-            <div class="form-group">
-              <label>Grade</label>
-              <input class="form-control" id="courseID" name="courseID" type="number" placeholder="Enter Course ID"  required>
-            </div>
-          </div>
+        </div>
           <div class="modal-footer">
-            <button class="btn btn-primary" type="submit" name="login-submit" id="login-submit">record</button>
+            <button class="btn btn-primary" type="submit" name="login-submit" id="login-submit">View</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 
-  <div id="create-professor" class="modal fade login">
+<!--------Pay Fee------------>
+  <div id="pay-fee" class="modal fade login">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header myheader">
-          <h2 class="modal-title">Create Professor</h2>
+          <h2 class="modal-title">Pay Fee</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
             <!--action form-->
           <form action="" method="POST" id="login">
             <div class="form-group">
-              <label>Name</label>
-              <input class="form-control" id="name" name="name" type="text" placeholder="Enter Professor name"  required>
+              <label>Course ID</label>
+              <input class="form-control" id="name" name="name" type="text" placeholder="Enter Course ID to pay for"  required>
             </div>
             <div class="form-group">
-              <label>Username</label>
-              <input class="form-control" id="username" name="username" type="text" placeholder="Enter Username"  required>
-            </div>
-            <div class="form-group">
-              <label>Password</label>
-              <input class="form-control" id="password" name="password" type="password" placeholder="Enter Password" required>
+              <input type="radio" name="payment" checked> Credit 
+			  <input type="radio" name="payment"> Check 
+			  <input type="radio" name="payment"> Cash 
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary" type="submit" name="login-submit" id="login-submit">create professor</button>
+            <button class="btn btn-primary" type="submit" name="login-submit" id="login-submit">Pay Fee</button>
           </div>
         </form>
       </div>
     </div>
   </div>
-
-  <!--approve student registration-->
-  <div id="approve-registration" class="modal fade login">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header myheader">
-          <h2 class="modal-title">Approve Registration</h2>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <!--action form-->
-          <form action="" method="POST" id="login">
-            <div class="form-group">
-              <label>Student ID</label>
-              <input class="form-control" id="courseID" name="courseID" type="number" placeholder="Enter Student ID"  required>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" type="submit" name="login-submit" id="login-submit">approve</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+</body>
