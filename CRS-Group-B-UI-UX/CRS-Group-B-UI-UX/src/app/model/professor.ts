@@ -9,3 +9,4 @@ export class Professor extends User {
         this.professorID = id;
         this.name = name;
     }
+}
