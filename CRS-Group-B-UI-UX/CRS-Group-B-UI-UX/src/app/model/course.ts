@@ -6,14 +6,14 @@ export class Course {
     public description: string;
     public department: string;
     public professor: Professor;
-    public prereqCourse: Course;
+    public prereqID: number;
 
-    constructor(courseID: number, name: string, description: string, department: string, prereqCourse: Course, professor: Professor) {
+    constructor(courseID: number, name: string, description: string, department: string, prereqID: number, professor: Professor) {
         this.courseID = courseID;
         this.name = name;
         this.description = description;
         this.department = department;
         this.professor = professor;
-        this.prereqCourse = prereqCourse;
+        this.prereqID = prereqID;
     }
 }
