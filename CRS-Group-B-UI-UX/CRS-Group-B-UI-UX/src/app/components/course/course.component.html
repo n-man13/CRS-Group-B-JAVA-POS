@@ -1,40 +1,62 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <form action="" method="POST" id="">
+            <form ngForm>
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Course ID</label>
                         <input class="form-control" id="courseID" name="courseID" type="number"
-                            placeholder="Enter Course ID" required>
+                            placeholder="Enter Course ID" 
+                            [(ngModel)]="model.courseID">
                     </div>
                     <div class="form-group">
                         <label>Course Name</label>
-                        <input class="form-control" id="username" name="username" type="text"
-                            placeholder="Enter Username" required>
+                        <input class="form-control" id="name" name="name" type="text"
+                            placeholder="Enter Username" [(ngModel)]="model.name" required>
                     </div>
                     <div class="form-group">
                         <label>Course Department</label>
-                        <input class="form-control" id="department" name="department" type="text" required>
+                        <input class="form-control" id="department" name="department" type="text" 
+                        [(ngModel)]="model.department" required>
                     </div>
                     <div class="form-group">
                         <label>Course Description</label>
                         <textarea class="form-control" id="description"
-                            name="description">Enter the course description</textarea>
+                            name="description"
+                            [(ngModel)]="model.description">Enter the course description</textarea>
                     </div>
                     <div class="form-group">
                         <label>Course ID prerequisite</label>
                         <input class="form-control" id="username" name="username" type="number"
-                            placeholder="Enter Username" required>
+                            placeholder="Enter Username" [(ngModel)]="model.prereqID" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit" name="login-submit" id="login-submit">create</button>
+                    <button class="btn btn-primary" (click)="createUpdateCourse()">Submit</button>
                 </div>
             </form>
         </div>
+        <div class="col-md-6">
+            <h3>Courses</h3>
+            <br>
+            <div *ngFor = "let course of courseArray" class="card" style="margin-bottom: 16px">
+                <div class="card-header">
+                    ID: {{course.courseID}}   
+                </div>
+                <div class="card-body">
+                  <h3 class="card-text">{{course.name}}</h3>
+                  <p class="card-text">Department: {{course.department}}</p>
+                  <p>{{course.description}}</p>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary" (click)="updateCourse(course)">Edit</button>&nbsp;<button type="button" class="btn btn-danger" (click)="deleteCourse(course)">Delete</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
 <!-- create course modal -->
 
 <div id="create-course" class="modal fade">
