@@ -7,7 +7,7 @@ import { Professor } from 'src/app/model/professor';
   styleUrls: ['./professor.component.css']
 })
 export class ProfessorComponent implements OnInit {
-  professors: Array<Professor> = new Array();
+  professorArray: Array<Professor> = new Array();
   id: number = 1;
   model: Professor = new Professor(0, "", "", "");
 
@@ -17,8 +17,8 @@ export class ProfessorComponent implements OnInit {
   }
 
   createProfessor() {
-    this.professors.push(new Professor(this.id, this.model.name, this.model.username, this.model.password));
+    this.professorArray.push(new Professor(this.id, this.model.name, this.model.username, this.model.password));
     this.id++;
-    console.log("new professor added");
+    console.log("new professor added: " + this.model.name);
   }
 }
