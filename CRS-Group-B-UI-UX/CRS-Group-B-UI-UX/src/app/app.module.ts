@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ProfessorComponent } from './components/professor/professor.component';
 import { StudentComponent } from './components/student/student.component';
 import { CourseComponent } from './components/course/course.component';
+import { MdbModalModule  } from 'mdb-angular-ui-kit/modal';
 
 
 @NgModule({
@@ -14,11 +15,13 @@ import { CourseComponent } from './components/course/course.component';
     ProfessorComponent,
     StudentComponent,
     CourseComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    MdbModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]
