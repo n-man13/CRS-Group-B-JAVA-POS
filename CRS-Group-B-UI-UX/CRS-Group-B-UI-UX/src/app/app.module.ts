@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { ProfessorComponent } from './components/professor/professor.component';
 import { StudentComponent } from './components/student/student.component';
 import { CourseComponent } from './components/course/course.component';
-import { MdbModalModule  } from 'mdb-angular-ui-kit/modal';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { MdbModalModule  } from 'mdb-angular-ui-kit/modal';
     ProfessorComponent,
     StudentComponent,
     CourseComponent,
-    
+
   ],
   imports: [
     BrowserModule,
