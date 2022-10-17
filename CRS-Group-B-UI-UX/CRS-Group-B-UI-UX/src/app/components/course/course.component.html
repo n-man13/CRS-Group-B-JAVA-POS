@@ -2,41 +2,7 @@
     <div class="row">
         <div class="col-md-6">
             <h3>Create Course</h3>
-            <form ngForm>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Course ID</label>
-                        <input class="form-control" id="courseID" name="courseID" type="number"
-                            placeholder="Enter Course ID" 
-                            [(ngModel)]="model.courseID">
-                    </div>
-                    <div class="form-group">
-                        <label>Course Name</label>
-                        <input class="form-control" id="name" name="name" type="text"
-                            placeholder="Enter Username" [(ngModel)]="model.name" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Course Department</label>
-                        <input class="form-control" id="department" name="department" type="text" 
-                        [(ngModel)]="model.department" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Course Description</label>
-                        <textarea class="form-control" id="description"
-                            name="description"
-                            [(ngModel)]="model.description">Enter the course description</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Course ID prerequisite</label>
-                        <input class="form-control" id="username" name="username" type="number"
-                            placeholder="Enter Username" [(ngModel)]="model.prereqID" required>
-                    </div>
-                </div>
-                <br>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" (click)="createUpdateCourse()">Submit</button>
-                </div>
-            </form>
+            
         </div>
         <div class="col-md-6">
             <h3>Courses</h3>
@@ -57,134 +23,9 @@
         </div>
     </div>
 
-    <!-- Modal practice-->
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button
-          type="button"
-          class="btn-close"
-          aria-label="Close"
-          (click)="modalRef.close()"
-        ></button>
-      </div>
-      <div class="modal-body">...</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+          
+    
 
 
 
-<!-- create course modal -->
 
-<div id="create-course" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header myheader">
-                <h2 class="modal-title">Create Course</h2>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!--action form-->
-            <form action="" method="POST" id="login">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Course Name</label>
-                        <input class="form-control" id="username" name="username" type="text"
-                            placeholder="Enter Username" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Course Department</label>
-                        <input class="form-control" id="department" name="department" type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Course Name</label>
-                        <textarea class="form-control" id="description"
-                            name="description">Enter the course description</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Course ID prerequisite</label>
-                        <input class="form-control" id="username" name="username" type="number"
-                            placeholder="Enter Username" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit" name="login-submit" id="login-submit">create</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- update course modal -->
-<div id="update-course" class="modal fade login">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header myheader">
-                <h2 class="modal-title">Update Course</h2>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!--action form-->
-            <form action="" method="POST" id="login">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Course ID</label>
-                        <input class="form-control" id="courseID" name="courseID" type="number"
-                            placeholder="Enter Course ID" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Course Name</label>
-                        <input class="form-control" id="username" name="username" type="text"
-                            placeholder="Enter Username" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Course Department</label>
-                        <input class="form-control" id="department" name="department" type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Course Name</label>
-                        <textarea class="form-control" id="description"
-                            name="description">Enter the course description</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Course ID prerequisite</label>
-                        <input class="form-control" id="username" name="username" type="number"
-                            placeholder="Enter Username" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit" name="login-submit" id="login-submit">update</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- delete course -->
-<div id="delete-course" class="modal fade login">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header myheader">
-                <h2 class="modal-title">Delete Course</h2>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!--action form-->
-            <form action="" method="POST" id="login">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Course ID</label>
-                        <input class="form-control" id="courseID" name="courseID" type="number"
-                            placeholder="Enter Course ID" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit" name="login-submit" id="login-submit">delete</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
