@@ -17,7 +17,7 @@ export class CourseComponent implements OnInit {
 
   model:Course = new Course(0, '', '', '',0, 0);
 
-  constructor(public modalRef: MdbModalRef<ModalComponent>) {}
+  constructor(public modalRef: MdbModalRef<CourseComponent>) {}
 
   ngOnInit(): void {
   }
