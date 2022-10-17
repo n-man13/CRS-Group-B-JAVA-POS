@@ -1,12 +1,11 @@
-<div class="modal-header myheader">
-    <h2 class="modal-title">Create Professor</h2>
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-</div>
 <!--action form-->
 <div class="container">
     <div class="row">
         <div class="col-md-6">
             <form ngForm>
+                <h2 class="modal-title">Create Professor</h2>
+                <div class="modal-body">
+
                 <div class="form-group">
                     <label>Name</label>
                     <input class="form-control" id="professorID" name="professorID" type="number"
@@ -26,9 +25,11 @@
                     <input class="form-control" id="password" name="password" type="password"
                         placeholder="Enter Password" [(ngModel)]="model.password" required>
                 </div>
-
-                <button class="btn btn-primary" type="submit" name="login-submit" id="login-submit"
-                    (click)="createProfessor()">Create Professor</button>
+                </div>
+                <br>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" (click)="createProfessor()">Submit</button>
+                </div>
             </form>
         </div>
     
