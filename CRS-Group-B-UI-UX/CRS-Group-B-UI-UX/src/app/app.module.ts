@@ -7,7 +7,8 @@ import { ProfessorComponent } from './components/professor/professor.component';
 import { StudentComponent } from './components/student/student.component';
 import { CourseComponent } from './components/course/course.component';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
-import { MatTabsModule } from '@angular/material/tabs';
+import { CreateCourseModalComponent } from './components/create-course-modal/create-course-modal/create-course-modal.component';
+//import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     ProfessorComponent,
     StudentComponent,
     CourseComponent,
+    CreateCourseModalComponent,
 
   ],
   imports: [
