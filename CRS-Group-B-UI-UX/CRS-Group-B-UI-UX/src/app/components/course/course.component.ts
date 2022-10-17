@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/model/course';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 
 @Component({
   selector: 'app-course',
@@ -16,7 +17,7 @@ export class CourseComponent implements OnInit {
 
   model:Course = new Course(0, '', '', '',0, 0);
 
-  constructor() { }
+  constructor(public modalRef: MdbModalRef<ModalComponent>) {}
 
   ngOnInit(): void {
   }
