@@ -10,7 +10,7 @@ import { Course } from './model/course';
 })
 export class AppComponent {
   modalRef: MdbModalRef<CreateCourseModalComponent> | null = null;
-  course:Course = new Course(0, "", "", "", 0, 0);
+  
   constructor(private modalService: MdbModalService) {}
   
   
