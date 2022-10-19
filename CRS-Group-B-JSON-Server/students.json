@@ -1,0 +1,19 @@
+{
+    "students":[
+        {
+            "studentID": 1,
+            "studentName": "Luca",
+            "isRegistered": false
+        },
+        {
+            "studentID": 4,
+            "studentName": "Seb",
+            "isRegistered": false
+        },
+        {
+            "studentID": 5,
+            "studentName": "Jonathan",
+            "isRegistered": false
+        }
+    ]
+}
