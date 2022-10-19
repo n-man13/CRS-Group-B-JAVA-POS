@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Professor } from 'src/app/model/professor';
+import { ProfessorService } from 'src/app/services/professor.service';
 
 @Component({
   selector: 'app-create-professor-modal',
@@ -8,19 +10,19 @@ import { Professor } from 'src/app/model/professor';
 })
 export class CreateProfessorModalComponent implements OnInit {
 
-  professorArray: Array<Professor> = new Array();
-  id: number = 1;
+
   model: Professor = new Professor(0, "", "", "");
 
-  constructor() { }
+  constructor(private httpService: ProfessorService, public router: Router) { }
 
   ngOnInit(): void {
   }
 
   createProfessor() {
-    this.professorArray.push(new Professor(this.id, this.model.name, this.model.username, this.model.password));
-    this.id++;
-    console.log("new professor added: " + this.model.name);
+    this.model.userID = this.model.professorID;
+    this.httpService.addProfessor(this.model);
+    console.log("new professor added: " + JSON.stringify(this.model));
+    this.router.navigate(["/listprofessor"]);
   }
 
 }
