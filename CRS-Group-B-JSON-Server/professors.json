@@ -2,7 +2,7 @@
     "professors": [
         {
             "professorID": 2,
-            "professorName": "amit"
+            "name": "amit"
         }
     ]
 }

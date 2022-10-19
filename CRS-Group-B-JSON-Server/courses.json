@@ -2,9 +2,9 @@
     "courses": [
         {
             "courseID": 1,
-            "courseName": "Math101",
-            "courseDepartment": "Mathematics",
-            "courseDescription": "Mathematics",
+            "name": "Math101",
+            "department": "Mathematics",
+            "description": "Mathematics",
             "professorID": 0,
             "prereqID": 0
         }

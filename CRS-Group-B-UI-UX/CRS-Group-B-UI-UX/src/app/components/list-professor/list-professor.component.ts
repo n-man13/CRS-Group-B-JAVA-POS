@@ -14,9 +14,10 @@ export class ListProfessorComponent implements OnInit {
   model: Professor = new Professor(0, "", "", "");
   getData: Professor[] | undefined;
 
-  constructor(private httpService: ProfessorService) { this.getProfessors()}
+  constructor(private httpService: ProfessorService) { }
 
   ngOnInit(): void {
+    this.getProfessors()
   }
 
 
