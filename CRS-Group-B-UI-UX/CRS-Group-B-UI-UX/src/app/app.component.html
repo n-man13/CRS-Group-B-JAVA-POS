@@ -4,10 +4,16 @@
     <p class="col-md-8 fs-4">Add, update, delete courses, register professor and approve student registrations</p>
   </div>
 </div>
-<div class="container">
-  <app-list-course></app-list-course>
-  <app-list-professor></app-list-professor>
-  <app-list-unregistered-student></app-list-unregistered-student>
+<div class="d-flex justify-content-center">
+    
+  <a class="btn btn-primary m-2" [routerLink]="['/listcourse']">List Courses</a>
+  <a class="btn btn-primary m-2" [routerLink]="['/courseform']">Create Course</a>
+  <a class="btn btn-primary m-2" [routerLink]="['/listprofessor']">List Professors</a>
+  <a class="btn btn-primary m-2" [routerLink]="['/professorform']">Create Professor</a>
+  <a class="btn btn-primary m-2" [routerLink]="['/listunregisteredstudent']">Register Students</a>
+ 
 </div>
-<button class="btn btn-primary" (click)="openModal()">Open modal</button>
-<router-outlet></router-outlet>
+<!-- <button class="btn btn-primary" (click)="openModal()">Open modal</button> -->
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
