@@ -10,7 +10,7 @@ export class ProfessorService {
 
   port:number = 7002;
 
-  url: string = `localhost:${this.port}/professors/`;
+  url: string = `http://localhost:${this.port}/professors/`;
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', "*");
 
   constructor(private httpClient: HttpClient) { }

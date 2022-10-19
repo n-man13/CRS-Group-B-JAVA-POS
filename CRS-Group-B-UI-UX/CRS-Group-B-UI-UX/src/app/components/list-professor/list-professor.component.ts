@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Professor } from 'src/app/model/professor';
+import { ProfessorService } from 'src/app/services/professor.service';
 
 @Component({
   selector: 'app-list-professor',
@@ -8,19 +10,20 @@ import { Professor } from 'src/app/model/professor';
 })
 export class ListProfessorComponent implements OnInit {
 
-  professorArray: Array<Professor> = new Array();
-  id: number = 1;
+  
   model: Professor = new Professor(0, "", "", "");
+  getData: Professor[] | undefined;
 
-  constructor() { }
+  constructor(private httpService: ProfessorService) { this.getProfessors()}
 
   ngOnInit(): void {
   }
 
-  createProfessor() {
-    this.professorArray.push(new Professor(this.id, this.model.name, this.model.username, this.model.password));
-    this.id++;
-    console.log("new professor added: " + this.model.name);
-  }
 
+  getProfessors() {
+    this.httpService.getProfessors().subscribe(data => {
+      console.log(data);
+      this.getData = data;
+    })
+  }
 }
