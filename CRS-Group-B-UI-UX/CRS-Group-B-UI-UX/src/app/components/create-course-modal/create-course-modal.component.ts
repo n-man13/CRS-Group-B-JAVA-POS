@@ -16,11 +16,11 @@ export class CreateCourseModalComponent implements OnInit {
 
   // isFound:boolean = false;
 
-  model:Course = new Course(0, '', '', '',0, 0);
+  model: Course = new Course(0, '', '', '', 0, 0);
 
-  getData:Course[] | undefined;
+  getData: Course[] | undefined;
 
-  constructor(private _httpService:CourseService) {}
+  constructor(private _httpService: CourseService) { }
 
   ngOnInit(): void {
   }
@@ -36,7 +36,7 @@ export class CreateCourseModalComponent implements OnInit {
   //       course.prereqID = this.model.prereqID;
   //       this.isFound = true;
   //     }
-      
+
   //   });
   //   if (!this.isFound) {
   //     this.courseArray.push(new Course(this.id, this.model.name, this.model.description, this.model.department, this.model.professorID, this.model.prereqID));
@@ -47,30 +47,28 @@ export class CreateCourseModalComponent implements OnInit {
   // }
 
   addCourse() {
-    
-    this._httpService.createCustomer(this.model)
+
+    this._httpService.createCourse(this.model)
       .subscribe(data => {
         console.log(data)
-        this.getUsersDetails();
       })
   }
 
   updateCustomer() {
 
-    this._httpService.updateCustomer(this.model)
+    this._httpService.updateCourse(this.model)
       .subscribe(data => {
         console.log(data)
-        this.getUsersDetails();
       })
   }
 
-  deleteCustomer(customer:Customer) {
+  deleteCustomer(course: Course) {
 
-    this._httpService.deleteCustomer(customer)
-    .subscribe(data => {
-      console.log(data)
-      this.getUsersDetails();
-    })
+    this._httpService.deleteCourse(course)
+      .subscribe(data => {
+        console.log(data)
+      })
 
 
+  }
 }

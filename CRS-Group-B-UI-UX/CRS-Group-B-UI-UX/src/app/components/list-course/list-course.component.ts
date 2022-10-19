@@ -23,6 +23,9 @@ export class ListCourseComponent implements OnInit {
   constructor(private _httpService:CourseService) {}
 
   ngOnInit(): void {
+
+    this.getCourses();
+
   }
 
   createUpdateCourse() {
