@@ -52,15 +52,18 @@ export class CreateCourseModalComponent implements OnInit {
 
     this._httpService.createCourse(this.model)
       .subscribe(data => {
-        console.log(data)
+        console.log(data);
+        this.router.navigate(['courseform']);
       })
+    
   }
 
   updateCourse() {
 
     this._httpService.updateCourse(this.model)
       .subscribe(data => {
-        console.log(data)
+        console.log(data);
+        this.router.navigate(['courseform']);
       })
   }
 
