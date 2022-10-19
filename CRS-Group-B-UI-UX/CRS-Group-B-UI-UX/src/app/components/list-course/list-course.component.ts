@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/model/course';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { CourseService } from 'src/app/services/course.service';
 
 @Component({
   selector: 'app-list-course',
@@ -16,6 +17,10 @@ export class ListCourseComponent implements OnInit {
   isFound:boolean = false;
 
   model:Course = new Course(0, '', '', '',0, 0);
+
+  getData:Course[] | undefined;
+
+  constructor(private _httpService:CourseService) {}
 
   ngOnInit(): void {
   }
@@ -39,6 +44,14 @@ export class ListCourseComponent implements OnInit {
     }
     this.isFound = false;
 
+  }
+
+  getCourses() {
+    
+    this._httpService.getCourses().subscribe(data => {
+      console.log(data);
+      this.getData = data;
+    })
   }
 
   updateCourse(course:Course) {
