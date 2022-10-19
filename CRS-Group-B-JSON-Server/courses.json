@@ -1,12 +1,31 @@
 {
-    "courses": [
-        {
-            "courseID": 1,
-            "name": "Math101",
-            "department": "Mathematics",
-            "description": "Mathematics",
-            "professorID": 0,
-            "prereqID": 0
-        }
-    ]
+  "courses": [
+    {
+      "id": 1,
+      "courseID": 1,
+      "name": "Math3009",
+      "department": "Mathematics",
+      "description": "Mathematics",
+      "professorID": 0,
+      "prereqID": 0
+    },
+    {
+      "courseID": 2,
+      "name": "Chemistry",
+      "description": "chemestry",
+      "department": "chemistry",
+      "professorID": 0,
+      "prereqID": 0,
+      "id": 2
+    },
+    {
+      "courseID": 0,
+      "name": "math",
+      "description": "math",
+      "department": "math",
+      "professorID": 0,
+      "prereqID": 0,
+      "id": 3
+    }
+  ]
 }

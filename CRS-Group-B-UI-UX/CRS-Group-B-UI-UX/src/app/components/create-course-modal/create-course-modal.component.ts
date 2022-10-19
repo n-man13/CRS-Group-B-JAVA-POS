@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { Course } from 'src/app/model/course';
 import { CourseService } from 'src/app/services/course.service';
@@ -16,13 +17,14 @@ export class CreateCourseModalComponent implements OnInit {
 
   // isFound:boolean = false;
 
-  model: Course = new Course(0, '', '', '', 0, 0);
+  model: Course = new Course(0, 0, '', '', '', 0, 0);
 
   getData: Course[] | undefined;
 
-  constructor(private _httpService: CourseService) { }
+  constructor(private _httpService: CourseService, public router:Router) { }
 
   ngOnInit(): void {
+    this.model = this._httpService.model;
   }
 
   // createUpdateCourse() {
@@ -54,7 +56,7 @@ export class CreateCourseModalComponent implements OnInit {
       })
   }
 
-  updateCustomer() {
+  updateCourse() {
 
     this._httpService.updateCourse(this.model)
       .subscribe(data => {
@@ -62,7 +64,7 @@ export class CreateCourseModalComponent implements OnInit {
       })
   }
 
-  deleteCustomer(course: Course) {
+  deleteCourse(course: Course) {
 
     this._httpService.deleteCourse(course)
       .subscribe(data => {
