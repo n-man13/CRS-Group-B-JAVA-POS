@@ -143,4 +143,10 @@ public class AdminController {
 		return new ResponseEntity(student, HttpStatus.CREATED);
 
 	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "/rejectRegistration/{studentID}")
+	public ResponseEntity rejectRegistration(@PathVariable int studentID) {
+		adminService.deleteStudent(studentID);
+		return new ResponseEntity(HttpStatus.OK);
+	}
 }
