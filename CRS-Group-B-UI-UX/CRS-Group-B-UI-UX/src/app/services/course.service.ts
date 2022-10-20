@@ -19,7 +19,7 @@ export class CourseService {
 
   getCourses(): Observable<any> {
 
-    return this.httpClient.get(this.url + "list", { headers: this.headers });
+    return this.httpClient.get("http://localhost:8091/viewAllCourses", { headers: this.headers });
 
   }
 
