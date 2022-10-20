@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.service.*;
+import com.lti.dao.StudentDAO;
 import com.lti.dto.*;
 import com.lti.exception.*;
 
@@ -118,6 +119,11 @@ public class AdminController {
 		adminService.createProfessor(professor);
 		return new ResponseEntity(HttpStatus.CREATED);
 
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/viewUnapprovedStudents")
+	public ResponseEntity viewUnapprovedStudents() throws AllStudentRegisteredException {
+		return new ResponseEntity(adminService.unregisteredStudent(), HttpStatus.OK);
 	}
 
 	/**
