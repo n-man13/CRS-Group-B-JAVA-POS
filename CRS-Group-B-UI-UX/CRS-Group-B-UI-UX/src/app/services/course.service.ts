@@ -10,7 +10,7 @@ export class CourseService {
 
   url: string = "http://localhost:7001/courses/";
 
-  headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', "*")
+  headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', "*");
 
   constructor(private httpClient: HttpClient) { }
 

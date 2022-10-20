@@ -53,7 +53,8 @@ export class CreateCourseModalComponent implements OnInit {
     this._httpService.createCourse(this.model)
       .subscribe(data => {
         console.log(data);
-        this.router.navigate(['courseform']);
+        this.router.navigate(['listcourse']);
+        this._httpService.model = new Course(0, 0, '', '', '', 0, 0);
       })
     
   }
@@ -63,7 +64,8 @@ export class CreateCourseModalComponent implements OnInit {
     this._httpService.updateCourse(this.model)
       .subscribe(data => {
         console.log(data);
-        this.router.navigate(['courseform']);
+        this.router.navigate(['listcourse']);
+        this._httpService.model = new Course(0, 0, '', '', '', 0, 0);
       })
   }
 

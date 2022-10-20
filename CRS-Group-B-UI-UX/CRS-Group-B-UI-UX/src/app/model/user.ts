@@ -4,8 +4,8 @@ export class User {
     public password:string;
     public role:number;
 
-    constructor(id:number, username:string, password:string, role:number){
-        this.userID = id;
+    constructor(userID:number, username:string, password:string, role:number){
+        this.userID = userID;
         this.username = username;
         this.password = password;
         this.role = role;

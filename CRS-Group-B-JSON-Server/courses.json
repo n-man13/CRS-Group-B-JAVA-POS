@@ -3,9 +3,9 @@
     {
       "id": 1,
       "courseID": 1,
-      "name": "Math3009",
+      "name": "Math3008",
       "department": "Mathematics",
-      "description": "Mathematics",
+      "description": "Mathematic",
       "professorID": 0,
       "prereqID": 0
     },
@@ -13,19 +13,10 @@
       "courseID": 2,
       "name": "Chemistry",
       "description": "chemestry",
-      "department": "chemistry",
+      "department": "jdjjdjdjd",
       "professorID": 0,
       "prereqID": 0,
       "id": 2
-    },
-    {
-      "courseID": 0,
-      "name": "math",
-      "description": "math",
-      "department": "math",
-      "professorID": 0,
-      "prereqID": 0,
-      "id": 3
     }
   ]
 }
