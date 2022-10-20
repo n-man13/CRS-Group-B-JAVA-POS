@@ -45,4 +45,5 @@ public class SQLConstants {
 	public static final String USER_SELECT = "SELECT userID, username , password, role FROM User WHERE username = ?";
 	public static final String USER_SELECT_ID = "SELECT userID, username , password, role FROM User WHERE userID = ?";
 	public static final String USER_UPDATE_PASSWORD = "UPDATE User SET password=? WHERE username=?";
+	public static final String USER_DELETE = "DELETE FROM User WHERE userID=?";
 }

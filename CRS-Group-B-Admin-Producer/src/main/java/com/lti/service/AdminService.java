@@ -181,5 +181,9 @@ public class AdminService implements AdminServiceInterface {
 			throw new StudentNotFoundException("This student was not found, ID: "+studentId, studentId);
 		return student;
 	}
+	
+	public void deleteStudent(int studentID) {
+		userDAO.deleteUser(studentID);
+	}
 
 }

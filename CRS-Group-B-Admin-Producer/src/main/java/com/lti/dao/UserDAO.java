@@ -91,5 +91,9 @@ public class UserDAO implements UserDAOInterface {
 		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.USER_UPDATE_PASSWORD, password, username);
 		return true;
 	}
+	
+	public void deleteUser(int userID) {
+		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.USER_DELETE, userID);
+	}
 
 }
