@@ -17,7 +17,7 @@ export class ListCourseComponent implements OnInit {
 
   isFound: boolean = false;
 
-  model: Course = new Course(0, 0, '', '', '', 0, 0);
+  model: Course = new Course(0, '', '', '', 0, 0);
 
   getData: Course[] | undefined;
 
@@ -68,7 +68,7 @@ export class ListCourseComponent implements OnInit {
     this.model.name = course.name;
     this.model.description = course.description;
     this.model.department = course.department;
-    this.model.prereqID = course.prereqID;
+    this.model.prereqCourseID = course.prereqCourseID;
   }
 
   // deleteCourse(course:Course) {

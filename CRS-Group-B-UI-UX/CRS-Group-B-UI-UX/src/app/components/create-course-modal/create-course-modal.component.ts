@@ -17,7 +17,7 @@ export class CreateCourseModalComponent implements OnInit {
 
   // isFound:boolean = false;
 
-  model: Course = new Course(0, 0, '', '', '', 0, 0);
+  model: Course = new Course( 0, '', '', '', 0, 0);
 
   getData: Course[] | undefined;
 
@@ -54,7 +54,7 @@ export class CreateCourseModalComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.router.navigate(['listcourse']);
-        this._httpService.model = new Course(0, 0, '', '', '', 0, 0);
+        this._httpService.model = new Course( 0, '', '', '', 0, 0);
       })
     
   }
@@ -65,7 +65,7 @@ export class CreateCourseModalComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.router.navigate(['listcourse']);
-        this._httpService.model = new Course(0, 0, '', '', '', 0, 0);
+        this._httpService.model = new Course( 0, '', '', '', 0, 0);
       })
   }
 

@@ -14,7 +14,7 @@ export class CourseService {
 
   constructor(private httpClient: HttpClient) { }
 
-  model:Course = new Course(0, 0,"","","",0,0);
+  model:Course = new Course(0,"","","",0,0);
 
 
   getCourses(): Observable<any> {
@@ -33,7 +33,7 @@ export class CourseService {
   updateCourse(course: Course): Observable<any> {
 
     const body = JSON.stringify(course);
-    return this.httpClient.put(this.url + "updateCourse/" + course.id, body, { headers: this.headers });
+    return this.httpClient.put(this.url + "updateCourse/" + course.courseID, body, { headers: this.headers });
 
   }
 
@@ -41,7 +41,7 @@ export class CourseService {
 
     const body = JSON.stringify(course);
     let httpOptions = {};
-    return this.httpClient.delete(this.url + "deleteCourse/" + course.id, httpOptions);
+    return this.httpClient.delete(this.url + "deleteCourse/" + course.courseID, httpOptions);
 
   }
 

@@ -24,7 +24,7 @@ export class StudentService {
   confirmRegistration(student: Student): Observable<any> {
 
     const body = JSON.stringify(student);
-    return this.httpClient.put(this.url + "register/" + student.id, body, { headers: this.headers });
+    return this.httpClient.put(this.url + "register/" + student.studentID, body, { headers: this.headers });
 
   }
 
@@ -32,7 +32,7 @@ export class StudentService {
 
     const body = JSON.stringify(student);
     let httpOptions = {};
-    return this.httpClient.delete(this.url + "register/" + student.id, httpOptions);
+    return this.httpClient.delete(this.url + "register/" + student.studentID, httpOptions);
 
   }
 
