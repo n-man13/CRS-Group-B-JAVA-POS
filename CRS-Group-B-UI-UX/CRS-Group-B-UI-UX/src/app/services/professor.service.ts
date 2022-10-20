@@ -22,6 +22,6 @@ export class ProfessorService {
   addProfessor(professor: Professor) : Observable<any>{
     console.log(this.url+"createProfessor")
     const body = JSON.stringify(professor);
-    return this.httpClient.post(this.url + "create", body, { headers: this.headers});
+    return this.httpClient.post(this.url + "createProfessor", body, { headers: this.headers});
   }
 }

@@ -75,7 +75,5 @@ export class CreateCourseModalComponent implements OnInit {
       .subscribe(data => {
         console.log(data)
       })
-
-
   }
 }
