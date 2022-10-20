@@ -4,12 +4,14 @@
         <div class="col-md-12">
             <h3>Professors</h3>
             <br>
-            <div *ngFor="let professor of getData" class="card col-md-4" style="margin-bottom: 16px">
-                <div class="card-header">
-                    ID: {{professor.professorID}}
-                </div>
-                <div class="card-body">
-                    <h3 class="card-text">{{professor.name}}</h3>
+            <div *ngFor="let professor of getData" class="col-md-4" style="margin-bottom: 16px">
+                <div class="card">
+                    <div class="card-header">
+                        ID: {{professor.professorID}}
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-text">{{professor.name}}</h3>
+                    </div>
                 </div>
             </div>
         </div>
