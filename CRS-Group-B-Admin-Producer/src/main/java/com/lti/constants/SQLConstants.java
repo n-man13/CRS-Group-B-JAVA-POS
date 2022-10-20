@@ -18,6 +18,7 @@ public class SQLConstants {
 	// Professor SQL
 	public static final String PROFESSOR_INSERT = "INSERT INTO Professor(professorID, name) VALUES(?,?)";
 	public static final String PROFESSOR_SELECT = "SELECT * FROM Professor WHERE professorID = ?";
+	public static final String PROFESSOR_SELECT_ALL = "SELECT * FROM Professor";
 	
 	// RegisteredCourse SQL
 	public static final String REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID = "SELECT studentID FROM RegisteredCourse WHERE courseID=?";

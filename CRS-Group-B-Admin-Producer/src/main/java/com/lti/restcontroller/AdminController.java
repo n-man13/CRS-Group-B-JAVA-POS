@@ -98,6 +98,11 @@ public class AdminController {
 		return new ResponseEntity(courseID, HttpStatus.OK);
 
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/viewProfessors")
+	public ResponseEntity viewProfessors() {
+		return new ResponseEntity(adminService.viewProfessors(), HttpStatus.OK);
+	}
 
 	/**
 	 * creates a professor and sets the username and password

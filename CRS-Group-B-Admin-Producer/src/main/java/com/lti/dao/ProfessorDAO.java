@@ -1,5 +1,7 @@
 package com.lti.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -12,15 +14,14 @@ import com.lti.mapper.ProfessorMapper;
 import com.lti.mapper.StudentMapper;
 
 @Repository
-public class ProfessorDAO implements ProfessorDAOInterface{
-	
+public class ProfessorDAO implements ProfessorDAOInterface {
+
 	@Autowired
 	private JDBCConfiguration jdbcTemplateObject;
-	
+
 	@Autowired
 	private UserDAO userDAO;
-	
-	
+
 	/**
 	 * creates a new professor
 	 * 
@@ -30,9 +31,12 @@ public class ProfessorDAO implements ProfessorDAOInterface{
 	@Override
 	public int createProfessor(Professor professor) {
 		int userID = userDAO.createUser(professor.getUsername(), professor.getPassword(), 2);
-		jdbcTemplateObject.jdbcTemplate()
-				.update(SQLConstants.PROFESSOR_INSERT, userID, professor.getName());
+		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.PROFESSOR_INSERT, userID, professor.getName());
 		return userID;
+	}
+
+	public List<Professor> viewProfessors() {
+		return jdbcTemplateObject.jdbcTemplate().query(SQLConstants.PROFESSOR_SELECT_ALL, new ProfessorMapper());
 	}
 
 	/**
@@ -44,7 +48,8 @@ public class ProfessorDAO implements ProfessorDAOInterface{
 	@Override
 	public Professor findProfessorByProfessorID(int professorID) {
 		try {
-			return jdbcTemplateObject.jdbcTemplate().queryForObject(SQLConstants.PROFESSOR_SELECT, new ProfessorMapper(), professorID);
+			return jdbcTemplateObject.jdbcTemplate().queryForObject(SQLConstants.PROFESSOR_SELECT,
+					new ProfessorMapper(), professorID);
 		} catch (DataAccessException e) {
 			return null;
 		}
