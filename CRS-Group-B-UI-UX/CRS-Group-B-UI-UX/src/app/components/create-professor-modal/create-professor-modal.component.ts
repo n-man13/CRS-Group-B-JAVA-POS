@@ -19,10 +19,12 @@ export class CreateProfessorModalComponent implements OnInit {
   }
 
   createProfessor() {
-    this.model.userID = this.model.professorID;
-    this.httpService.addProfessor(this.model);
-    console.log("new professor added: " + JSON.stringify(this.model));
-    this.router.navigate(["/listprofessor"]);
+    this.httpService.addProfessor(this.model)
+      .subscribe(data => {
+        console.log(data);
+        //this.router.navigate(['listprofessor']);
+      })
+    //this.router.navigate(["/listprofessor"]);
   }
 
 }
