@@ -32,7 +32,7 @@ export class StudentService {
 
     const body = JSON.stringify(student);
     let httpOptions = {};
-    return this.httpClient.delete(this.url + "register/" + student.studentID, httpOptions);
+    return this.httpClient.delete(this.url + "rejectRegistration/" + student.studentID, httpOptions);
 
   }
 
