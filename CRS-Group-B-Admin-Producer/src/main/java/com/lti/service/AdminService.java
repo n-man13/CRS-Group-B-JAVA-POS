@@ -62,6 +62,10 @@ public class AdminService implements AdminServiceInterface {
 			throw new UsernameUsedException("Username already taken, username: "+professor.getUsername(), professor.getUsername());
 		professorDAO.createProfessor(professor);
 	}
+	
+	public List<Professor> viewProfessors(){
+		return professorDAO.viewProfessors();
+	}
 
 	/**
 	 * call courseDAO to update a course
