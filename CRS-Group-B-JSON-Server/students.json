@@ -1,22 +1,16 @@
 {
-    "students":[
-        {
-            "id": 1,
-            "studentID": 1,
-            "studentName": "Luca",
-            "isRegistered": false
-        },
-        {
-            "id": 4,
-            "studentID": 4,
-            "studentName": "Seb",
-            "isRegistered": false
-        },
-        {
-            "id": 5,
-            "studentID": 5,
-            "studentName": "Jonathan",
-            "isRegistered": false
-        }
-    ]
+  "students": [
+    {
+      "id": 1,
+      "studentID": 1,
+      "name": "Luca",
+      "isRegistered": false
+    },
+    {
+      "id": 4,
+      "studentID": 4,
+      "name": "Seb",
+      "isRegistered": true
+    }
+  ]
 }
