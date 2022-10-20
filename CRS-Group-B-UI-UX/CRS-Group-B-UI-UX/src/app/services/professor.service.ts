@@ -10,17 +10,17 @@ export class ProfessorService {
 
   port:number = 7002;
 
-  url: string = "http://localhost:7002/professors/";
+  url: string = "http://localhost:8091/";
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', "*");
 
   constructor(private httpClient: HttpClient) { }
 
   getProfessors(): Observable<any>{
-    return this.httpClient.get(this.url, { headers: this.headers });
+    return this.httpClient.get(this.url + "viewProfessors", { headers: this.headers });
   }
 
   addProfessor(professor: Professor) : Observable<any>{
-    console.log(this.url+"create")
+    console.log(this.url+"createProfessor")
     const body = JSON.stringify(professor);
     return this.httpClient.post(this.url + "create", body, { headers: this.headers});
   }
