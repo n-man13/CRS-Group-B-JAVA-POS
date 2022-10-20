@@ -8,7 +8,7 @@ import { Course } from '../model/course';
 })
 export class CourseService {
 
-  url: string = "http://localhost:7001/courses/";
+  url: string = "http://localhost:8091/";
 
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', "*");
 
@@ -19,21 +19,21 @@ export class CourseService {
 
   getCourses(): Observable<any> {
 
-    return this.httpClient.get("http://localhost:8091/viewAllCourses", { headers: this.headers });
+    return this.httpClient.get(this.url + "viewAllCourses", { headers: this.headers });
 
   }
 
   createCourse(customer: Course): Observable<any> {
 
     const body = JSON.stringify(customer);
-    return this.httpClient.post(this.url + "create", body, { headers: this.headers });
+    return this.httpClient.post(this.url + "createCourse", body, { headers: this.headers });
 
   }
 
   updateCourse(course: Course): Observable<any> {
 
     const body = JSON.stringify(course);
-    return this.httpClient.put(this.url + "update/" + course.id, body, { headers: this.headers });
+    return this.httpClient.put(this.url + "updateCourse/" + course.id, body, { headers: this.headers });
 
   }
 
@@ -41,7 +41,7 @@ export class CourseService {
 
     const body = JSON.stringify(course);
     let httpOptions = {};
-    return this.httpClient.delete(this.url + "delete/" + course.id, httpOptions);
+    return this.httpClient.delete(this.url + "deleteCourse/" + course.id, httpOptions);
 
   }
 
