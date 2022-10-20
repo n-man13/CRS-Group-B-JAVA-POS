@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.service.*;
+import com.lti.dao.StudentDAO;
 import com.lti.dto.*;
 import com.lti.exception.*;
 
@@ -119,6 +120,11 @@ public class AdminController {
 		return new ResponseEntity(HttpStatus.CREATED);
 
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/viewUnapprovedStudents")
+	public ResponseEntity viewUnapprovedStudents() throws AllStudentRegisteredException {
+		return new ResponseEntity(adminService.unregisteredStudent(), HttpStatus.OK);
+	}
 
 	/**
 	 * Approves a student's registration
@@ -136,5 +142,11 @@ public class AdminController {
 		adminService.approveStudentRegistration(student);
 		return new ResponseEntity(student, HttpStatus.CREATED);
 
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "/rejectRegistration/{studentID}")
+	public ResponseEntity rejectRegistration(@PathVariable int studentID) {
+		adminService.deleteStudent(studentID);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 }
