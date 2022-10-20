@@ -49,6 +49,7 @@ export class ListUnregisteredStudentComponent implements OnInit {
     this.httpService.confirmRegistration(student)
       .subscribe(data => {
         console.log(data);
+        this.getStudents();
         this.router.navigate(['listunregisteredstudent']);
         
       })
@@ -58,6 +59,7 @@ export class ListUnregisteredStudentComponent implements OnInit {
 
     this.httpService.rejectRegistration(student)
       .subscribe(data => {
+        this.getStudents();
         console.log(data)
       })
 
