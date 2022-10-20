@@ -9,7 +9,7 @@ import { Student } from '../model/student';
 export class StudentService {
 
 
-  url: string = "http://localhost:7003/students/";
+  url: string = "http://localhost:8091/";
 
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', "*")
 
@@ -18,13 +18,13 @@ export class StudentService {
   model:Student = new Student(0,"", "", "", false);
 
   getStudents(): Observable<any>{
-    return this.httpClient.get(this.url, { headers: this.headers });
+    return this.httpClient.get(this.url + "viewUnapprovedStudents", { headers: this.headers });
   }
 
   confirmRegistration(student: Student): Observable<any> {
 
     const body = JSON.stringify(student);
-    return this.httpClient.put(this.url + "register/" + student.studentID, body, { headers: this.headers });
+    return this.httpClient.put(this.url + "approveRegistration/" + student.studentID, body, { headers: this.headers });
 
   }
 
