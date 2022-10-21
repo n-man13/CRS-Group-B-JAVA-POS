@@ -31,6 +31,7 @@ import { DropCourseComponent } from './components/Student/drop-course/drop-cours
 import { ViewAppliedCoursesComponent } from './components/Student/view-applied-courses/view-applied-courses.component';
 import { MakePaymentComponent } from './components/Student/make-payment/make-payment.component';
 import { CheckGradesComponent } from './components/Student/check-grades/check-grades.component';
+import { ViewAllCoursesComponent } from './components/Student/view-all-courses/view-all-courses.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CheckGradesComponent } from './components/Student/check-grades/check-gr
     DropCourseComponent,
     ViewAppliedCoursesComponent,
     MakePaymentComponent,
-    CheckGradesComponent
+    CheckGradesComponent,
+    ViewAllCoursesComponent
   ],
   imports: [
     BrowserModule,
