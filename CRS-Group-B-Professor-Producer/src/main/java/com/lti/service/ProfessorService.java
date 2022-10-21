@@ -132,7 +132,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 * @throws NoStudentsEnrolledException if there
 	 */
 	@Override
-	public Map<Student, Double> viewStudentsGrades(int professorId, int courseId)
+	public Map<Student, Grade> viewStudentsGrades(int professorId, int courseId)
 			throws CourseNotFoundException, NoStudentsEnrolledException {
 		logger.info("viewStudentsGrades in ProfessorService");
 		List<Course> courses = courseDAO.findCourseByProfessorID(professorId);
@@ -146,7 +146,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 			throw new CourseNotFoundException("You are not enrolled in this course, ID: "+courseId, courseId);
 		if (courseDAO.findCourseByCourseID(courseId) == null)
 			throw new CourseNotFoundException("This course was not found, ID: "+courseId, courseId);
-		Map<Student, Double> studentsAndGrades = registeredCourseDAO.findStudentsAndGradesByCourseID(courseId);
+		Map<Student, Grade> studentsAndGrades = registeredCourseDAO.findStudentsAndGradesByCourseID(courseId);
 		if (studentsAndGrades.isEmpty())
 			throw new NoStudentsEnrolledException("This course has no students, ID: "+courseId, courseId);
 		return studentsAndGrades;

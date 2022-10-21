@@ -46,7 +46,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public boolean createCourse(Course course) {
-		if (course.getPrereqCourseID() == -1) {
+		if (course.getPrereqCourseID() == 0) {
 			jdbcTemplateObject.jdbcTemplate().update(SQLConstants.COURSE_INSERT, course.getName(), course.getDepartment(),
 					course.getDescription(), null);
 		}
@@ -143,7 +143,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public boolean updateCourse(Course course) {
-		if (course.getPrereqCourseID() == -1) {
+		if (course.getPrereqCourseID() == 0) {
 			jdbcTemplateObject.jdbcTemplate().update(SQLConstants.COURSE_UPDATE, course.getName(), course.getDepartment(),
 					course.getDescription(), null, course.getCourseID());
 		}

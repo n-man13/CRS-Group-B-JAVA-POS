@@ -93,13 +93,13 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	 * @return a map of students to their grades in the specified class
 	 */
 	@Override
-	public Map<Student, Double> findStudentsAndGradesByCourseID(int courseID) {
-		Map<Student, Double> studentGrades = new HashMap<Student, Double>();
+	public Map<Student, Grade> findStudentsAndGradesByCourseID(int courseID) {
+		Map<Student, Grade> studentGrades = new HashMap<Student, Grade>();
 		List<RegisteredCourse> registeredCourses = jdbcConfiguration.jdbcTemplate()
 				.query(SQLConstants.REGISTEREDCOURSE_SELECT_GRADES_BY_COURSEID, new RegisteredCourseMapper(), courseID);
 
 		for (RegisteredCourse registeredCourse : registeredCourses) {
-			studentGrades.put(studentDAO.findStudent(registeredCourse.getStudentID()), registeredCourse.getGrade());
+			studentGrades.put(studentDAO.findStudent(registeredCourse.getStudentID()), new Grade(registeredCourse.getGrade()));
 		}
 
 		return studentGrades;

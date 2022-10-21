@@ -2,6 +2,9 @@ package com.lti.constants;
 
 public class SQLConstants {
 	
+	// Admin SQL
+	public static final String ADMIN_INSERT = "INSERT INTO Admin(adminID) VALUES(?)";
+	public static final String ADMIN_SELECT = "SELECT * FROM Admin WHERE adminID = ?";
 	
 	// Course SQL
 	public static final String COURSE_SELECT_BY_COURSEID = "SELECT courseID, name , department, description, professorID, prereqID FROM Course WHERE courseID=?";
@@ -15,6 +18,7 @@ public class SQLConstants {
 	// Professor SQL
 	public static final String PROFESSOR_INSERT = "INSERT INTO Professor(professorID, name) VALUES(?,?)";
 	public static final String PROFESSOR_SELECT = "SELECT * FROM Professor WHERE professorID = ?";
+	public static final String PROFESSOR_SELECT_ALL = "SELECT * FROM Professor";
 	
 	// RegisteredCourse SQL
 	public static final String REGISTEREDCOURSE_SELECT_STUDENTS_BY_COURSEID = "SELECT studentID FROM RegisteredCourse WHERE courseID=?";
@@ -41,4 +45,5 @@ public class SQLConstants {
 	public static final String USER_SELECT = "SELECT userID, username , password, role FROM User WHERE username = ?";
 	public static final String USER_SELECT_ID = "SELECT userID, username , password, role FROM User WHERE userID = ?";
 	public static final String USER_UPDATE_PASSWORD = "UPDATE User SET password=? WHERE username=?";
+	public static final String USER_DELETE = "DELETE FROM User WHERE userID=?";
 }
