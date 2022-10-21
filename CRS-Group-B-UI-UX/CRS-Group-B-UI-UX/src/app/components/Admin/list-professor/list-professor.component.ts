@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Professor } from 'src/app/model/professor';
-import { ProfessorService } from 'src/app/services/professor.service';
+import { ProfessorService } from 'src/app/services/admin/professor.service';
 
 @Component({
   selector: 'app-list-professor',

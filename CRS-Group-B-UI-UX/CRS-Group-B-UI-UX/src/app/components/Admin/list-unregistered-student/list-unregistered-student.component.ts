@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from 'src/app/model/student';
-import { StudentService } from 'src/app/services/student.service';
+import { StudentService } from 'src/app/services/admin/student.service';
 
 
 @Component({
