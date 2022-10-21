@@ -15,6 +15,7 @@ import com.lti.dao.RegisteredCourseDAO;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.UserDAO;
 import com.lti.dto.Course;
+import com.lti.dto.Grade;
 import com.lti.dto.Student;
 import com.lti.exception.AllCoursesPaidException;
 import com.lti.exception.CourseFullException;
@@ -126,7 +127,7 @@ public class StudentService implements StudentServiceInterface {
 	 * @param studentId the studentId that wants to check his grades
 	 * @return Returns a map course to grade
 	 */
-	public Map<Course, Double> checkGrades(int studentId) {
+	public Map<Course, Grade> checkGrades(int studentId) {
 		logger.info("checkGrades in StudentService");
 		return registeredCourseDAO.findGradesByStudentID(studentId);
 	}

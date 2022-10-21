@@ -52,7 +52,7 @@ public interface RegisteredCourseDAOInterface {
 	 * @param studentID the student to look at
 	 * @return a map of courses to their grades by the student
 	 */
-	public Map<Course, Double> findGradesByStudentID(int studentID);
+	public Map<Course, Grade> findGradesByStudentID(int studentID);
 
 	/**
 	 * updates a student's course registration information

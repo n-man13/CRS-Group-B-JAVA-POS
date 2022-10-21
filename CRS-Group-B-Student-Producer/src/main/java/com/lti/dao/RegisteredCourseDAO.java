@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.lti.configuration.JDBCConfiguration;
 import com.lti.constants.SQLConstants;
 import com.lti.dto.Course;
+import com.lti.dto.Grade;
 import com.lti.dto.RegisteredCourse;
 import com.lti.dto.Student;
 import com.lti.mapper.CourseMapper;
@@ -111,14 +112,14 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	 * @return a map of courses to their grades by the student
 	 */
 	@Override
-	public Map<Course, Double> findGradesByStudentID(int studentID) {
-		Map<Course, Double> courseGrades = new HashMap<Course, Double>();
+	public Map<Course, Grade> findGradesByStudentID(int studentID) {
+		Map<Course, Grade> courseGrades = new HashMap<Course, Grade>();
 		List<RegisteredCourse> registeredCourses = jdbcConfiguration.jdbcTemplate()
 				.query(SQLConstants.REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID, new RegisteredCourseMapper(), studentID);
 
 		for (RegisteredCourse registeredCourse : registeredCourses) {
 			courseGrades.put(courseDAO.findCourseByCourseID(registeredCourse.getCourseID()),
-					registeredCourse.getGrade());
+					new Grade(registeredCourse.getGrade()));
 		}
 
 		return courseGrades;

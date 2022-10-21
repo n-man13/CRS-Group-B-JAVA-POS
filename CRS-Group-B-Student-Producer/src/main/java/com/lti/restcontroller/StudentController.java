@@ -114,7 +114,7 @@ public class StudentController {
 	 * @return ResponseEntity the ResponseEntity if the login is successful or not
 	 */
 	@RequestMapping(value = "/checkGrades/{studentID}", method = RequestMethod.GET)
-	public Map<Course, Double> checkGrades(@PathVariable int studentID) {
+	public Map<Course, Grade> checkGrades(@PathVariable int studentID) {
 		logger.info("makePayment in StudentController");
 		logger.debug("Map students to grade " + studentService.checkGrades(studentID));
 		return studentService.checkGrades(studentID);
