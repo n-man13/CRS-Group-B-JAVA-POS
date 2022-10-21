@@ -1,5 +1,6 @@
 package com.lti.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,18 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public List<Course> findAllCourses() {
+		List<Course> courses = new ArrayList<Course>();
 		try {
-			return jdbcTemplateObject.jdbcTemplate().query(SQLConstants.COURSE_SELECT_ALL_COURSES, new CourseMapper());
+			for (Course c : jdbcTemplateObject.jdbcTemplate().query(SQLConstants.COURSE_SELECT_ALL_COURSES, new CourseMapper())) {
+				if (c.getProf() != null)
+					courses.add(saveProfessorIntoCourse(c, c.getProf().getProfessorID()));
+				else
+					courses.add(c);
+			}
 		} catch (DataAccessException e) {
 			return null;
 		}
+		return courses;
 	}
 	
 	/**
