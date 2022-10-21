@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { CreateCourseModalComponent } from './components/create-course-modal/create-course-modal.component';
+import { CreateCourseModalComponent } from './components/Admin/create-course-modal/create-course-modal.component';
 import { Course } from './model/course';
 
 @Component({

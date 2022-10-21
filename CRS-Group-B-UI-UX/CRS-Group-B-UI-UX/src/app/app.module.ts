@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListCourseComponent } from './components/list-course/list-course.component';
-import { CreateCourseModalComponent } from './components/create-course-modal/create-course-modal.component';
+import { CreateCourseModalComponent } from './components/Admin/create-course-modal/create-course-modal.component';
 import { CreateProfessorModalComponent } from './components/create-professor-modal/create-professor-modal.component';
 import { ListProfessorComponent } from './components/list-professor/list-professor.component';
 import { ListUnregisteredStudentComponent } from './components/list-unregistered-student/list-unregistered-student.component';
