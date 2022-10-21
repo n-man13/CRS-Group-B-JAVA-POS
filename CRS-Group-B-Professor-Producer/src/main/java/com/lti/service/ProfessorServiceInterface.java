@@ -69,7 +69,7 @@ public interface ProfessorServiceInterface {
 	 * @throws CourseNotFoundException     if courseId doesn't exist
 	 * @throws NoStudentsEnrolledException if there
 	 */
-	public Map<Student, Double> viewStudentsGrades(int professorId, int courseId)
+	public Map<Student, Grade> viewStudentsGrades(int professorId, int courseId)
 			throws CourseNotFoundException, NoStudentsEnrolledException;
 
 }

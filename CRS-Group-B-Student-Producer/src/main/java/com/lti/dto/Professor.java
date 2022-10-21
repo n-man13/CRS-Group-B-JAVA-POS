@@ -81,4 +81,7 @@ public class Professor extends User implements  Serializable{
 		this.professorID = professorID;
 	}
 
+	public String toString() {
+		return this.name;
+	}
 }
