@@ -20,7 +20,7 @@
                                 <div class="col-9 p-2">
                                 </div>
                                 <div class="col-3 p-2">
-                                    <button *gnIf="!myCourses.includes(course)" type="button" class="btn-sm btn-primary btn-block p-1" (click)="applyToCourse(course)">Apply</button>
+                                    <button *ngIf="!myCourses.includes(course)" type="button" class="btn-sm btn-primary btn-block p-1" (click)="applyToCourse(course)">Apply</button>
                                 </div>
                             </div>
                         </div> 

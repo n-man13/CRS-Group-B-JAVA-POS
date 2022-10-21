@@ -14,7 +14,7 @@ export class ViewAllCoursesComponent implements OnInit {
 
   allCourses: Course[] | undefined;
 
-  myCourses: Course[] | undefined;
+  myCourses: Course[] = new Array();
 
   constructor(private _httpService: CourseService) { }
 
