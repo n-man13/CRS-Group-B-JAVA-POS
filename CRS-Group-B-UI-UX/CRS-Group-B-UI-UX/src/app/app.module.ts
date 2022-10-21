@@ -26,8 +26,6 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AddCourseComponent } from './components/Student/add-course/add-course.component';
-import { DropCourseComponent } from './components/Student/drop-course/drop-course.component';
 import { ViewAppliedCoursesComponent } from './components/Student/view-applied-courses/view-applied-courses.component';
 import { MakePaymentComponent } from './components/Student/make-payment/make-payment.component';
 import { CheckGradesComponent } from './components/Student/check-grades/check-grades.component';
@@ -41,8 +39,6 @@ import { ViewAllCoursesComponent } from './components/Student/view-all-courses/v
     CreateProfessorModalComponent,
     ListProfessorComponent,
     ListUnregisteredStudentComponent,
-    AddCourseComponent,
-    DropCourseComponent,
     ViewAppliedCoursesComponent,
     MakePaymentComponent,
     CheckGradesComponent,
