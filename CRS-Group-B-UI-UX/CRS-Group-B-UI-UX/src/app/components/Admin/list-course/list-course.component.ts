@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/model/course';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
-import { CourseService } from 'src/app/services/course.service';
+import { CourseService } from 'src/app/services/admin/course.service';
 import { Router } from '@angular/router';
 
 @Component({

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { Course } from 'src/app/model/course';
-import { CourseService } from 'src/app/services/course.service';
+import { CourseService } from 'src/app/services/admin/course.service';
 
 @Component({
   selector: 'app-create-course-modal',
