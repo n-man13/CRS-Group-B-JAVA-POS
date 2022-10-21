@@ -121,6 +121,11 @@ public class StudentController {
 		//return new ResponseEntity(HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/viewAllCourses", method = RequestMethod.GET)
+	public ResponseEntity viewAllCourses() {
+		return new ResponseEntity(studentService.viewAllCourses(), HttpStatus.OK);
+	}
+	
 	/**
 	 * Method to display courses
 	 * 

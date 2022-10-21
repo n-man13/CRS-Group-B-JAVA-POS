@@ -91,6 +91,10 @@ public class StudentService implements StudentServiceInterface {
 		logger.info("viewAppliedCourses in StudentService");
 		return registeredCourseDAO.findCoursesByStudentID(studentId);
 	}
+	
+	public List<Course> viewAllCourses(){
+		return courseDAO.findAllCourses();
+	}
 
 	/**
 	 * calls DAO method to payFee
