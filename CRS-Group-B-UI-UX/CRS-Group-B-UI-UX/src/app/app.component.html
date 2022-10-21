@@ -1,4 +1,3 @@
-
 <div class="p-5 mb-4 bg-light rounded-3">
   <div class="container-fluid py-5">
     <!-- <h1 class="display-5 fw-bold">Admin Portal</h1>
@@ -7,17 +6,21 @@
     <p class="col-md-8 fs-4">register, drop, view courses, check grades, and make payments</p>
   </div>
 </div>
-<!-- <div class="d-flex justify-content-center">
+<!-- 
     
   <a class="btn btn-primary m-2" [routerLink]="['/listcourse']">List Courses</a>
   <a class="btn btn-primary m-2" [routerLink]="['/courseform']">Create Course</a>
   <a class="btn btn-primary m-2" [routerLink]="['/listprofessor']">List Professors</a>
   <a class="btn btn-primary m-2" [routerLink]="['/professorform']">Create Professor</a>
   <a class="btn btn-primary m-2" [routerLink]="['/listunregisteredstudent']">Approve Registrations</a>
-  
-</div> -->
+ -->
+<div class="d-flex justify-content-center">
+  <a class="btn btn-primary m-2" [routerLink]="['/viewallcourses']">List All Courses</a>
+  <a class="btn btn-primary m-2" [routerLink]="['/viewappliedcourses']">List Applied Courses</a>
+  <a class="btn btn-primary m-2" [routerLink]="['/checkgrades']">Check Grades</a>
+</div>
 <hr>
-  <br>
+<br>
 <!-- <button class="btn btn-primary" (click)="openModal()">Open modal</button> -->
 <div class="container">
   <router-outlet></router-outlet>

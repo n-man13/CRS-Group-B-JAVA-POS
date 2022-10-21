@@ -12,4 +12,8 @@ export class ViewAllCoursesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  applyToCourse() {
+    
+  }
+
 }

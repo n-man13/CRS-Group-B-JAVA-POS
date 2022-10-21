@@ -1,1 +1,32 @@
-<p>view-all-courses works!</p>
+<div class="col-md-12">
+    <h3 style="text-align:center">Courses</h3>
+    <br>
+    <div class="container">
+        <div class="row">
+            <!-- *ngFor="let course of getData" -->
+            <div  class="col-md-4">
+                <div class="card" style="margin-bottom: 16px">
+                    <div class="card-header p-2">
+                        ID: 1
+                    </div>
+                    <div class="card-body p-2">
+                        <h3 class="card-text">Math</h3>
+                        <p class="card-text">Department: Math</p>
+                        <p>Basics of math</p>
+                    </div>
+                    <div class="card-footer p-2">
+                        <div class="container p-0">
+                            <div class="row">
+                                <div class="col-9 p-2">
+                                </div>
+                                <div class="col-3 p-2">
+                                    <button type="button" class="btn-sm btn-primary btn-block p-1" (click)="applyToCourse()">Apply</button>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>

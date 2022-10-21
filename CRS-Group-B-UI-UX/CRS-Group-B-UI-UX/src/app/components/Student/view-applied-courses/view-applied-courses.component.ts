@@ -11,5 +11,12 @@ export class ViewAppliedCoursesComponent implements OnInit {
 
   ngOnInit(): void {
   }
+payCourse() {
+
+}
+
+dropCourse() {
+  
+}
 
 }
