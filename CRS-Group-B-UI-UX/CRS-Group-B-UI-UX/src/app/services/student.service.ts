@@ -17,7 +17,7 @@ export class StudentService {
 
   model:Student = new Student(0,"", "", "", false);
 
-  getStudents(): Observable<any>{
+  getUnapprovedStudents(): Observable<any>{
     return this.httpClient.get(this.url + "viewUnapprovedStudents", { headers: this.headers });
   }
 
