@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Student } from 'src/app/model/student';
 
 
 @Injectable({
@@ -15,6 +16,10 @@ export class CourseService {
 
   getCourses(): Observable<any> {
     return this.http.get(this.url + "viewAllCourses", { headers: this.headers });
+  }
+
+  getAppliedCourses(student: Student): Observable<any> {
+    return this.http.get(this.url + "viewAppliedCourses/" + student.studentID, { headers: this.headers });
   }
 
 }
