@@ -38,7 +38,7 @@ export class ListUnregisteredStudentComponent implements OnInit {
   // }
 
   getStudents() {
-    this.httpService.getStudents().subscribe(data => {
+    this.httpService.getUnapprovedStudents().subscribe(data => {
       console.log(data);
       this.getData = data;
     })

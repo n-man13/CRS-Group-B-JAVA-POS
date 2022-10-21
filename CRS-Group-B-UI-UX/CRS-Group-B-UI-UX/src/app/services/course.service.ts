@@ -23,9 +23,9 @@ export class CourseService {
 
   }
 
-  createCourse(customer: Course): Observable<any> {
+  createCourse(course: Course): Observable<any> {
 
-    const body = JSON.stringify(customer);
+    const body = JSON.stringify(course);
     return this.httpClient.post(this.url + "createCourse", body, { headers: this.headers });
 
   }

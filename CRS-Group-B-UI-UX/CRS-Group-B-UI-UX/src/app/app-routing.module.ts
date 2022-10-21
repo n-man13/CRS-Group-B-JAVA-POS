@@ -8,11 +8,11 @@ import { ListUnregisteredStudentComponent } from './components/Admin/list-unregi
 
 const routes: Routes = [
   {path:'', redirectTo: 'home', pathMatch:'full'},
-  {path:'listcourse', component:ListCourseComponent},
+/*   {path:'listcourse', component:ListCourseComponent},
   {path:'courseform', component:CreateCourseModalComponent},
   {path:'listprofessor', component:ListProfessorComponent},
   {path:'professorform', component:CreateProfessorModalComponent},
-  {path:'listunregisteredstudent', component:ListUnregisteredStudentComponent},
+  {path:'listunregisteredstudent', component:ListUnregisteredStudentComponent}, */
 ];
 
 @NgModule({
