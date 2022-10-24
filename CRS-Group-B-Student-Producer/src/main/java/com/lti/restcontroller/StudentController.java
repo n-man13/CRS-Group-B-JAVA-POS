@@ -86,6 +86,12 @@ public class StudentController {
 
 		return new ResponseEntity(courses, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/viewRegisteredCourses/{studentID}", method = RequestMethod.GET)
+	public ResponseEntity viewRegisteredCourses(@PathVariable int studentID) {
+		List<RegisteredCourse> courses = studentService.viewRegisteredCourses(studentID);
+		return new ResponseEntity(courses, HttpStatus.OK);
+	}
 
 	/**
 	 * Method to makePayment

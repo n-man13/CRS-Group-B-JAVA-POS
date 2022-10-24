@@ -52,6 +52,18 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 		return courses;
 
 	}
+	
+	public List<RegisteredCourse> findRegisteredCoursesByStudentID(int studentID){
+		List<RegisteredCourse> courses = new ArrayList<RegisteredCourse>();
+		courses = jdbcConfiguration.jdbcTemplate()
+				.query(SQLConstants.REGISTEREDCOURSE_SELECT_ALL_COURSES_BY_STUDENTID, new RegisteredCourseMapper(), studentID);
+		for (RegisteredCourse course : courses) {
+			course.setCourse(courseDAO.findCourseByCourseID(course.getCourse().getCourseID()));
+			course.setStudent(studentDAO.findStudent(studentID));
+		}
+		
+		return courses;
+	}
 
 	/**
 	 * view the students in a course
@@ -101,7 +113,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 
 		for (RegisteredCourse registeredCourse : registeredCourses) {
 			studentGrades.add(new Grade(registeredCourse.getGrade(),
-					studentDAO.findStudent(registeredCourse.getStudentID()), courseDAO.findCourseByCourseID(courseID)));
+					studentDAO.findStudent(registeredCourse.getStudent().getStudentID()), courseDAO.findCourseByCourseID(courseID)));
 		}
 
 		return studentGrades;
@@ -121,7 +133,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 
 		for (RegisteredCourse registeredCourse : registeredCourses) {
 			courseGrades.add(new Grade(registeredCourse.getGrade(), studentDAO.findStudent(studentID),
-					courseDAO.findCourseByCourseID(registeredCourse.getCourseID())));
+					courseDAO.findCourseByCourseID(registeredCourse.getCourse().getCourseID())));
 		}
 
 		return courseGrades;

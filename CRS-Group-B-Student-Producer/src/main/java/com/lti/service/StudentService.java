@@ -16,6 +16,7 @@ import com.lti.dao.StudentDAO;
 import com.lti.dao.UserDAO;
 import com.lti.dto.Course;
 import com.lti.dto.Grade;
+import com.lti.dto.RegisteredCourse;
 import com.lti.dto.Student;
 import com.lti.exception.AllCoursesPaidException;
 import com.lti.exception.CourseFullException;
@@ -90,6 +91,10 @@ public class StudentService implements StudentServiceInterface {
 	public List<Course> viewAppliedCourses(int studentId) {
 		logger.info("viewAppliedCourses in StudentService");
 		return registeredCourseDAO.findCoursesByStudentID(studentId);
+	}
+	
+	public List<RegisteredCourse> viewRegisteredCourses(int studentID){
+		return registeredCourseDAO.findRegisteredCoursesByStudentID(studentID);
 	}
 	
 	public List<Course> viewAllCourses(){
