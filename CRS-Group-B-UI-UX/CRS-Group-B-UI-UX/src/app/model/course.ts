@@ -5,15 +5,15 @@ export class Course {
     public name: string;
     public description: string;
     public department: string;
-    public professorID: number;
+    public professor: Professor;
     public prereqCourseID: number;
 
-    constructor(courseID: number, name: string, description: string, department: string, prereqCourseID: number, professorID: number) {
+    constructor(courseID: number, name: string, description: string, department: string, prereqCourseID: number, professor: Professor) {
         this.courseID = courseID;
         this.name = name;
         this.description = description;
         this.department = department;
-        this.professorID = professorID;
+        this.professor = professor;
         this.prereqCourseID = prereqCourseID;
     }
 }

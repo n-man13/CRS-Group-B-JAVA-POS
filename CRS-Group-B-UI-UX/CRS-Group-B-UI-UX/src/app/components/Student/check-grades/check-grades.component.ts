@@ -12,7 +12,7 @@ import { RegisteredCourseService } from 'src/app/services/student/registered-cou
 export class CheckGradesComponent implements OnInit {
 
   student: Student = new Student(1, "Luca", "Lucam", "1234", true);
-  grades: Map<Course, Grade> = new Map();
+  grades: Grade[] = new Array();
   courses: Course[] = new Array();
 
   constructor(private registeredCourseService: RegisteredCourseService) {}
@@ -35,13 +35,13 @@ export class CheckGradesComponent implements OnInit {
 
   getCourses(){
     console.log("running courses");
-    this.grades.forEach(function(value,key){
+    /* this.grades.forEach(function(value,key){
       console.log(key.name);
     })
     for (let course of this.grades.keys()){
       console.log(course.name);
       this.courses.push(course);
-    } 
+    }  */
   }
 
 }
