@@ -15,7 +15,7 @@ export class RegisteredCourseService {
 
 
   getAppliedCourses(student: Student): Observable<any> {
-    return this.http.get(this.url + "viewAppliedCourses/" + student.studentID, { headers: this.headers });
+    return this.http.get(this.url + "viewRegisteredCourses/" + student.studentID, { headers: this.headers });
   }
 
   addCourse(student: Student, course: Course): Observable<any> {

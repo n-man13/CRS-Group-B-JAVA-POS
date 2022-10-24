@@ -27,8 +27,8 @@ export class ViewAppliedCoursesComponent implements OnInit {
 
   getAppliedCourse() {
 
-    this.courseService.getAppliedCourses(this.student).subscribe(data => {
-      console.log("applied course Data "+data);
+    this.registeredCourseService.getAppliedCourses(this.student).subscribe(data => {
+      console.log(data);
       this.myCourses = data;
       
     })
@@ -53,6 +53,7 @@ dropCourse(myCourse : RegisteredCourse) {
       .subscribe(data => {
         this.getAppliedCourse();
         console.log(data)
+        location.reload();
       })
   
 }

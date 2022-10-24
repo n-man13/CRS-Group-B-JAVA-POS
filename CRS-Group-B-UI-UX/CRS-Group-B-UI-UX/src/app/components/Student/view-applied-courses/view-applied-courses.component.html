@@ -16,25 +16,26 @@
                     </div>
                     <div class="card-footer p-2">
                         <div class="container p-0">
-                            <div class="row">
+                            <div *ngIf="myCourse.feePaid" class="row">
                                 <div class="col-6 p-2">
                                 </div>
-                                <div *ngIf = "myCourse.feePaid">
-                                    <div class="col-6 p-2">
-                                        <button type="button" class="btn-sm btn-primary p-1 btn-block disabled"></button>
-                                    </div>
+                                <div class="col-6 p-2">
+                                    <button type="button" disabled class="btn-sm btn-primary p-1 btn-block ">Registration Confirmed</button>
                                 </div>
-                                <div *ngIf = "!myCourse.feePaid">
-                                    <div class="col-3 p-2">
-                                        <button type="button" class="btn-sm btn-primary p-1 btn-block"
-                                            (click)="payCourse(myCourse)">Pay</button>
-                                    </div>
-                                    <div class="col-3 p-2">
-                                        <button type="button" class="btn-sm btn-danger p-1 btn-block"
-                                            (click)="dropCourse(myCourse)">Drop</button>
-    
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!myCourse.feePaid" class="row">
+
+                            <div class="col-6 p-2">
+                            </div>
+                            <div class="col-3 p-2">
+                                <button type="button" class="btn-sm btn-primary p-1 btn-block"
+                                    (click)="payCourse(myCourse)">Pay</button>
+                            </div>
+                            <div class="col-3 p-2">
+                                <button type="button" class="btn-sm btn-danger p-1 btn-block"
+                                    (click)="dropCourse(myCourse)">Drop</button>
+
                             </div>
                         </div>
                     </div>
