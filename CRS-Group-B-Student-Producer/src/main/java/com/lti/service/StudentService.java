@@ -131,7 +131,7 @@ public class StudentService implements StudentServiceInterface {
 	 * @param studentId the studentId that wants to check his grades
 	 * @return Returns a map course to grade
 	 */
-	public Map<Course, Grade> checkGrades(int studentId) {
+	public List<Grade> checkGrades(int studentId) {
 		logger.info("checkGrades in StudentService");
 		return registeredCourseDAO.findGradesByStudentID(studentId);
 	}
