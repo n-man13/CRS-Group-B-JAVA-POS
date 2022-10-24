@@ -37,12 +37,24 @@ export class ViewAppliedCoursesComponent implements OnInit {
   }
 
 
-payCourse() {
+payCourse(myCourse : RegisteredCourse) {
+
+  this.registeredCourseService.makePayment(this.student, myCourse.course)
+      .subscribe(data => {
+        this.getAppliedCourse();
+        console.log(data)
+      })
 
 }
 
-dropCourse() {
+dropCourse(myCourse : RegisteredCourse) {
 
+  this.registeredCourseService.dropCourse(this.student, myCourse.course)
+      .subscribe(data => {
+        this.getAppliedCourse();
+        console.log(data)
+      })
+  
 }
 
 }
