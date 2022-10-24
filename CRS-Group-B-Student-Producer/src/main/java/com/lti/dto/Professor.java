@@ -47,15 +47,6 @@ public class Professor extends User implements  Serializable{
 	}
 
 	/**
-	 * returns the professor id
-	 * 
-	 * @return the profID
-	 */
-	public int getProfID() {
-		return professorID;
-	}
-
-	/**
 	 * returns the name of the professor
 	 * 
 	 * @return the name
