@@ -40,6 +40,9 @@ public class Grade {
 		else if (grade >= 60) {
 			gradeLetter = 'D';
 		}
+		else if (grade < 0) {
+			gradeLetter = '-';
+		}
 		else
 			gradeLetter = 'F';
 	}
