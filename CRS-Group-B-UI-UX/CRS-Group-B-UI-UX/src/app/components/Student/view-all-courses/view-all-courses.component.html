@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <h3 style="text-align:center">Courses</h3>
+    <h3 style="text-align:center">All Courses</h3>
     <br>
     <div class="container">
         <div class="row">
@@ -20,8 +20,12 @@
                                 <div class="col-9 p-2">
                                 </div>
                                 <!-- *"  -->
-                                <div *ngIf="!(myCourses.includes(course))" class="col-3 p-2" >
+                                <div *ngIf="!(isApplied(course))" class="col-3 p-2" >
                                     <button type="button" class="btn-sm btn-primary btn-block p-1" (click)="applyToCourse(course)">Apply</button>
+                                    <!-- <button ng-show="myCourses.includes(course)">some text</button><button ng-show="!myCourses.includes(course)">some other text</button> -->
+                                </div>
+                                <div *ngIf="(isApplied(course))" class="col-3 p-2" >
+                                    <button type="button" class="btn-sm btn-danger btn-block p-1" (click)="goToAppliedCourses()">Drop</button>
                                     <!-- <button ng-show="myCourses.includes(course)">some text</button><button ng-show="!myCourses.includes(course)">some other text</button> -->
                                 </div>
                             </div>
