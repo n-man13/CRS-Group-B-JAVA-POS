@@ -15,7 +15,7 @@ export class CourseService {
 
   constructor(private httpClient: HttpClient) { }
 
-  model:Course = new Course(0,"","","",0, new Professor(0,"","",""));
+  model: Course = new Course(0, "", "", "", 0, new Professor(0, "", "", ""));
 
 
   getCourses(): Observable<any> {

@@ -15,25 +15,25 @@ export class CheckGradesComponent implements OnInit {
   grades: Grade[] = new Array();
   courses: Course[] = new Array();
 
-  constructor(private registeredCourseService: RegisteredCourseService) {}
+  constructor(private registeredCourseService: RegisteredCourseService) { }
 
   ngOnInit(): void {
     this.getCourses();
     this.getGrades();
-    
+
   }
 
-  getGrades(){
+  getGrades() {
     console.log("running grades")
     this.registeredCourseService.checkGrades(this.student).subscribe(data => {
       console.log(data);
       this.grades = data;
       this.getCourses();
     });
-    
+
   }
 
-  getCourses(){
+  getCourses() {
     console.log("running courses");
     /* this.grades.forEach(function(value,key){
       console.log(key.name);

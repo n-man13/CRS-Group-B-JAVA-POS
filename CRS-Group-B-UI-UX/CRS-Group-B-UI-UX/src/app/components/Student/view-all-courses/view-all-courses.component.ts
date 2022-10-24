@@ -57,11 +57,11 @@ export class ViewAllCoursesComponent implements OnInit {
       // this.router.navigate(['viewallcourses'])
       // this.getCourses();
     })
-    
+
   }
 
   isApplied(course: Course) {
-    let output:boolean = false;
+    let output: boolean = false;
     this.myCourses.forEach(myCourse => {
       if (myCourse.courseID == course.courseID) {
         output = true;

@@ -13,25 +13,25 @@ export class RegisteredCourseService {
 
   constructor(private http: HttpClient) { }
 
-  
+
   getAppliedCourses(student: Student): Observable<any> {
     return this.http.get(this.url + "viewAppliedCourses/" + student.studentID, { headers: this.headers });
   }
 
-  addCourse(student: Student, course: Course):Observable<any> {
-    const body:String = "{}";
+  addCourse(student: Student, course: Course): Observable<any> {
+    const body: String = "{}";
     return this.http.post(this.url + "applyToCourseStudent/" + student.studentID + "/" + course.courseID, body, { headers: this.headers });
   }
 
-  dropCourse(student: Student, course: Course):Observable<any> {
+  dropCourse(student: Student, course: Course): Observable<any> {
     return this.http.delete(this.url + "dropCourse/" + student.studentID + "/" + course.courseID, { headers: this.headers });
   }
 
-  makePayment(student: Student, course:Course):Observable<any> {
+  makePayment(student: Student, course: Course): Observable<any> {
     return this.http.put(this.url + "makePayment/" + student.studentID + "/" + course.courseID, { headers: this.headers });
   }
 
-  checkGrades(student: Student):Observable<any> {
+  checkGrades(student: Student): Observable<any> {
     return this.http.get(this.url + "checkGrades/" + student.studentID, { headers: this.headers });
   }
 }
