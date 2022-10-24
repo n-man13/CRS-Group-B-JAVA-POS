@@ -57,7 +57,7 @@ public interface StudentServiceInterface {
 	 * @param studentId the studentId that wants to check his grades
 	 * @return Returns a map course to grade
 	 */
-	public Map<Course, Grade> checkGrades(int studentId);
+	public List<Grade> checkGrades(int studentId);
 
 	/**
 	 * calls DAO method to view unpaid courses

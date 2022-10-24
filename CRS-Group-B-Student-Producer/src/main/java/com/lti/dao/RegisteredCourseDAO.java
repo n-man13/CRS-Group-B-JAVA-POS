@@ -2,6 +2,7 @@
  * 
  */
 package com.lti.dao;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import com.lti.dto.Student;
 import com.lti.mapper.CourseMapper;
 import com.lti.mapper.RegisteredCourseMapper;
 import com.lti.mapper.StudentMapper;
+
 /**
  * @author user101
  *
@@ -32,7 +34,6 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	private StudentDAO studentDAO;
 
 	// Queries for RegisteredCourse table
-	
 
 	/**
 	 * view the courses of a student given id
@@ -49,7 +50,7 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 			courses.add(courseDAO.findCourseByCourseID(courseID));
 		}
 		return courses;
-		
+
 	}
 
 	/**
@@ -93,13 +94,14 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	 * @return a map of students to their grades in the specified class
 	 */
 	@Override
-	public Map<Student, Grade> findStudentsAndGradesByCourseID(int courseID) {
-		Map<Student, Grade> studentGrades = new HashMap<Student, Grade>();
+	public List<Grade> findStudentsAndGradesByCourseID(int courseID) {
+		List<Grade> studentGrades = new ArrayList<Grade>();
 		List<RegisteredCourse> registeredCourses = jdbcConfiguration.jdbcTemplate()
 				.query(SQLConstants.REGISTEREDCOURSE_SELECT_GRADES_BY_COURSEID, new RegisteredCourseMapper(), courseID);
 
 		for (RegisteredCourse registeredCourse : registeredCourses) {
-			studentGrades.put(studentDAO.findStudent(registeredCourse.getStudentID()), new Grade(registeredCourse.getGrade()));
+			studentGrades.add(new Grade(registeredCourse.getGrade(),
+					studentDAO.findStudent(registeredCourse.getStudentID()), courseDAO.findCourseByCourseID(courseID)));
 		}
 
 		return studentGrades;
@@ -112,14 +114,14 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	 * @return a map of courses to their grades by the student
 	 */
 	@Override
-	public Map<Course, Grade> findGradesByStudentID(int studentID) {
-		Map<Course, Grade> courseGrades = new HashMap<Course, Grade>();
-		List<RegisteredCourse> registeredCourses = jdbcConfiguration.jdbcTemplate()
-				.query(SQLConstants.REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID, new RegisteredCourseMapper(), studentID);
+	public List<Grade> findGradesByStudentID(int studentID) {
+		List<Grade> courseGrades = new ArrayList<Grade>();
+		List<RegisteredCourse> registeredCourses = jdbcConfiguration.jdbcTemplate().query(
+				SQLConstants.REGISTEREDCOURSE_SELECT_GRADES_BY_STUDENTID, new RegisteredCourseMapper(), studentID);
 
 		for (RegisteredCourse registeredCourse : registeredCourses) {
-			courseGrades.put(courseDAO.findCourseByCourseID(registeredCourse.getCourseID()),
-					new Grade(registeredCourse.getGrade()));
+			courseGrades.add(new Grade(registeredCourse.getGrade(), studentDAO.findStudent(studentID),
+					courseDAO.findCourseByCourseID(registeredCourse.getCourseID())));
 		}
 
 		return courseGrades;
@@ -161,8 +163,8 @@ public class RegisteredCourseDAO implements RegisteredCourseDAOInterface {
 	 */
 	@Override
 	public boolean updateGrade(int studentID, int courseID, double grade) {
-		jdbcConfiguration.jdbcTemplate()
-				.update(SQLConstants.REGISTEREDCOURSE_UPDATE_GRADES, grade, courseID, studentID);
+		jdbcConfiguration.jdbcTemplate().update(SQLConstants.REGISTEREDCOURSE_UPDATE_GRADES, grade, courseID,
+				studentID);
 		return true;
 	}
 
