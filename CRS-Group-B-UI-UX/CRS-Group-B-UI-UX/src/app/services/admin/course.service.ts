@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Course } from 'src/app/model/course';
+import { Professor } from 'src/app/model/professor';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class CourseService {
 
   constructor(private httpClient: HttpClient) { }
 
-  model:Course = new Course(0,"","","",0,0);
+  model:Course = new Course(0,"","","",0, new Professor(0,"","",""));
 
 
   getCourses(): Observable<any> {

@@ -3,6 +3,7 @@ import { Course } from 'src/app/model/course';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { CourseService } from 'src/app/services/admin/course.service';
 import { Router } from '@angular/router';
+import { Professor } from 'src/app/model/professor';
 
 @Component({
   selector: 'app-list-course',
@@ -17,7 +18,7 @@ export class ListCourseComponent implements OnInit {
 
   isFound: boolean = false;
 
-  model: Course = new Course(0, '', '', '', 0, 0);
+  model: Course = new Course(0, '', '', '', 0, new Professor(0, "", "", ""));
 
   getData: Course[] | undefined;
 

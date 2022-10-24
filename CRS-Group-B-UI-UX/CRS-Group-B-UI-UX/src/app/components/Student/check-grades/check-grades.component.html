@@ -9,11 +9,11 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let course of grades | keyvalue">
-      <th scope="row">{{course.key.courseID}}</th>
-      <td>{{course.key.name}}</td>
-      <td>{{course.key.professorID}}</td>
-      <td>{{course.value.grade}}</td>
+    <tr *ngFor="let grade of grades">
+      <th scope="row">{{grade.course.courseID}}</th>
+      <td>{{grade.course.name}}</td>
+      <td>{{grade.course.professor.name}}</td>
+      <td>{{grade.grade}}</td>
     </tr>
   </tbody>
 </table>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { Course } from 'src/app/model/course';
+import { Professor } from 'src/app/model/professor';
 import { CourseService } from 'src/app/services/admin/course.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class CreateCourseModalComponent implements OnInit {
 
   // isFound:boolean = false;
 
-  model: Course = new Course( 0, '', '', '', 0, 0);
+  model: Course = new Course( 0, '', '', '', 0, new Professor(0, "", "", ""));
 
   getData: Course[] | undefined;
 
@@ -54,7 +55,7 @@ export class CreateCourseModalComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.router.navigate(['listcourse']);
-        this._httpService.model = new Course( 0, '', '', '', 0, 0);
+        this._httpService.model = new Course( 0, '', '', '', 0, new Professor(0, "", "", ""));
       })
     
   }
@@ -65,7 +66,7 @@ export class CreateCourseModalComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.router.navigate(['listcourse']);
-        this._httpService.model = new Course( 0, '', '', '', 0, 0);
+        this._httpService.model = new Course( 0, '', '', '', 0, new Professor(0, "", "", ""));
       })
   }
 
