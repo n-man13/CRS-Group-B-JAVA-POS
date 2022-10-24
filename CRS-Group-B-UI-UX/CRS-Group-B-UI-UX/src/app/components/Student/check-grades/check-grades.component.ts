@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/model/course';
 import { Grade } from 'src/app/model/grade';
+import { Professor } from 'src/app/model/professor';
 import { Student } from 'src/app/model/student';
 import { RegisteredCourseService } from 'src/app/services/student/registered-course.service';
 
@@ -18,7 +19,6 @@ export class CheckGradesComponent implements OnInit {
   constructor(private registeredCourseService: RegisteredCourseService) { }
 
   ngOnInit(): void {
-    this.getCourses();
     this.getGrades();
 
   }
@@ -28,13 +28,18 @@ export class CheckGradesComponent implements OnInit {
     this.registeredCourseService.checkGrades(this.student).subscribe(data => {
       console.log(data);
       this.grades = data;
-      this.getCourses();
+      this.getProfessors();
     });
 
   }
 
-  getCourses() {
-    console.log("running courses");
+  getProfessors() {
+    console.log("running professors");
+    for (let grade of this.grades){
+      if (grade.course.professor == null){
+        grade.course.professor = new Professor(0, "No Professor", "", "");
+      }
+    }
     /* this.grades.forEach(function(value,key){
       console.log(key.name);
     })

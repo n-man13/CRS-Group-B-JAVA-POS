@@ -12,7 +12,7 @@
     <tr *ngFor="let grade of grades">
       <th scope="row">{{grade.course.courseID}}</th>
       <td>{{grade.course.name}}</td>
-      <td>{{grade.course.professor}}</td>
+      <td>{{grade.course.professor.name}}</td>
       <td>{{grade.gradeLetter}}</td>
     </tr>
   </tbody>
