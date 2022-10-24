@@ -20,11 +20,9 @@
                                 <div class="col-9 p-2">
                                 </div>
                                 <!-- *"  -->
-                                <div *ngFor="let myCourse of myCourses">
                                 <div *ngIf="!(myCourses.includes(course))" class="col-3 p-2" >
                                     <button type="button" class="btn-sm btn-primary btn-block p-1" (click)="applyToCourse(course)">Apply</button>
                                     <!-- <button ng-show="myCourses.includes(course)">some text</button><button ng-show="!myCourses.includes(course)">some other text</button> -->
-                                </div>
                                 </div>
                             </div>
                         </div> 

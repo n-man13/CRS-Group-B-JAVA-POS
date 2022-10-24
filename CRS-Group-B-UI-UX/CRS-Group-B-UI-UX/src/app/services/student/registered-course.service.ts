@@ -19,7 +19,8 @@ export class RegisteredCourseService {
   }
 
   addCourse(student: Student, course: Course):Observable<any> {
-    return this.http.post(this.url + "applyToCourseStudent/" + student.studentID + "/" + course.courseID, { headers: this.headers });
+    const body:String = "{}";
+    return this.http.post(this.url + "applyToCourseStudent/" + student.studentID + "/" + course.courseID, body, { headers: this.headers });
   }
 
   dropCourse(student: Student, course: Course):Observable<any> {
