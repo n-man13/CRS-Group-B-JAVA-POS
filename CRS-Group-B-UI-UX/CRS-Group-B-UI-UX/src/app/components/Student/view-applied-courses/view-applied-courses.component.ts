@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/model/course';
+import { RegisteredCourse } from 'src/app/model/registered-course';
 import { Student } from 'src/app/model/student';
 import { CourseService } from 'src/app/services/student/course.service';
 import { RegisteredCourseService } from 'src/app/services/student/registered-course.service';
@@ -13,9 +14,7 @@ export class ViewAppliedCoursesComponent implements OnInit {
 
   student:Student = new Student(1, "Luca", "Lucam", "1234", true);
 
-  allCourses: Course[] | undefined;
-
-  myCourses: Course [] = [];
+  myCourses: RegisteredCourse [] = [];
 
   constructor(private courseService: CourseService, private registeredCourseService: RegisteredCourseService) { }
 
