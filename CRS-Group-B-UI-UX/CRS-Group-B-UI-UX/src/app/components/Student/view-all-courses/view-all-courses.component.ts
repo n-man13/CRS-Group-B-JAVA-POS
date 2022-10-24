@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/model/course';
 import { Student } from 'src/app/model/student';
 import { CourseService } from 'src/app/services/student/course.service';
+import { RegisteredCourseService } from 'src/app/services/student/registered-course.service';
 
 @Component({
   selector: 'app-view-all-courses',
@@ -14,40 +15,44 @@ export class ViewAllCoursesComponent implements OnInit {
 
   allCourses: Course[] | undefined;
 
-  myCourses: Course[] = new Array();
+  myCourses: Course [] = [];
 
-  constructor(private _httpService: CourseService) { }
+  constructor(private courseService: CourseService, private registeredCourseService: RegisteredCourseService) { }
 
   ngOnInit(): void {
 
     this.getCourses();
-    this.getApplyedCourse();
+    this.getAppliedCourse();    
 
   }
 
   getCourses() {
 
-    this._httpService.getCourses().subscribe(data => {
-      console.log(data);
+    this.courseService.getCourses().subscribe(data => {
+      console.log("GetCourses DATA"+data);
       this.allCourses = data;
-    })
+      console.log("all courses array" + this.allCourses);
 
+    })
+    // console.log("all courses array" + this.allCourses);
   }
 
-  getApplyedCourse() {
+  getAppliedCourse() {
 
-    this._httpService.getCourses().subscribe(data => {
-      console.log(data);
+    this.courseService.getAppliedCourses(this.student).subscribe(data => {
+      console.log("applied course Data "+data);
       this.myCourses = data;
+      
     })
+    console.log("my courses array" + this.myCourses);
 
   }
 
   applyToCourse(course:Course) {
 
-    this._httpService.getAppliedCourses(this.student).subscribe(data => {
+    this.registeredCourseService.addCourse(this.student, course).subscribe(data => {
       console.log(data);
-      this.allCourses = data;
+      this.getCourses();
     })
 
   }

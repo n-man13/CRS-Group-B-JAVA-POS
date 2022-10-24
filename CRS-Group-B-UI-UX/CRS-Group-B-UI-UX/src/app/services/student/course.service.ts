@@ -19,7 +19,12 @@ export class CourseService {
   }
 
   getAppliedCourses(student: Student): Observable<any> {
+    console.log(this.url+"viewAppliedCourses/"+student.studentID);
     return this.http.get(this.url + "viewAppliedCourses/" + student.studentID, { headers: this.headers });
   }
+
+  
+
+
 
 }
