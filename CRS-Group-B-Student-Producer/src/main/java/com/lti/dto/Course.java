@@ -113,7 +113,7 @@ public class Course implements  Serializable{
 	 * 
 	 * @return the professor
 	 */
-	public Professor getProf() {
+	public Professor getProfessor() {
 		return professor;
 	}
 
@@ -122,7 +122,7 @@ public class Course implements  Serializable{
 	 * 
 	 * @param prof the prof to set
 	 */
-	public void setProf(Professor prof) {
+	public void setProfessor(Professor prof) {
 		this.professor = prof;
 	}
 

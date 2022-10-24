@@ -135,9 +135,9 @@ public class StudentController {
 		System.out.println(
 				"CourseID \t Course Name \t Department \t Description \t\t Professor \t Prerequisite CourseID");
 		for (Course c : courses) {
-			if (c.getProf() != null)
+			if (c.getProfessor() != null)
 				System.out.println(c.getCourseID() + "\t\t" + c.getName() + "\t" + c.getDepartment() + "\t\t"
-						+ c.getDescription() + "\t" + c.getProf().getName() + "\t" + c.getPrereqCourseID());
+						+ c.getDescription() + "\t" + c.getProfessor().getName() + "\t" + c.getPrereqCourseID());
 			else
 				System.out.println(c.getCourseID() + "\t\t" + c.getName() + "\t" + c.getDepartment() + "\t\t"
 						+ c.getDescription() + "\t" + "No Professor" + "\t" + c.getPrereqCourseID());

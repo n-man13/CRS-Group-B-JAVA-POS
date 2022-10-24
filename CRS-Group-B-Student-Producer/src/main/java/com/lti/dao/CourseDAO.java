@@ -35,8 +35,8 @@ public class CourseDAO implements CourseDAOInterface {
 		List<Course> courses = new ArrayList<Course>();
 		try {
 			for (Course c : jdbcTemplateObject.jdbcTemplate().query(SQLConstants.COURSE_SELECT_ALL_COURSES, new CourseMapper())) {
-				if (c.getProf() != null)
-					courses.add(saveProfessorIntoCourse(c, c.getProf().getProfessorID()));
+				if (c.getProfessor() != null)
+					courses.add(saveProfessorIntoCourse(c, c.getProfessor().getProfessorID()));
 				else
 					courses.add(c);
 			}
@@ -108,7 +108,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	private Course saveProfessorIntoCourse(Course course, int professorID) {
 		Professor professor = professorDAO.findProfessorByProfessorID(professorID);
-		course.setProf(professor);
+		course.setProfessor(professor);
 		return course;
 	}
 
@@ -136,7 +136,7 @@ public class CourseDAO implements CourseDAOInterface {
 		try {
 			Course course = jdbcTemplateObject.jdbcTemplate().queryForObject(SQLConstants.COURSE_SELECT_BY_COURSEID,
 					new CourseMapper(), courseID);
-			course = saveProfessorIntoCourse(course, course.getProf().getProfessorID());
+			course = saveProfessorIntoCourse(course, course.getProfessor().getProfessorID());
 			return course;
 		} catch (DataAccessException e) {
 			return null;
