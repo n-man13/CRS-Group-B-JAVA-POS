@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lti.dto.Admin;
+import com.lti.dto.Professor;
 import com.lti.dto.Student;
 import com.lti.dto.User;
 import com.lti.exception.StudentNotFoundException;
@@ -43,6 +45,29 @@ public class UserController {
 	public ResponseEntity login(@RequestBody User user) throws StudentNotFoundException {
 		logger.info("login in userController");
 		if (userService.verifyCredetials(user.getUsername(), user.getPassword(), user.getRole())) {
+			switch(user.getRole()) {
+			case 1:
+				Admin result = new Admin();
+				result.setUsername(user.getUsername());
+				result.setRole(user.getRole());
+				result.setUserID(userService.getUserID(user.getUsername()));
+				result.setAdminID(result.getUserID());
+				return new ResponseEntity(result, HttpStatus.OK);
+			case 2:
+				Professor resultP = new Professor();
+				resultP.setUsername(user.getUsername());
+				resultP.setRole(user.getRole());
+				resultP.setUserID(userService.getUserID(user.getUsername()));
+				resultP.setProfessorID(resultP.getUserID());
+				resultP.setName(userService.getProfessor(resultP.getUserID()).getName());
+				return new ResponseEntity(resultP, HttpStatus.OK);
+			case 3:
+				Student resultS = studentService.getStudentByUsername(user.getUsername());
+				resultS.setUsername(user.getUsername());
+				resultS.setRole(user.getRole());
+				resultS.setUserID(userService.getUserID(user.getUsername()));
+				return new ResponseEntity(resultS, HttpStatus.OK);
+			}
 			User newUser = new User();
 			newUser.setUsername(user.getUsername());
 			newUser.setRole(user.getRole());
