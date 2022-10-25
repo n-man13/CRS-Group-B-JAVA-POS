@@ -21,21 +21,32 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
 
-    console.log(this.model.username, this.model.password);
-    var user = this.model.username;
-    var password = this.model.password;
-    console.log(user);
-    console.log(password)
-    //let user=this.model.username;
-    //let password=this.model.password;
-    // Service Call ang Auth Data form  // U take form  Service
-    if (user == 'admin' && password == 'admin') {
-      console.log(this.model.username);
-      console.log(this.model.password);
-      this.router.navigate(['admindashboard', {username: this.model.username}]); //send data via routing
 
+
+
+    switch (this.model.role) {
+      case 1:
+        this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
+          this.router.navigate(['admindashboard', { admin: data }]);
+        })
+        break;
+      case 2:
+        this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
+          this.router.navigate(['professordashboard', { professor: data }]);
+        })
+        break;
+      case 3:
+        this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
+          this.router.navigate(['studentdashboard', { student: data }]);
+        })
+        break;
     }
+
+
+
 
   }
 
 }
+
+
