@@ -18,10 +18,10 @@
                 <tbody>
                     <tr *ngFor="let grade of grades">
                         <th scope="row">{{grade.student.studentId}}</th>
-                        <td>{{grade.course.name}}</td>
-                        <td *ngIf="!isEditable">{{grade.grade}}</td>
-                        <td *ngIf="isEditable"><input class="form-control" id="username" name="username" type="number" placeholder={{grade.grade}}
-                            [(ngModel)]="model.prereqCourseID"></td>
+                        <td>{{grade.student.name}}</td>
+                        <td *ngIf="!checkId(grade.student.studentID)">{{grade.grade}}<button type="button" class="btn-sm btn-primary p-1" (click)="editTogle(grade.student.studentID)">Edit</button> </td>
+                        <td *ngIf="checkId(grade.student.studentID)"><input class="form-control" id="grade" name="grade" type="number"
+                            [(ngModel)]="model"><button type="button" class="btn-sm btn-primary p-1" (click)="editTogle(grade.student.studentID)">Done</button></td>
                     </tr>
                 </tbody>
             </table>

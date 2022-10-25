@@ -11,10 +11,12 @@ import { CourseService } from 'src/app/services/professor/course.service';
 })
 export class ViewStudentsComponent implements OnInit {
 
-  student: Professor = new Professor(2, "Amit", "Amit", "1234");
+  professor: Professor = new Professor(2, "Amit", "Amit", "1234");
   grades: Grade[] = new Array();
   courses: Course[] = new Array();
   isEditable:boolean = false;
+  editableId:number[] = new Array();
+  model:number = -1;
 
   constructor(private courseService: CourseService) { }
 
@@ -29,9 +31,21 @@ export class ViewStudentsComponent implements OnInit {
     })
   }
 
-  editToggle() {
-    this.isEditable = !this.isEditable;
+  editToggle(id:number) {
+    this.editableId.push(id);
   }
+
+  checkId(id:number) {
+    this.editableId.includes(id);
+  }
+
+  saveGrade(grade:Grade) {
+    this.courseService.recordGrade(grade.course, grade.student, this.model);
+    let index:number = this.editableId.indexOf(grade.student.studentID);
+    this.editableId.splice(index, 1);
+  }
+
+
 
   
 
