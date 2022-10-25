@@ -1,32 +1,30 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <select class="form-select" aria-label="Default select example" (change)="getStudents($event.target.value)">
+            <select class="form-select" id="studentSelect" (change)="getStudents($event.target.value)">
                 <option selected>Select Course</option>
                 <option *ngFor="" value="course.courseID">{{course.name}}</option>
             </select>
         </div>
         <div class="col-md-9">
-
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:10%">Student ID</th>
+                        <th scope="col" style="width:45%">Student Name</th>
+                        <th scope="col" style="width:35%">Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let grade of grades">
+                        <th scope="row">{{grade.student.studentId}}</th>
+                        <td>{{grade.course.name}}</td>
+                        <td *ngIf="!isEditable">{{grade.grade}}</td>
+                        <td *ngIf="isEditable"><input class="form-control" id="username" name="username" type="number" placeholder={{grade.grade}}
+                            [(ngModel)]="model.prereqCourseID"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col" style="width:10%">Course ID</th>
-            <th scope="col" style="width:40%">Title</th>
-            <th scope="col" style="width:30%">Professor</th>
-            <th scope="col" style="width:20%">Grade</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr *ngFor="let grade of grades">
-            <th scope="row">{{grade.course.courseID}}</th>
-            <td>{{grade.course.name}}</td>
-            <td>{{grade.course.professor.name}}</td>
-            <td>{{grade.gradeLetter}}</td>
-        </tr>
-    </tbody>
-</table>
