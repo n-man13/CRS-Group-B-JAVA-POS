@@ -10,7 +10,7 @@ import { CourseService } from 'src/app/services/professor/course.service';
 })
 export class ViewCoursesComponent implements OnInit {
 
-  professor: Professor = new Professor(0, "", "", "")
+  professor: Professor = new Professor(2, "Amit", "amit", "1234")
 
   model: Course = new Course(0, '', '', '', 0, new Professor(0, "", "", ""));
 

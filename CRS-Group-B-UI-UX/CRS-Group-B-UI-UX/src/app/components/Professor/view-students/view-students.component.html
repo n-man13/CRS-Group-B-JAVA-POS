@@ -10,7 +10,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col" style="width:10%">Student ID</th>
+                        <th scope="col" style="width:20%">Student ID</th>
                         <th scope="col" style="width:45%">Student Name</th>
                         <th scope="col" style="width:35%">Grade</th>
                     </tr>
@@ -19,9 +19,29 @@
                     <tr *ngFor="let grade of grades">
                         <th scope="row">{{grade.student.studentID}}</th>
                         <td>{{grade.student.name}}</td>
-                        <td *ngIf="!checkId(grade.student.studentID)">{{grade.grade}}<button type="button" class="btn-sm btn-primary p-1" (click)="editToggle(grade.student.studentID)">Edit</button> </td>
-                        <td *ngIf="checkId(grade.student.studentID)"><input class="form-control" id="grade" name="grade" type="number"
-                            [(ngModel)]="model"><button type="button" class="btn-sm btn-primary p-1" (click)="editToggle(grade.student.studentID)">Done</button></td>
+                        <td *ngIf="!checkId(grade.student.studentID)">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{grade.grade}}
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn-sm btn-primary p-1"
+                                        (click)="editToggle(grade.student.studentID, grade.grade)">Edit</button>
+                                </div>
+                            </div>
+                        </td>
+                        <td *ngIf="checkId(grade.student.studentID)">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input class="form-control" id="grade" name="grade" type="number"
+                                        [(ngModel)]="model">
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn-sm btn-primary p-1"
+                                        (click)="saveGrade(grade)">Done</button>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

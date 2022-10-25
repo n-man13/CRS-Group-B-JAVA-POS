@@ -22,17 +22,19 @@ export class ViewStudentsComponent implements OnInit {
 
   ngOnInit(): void {
     
-
+    this.getMyCourses()
   }
 
   getStudents(courseID:number){
     this.courseService.getMyStudents(courseID, this.professor).subscribe(data => {
       console.log(data);
+      this.grades = data;
     })
   }
 
-  editToggle(id:number) {
+  editToggle(id:number, grade:number) {
     this.editableId.push(id);
+    this.model = grade;
   }
 
   checkId(id:number): boolean {
@@ -40,13 +42,17 @@ export class ViewStudentsComponent implements OnInit {
   }
 
   saveGrade(grade:Grade) {
-    this.courseService.recordGrade(grade.course, grade.student, this.model);
+    this.courseService.recordGrade(grade.course, grade.student, this.model).subscribe(data => {
+      console.log(data);
+    });
     let index:number = this.editableId.indexOf(grade.student.studentID);
     this.editableId.splice(index, 1);
+    this.getStudents(grade.course.courseID);
   }
 
   getMyCourses(){
     this.courseService.getMyCourses(this.professor).subscribe(data =>{
+      console.log(data);
       this.courses = data;
     })
   }

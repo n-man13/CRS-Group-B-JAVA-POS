@@ -32,6 +32,6 @@ export class CourseService {
   }
 
   recordGrade(course: Course, student: Student, grade: number): Observable<any> {
-    return this.http.get(this.url + "recordGrade/" + course.courseID + "/" + student.studentID + "/" + grade, { headers: this.headers });
+    return this.http.put(this.url + "recordGrade/" + course.courseID + "/" + student.studentID + "/" + grade, { headers: this.headers });
   }
 }

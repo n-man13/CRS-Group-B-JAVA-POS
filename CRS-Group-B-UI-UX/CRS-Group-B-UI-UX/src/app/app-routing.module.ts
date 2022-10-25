@@ -5,6 +5,8 @@ import { CreateProfessorModalComponent } from './components/Admin/create-profess
 import { ListCourseComponent } from './components/Admin/list-course/list-course.component';
 import { ListProfessorComponent } from './components/Admin/list-professor/list-professor.component';
 import { ListUnregisteredStudentComponent } from './components/Admin/list-unregistered-student/list-unregistered-student.component';
+import { ViewCoursesComponent } from './components/Professor/view-courses/view-courses.component';
+import { ViewStudentsComponent } from './components/Professor/view-students/view-students.component';
 import { CheckGradesComponent } from './components/Student/check-grades/check-grades.component';
 import { ViewAllCoursesComponent } from './components/Student/view-all-courses/view-all-courses.component';
 import { ViewAppliedCoursesComponent } from './components/Student/view-applied-courses/view-applied-courses.component';
@@ -16,9 +18,8 @@ const routes: Routes = [
   {path:'listprofessor', component:ListProfessorComponent},
   {path:'professorform', component:CreateProfessorModalComponent},
   {path:'listunregisteredstudent', component:ListUnregisteredStudentComponent}, */
-  {path:'viewallcourses', component:ViewAllCoursesComponent},
-  {path:'viewappliedcourses', component:ViewAppliedCoursesComponent},
-  {path:'checkgrades', component:CheckGradesComponent}
+  {path:'viewcourses', component:ViewCoursesComponent},
+  {path:'viewstudents', component:ViewStudentsComponent}
 ];
 
 @NgModule({
