@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <select class="form-select" id="studentSelect" (change)="getStudents($any($event.target.value))">
+            <select class="form-select" id="studentSelect" (change)="getStudents($any($event.target).value)">
                 <option selected value=0>Select Course</option>
-                <option *ngFor="let course of courses" value="course.courseID">{{course.name}}</option>
+                <option *ngFor="let course of courses" value="{{course.courseID}}">{{course.name}}</option>
             </select>
         </div>
         <div class="col-md-9">
