@@ -4,25 +4,25 @@ import java.io.Serializable;
 
 public class RegisteredCourse implements Serializable {
 
-	private int studentID;
-	private int courseID;
+	private Student student;
+	private Course course;
 	private boolean feePaid;
 	private double grade;
 
-	public int getStudentID() {
-		return studentID;
+	public Student getStudent() {
+		return student;
 	}
 
-	public void setStudentID(int studentID) {
-		this.studentID = studentID;
+	public void setStudent(Student studentID) {
+		this.student = studentID;
 	}
 
-	public int getCourseID() {
-		return courseID;
+	public Course getCourse() {
+		return course;
 	}
 
-	public void setCourseID(int course) {
-		this.courseID = course;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	public boolean isFeePaid() {

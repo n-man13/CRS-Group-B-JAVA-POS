@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lti.dto.Grade;
 import com.lti.dto.Student;
 import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.NoStudentsEnrolledException;
@@ -97,12 +98,12 @@ public class ProfessorController {
 	 * @throws NoStudentsEnrolledException if no students are enrolled in the course
 	 * @throws CourseNotFoundException     if the course was not found
 	 */
-	@RequestMapping(value = "/viewStudents/{courseID}", method = RequestMethod.GET)
-	public ResponseEntity viewStudents(@PathVariable int courseID)
+	@RequestMapping(value = "/viewStudents/{courseID}/{professorID}", method = RequestMethod.GET)
+	public ResponseEntity viewStudents(@PathVariable int courseID, @PathVariable int professorID)
 			throws CourseNotFoundException, NoStudentsEnrolledException {
 		logger.info("viewStudents in ProfessorController");
 
-		List<Student> students = professorService.viewStudents(courseID);
+		List<Grade> students = professorService.viewStudentsGrades(professorID, courseID);
 		return new ResponseEntity(students, HttpStatus.OK);
 
 	}

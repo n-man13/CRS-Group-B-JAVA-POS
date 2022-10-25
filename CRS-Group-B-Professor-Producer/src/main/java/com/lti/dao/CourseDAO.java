@@ -1,5 +1,6 @@
 package com.lti.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,18 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	@Override
 	public List<Course> findAllCourses() {
+		List<Course> courses = new ArrayList<Course>();
 		try {
-			return jdbcTemplateObject.jdbcTemplate().query(SQLConstants.COURSE_SELECT_ALL_COURSES, new CourseMapper());
+			for (Course c : jdbcTemplateObject.jdbcTemplate().query(SQLConstants.COURSE_SELECT_ALL_COURSES, new CourseMapper())) {
+				if (c.getProfessor() != null)
+					courses.add(saveProfessorIntoCourse(c, c.getProfessor().getProfessorID()));
+				else
+					courses.add(c);
+			}
 		} catch (DataAccessException e) {
 			return null;
 		}
+		return courses;
 	}
 	
 	/**
@@ -100,7 +108,7 @@ public class CourseDAO implements CourseDAOInterface {
 	 */
 	private Course saveProfessorIntoCourse(Course course, int professorID) {
 		Professor professor = professorDAO.findProfessorByProfessorID(professorID);
-		course.setProf(professor);
+		course.setProfessor(professor);
 		return course;
 	}
 
@@ -128,7 +136,7 @@ public class CourseDAO implements CourseDAOInterface {
 		try {
 			Course course = jdbcTemplateObject.jdbcTemplate().queryForObject(SQLConstants.COURSE_SELECT_BY_COURSEID,
 					new CourseMapper(), courseID);
-			course = saveProfessorIntoCourse(course, course.getProf().getProfessorID());
+			course = saveProfessorIntoCourse(course, course.getProfessor().getProfessorID());
 			return course;
 		} catch (DataAccessException e) {
 			return null;
