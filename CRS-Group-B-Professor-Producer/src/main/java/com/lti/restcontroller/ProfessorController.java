@@ -20,6 +20,7 @@ import com.lti.exception.CourseNotFoundException;
 import com.lti.exception.NoStudentsEnrolledException;
 import com.lti.exception.StudentNotFoundException;
 import com.lti.service.ProfessorService;
+import com.mysql.fabric.Response;
 
 /**
  * applyToCourseProfessor, recordGrade, viewStudents
@@ -59,6 +60,11 @@ public class ProfessorController {
 		return new ResponseEntity(professorService.viewAllCourses(), HttpStatus.OK);
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/viewMyCourses")
+	public ResponseEntity viewMyCourses(@PathVariable int professorID) {
+		return new ResponseEntity(professorService.viewProfessorCourses(professorID), HttpStatus.OK);
+	}
+	
 	/**
 	 * Records a grade for a student in a course
 	 * 
