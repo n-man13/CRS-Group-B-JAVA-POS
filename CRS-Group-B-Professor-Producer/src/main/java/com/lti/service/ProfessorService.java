@@ -134,7 +134,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 */
 	@Override
 	public List<Grade> viewStudentsGrades(int professorId, int courseId)
-			throws CourseNotFoundException, NoStudentsEnrolledException {
+			throws CourseNotFoundException {
 		logger.info("viewStudentsGrades in ProfessorService");
 		List<Course> courses = courseDAO.findCourseByProfessorID(professorId);
 		/*
@@ -148,8 +148,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 		if (courseDAO.findCourseByCourseID(courseId) == null)
 			throw new CourseNotFoundException("This course was not found, ID: "+courseId, courseId);
 		List<Grade> studentsAndGrades = registeredCourseDAO.findStudentsAndGradesByCourseID(courseId);
-		if (studentsAndGrades.isEmpty())
-			throw new NoStudentsEnrolledException("This course has no students, ID: "+courseId, courseId);
+		
 		return studentsAndGrades;
 
 	}
