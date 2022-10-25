@@ -5,6 +5,8 @@ import { CreateProfessorModalComponent } from './components/Admin/create-profess
 import { ListCourseComponent } from './components/Admin/list-course/list-course.component';
 import { ListProfessorComponent } from './components/Admin/list-professor/list-professor.component';
 import { ListUnregisteredStudentComponent } from './components/Admin/list-unregistered-student/list-unregistered-student.component';
+import { LoginComponent } from './components/login/login.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ViewCoursesComponent } from './components/Professor/view-courses/view-courses.component';
 import { ViewStudentsComponent } from './components/Professor/view-students/view-students.component';
 import { CheckGradesComponent } from './components/Student/check-grades/check-grades.component';
@@ -12,14 +14,22 @@ import { ViewAllCoursesComponent } from './components/Student/view-all-courses/v
 import { ViewAppliedCoursesComponent } from './components/Student/view-applied-courses/view-applied-courses.component';
 
 const routes: Routes = [
-  {path:'', redirectTo: 'home', pathMatch:'full'},
-/*   {path:'listcourse', component:ListCourseComponent},
-  {path:'courseform', component:CreateCourseModalComponent},
-  {path:'listprofessor', component:ListProfessorComponent},
-  {path:'professorform', component:CreateProfessorModalComponent},
-  {path:'listunregisteredstudent', component:ListUnregisteredStudentComponent}, */
-  {path:'viewcourses', component:ViewCoursesComponent},
-  {path:'viewstudents', component:ViewStudentsComponent}
+
+  { path: '', component: LoginComponent },
+  {
+    path: 'admindashboard', component: AdminDashboardComponent,
+    children: [
+
+      { path: '', component: ListCourseComponent },
+      { path: 'listcourse', component: ListCourseComponent },
+      { path: 'courseform', component: CreateCourseModalComponent },
+      { path: 'listprofessor', component: ListProfessorComponent },
+      { path: 'professorform', component: CreateProfessorModalComponent },
+      { path: 'listunregisteredstudent', component: ListUnregisteredStudentComponent }
+      /*  {path:'viewcourses', component:ViewCoursesComponent},
+       {path:'viewstudents', component:ViewStudentsComponent} */
+    ]
+  }
 ];
 
 @NgModule({

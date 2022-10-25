@@ -32,6 +32,8 @@ import { CheckGradesComponent } from './components/Student/check-grades/check-gr
 import { ViewAllCoursesComponent } from './components/Student/view-all-courses/view-all-courses.component';
 import { ViewStudentsComponent } from './components/Professor/view-students/view-students.component';
 import { ViewCoursesComponent } from './components/Professor/view-courses/view-courses.component';
+import { LoginComponent } from './components/login/login.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { ViewCoursesComponent } from './components/Professor/view-courses/view-c
     CheckGradesComponent,
     ViewAllCoursesComponent,
     ViewStudentsComponent,
-    ViewCoursesComponent
+    ViewCoursesComponent,
+    LoginComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,
