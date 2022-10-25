@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
 
-    console.log(this.model.name, this.model.password);
-    var user = this.model.name;
+    console.log(this.model.username, this.model.password);
+    var user = this.model.username;
     var password = this.model.password;
     console.log(user);
     console.log(password)
