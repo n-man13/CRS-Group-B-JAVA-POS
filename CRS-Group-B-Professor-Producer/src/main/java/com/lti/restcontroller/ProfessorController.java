@@ -60,7 +60,7 @@ public class ProfessorController {
 		return new ResponseEntity(professorService.viewAllCourses(), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/viewMyCourses")
+	@RequestMapping(method = RequestMethod.GET, value = "/viewMyCourses/{professorID}")
 	public ResponseEntity viewMyCourses(@PathVariable int professorID) {
 		return new ResponseEntity(professorService.viewProfessorCourses(professorID), HttpStatus.OK);
 	}
