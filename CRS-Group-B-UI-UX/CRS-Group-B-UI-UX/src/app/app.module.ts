@@ -30,6 +30,8 @@ import { ViewAppliedCoursesComponent } from './components/Student/view-applied-c
 import { MakePaymentComponent } from './components/Student/make-payment/make-payment.component';
 import { CheckGradesComponent } from './components/Student/check-grades/check-grades.component';
 import { ViewAllCoursesComponent } from './components/Student/view-all-courses/view-all-courses.component';
+import { ViewStudentsComponent } from './components/Professor/view-students/view-students.component';
+import { ViewCoursesComponent } from './components/Professor/view-courses/view-courses.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { ViewAllCoursesComponent } from './components/Student/view-all-courses/v
     ViewAppliedCoursesComponent,
     MakePaymentComponent,
     CheckGradesComponent,
-    ViewAllCoursesComponent
+    ViewAllCoursesComponent,
+    ViewStudentsComponent,
+    ViewCoursesComponent
   ],
   imports: [
     BrowserModule,
