@@ -75,6 +75,10 @@ public class UserService implements UserServiceInterface {
 		//should throw exception called properly instead of returning a boolean
 		return false;
 	}
+	
+	public int getUserID(String username) {
+		return userDAO.findUser(username).getUserID();
+	}
 
 	public void logOut() {
 

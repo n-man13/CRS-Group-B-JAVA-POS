@@ -43,7 +43,11 @@ public class UserController {
 	public ResponseEntity login(@RequestBody User user) throws StudentNotFoundException {
 		logger.info("login in userController");
 		if (userService.verifyCredetials(user.getUsername(), user.getPassword(), user.getRole())) {
-			return new ResponseEntity("Login succesful", HttpStatus.OK);
+			User newUser = new User();
+			newUser.setUsername(user.getUsername());
+			newUser.setRole(user.getRole());
+			newUser.setUserID(userService.getUserID(user.getUsername()));
+			return new ResponseEntity(newUser, HttpStatus.OK);
 		}
 		
 		if (user == null)
