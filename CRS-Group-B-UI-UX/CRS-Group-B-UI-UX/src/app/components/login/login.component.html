@@ -3,29 +3,39 @@
         <h1 class="display-5 fw-bold">Welcome to CRS</h1>
     </div>
 </div>
-<div class="col-md-3">
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <h3>Create Course</h3>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" required [(ngModel)]="model.username" name="username" #name='ngModel'>
+            </div>
+        
+            <div class="form-group">
+                <label for="password">password</label>
+                <input type="password" class="form-control" id="password" [(ngModel)]="model.password" name="password">
+            </div>
+        
+            <div class="form-group">
+                <label for="password">role</label>
+                <select class="form-select" [(ngModel)]="model.role">
+                    <option selected>Select Role</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Professor</option>
+                    <option value="3">Student</option>
+                </select>
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-success" (click)="loginUser()">Login</button>
+        </div>
+    </div>
+</div>
+<div class="container">
 
 </div>
-<div class="col-md-6">
-    <h3>Create Course</h3>
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name='ngModel'>
-    </div>
 
-    <div class="form-group">
-        <label for="password">password</label>
-        <input type="password" class="form-control" id="password" [(ngModel)]="model.password" name="password">
-    </div>
 
-    <div class="form-group">
-        <label for="password">role</label>
-        <select class="form-select" [(ngModel)]="model.role">
-            <option selected>Select Role</option>
-            <option value="1">Admin</option>
-            <option value="2">Professor</option>
-            <option value="3">Student</option>
-        </select>
-    </div>
-</div>
-<button type="submit" class="btn btn-success" (click)="loginUser()">Login</button>
