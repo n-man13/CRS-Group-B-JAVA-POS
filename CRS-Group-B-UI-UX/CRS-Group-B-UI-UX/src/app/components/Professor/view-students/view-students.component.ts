@@ -35,8 +35,8 @@ export class ViewStudentsComponent implements OnInit {
     this.editableId.push(id);
   }
 
-  checkId(id:number) {
-    this.editableId.includes(id);
+  checkId(id:number): boolean {
+    return this.editableId.includes(id);
   }
 
   saveGrade(grade:Grade) {
