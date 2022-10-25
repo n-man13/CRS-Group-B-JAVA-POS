@@ -53,6 +53,11 @@ public class ProfessorController {
 
 		return new ResponseEntity(HttpStatus.OK);
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/viewAllCourses")
+	public ResponseEntity viewAllCourses() {
+		return new ResponseEntity(professorService.viewAllCourses(), HttpStatus.OK);
+	}
 
 	/**
 	 * Records a grade for a student in a course
