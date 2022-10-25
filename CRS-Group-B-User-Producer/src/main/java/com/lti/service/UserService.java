@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import com.lti.dao.ProfessorDAO;
 import com.lti.dao.StudentDAO;
 import com.lti.dao.StudentDAOInterface;
 import com.lti.dao.UserDAO;
 import com.lti.dao.UserDAOInterface;
+import com.lti.dto.Professor;
 import com.lti.dto.Student;
 import com.lti.dto.User;
 import com.lti.exception.StudentNotFoundException;
@@ -23,6 +25,9 @@ public class UserService implements UserServiceInterface {
 
 	@Autowired
 	private StudentDAO studentDAO;
+	
+	@Autowired
+	private ProfessorDAO professorDAO;
 
 	private User user;
 	
@@ -82,6 +87,10 @@ public class UserService implements UserServiceInterface {
 
 	public void logOut() {
 
+	}
+	
+	public Professor getProfessor(int professorID) {
+		return professorDAO.findProfessorByProfessorID(professorID);
 	}
 
 	/**
