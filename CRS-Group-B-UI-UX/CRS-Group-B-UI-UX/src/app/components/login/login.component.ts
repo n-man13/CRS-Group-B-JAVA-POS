@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  model: any = {};
+  model: User = new User(0, "", "", 0);
 
   constructor(private router: Router, private userService: UserService) { }
 
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
     //let password=this.model.password;
     // Service Call ang Auth Data form  // U take form  Service
     if (user == 'admin' && password == 'admin') {
-      console.log(this.model.user);
+      console.log(this.model.username);
       console.log(this.model.password);
       this.router.navigate(['admindashboard', {username: this.model.username}]); //send data via routing
 
