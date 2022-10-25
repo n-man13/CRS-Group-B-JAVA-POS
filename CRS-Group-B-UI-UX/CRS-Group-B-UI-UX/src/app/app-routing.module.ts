@@ -13,6 +13,7 @@ import { CheckGradesComponent } from './components/Student/check-grades/check-gr
 import { ViewAllCoursesComponent } from './components/Student/view-all-courses/view-all-courses.component';
 import { ViewAppliedCoursesComponent } from './components/Student/view-applied-courses/view-applied-courses.component';
 import { ProfessorDashboardComponent } from './components/professor-dashboard/professor-dashboard.component';
+import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 
 const routes: Routes = [
 
@@ -27,19 +28,24 @@ const routes: Routes = [
       { path: 'listprofessor', component: ListProfessorComponent },
       { path: 'professorform', component: CreateProfessorModalComponent },
       { path: 'listunregisteredstudent', component: ListUnregisteredStudentComponent }
-      /*  {path:'viewcourses', component:ViewCoursesComponent},
-       {path:'viewstudents', component:ViewStudentsComponent} */
     ]
   },
 
   {
     path: 'professordashboard', component: ProfessorDashboardComponent,
     children: [
-
-      { path: '', component: ListCourseComponent },
+      { path: '', component: ViewCoursesComponent },
       {path:'viewcourses', component:ViewCoursesComponent},
-      {path:'viewstudents', component:ViewStudentsComponent}
-      
+      {path:'viewstudents', component:ViewStudentsComponent} 
+    ]
+  },
+  {
+    path: 'studentdashboard', component: StudentDashboardComponent,
+    children: [
+      { path: '', component:ViewAllCoursesComponent },
+      {path:'viewallcourses', component:ViewAllCoursesComponent},
+      {path:'viewappliedcourses', component:ViewAppliedCoursesComponent},
+      {path:'checkgrades', component:CheckGradesComponent}
     ]
   }
 ];
