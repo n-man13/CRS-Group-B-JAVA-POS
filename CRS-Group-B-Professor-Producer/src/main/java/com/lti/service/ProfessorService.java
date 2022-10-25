@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 
 import com.lti.dao.CourseDAO;
 import com.lti.dao.ProfessorDAO;
@@ -151,6 +152,11 @@ public class ProfessorService implements ProfessorServiceInterface {
 			throw new NoStudentsEnrolledException("This course has no students, ID: "+courseId, courseId);
 		return studentsAndGrades;
 
+	}
+
+	public List<Course> viewAllCourses() {
+		return courseDAO.findAllCourses();
+		
 	}
 
 }
