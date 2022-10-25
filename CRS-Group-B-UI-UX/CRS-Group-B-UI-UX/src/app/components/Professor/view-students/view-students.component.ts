@@ -45,6 +45,12 @@ export class ViewStudentsComponent implements OnInit {
     this.editableId.splice(index, 1);
   }
 
+  getMyCourses(){
+    this.courseService.getMyCourses(this.professor).subscribe(data =>{
+      this.courses = data;
+    })
+  }
+
 
 
   
