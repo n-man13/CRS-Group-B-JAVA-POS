@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   model: any = {};
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
     if (user == 'admin' && password == 'admin') {
       console.log(this.model.user);
       console.log(this.model.password);
-      this.router.navigate(['admindashboard']);
+      this.router.navigate(['admindashboard', {username: this.model.username}]); //send data via routing
 
     }
 
