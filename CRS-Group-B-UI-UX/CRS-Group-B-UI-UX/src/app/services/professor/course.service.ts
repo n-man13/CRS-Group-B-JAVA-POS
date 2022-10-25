@@ -27,8 +27,8 @@ export class CourseService {
     return this.http.get(this.url + "viewMyCourses/" + professor.professorID, { headers: this.headers });
   }
 
-  getMyStudents(courseID: number): Observable<any> {
-    return this.http.get(this.url + "viewStudents/" + courseID, { headers: this.headers });
+  getMyStudents(courseID: number, professor: Professor): Observable<any> {
+    return this.http.get(this.url + "viewStudents/" + courseID + "/" + professor.professorID, { headers: this.headers });
   }
 
   recordGrade(course: Course, student: Student, grade: number): Observable<any> {

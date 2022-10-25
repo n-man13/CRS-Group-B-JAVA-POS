@@ -4,9 +4,13 @@ public class Grade {
 	
 	private double grade;
 	private char gradeLetter;
+	private Student student;
+	private Course course;
 	
-	public Grade(double grade) {
+	public Grade(double grade, Student student, Course course) {
 		this.grade = grade;
+		this.student = student;
+		this.setCourse(course);
 		setGradeLetter();
 	}
 	
@@ -23,6 +27,27 @@ public class Grade {
 		return gradeLetter;
 	}
 	
+	/**
+	 * @return the student
+	 */
+	public Student getStudent() {
+		return student;
+	}
+
+	/**
+	 * @return the course
+	 */
+	public Course getCourse() {
+		return course;
+	}
+
+	/**
+	 * @param course the course to set
+	 */
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
 	public String toString() {
 		return grade + " " + gradeLetter;
 	}
@@ -39,6 +64,9 @@ public class Grade {
 		}
 		else if (grade >= 60) {
 			gradeLetter = 'D';
+		}
+		else if (grade < 0) {
+			gradeLetter = '-';
 		}
 		else
 			gradeLetter = 'F';

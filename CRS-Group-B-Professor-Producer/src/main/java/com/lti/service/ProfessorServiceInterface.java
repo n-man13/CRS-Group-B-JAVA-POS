@@ -65,11 +65,11 @@ public interface ProfessorServiceInterface {
 	 * 
 	 * @param courseId    the id of the course
 	 * @param professorId the id of the professor
-	 * @return Returns a map of student to grade
+	 * @return Returns a list of grades
 	 * @throws CourseNotFoundException     if courseId doesn't exist
 	 * @throws NoStudentsEnrolledException if there
 	 */
-	public Map<Student, Grade> viewStudentsGrades(int professorId, int courseId)
+	public List<Grade> viewStudentsGrades(int professorId, int courseId)
 			throws CourseNotFoundException, NoStudentsEnrolledException;
 
 }

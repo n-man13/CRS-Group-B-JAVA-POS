@@ -26,7 +26,7 @@ public class CourseMapper implements RowMapper<Course>{
 		course.setPrereqCourseID(rs.getInt("prereqID"));
 		Professor professor = new Professor();
 		professor.setProfessorID(rs.getInt("professorID"));
-		course.setProf(professor);
+		course.setProfessor(professor);
 		return course;
 		
 	}

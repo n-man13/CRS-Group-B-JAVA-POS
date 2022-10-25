@@ -44,13 +44,13 @@ public class ProfessorService implements ProfessorServiceInterface {
 		// apply to specific course
 		if (userDAO.findUser(professorId).getRole() != 2)
 			throw new CourseNotFoundException("You are not a professor, Id: " + professorId, professorId);
-		if (courseDAO.findCourseByCourseID(courseId).getProf() == null) {
+		if (courseDAO.findCourseByCourseID(courseId).getProfessor() == null) {
 			if (!courseDAO.updateProfessorToCourse(courseId, professorId))
 				throw new CourseNotFoundException("This course was not found, Id: " + courseId, courseId);
 		} else {
-			if (courseDAO.findCourseByCourseID(courseId).getProf().getProfID() != 0)
+			if (courseDAO.findCourseByCourseID(courseId).getProfessor().getProfessorID() != 0)
 				throw new CourseNotFoundException("This course is already being taught, ID: " +courseId, courseId);
-			if (courseDAO.findCourseByCourseID(courseId).getProf().getProfID() == professorId)
+			if (courseDAO.findCourseByCourseID(courseId).getProfessor().getProfessorID() == professorId)
 				throw new CourseNotFoundException("You are already enrolled in this course, ID: "+ courseId, courseId);
 			if (!courseDAO.updateProfessorToCourse(courseId, professorId))
 				throw new CourseNotFoundException("This course was not found, Id: "+ courseId, courseId);
@@ -133,7 +133,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 	 * @throws NoStudentsEnrolledException if there
 	 */
 	@Override
-	public Map<Student, Grade> viewStudentsGrades(int professorId, int courseId)
+	public List<Grade> viewStudentsGrades(int professorId, int courseId)
 			throws CourseNotFoundException, NoStudentsEnrolledException {
 		logger.info("viewStudentsGrades in ProfessorService");
 		List<Course> courses = courseDAO.findCourseByProfessorID(professorId);
@@ -147,7 +147,7 @@ public class ProfessorService implements ProfessorServiceInterface {
 			throw new CourseNotFoundException("You are not enrolled in this course, ID: "+courseId, courseId);
 		if (courseDAO.findCourseByCourseID(courseId) == null)
 			throw new CourseNotFoundException("This course was not found, ID: "+courseId, courseId);
-		Map<Student, Grade> studentsAndGrades = registeredCourseDAO.findStudentsAndGradesByCourseID(courseId);
+		List<Grade> studentsAndGrades = registeredCourseDAO.findStudentsAndGradesByCourseID(courseId);
 		if (studentsAndGrades.isEmpty())
 			throw new NoStudentsEnrolledException("This course has no students, ID: "+courseId, courseId);
 		return studentsAndGrades;

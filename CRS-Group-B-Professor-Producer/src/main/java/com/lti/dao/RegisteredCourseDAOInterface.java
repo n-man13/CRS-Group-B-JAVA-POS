@@ -44,7 +44,7 @@ public interface RegisteredCourseDAOInterface {
 	 * @param courseID the course to look up
 	 * @return a map of students to their grades in the specified class
 	 */
-	public Map<Student, Grade> findStudentsAndGradesByCourseID(int courseID);
+	public List<Grade> findStudentsAndGradesByCourseID(int courseID);
 
 	/**
 	 * views the courses and the grades of a student
@@ -52,7 +52,7 @@ public interface RegisteredCourseDAOInterface {
 	 * @param studentID the student to look at
 	 * @return a map of courses to their grades by the student
 	 */
-	public Map<Course, Grade> findGradesByStudentID(int studentID);
+	public List<Grade> findGradesByStudentID(int studentID);
 
 	/**
 	 * updates a student's course registration information

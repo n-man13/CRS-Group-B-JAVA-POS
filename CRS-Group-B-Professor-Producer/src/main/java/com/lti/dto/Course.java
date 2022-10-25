@@ -16,7 +16,7 @@ public class Course implements  Serializable{
 	private int courseID;
 	private String name;
 	//private ArrayList<Student> students;
-	private Professor prof;
+	private Professor professor;
 	private String department;
 	private String description;
 	private int prereqCourseID;
@@ -113,8 +113,8 @@ public class Course implements  Serializable{
 	 * 
 	 * @return the professor
 	 */
-	public Professor getProf() {
-		return prof;
+	public Professor getProfessor() {
+		return professor;
 	}
 
 	/**
@@ -122,8 +122,8 @@ public class Course implements  Serializable{
 	 * 
 	 * @param prof the prof to set
 	 */
-	public void setProf(Professor prof) {
-		this.prof = prof;
+	public void setProfessor(Professor prof) {
+		this.professor = prof;
 	}
 
 	/**
@@ -167,7 +167,7 @@ public class Course implements  Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Course [courseID=" + courseID + ", students=" + ", prof=" + prof + ", department="
+		return "Course [courseID=" + courseID + ", students=" + ", prof=" + professor + ", department="
 				+ department + ", prereqCourseID=" + prereqCourseID + "]";
 	}
 
