@@ -21,29 +21,23 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
 
+    console.log(this.model);
 
-
-
-    switch (this.model.role) {
-      case 1:
-        this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
-          this.router.navigate(['admindashboard', { admin: data }]);
-        })
-        break;
-      case 2:
-        this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
-          this.router.navigate(['professordashboard', { professor: data }]);
-        })
-        break;
-      case 3:
-        this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
-          this.router.navigate(['studentdashboard', { student: data }]);
-        })
-        break;
+    if (this.model.role == 1) {
+      this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
+        this.router.navigate(['admindashboard', { admin: data }]);
+      })
     }
-
-
-
+    else if (this.model.role == 2) {
+      this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
+        this.router.navigate(['professordashboard', { professor: data }]);
+      })
+    }
+    else if (this.model.role == 3) {
+      this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
+        this.router.navigate(['studentdashboard', { student: data }]);
+      })
+    }
 
   }
 
