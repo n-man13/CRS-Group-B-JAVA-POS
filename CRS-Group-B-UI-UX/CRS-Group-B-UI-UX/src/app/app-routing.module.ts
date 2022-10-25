@@ -12,6 +12,7 @@ import { ViewStudentsComponent } from './components/Professor/view-students/view
 import { CheckGradesComponent } from './components/Student/check-grades/check-grades.component';
 import { ViewAllCoursesComponent } from './components/Student/view-all-courses/view-all-courses.component';
 import { ViewAppliedCoursesComponent } from './components/Student/view-applied-courses/view-applied-courses.component';
+import { ProfessorDashboardComponent } from './components/professor-dashboard/professor-dashboard.component';
 
 const routes: Routes = [
 
@@ -28,6 +29,17 @@ const routes: Routes = [
       { path: 'listunregisteredstudent', component: ListUnregisteredStudentComponent }
       /*  {path:'viewcourses', component:ViewCoursesComponent},
        {path:'viewstudents', component:ViewStudentsComponent} */
+    ]
+  },
+
+  {
+    path: 'professordashboard', component: ProfessorDashboardComponent,
+    children: [
+
+      { path: '', component: ListCourseComponent },
+      {path:'viewcourses', component:ViewCoursesComponent},
+      {path:'viewstudents', component:ViewStudentsComponent}
+      
     ]
   }
 ];

@@ -34,6 +34,8 @@ import { ViewStudentsComponent } from './components/Professor/view-students/view
 import { ViewCoursesComponent } from './components/Professor/view-courses/view-courses.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { ProfessorDashboardComponent } from './components/professor-dashboard/professor-dashboard.component';
+import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     ViewStudentsComponent,
     ViewCoursesComponent,
     LoginComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    ProfessorDashboardComponent,
+    StudentDashboardComponent
   ],
   imports: [
     BrowserModule,
