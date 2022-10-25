@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/model/course';
 import { Professor } from 'src/app/model/professor';
+import { CourseService } from 'src/app/services/professor/course.service';
 
 @Component({
   selector: 'app-view-courses',
@@ -33,9 +34,8 @@ export class ViewCoursesComponent implements OnInit {
   }
 
   applyToCourse(course:Course) {
-    this.courseService.applyToCourse().subscribe(data => {
+    this.courseService.applyToCourse(course, this.professor).subscribe(data => {
       console.log(data);
-      this.getData = data;
     })
   }
 
