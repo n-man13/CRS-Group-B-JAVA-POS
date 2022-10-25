@@ -26,7 +26,7 @@ export class ViewStudentsComponent implements OnInit {
   }
 
   getStudents(courseID:number){
-    this.courseService.getMyStudents(courseID).subscribe(data => {
+    this.courseService.getMyStudents(courseID, this.professor).subscribe(data => {
       console.log(data);
     })
   }
