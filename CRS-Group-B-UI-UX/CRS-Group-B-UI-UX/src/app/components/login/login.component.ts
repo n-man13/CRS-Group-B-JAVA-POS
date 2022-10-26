@@ -25,16 +25,19 @@ export class LoginComponent implements OnInit {
 
     if (this.model.role == 1) {
       this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
+        this.userService.saveData(data);
         this.router.navigate(['admindashboard', { admin: data }]); // { skipLocationChange: true }
       })
     }
     else if (this.model.role == 2) {
       this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
+        this.userService.saveData(data);
         this.router.navigate(['professordashboard', { professor: data }]);
       })
     }
     else if (this.model.role == 3) {
       this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
+        this.userService.saveData(data);
         this.router.navigate(['studentdashboard', { student: data }]);
       })
     }
