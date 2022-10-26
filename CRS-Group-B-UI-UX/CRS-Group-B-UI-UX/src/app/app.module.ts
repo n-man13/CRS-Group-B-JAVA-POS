@@ -39,6 +39,7 @@ import { StudentDashboardComponent } from './components/student-dashboard/studen
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { CenterDirective } from './directives/center.directive';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     StudentDashboardComponent,
     HeaderComponent,
     FooterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CenterDirective
   ],
   imports: [
     BrowserModule,
