@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
     if (this.model.role == 1) {
       this.userService.checkLogin(this.model.username, this.model.password, this.model.role).subscribe(data => {
-        this.router.navigate(['admindashboard', { admin: data }]);
+        this.router.navigate(['admindashboard', { admin: data }]); // { skipLocationChange: true }
       })
     }
     else if (this.model.role == 2) {
