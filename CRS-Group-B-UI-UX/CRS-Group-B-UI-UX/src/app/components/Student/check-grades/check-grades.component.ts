@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Course } from 'src/app/model/course';
 import { Grade } from 'src/app/model/grade';
 import { Professor } from 'src/app/model/professor';
 import { Student } from 'src/app/model/student';
 import { RegisteredCourseService } from 'src/app/services/student/registered-course.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-check-grades',
@@ -12,15 +14,19 @@ import { RegisteredCourseService } from 'src/app/services/student/registered-cou
 })
 export class CheckGradesComponent implements OnInit {
 
-  student: Student = new Student(1, "Luca", "Lucam", "1234", true);
+  student: Student = new Student(0, "", "", "", false);
   grades: Grade[] = new Array();
   courses: Course[] = new Array();
 
-  constructor(private registeredCourseService: RegisteredCourseService) { }
+  constructor(private registeredCourseService: RegisteredCourseService, private userService: UserService, public router: Router) { }
 
   ngOnInit(): void {
-    this.getGrades();
-
+    if (JSON.parse(this.userService.getData() as string).role != 3) {
+      this.router.navigate(['']);
+    } else {
+      this.student = JSON.parse(this.userService.getData() as string)
+      this.getGrades();
+    }
   }
 
   getGrades() {
@@ -35,8 +41,8 @@ export class CheckGradesComponent implements OnInit {
 
   getProfessors() {
     console.log("running professors");
-    for (let grade of this.grades){
-      if (grade.course.professor == null){
+    for (let grade of this.grades) {
+      if (grade.course.professor == null) {
         grade.course.professor = new Professor(0, "No Professor", "", "");
       }
     }
