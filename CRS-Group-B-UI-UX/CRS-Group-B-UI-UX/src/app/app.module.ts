@@ -36,6 +36,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ProfessorDashboardComponent } from './components/professor-dashboard/professor-dashboard.component';
 import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { StudentDashboardComponent } from './components/student-dashboard/studen
     LoginComponent,
     AdminDashboardComponent,
     ProfessorDashboardComponent,
-    StudentDashboardComponent
+    StudentDashboardComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
