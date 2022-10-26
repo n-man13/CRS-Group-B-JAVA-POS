@@ -10,7 +10,7 @@ export class UserService {
 
   url: string = "http://localhost:8094/";
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', "*");
-  
+
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +25,10 @@ export class UserService {
 
   getData() {
     return sessionStorage.getItem('globalUser');
+  }
+
+  deleteData() {
+    sessionStorage.clear();
   }
 
 }
