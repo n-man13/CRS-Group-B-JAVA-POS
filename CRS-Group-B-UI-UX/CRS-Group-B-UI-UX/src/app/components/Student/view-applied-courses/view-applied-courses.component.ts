@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Course } from 'src/app/model/course';
 import { RegisteredCourse } from 'src/app/model/registered-course';
 import { Student } from 'src/app/model/student';
 import { CourseService } from 'src/app/services/student/course.service';
 import { RegisteredCourseService } from 'src/app/services/student/registered-course.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-view-applied-courses',
@@ -12,17 +14,21 @@ import { RegisteredCourseService } from 'src/app/services/student/registered-cou
 })
 export class ViewAppliedCoursesComponent implements OnInit {
 
-  student:Student = new Student(1, "Luca", "Lucam", "1234", true);
+  student: Student = new Student(0, "", "", "", false);
 
-  myCourses: RegisteredCourse [] = [];
+  myCourses: RegisteredCourse[] = [];
 
-  constructor(private courseService: CourseService, private registeredCourseService: RegisteredCourseService) { }
+  constructor(private courseService: CourseService, public router: Router, private userService: UserService, private registeredCourseService: RegisteredCourseService) { }
 
   ngOnInit(): void {
 
-    
-    this.getAppliedCourse();    
+    if (JSON.parse(this.userService.getData() as string).role != 3) {
+      this.router.navigate(['']);
+    } else {
+      this.student = JSON.parse(this.userService.getData() as string)
 
+      this.getAppliedCourse();
+    }
   }
 
   getAppliedCourse() {
@@ -30,32 +36,32 @@ export class ViewAppliedCoursesComponent implements OnInit {
     this.registeredCourseService.getAppliedCourses(this.student).subscribe(data => {
       console.log(data);
       this.myCourses = data;
-      
+
     })
     console.log("my courses array" + this.myCourses);
 
   }
 
 
-payCourse(myCourse : RegisteredCourse) {
+  payCourse(myCourse: RegisteredCourse) {
 
-  this.registeredCourseService.makePayment(this.student, myCourse.course)
+    this.registeredCourseService.makePayment(this.student, myCourse.course)
       .subscribe(data => {
         this.getAppliedCourse();
         console.log(data)
       })
 
-}
+  }
 
-dropCourse(myCourse : RegisteredCourse) {
+  dropCourse(myCourse: RegisteredCourse) {
 
-  this.registeredCourseService.dropCourse(this.student, myCourse.course)
+    this.registeredCourseService.dropCourse(this.student, myCourse.course)
       .subscribe(data => {
         this.getAppliedCourse();
         console.log(data)
         location.reload();
       })
-  
-}
+
+  }
 
 }

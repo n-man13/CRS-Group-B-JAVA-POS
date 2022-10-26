@@ -4,6 +4,7 @@ import { Course } from 'src/app/model/course';
 import { Student } from 'src/app/model/student';
 import { CourseService } from 'src/app/services/student/course.service';
 import { RegisteredCourseService } from 'src/app/services/student/registered-course.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-view-all-courses',
@@ -12,18 +13,23 @@ import { RegisteredCourseService } from 'src/app/services/student/registered-cou
 })
 export class ViewAllCoursesComponent implements OnInit {
 
-  student: Student = new Student(1, "Luca", "Lucam", "1234", true);
+  student: Student = new Student(0, "", "", "", false);
 
   allCourses: Course[] | undefined;
 
   myCourses: Course[] = [];
 
-  constructor(private courseService: CourseService, private registeredCourseService: RegisteredCourseService, public router: Router) { }
+  constructor(private courseService: CourseService, private registeredCourseService: RegisteredCourseService, private userService: UserService, public router: Router) { }
 
   ngOnInit(): void {
+    if (JSON.parse(this.userService.getData() as string).role != 3) {
+      this.router.navigate(['']);
+    } else {
+      this.student = JSON.parse(this.userService.getData() as string)
+      this.getCourses();
+      this.getAppliedCourse();
+    }
 
-    this.getCourses();
-    this.getAppliedCourse();
 
   }
 
