@@ -4,6 +4,7 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { Course } from 'src/app/model/course';
 import { Professor } from 'src/app/model/professor';
 import { CourseService } from 'src/app/services/admin/course.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create-course-modal',
@@ -22,10 +23,16 @@ export class CreateCourseModalComponent implements OnInit {
 
   getData: Course[] | undefined;
 
-  constructor(private _httpService: CourseService, public router:Router) { }
+  constructor(private _httpService: CourseService, private userService: UserService, public router:Router) { }
 
   ngOnInit(): void {
-    this.model = this._httpService.model;
+    if (JSON.parse(this.userService.getData() as string).role != 1) {
+      this.userService.deleteData();
+      this.router.navigate(['']);
+    } else {
+      this.model = this._httpService.model;
+    }
+    
   }
 
   // createUpdateCourse() {
