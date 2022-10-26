@@ -14,6 +14,7 @@ import { ViewAllCoursesComponent } from './components/Student/view-all-courses/v
 import { ViewAppliedCoursesComponent } from './components/Student/view-applied-courses/view-applied-courses.component';
 import { ProfessorDashboardComponent } from './components/professor-dashboard/professor-dashboard.component';
 import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
 
@@ -47,7 +48,8 @@ const routes: Routes = [
       {path:'viewappliedcourses', component:ViewAppliedCoursesComponent},
       {path:'checkgrades', component:CheckGradesComponent}
     ]
-  }
+  },
+  {path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

@@ -38,6 +38,7 @@ import { ProfessorDashboardComponent } from './components/professor-dashboard/pr
 import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ProfessorDashboardComponent,
     StudentDashboardComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
