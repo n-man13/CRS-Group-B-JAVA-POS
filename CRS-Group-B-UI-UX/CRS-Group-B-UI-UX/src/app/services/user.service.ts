@@ -10,6 +10,7 @@ export class UserService {
 
   url: string = "http://localhost:8094/";
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', "*");
+  
 
   constructor(private http: HttpClient) { }
 
@@ -17,4 +18,13 @@ export class UserService {
     let user: User = new User(0,username, password, role);
     return this.http.post(this.url + "login", user, { headers: this.headers });
   }
+
+  saveData(user:any) {
+    sessionStorage.setItem('globalUser', JSON.stringify(user));
+  }
+
+  getData() {
+    return sessionStorage.getItem('globalUser');
+  }
+
 }
