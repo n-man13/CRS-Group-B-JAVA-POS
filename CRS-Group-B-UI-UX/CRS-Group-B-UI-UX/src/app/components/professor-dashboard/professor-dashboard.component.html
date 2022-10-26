@@ -5,12 +5,14 @@
       <!-- <h1 class="display-5 fw-bold" style="text-align:center">Student Portal</h1>
       <p class="fs-4" style="text-align:center">register, drop, view courses, check grades, and make payments</p> -->
       <!-- <h1 class="display-5 fw-bold" style="text-align:center">Professor Portal</h1>
-      <p class="fs-4" style="text-align:center">Apply to course, view students, and record grades</p> -->
+      <p class="fs-4" style="text-align:center">Apply to course, view students, and record grades</p> 
+    <a class="btn btn-primary m-2" [routerLink]="['/viewcourses']">View Courses</a>
+  <a class="btn btn-primary m-2" [routerLink]="['/viewstudents']">View Students</a>-->
     </div>
   </div>
 <div class="d-flex justify-content-center">
-    <a class="btn btn-primary m-2" [routerLink]="['/admindashboard/listcourse']">List Courses</a>
-    <a class="btn btn-primary m-2" [routerLink]="['/admindashboard/courseform']">Create Course</a>  
+    <a class="btn btn-primary m-2" [routerLink]="['/professordashboard/viewcourses']">View Courses</a>
+    <a class="btn btn-primary m-2" [routerLink]="['/professordashboard/viewstudents']">View Students</a>  
 </div>
 
 <router-outlet></router-outlet>
