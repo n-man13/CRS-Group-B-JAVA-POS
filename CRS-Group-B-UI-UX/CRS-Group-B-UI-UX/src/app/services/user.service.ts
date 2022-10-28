@@ -8,7 +8,7 @@ import { User } from '../model/user';
 })
 export class UserService {
 
-  url: string = "http://localhost:8094/";
+  url: string = "http://localhost:3001/";
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', "*");
 
 
