@@ -6,3 +6,4 @@ var con = mysql.createConnection({
     password: "root",
     database: "crsdatabase"
 });
+
