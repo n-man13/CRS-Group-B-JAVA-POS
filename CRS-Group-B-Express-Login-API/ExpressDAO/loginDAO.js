@@ -16,7 +16,7 @@ class loginDAO {
         dbCon.query(USER_PASSWORD, [body.username, body.password, body.role], function (err, result) {
             console.log("User found-->" + JSON.stringify(result));
             if (err) throw err;
-            if (result.length == 0) throw new Error('Wrong credentials');
+            if (result.length == 0) callBack(new Error('Wrong credentials'), null) ;
             if (body.role == 3) {
                 console.log("User is a student");
                 var STUDENT_JOIN = "SELECT User.userID, User.username, User.role, Student.studentID, Student.name, Student.registrationApproved FROM Student INNER JOIN User ON User.userID=Student.studentID WHERE User.username=?;";
@@ -29,7 +29,7 @@ class loginDAO {
                         return callBack(null, student[0]);
                     }
                     else {
-                        return callBack(null, 'Not Approve Registration');
+                        return callBack(new Error('Your registration is not approved'), null);
                     }
                 })
             }
