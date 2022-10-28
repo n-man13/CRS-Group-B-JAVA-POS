@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from 'src/app/model/student';
 import { StudentService } from 'src/app/services/admin/student.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -15,16 +16,21 @@ export class ListUnregisteredStudentComponent implements OnInit {
   model: Student = new Student(0, "", "", "", false);
   getData: Student[] | undefined;
 
-  constructor(private httpService: StudentService, public router: Router) { 
+  constructor(private httpService: StudentService, public router: Router, private userService: UserService) {
     // let s1:Student = new Student(1, "Luca", "Lucam", "1234", false);
     // let s2:Student = new Student(2, "Seb", "Seba", "1234", false);
     // let s3:Student = new Student(3, "Nikhil", "Nik", "1234", false);
     // this.studentArray.push(s1,s2,s3);
-    
+
   }
 
   ngOnInit(): void {
-    this.getStudents();
+    if (JSON.parse(this.userService.getData() as string).role != 1) {
+      this.userService.deleteData();
+      this.router.navigate(['']);
+    } else {
+      this.getStudents();
+    }
   }
 
   // studentRegistration(student:Student) {
@@ -44,14 +50,14 @@ export class ListUnregisteredStudentComponent implements OnInit {
     })
   }
 
-  confirmRegistration(student:Student) {
+  confirmRegistration(student: Student) {
     student.isRegistered = true;
     this.httpService.confirmRegistration(student)
       .subscribe(data => {
         console.log(data);
         this.getStudents();
         this.router.navigate(['listunregisteredstudent']);
-        
+
       })
   }
 
@@ -65,5 +71,5 @@ export class ListUnregisteredStudentComponent implements OnInit {
 
 
   }
-  
+
 }

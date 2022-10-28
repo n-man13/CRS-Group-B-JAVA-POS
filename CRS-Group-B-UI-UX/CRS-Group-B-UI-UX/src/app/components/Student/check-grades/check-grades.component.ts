@@ -22,6 +22,7 @@ export class CheckGradesComponent implements OnInit {
 
   ngOnInit(): void {
     if (JSON.parse(this.userService.getData() as string).role != 3) {
+      this.userService.deleteData();
       this.router.navigate(['']);
     } else {
       this.student = JSON.parse(this.userService.getData() as string)
