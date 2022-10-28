@@ -12,6 +12,7 @@ app.post('/login', express.json(), (req, res) => {
 const URL_PUT = '/updateCustomer';  // final in java // final C#
 app.put(URL_PUT, express.json(), function (req, res) {
     dao.updateCustomer(req.body, function(err, result){
+        console.log("inside API");
         res.send(result);
     });
 })
