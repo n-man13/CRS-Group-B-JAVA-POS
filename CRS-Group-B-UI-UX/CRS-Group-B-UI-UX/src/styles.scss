@@ -57,3 +57,10 @@ body {
 .card {
   padding: 8px !important;
 }
+
+.home-bg{
+  background: url(../src/assets/images/home-dashboard.jpg);
+  background-repeat: no-repeat;
+  background-size:auto;
+  background: rgba($color: #000000, $alpha: 1.0);
+}

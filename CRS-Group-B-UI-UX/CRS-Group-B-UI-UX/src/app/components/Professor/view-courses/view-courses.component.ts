@@ -23,10 +23,13 @@ export class ViewCoursesComponent implements OnInit {
   ngOnInit(): void {
     if (JSON.parse(this.userService.getData() as string).role != 2) {
       this.router.navigate(['']);
+      this.userService.deleteData();
     }
-    this.getCourses();
-    this.professor = JSON.parse(this.userService.getData() as string);
-
+    else {
+      this.professor = JSON.parse(this.userService.getData() as string);
+      this.getCourses();
+    }
+    
   }
 
   getCourses() {

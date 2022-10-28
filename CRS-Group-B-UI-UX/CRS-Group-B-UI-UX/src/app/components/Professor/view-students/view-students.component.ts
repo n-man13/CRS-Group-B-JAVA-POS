@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Course } from 'src/app/model/course';
 import { Grade } from 'src/app/model/grade';
 import { Professor } from 'src/app/model/professor';
 import { CourseService } from 'src/app/services/professor/course.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-view-students',
@@ -18,11 +20,17 @@ export class ViewStudentsComponent implements OnInit {
   editableId:number[] = new Array();
   model:number = -1;
 
-  constructor(private courseService: CourseService) { }
+  constructor(private courseService: CourseService, private userService: UserService, public router: Router) { }
 
   ngOnInit(): void {
-    
-    this.getMyCourses()
+    if (JSON.parse(this.userService.getData() as string).role != 2) {
+      this.router.navigate(['']);
+      this.userService.deleteData();
+    }
+    else {
+      this.professor = JSON.parse(this.userService.getData() as string);
+    this.getMyCourses();
+    }  
   }
 
   getStudents(courseID:number){
