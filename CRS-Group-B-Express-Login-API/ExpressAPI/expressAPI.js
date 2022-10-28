@@ -3,8 +3,8 @@ var Dao = require('../ExpressDAO/loginDAO');
 var dao = new Dao();
 const app = express();
 // respond with "hello world" when a GET request is made to the homepage
-app.post('/login', express.json(), (req, res) => {
-    dao.login(function(err, result){
+app.post('/login', express.json(), function (req, res) {
+    dao.login(req.body, function(err, result){
         res.send(result);
     });
 });
