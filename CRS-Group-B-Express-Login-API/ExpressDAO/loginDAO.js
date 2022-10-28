@@ -36,7 +36,7 @@ class loginDAO {
                         console.log("student is approved? " + student[0].registrationApproved);
                         if (student[0].registrationApproved == 1) {
                             console.log("Student is registered");
-                            return callBack(null, student);
+                            return callBack(null, student[0]);
                         }
                         else {
                             return callBack(null, 'Not Approve Registration');
@@ -47,14 +47,14 @@ class loginDAO {
                     var PROFESSOR_JOIN = "SELECT User.userID, User.username, User.role, Professor.professorID, Professor.name FROM Professor INNER JOIN User ON User.userID=Professor.professorID WHERE User.username=?;";
                     con.query(PROFESSOR_JOIN, [body.username], function (err, professor) {
                         if (err) throw err;
-                        return callBack(null, professor);
+                        return callBack(null, professor[0]);
                     })
                 }
                 else if (body.role == 1) {
                     var ADMIN_JOIN = "SELECT User.userID, User.username, User.role, Admin.adminID FROM Admin INNER JOIN User ON User.userID=Admin.adminID WHERE User.username=?;";
                     con.query(ADMIN_JOIN, [body.username], function (err, admin) {
                         if (err) throw err;
-                        return callBack(null, admin);
+                        return callBack(null, admin[0]);
                     })
                 }
             })
