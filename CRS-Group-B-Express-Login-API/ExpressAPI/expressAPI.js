@@ -7,7 +7,12 @@ app.use(cors());
 // respond with "hello world" when a GET request is made to the homepage
 app.post('/login', express.json(), function (req, res) {
     dao.login(req.body, function(err, result){
-        res.send(result);
+        if (err) {
+            res.send(err);
+        }
+        else {
+            res.send(result);
+        }
     });
 });
 
