@@ -12,7 +12,7 @@ class mongoDAO {
     login(body, callBack) {
 
         MongoClient.connect(url, function (err, db) {
-            var query = { username: body.username, password: body.password, role:parseInt(body.role)}
+            var query = { username: body.username, password: body.password, role: parseInt(body.role) }
             console.log("query -> " + JSON.stringify(query));
             if (err) throw err;
             var dbo = db.db("crslogin");
@@ -23,11 +23,14 @@ class mongoDAO {
                 if (result.length == 0) {
                     console.log("the credentials are wrong")
                     callBack(new Error('Wrong credentials'), null);
-                    
+
                 }
-                if (body.role == 3 && !result.registrationApproved) {
-                    console.log("Registration is not approved");
-                    return callBack(new Error('Your registration is not approved'), null);
+                else if (body.role == 3) {
+                    if (!result[0].registrationApproved) {
+                        console.log("Registration is not approved");
+                        console.log(result[0].registrationApproved);
+                        return callBack(new Error('Your registration is not approved'), null);
+                    }
                 }
                 else {
                     console.log("works");
@@ -36,7 +39,7 @@ class mongoDAO {
             })
         })
     }
-}      
+}
 
 module.exports = mongoDAO;
 
