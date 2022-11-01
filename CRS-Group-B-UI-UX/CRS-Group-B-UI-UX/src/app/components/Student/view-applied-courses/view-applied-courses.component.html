@@ -19,9 +19,9 @@
                             <div *ngIf="myCourse.feePaid" class="row">
                                 <div class="col-6 p-2">
                                 </div>
-                                <div class="col-6 p-2">
+                                <div class="d-flex flex-row-reverse p-2">
                                     <button type="button" disabled
-                                        class="btn-sm btn-outline-primary p-1 btn-block ">Registration Confirmed</button>
+                                        class="btn-sm btn-outline-primary p-1 m-1">Registration Confirmed</button>
                                 </div>
                             </div>
                         </div>
@@ -29,12 +29,10 @@
 
                             <div class="col-6 p-2">
                             </div>
-                            <div class="col-3 p-2">
-                                <button type="button" class="btn-sm btn-blue p-1 btn-block"
+                            <div class="d-flex flex-row-reverse p-2">
+                                <button type="button" class="btn-sm btn-blue p-1 m-1"
                                     (click)="payCourse(myCourse)">Pay</button>
-                            </div>
-                            <div class="col-3 p-2">
-                                <button type="button" class="btn-sm btn-red p-1 btn-block"
+                                <button type="button" class="btn-sm btn-red p-1 m-1"
                                     (click)="dropCourse(myCourse)">Drop</button>
 
                             </div>
