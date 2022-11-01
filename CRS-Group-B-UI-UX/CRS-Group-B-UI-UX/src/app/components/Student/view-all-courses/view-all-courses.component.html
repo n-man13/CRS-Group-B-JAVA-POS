@@ -20,13 +20,13 @@
                                 <div class="col-9 p-2">
                                 </div>
                                 <!-- *"  -->
-                                <div *ngIf="!(isApplied(course))" class="col-3 p-2">
-                                    <button type="button" class="btn-sm btn-blue btn-block p-1"
+                                <div *ngIf="!(isApplied(course))" class="d-flex flex-row-reverse p-2">
+                                    <button type="button" class="btn-sm btn-blue p-1"
                                         (click)="applyToCourse(course)">Apply</button>
                                     <!-- <button ng-show="myCourses.includes(course)">some text</button><button ng-show="!myCourses.includes(course)">some other text</button> -->
                                 </div>
-                                <div *ngIf="(isApplied(course))" class="col-3 p-2">
-                                    <button type="button" class="btn-sm btn-red btn-block p-1"
+                                <div *ngIf="(isApplied(course))" class="d-flex flex-row-reverse p-2">
+                                    <button type="button" class="btn-sm btn-red p-1"
                                         (click)="goToAppliedCourses()">Drop</button>
                                     <!-- <button ng-show="myCourses.includes(course)">some text</button><button ng-show="!myCourses.includes(course)">some other text</button> -->
                                 </div>
