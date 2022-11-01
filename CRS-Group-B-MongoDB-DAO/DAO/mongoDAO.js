@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/mydb";
 
-class loginDAO {
+class mongoDAO {
 
 
 
@@ -28,5 +28,5 @@ class loginDAO {
     }
 }      
 
-module.exports = loginDAO;
+module.exports = mongoDAO;
 
