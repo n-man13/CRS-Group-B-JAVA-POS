@@ -1,5 +1,5 @@
 const express = require('express');
-var Dao = require('../ExpressDAO/loginDAO');
+var Dao = require('../DAO/loginDAO');
 var dao = new Dao();
 const app = express();
 var cors = require('cors');
