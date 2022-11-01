@@ -66,7 +66,7 @@ export class ListCourseComponent implements OnInit {
 
   saveInfo(course: Course) {
     this._httpService.saveInfo(course);
-    this.router.navigate(['courseform']);
+    this.router.navigate(['admindashboard/courseform']);
   }
 
   updateCourse(course: Course) {

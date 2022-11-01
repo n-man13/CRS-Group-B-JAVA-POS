@@ -27,7 +27,7 @@ export class CreateProfessorModalComponent implements OnInit {
     this.httpService.addProfessor(this.model)
       .subscribe(data => {
         console.log(data);
-        this.router.navigate(['listprofessor']);
+        this.router.navigate(['admindashboard/listprofessor']);
       })
     
   }
