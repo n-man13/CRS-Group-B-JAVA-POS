@@ -136,3 +136,49 @@ fieldset[disabled] .btn-blue.active {
   color: #5D75E2; 
   background-color: #FFFFFF; 
 }
+
+.btn-red { 
+  color: #FFFFFF; 
+  background-color: #F65868; 
+  border-color: #F65868; 
+} 
+ 
+.btn-red:hover, 
+.btn-red:focus, 
+.btn-red:active, 
+.btn-red.active, 
+.open .dropdown-toggle.btn-red { 
+  color: #FFFFFF; 
+  background-color: #F05262; 
+  border-color: #F65868; 
+} 
+ 
+.btn-red:active, 
+.btn-red.active, 
+.open .dropdown-toggle.btn-red { 
+  background-image: none; 
+} 
+ 
+.btn-red.disabled, 
+.btn-red[disabled], 
+fieldset[disabled] .btn-red, 
+.btn-red.disabled:hover, 
+.btn-red[disabled]:hover, 
+fieldset[disabled] .btn-red:hover, 
+.btn-red.disabled:focus, 
+.btn-red[disabled]:focus, 
+fieldset[disabled] .btn-red:focus, 
+.btn-red.disabled:active, 
+.btn-red[disabled]:active, 
+fieldset[disabled] .btn-red:active, 
+.btn-red.disabled.active, 
+.btn-red[disabled].active, 
+fieldset[disabled] .btn-red.active { 
+  background-color: #F65868; 
+  border-color: #F65868; 
+} 
+ 
+.btn-red .badge { 
+  color: #F65868; 
+  background-color: #FFFFFF; 
+}
