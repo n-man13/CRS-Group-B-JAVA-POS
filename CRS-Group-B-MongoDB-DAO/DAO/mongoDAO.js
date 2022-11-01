@@ -31,6 +31,10 @@ class mongoDAO {
                         console.log(result[0].registrationApproved);
                         return callBack(new Error('Your registration is not approved'), null);
                     }
+                    else {
+                        return callBack(null, result[0]);
+                    }
+                    
                 }
                 else {
                     console.log("works");
