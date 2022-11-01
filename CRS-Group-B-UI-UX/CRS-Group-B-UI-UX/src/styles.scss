@@ -89,3 +89,49 @@ body {
   background-color: rgba(255, 0, 0, 0.6);
   color: white
 }
+
+.btn-blue { 
+  color: #FFFFFF; 
+  background-color: #5D75E2; 
+  border-color: #5D75E2; 
+} 
+ 
+.btn-blue:hover, 
+.btn-blue:focus, 
+.btn-blue:active, 
+.btn-blue.active, 
+.open .dropdown-toggle.btn-blue { 
+  color: #FFFFFF; 
+  background-color: #4C62C7; 
+  border-color: #5D75E2; 
+} 
+ 
+.btn-blue:active, 
+.btn-blue.active, 
+.open .dropdown-toggle.btn-blue { 
+  background-image: none; 
+} 
+ 
+.btn-blue.disabled, 
+.btn-blue[disabled], 
+fieldset[disabled] .btn-blue, 
+.btn-blue.disabled:hover, 
+.btn-blue[disabled]:hover, 
+fieldset[disabled] .btn-blue:hover, 
+.btn-blue.disabled:focus, 
+.btn-blue[disabled]:focus, 
+fieldset[disabled] .btn-blue:focus, 
+.btn-blue.disabled:active, 
+.btn-blue[disabled]:active, 
+fieldset[disabled] .btn-blue:active, 
+.btn-blue.disabled.active, 
+.btn-blue[disabled].active, 
+fieldset[disabled] .btn-blue.active { 
+  background-color: #5D75E2; 
+  border-color: #5D75E2; 
+} 
+ 
+.btn-blue .badge { 
+  color: #5D75E2; 
+  background-color: #FFFFFF; 
+}
