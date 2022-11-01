@@ -16,26 +16,26 @@ app.post('/login', express.json(), function (req, res) {
     });
 });
 
-const URL_PUT = '/updateCustomer';  // final in java // final C#
-app.put(URL_PUT, express.json(), function (req, res) {
-    dao.updateCustomer(req.body, function(err, result){
-        console.log("inside API");
-        res.send(result);
-    });
-})
+// const URL_PUT = '/updateCustomer';  // final in java // final C#
+// app.put(URL_PUT, express.json(), function (req, res) {
+//     dao.updateCustomer(req.body, function(err, result){
+//         console.log("inside API");
+//         res.send(result);
+//     });
+// })
 
-const URL_POST = '/createCustomer';  // final in java // final C#
-app.post(URL_POST,express.json(), function (req, res) {
-    dao.createCustomer(req.body, function(err, result){
-        res.send(result);
-    });    
-})
-// delete implementation here 
-app.delete('/deleteCustomer',express.json(), function (req, res) {
-    dao.deleteCustomer(req.body, function(err, result){
-        res.send(result);
-    });
-})
+// const URL_POST = '/createCustomer';  // final in java // final C#
+// app.post(URL_POST,express.json(), function (req, res) {
+//     dao.createCustomer(req.body, function(err, result){
+//         res.send(result);
+//     });    
+// })
+// // delete implementation here 
+// app.delete('/deleteCustomer',express.json(), function (req, res) {
+//     dao.deleteCustomer(req.body, function(err, result){
+//         res.send(result);
+//     });
+// })
 
 // craete server here  to expose the Express code
 var server = app.listen(3001, function () {
