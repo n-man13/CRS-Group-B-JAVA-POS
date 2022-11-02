@@ -91,11 +91,16 @@ public class UserController {
 	 * @param student the student that has to be registered
 	 * @return ResponseEntity the ResponseEntity if the login is successful or not
 	 * @throws UsernameUsedException if username already taken
+	 * @throws StudentNotFoundException 
 	 */
 	@RequestMapping(value = "/studentRegistration", method = RequestMethod.POST)
-	public ResponseEntity studentRegistration(@RequestBody Student student) throws UsernameUsedException {
+	public ResponseEntity studentRegistration(@RequestBody Student student) throws UsernameUsedException, StudentNotFoundException {
 		logger.info("studentRegistration in userController");
 		studentService.createStudent(student);
+		Student newStudent = studentService.getStudentByUsername(student.getUsername());
+		newStudent.setUsername(student.getUsername());
+		newStudent.setRole(3);
+		newStudent.setUserID(userService.getUserID(student.getUsername()));
 		if (student == null)
 			return new ResponseEntity("New Student information not provided", HttpStatus.NOT_FOUND);
 //		try {
@@ -103,7 +108,7 @@ public class UserController {
 //		} catch (UsernameUsedException e) {
 //			return new ResponseEntity(e.getMessage() + e.getUsername(), HttpStatus.I_AM_A_TEAPOT);
 //		}
-		return new ResponseEntity(HttpStatus.CREATED);
+		return new ResponseEntity(newStudent, HttpStatus.CREATED);
 	}
 	
 	/**
