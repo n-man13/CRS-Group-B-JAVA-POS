@@ -15,10 +15,13 @@ import { ViewAppliedCoursesComponent } from './components/Student/view-applied-c
 import { ProfessorDashboardComponent } from './components/professor-dashboard/professor-dashboard.component';
 import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AppComponent } from './app.component';
+import { StudentRegistrationComponent } from './components/student-registration/student-registration.component';
 
 const routes: Routes = [
 
-  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'studentregistration', component: StudentRegistrationComponent },
   {
     path: 'admindashboard', component: AdminDashboardComponent,
     children: [

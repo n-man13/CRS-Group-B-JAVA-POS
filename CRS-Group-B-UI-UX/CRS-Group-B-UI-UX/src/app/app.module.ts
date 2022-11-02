@@ -24,7 +24,7 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewAppliedCoursesComponent } from './components/Student/view-applied-courses/view-applied-courses.component';
 import { MakePaymentComponent } from './components/Student/make-payment/make-payment.component';
@@ -70,6 +70,7 @@ import { StudentRegistrationComponent } from './components/student-registration/
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MdbAccordionModule,
     MdbCarouselModule,
