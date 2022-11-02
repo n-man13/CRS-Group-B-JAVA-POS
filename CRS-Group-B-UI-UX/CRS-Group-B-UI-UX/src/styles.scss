@@ -63,7 +63,8 @@ body {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-color: rgba(255, 0, 0, 0.6);
-  color: white
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .student-bg{
@@ -71,7 +72,8 @@ body {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-color: rgba(255, 0, 0, 0.6);
-  color: white
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .admin-bg{
@@ -79,7 +81,8 @@ body {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-color: rgba(255, 0, 0, 0.6);
-  color: white
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .professor-bg{
@@ -95,7 +98,7 @@ body {
   color: #FFFFFF; 
   background-color: #5D75E2; 
   border-color: #5D75E2;
-  width: 15%; 
+  width: 20%; 
 } 
  
 .btn-blue:hover, 
@@ -142,7 +145,7 @@ fieldset[disabled] .btn-blue.active {
   color: #FFFFFF; 
   background-color: #F65868; 
   border-color: #F65868; 
-  width:15%;
+  width:20%;
 } 
  
 .btn-red:hover, 
