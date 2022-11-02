@@ -20,7 +20,7 @@ public class StudentMapper implements RowMapper<Student>{
 		
 		student.setStudentID(rs.getInt("studentID"));
 		student.setName(rs.getString("name"));
-		student.setRegistered(rs.getBoolean("registrationApproved"));
+		student.setRegistrationApproved(rs.getBoolean("registrationApproved"));
 		return student;
 		
 	}

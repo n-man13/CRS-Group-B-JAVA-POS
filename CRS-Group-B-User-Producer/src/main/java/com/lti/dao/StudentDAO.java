@@ -39,7 +39,7 @@ public class StudentDAO implements StudentDAOInterface {
 	public int createStudent(Student student) {
 		int userID = userDAO.createUser(student.getUsername(), student.getPassword(), 3);
 		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.STUDENT_INSERT, userID, student.getName(),
-				student.isRegistered());
+				student.isRegistrationApproved());
 		return userID;
 	}
 
@@ -79,7 +79,7 @@ public class StudentDAO implements StudentDAOInterface {
 	 */
 	@Override
 	public boolean updateStudent(Student student) {
-		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.STUDENT_UPDATE, student.getName(), student.isRegistered(),
+		jdbcTemplateObject.jdbcTemplate().update(SQLConstants.STUDENT_UPDATE, student.getName(), student.isRegistrationApproved(),
 				student.getStudentID());
 		return true;
 	}
