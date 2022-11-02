@@ -179,7 +179,7 @@ public class StudentService implements StudentServiceInterface {
 		logger.info("createStudent in StudentService");
 		if (userDAO.findUser(student.getUsername()) != null)
 			throw new UsernameUsedException("Username already taken, username: " + student.getUsername(), student.getUsername());
-		student.setRegistered(false);
+		student.setRegistrationApproved(false);
 		studentDAO.createStudent(student);
 
 	}

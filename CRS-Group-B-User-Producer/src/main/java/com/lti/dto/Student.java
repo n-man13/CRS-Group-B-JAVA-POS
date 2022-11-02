@@ -20,7 +20,7 @@ public class Student extends User implements  Serializable{
 //	private ArrayList<Course> registeredCourses = new ArrayList<Course>();
 //	private ArrayList<Course> alternateCourses = new ArrayList<Course>();
 	//private ArrayList<Double> grades = new ArrayList<Double>(); // move elsewhere in the future
-	private boolean registered = false;
+	private boolean registrationApproved = false;
 	//private int coursesPaid = 0;
 
 	/**
@@ -118,8 +118,8 @@ public class Student extends User implements  Serializable{
 	 * 
 	 * @return the registered
 	 */
-	public boolean isRegistered() {
-		return registered;
+	public boolean isRegistrationApproved() {
+		return registrationApproved;
 	}
 
 	/**
@@ -127,8 +127,8 @@ public class Student extends User implements  Serializable{
 	 * 
 	 * @param registered the registered to set
 	 */
-	public void setRegistered(boolean registered) {
-		this.registered = registered;
+	public void setRegistrationApproved(boolean registered) {
+		this.registrationApproved = registered;
 	}
 
 
