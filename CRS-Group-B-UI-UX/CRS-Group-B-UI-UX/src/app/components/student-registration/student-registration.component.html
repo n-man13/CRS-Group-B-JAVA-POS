@@ -4,7 +4,7 @@
 
         </div>
         <div class="col-md-6">
-            <h3>Login</h3>
+            <h3>Student Registration</h3>
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                 <div class="form-row">
                     <div class="form-group col">
@@ -43,9 +43,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center">
-                    <button class="btn btn-primary mr-1">Register</button>
-                    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                <hr>
+                <div class="text-end">
+                    <button class="btn btn-blue me-2">Register</button>
+                    <button class="btn btn-red " type="reset" (click)="onReset()">Cancel</button>
                 </div>
             </form>
         </div>

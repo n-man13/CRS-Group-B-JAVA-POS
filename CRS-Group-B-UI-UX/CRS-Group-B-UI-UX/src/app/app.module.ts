@@ -41,6 +41,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CenterDirective } from './directives/center.directive';
 import { StudentRegistrationComponent } from './components/student-registration/student-registration.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { StudentRegistrationComponent } from './components/student-registration/
     FooterComponent,
     PageNotFoundComponent,
     CenterDirective,
-    StudentRegistrationComponent
+    StudentRegistrationComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
