@@ -24,7 +24,7 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewAppliedCoursesComponent } from './components/Student/view-applied-courses/view-applied-courses.component';
 import { MakePaymentComponent } from './components/Student/make-payment/make-payment.component';
@@ -41,6 +41,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CenterDirective } from './directives/center.directive';
 import { StudentRegistrationComponent } from './components/student-registration/student-registration.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -64,12 +65,14 @@ import { StudentRegistrationComponent } from './components/student-registration/
     FooterComponent,
     PageNotFoundComponent,
     CenterDirective,
-    StudentRegistrationComponent
+    StudentRegistrationComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MdbAccordionModule,
     MdbCarouselModule,
