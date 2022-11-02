@@ -12,6 +12,7 @@ class mongoDAO {
     }
 
     createStudent(body, callBack) {
+        console.log("body: " + JSON.stringify(body));
         MongoClient.connect(url, function (err, db){
             var query = { username: body.username }
             if (err) throw err;
@@ -22,7 +23,7 @@ class mongoDAO {
                     callBack(new Error("Username already used."), null);
                 }
                 else {
-                    console.log("inserting body: " + json.stringify(body));
+                    console.log("inserting body: " + JSON.stringify(body));
                     dbo.collection("users").insertOne(body);
                 }
             })

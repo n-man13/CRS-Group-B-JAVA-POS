@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Student } from 'src/app/model/student';
+import { UserService } from 'src/app/services/user.service';
 
 
 // import custom validator to validate that password and confirm password fields match
@@ -15,7 +17,7 @@ export class StudentRegistrationComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
 
   ngOnInit(): void {
 
@@ -42,7 +44,10 @@ export class StudentRegistrationComponent implements OnInit {
       }
 
       // display form values on success
-      alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+      
+      this.userService.studentRegister(this.registerForm.value.username, this.registerForm.value.password, this.registerForm.value.name).subscribe((data: any)=> {
+        alert('SUCCESS!! :-)\n\n' + JSON.stringify(data));
+      });
   }
 
   onReset() {
