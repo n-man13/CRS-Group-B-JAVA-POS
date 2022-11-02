@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Student } from '../model/student';
 import { User } from '../model/user';
 
 @Injectable({
@@ -17,6 +18,12 @@ export class UserService {
   checkLogin(username: string, password: string, role: number): Observable<any> {
     let user: User = new User(0,username, password, role);
     return this.http.post(this.url + "login", user, { headers: this.headers });
+  }
+
+  studentRegister(username: string, password: string, name: string): Observable<any> {
+    let student: Student = new Student(0, name, username, password, false);
+    let temp: any = this.http.post("http://localhost:8094/studentRegistration", student, { headers: this.headers});
+    return this.http.post(this.url + "studentRegistration", temp, { headers: this.headers });
   }
 
   saveData(user:any) {
