@@ -1,3 +1,5 @@
+const { json } = require('express');
+
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/crslogin";
 
@@ -7,6 +9,24 @@ class mongoDAO {
 
 
     constructor() {
+    }
+
+    createStudent(body, callBack) {
+        MongoClient.connect(url, function (err, db){
+            var query = { username: body.username }
+            if (err) throw err;
+            var dbo = db.db("crslogin");
+            dbo.collection("users").find(query).toArray(function (err, result) {
+                console.log("result --> " + JSON.stringify(result));
+                if (result.length != 0){
+                    callBack(new Error("Username already used."), null);
+                }
+                else {
+                    console.log("inserting body: " + json.stringify(body));
+                    dbo.collection("users").insertOne(body);
+                }
+            })
+        })
     }
 
     login(body, callBack) {

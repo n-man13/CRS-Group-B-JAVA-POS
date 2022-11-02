@@ -16,6 +16,17 @@ app.post('/login', express.json(), function (req, res) {
     });
 });
 
+app.post('/studentRegistration', express.json(), function (req, res) {
+    dao.createStudent(req.body, function(err, result) {
+        if (err){
+            res.status(406).send(err.message);
+        }
+        else {
+            res.send(result);
+        }
+    })
+})
+
 // const URL_PUT = '/updateCustomer';  // final in java // final C#
 // app.put(URL_PUT, express.json(), function (req, res) {
 //     dao.updateCustomer(req.body, function(err, result){
