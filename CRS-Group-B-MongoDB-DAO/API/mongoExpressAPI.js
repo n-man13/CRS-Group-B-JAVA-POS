@@ -17,6 +17,7 @@ app.post('/login', express.json(), function (req, res) {
 });
 
 app.post('/studentRegistration', express.json(), function (req, res) {
+    console.log(JSON.stringify(req.body));
     dao.createStudent(req.body, function(err, result) {
         if (err){
             res.status(406).send(err.message);

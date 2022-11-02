@@ -22,17 +22,13 @@ export class UserService {
 
   studentRegister(username: string, password: string, name: string): Observable<any> {
     let student: Student = new Student(0, name, username, password, false);
-    let temp: any
-    this.http.post("http://localhost:8094/studentRegistration", student, { headers: this.headers}).subscribe(data=> {
-      temp = data;
-      console.log(data);
-      temp.password = password;
-      return this.http.post(this.url + "studentRegistration", temp, { headers: this.headers });
-    });
-    return new Observable();
-    
+    let temp: any;
+    return this.http.post("http://localhost:8094/studentRegistration", student, { headers: this.headers});
   }
 
+  studentRegistrationMongo(student: Student): Observable<any>{
+    return this.http.post(this.url + "studentRegistration", student, { headers: this.headers });
+  }
   saveData(user:any) {
     sessionStorage.setItem('globalUser', JSON.stringify(user));
   }

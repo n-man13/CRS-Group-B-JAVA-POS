@@ -46,7 +46,10 @@ export class StudentRegistrationComponent implements OnInit {
       // display form values on success
       
       this.userService.studentRegister(this.registerForm.value.username, this.registerForm.value.password, this.registerForm.value.name).subscribe((data: any)=> {
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(data));
+        data.password = this.registerForm.value.password;
+        this.userService.studentRegistrationMongo(data).subscribe(result=> {
+          alert('SUCCESS!! :-)\n\n' + JSON.stringify(result));
+        });
       });
   }
 
