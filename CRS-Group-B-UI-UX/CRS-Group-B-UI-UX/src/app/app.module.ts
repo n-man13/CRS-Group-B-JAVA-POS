@@ -40,6 +40,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CenterDirective } from './directives/center.directive';
+import { StudentRegistrationComponent } from './components/student-registration/student-registration.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { CenterDirective } from './directives/center.directive';
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
-    CenterDirective
+    CenterDirective,
+    StudentRegistrationComponent
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,7 @@ app.use(cors());
 app.post('/login', express.json(), function (req, res) {
     dao.login(req.body, function(err, result){
         if (err) {
-            res.status(406).send(err);
+            res.status(406).send(err.message);
         }
         else {
             res.send(result);
