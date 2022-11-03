@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Student } from 'src/app/model/student';
 import { UserService } from 'src/app/services/user.service';
 
@@ -17,9 +18,9 @@ export class StudentRegistrationComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
   submitted = false;
   taken = false;
-  errors : any = [];
+  errors: any = [];
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, public router: Router) { }
 
   ngOnInit(): void {
 
@@ -56,9 +57,12 @@ export class StudentRegistrationComponent implements OnInit {
       this.userService.studentRegistrationMongo(data).subscribe(result => {
 
       });
+      this.errors = [];
+      console.log('object created');
+      this.router.navigate(['login']);
     },
       (error: any) => {
-        this.errors = ({usernameTaken : error.error.message}) ;
+        this.errors = ({ usernameTaken: error.error.message });
         console.log(this.errors);
       });
   }
@@ -66,9 +70,10 @@ export class StudentRegistrationComponent implements OnInit {
   onReset() {
     this.submitted = false;
     this.registerForm.reset();
+    this.errors = [];
   }
 
-  
+
 
 
 
