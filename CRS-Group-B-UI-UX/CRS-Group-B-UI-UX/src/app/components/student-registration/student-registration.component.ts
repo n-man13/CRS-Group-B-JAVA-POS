@@ -33,7 +33,6 @@ export class StudentRegistrationComponent implements OnInit {
       validator:
         [
           MustMatch('password', 'confirmPassword')
-
         ]
     });
 
