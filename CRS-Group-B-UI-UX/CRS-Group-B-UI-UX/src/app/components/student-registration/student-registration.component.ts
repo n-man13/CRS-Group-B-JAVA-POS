@@ -16,6 +16,8 @@ export class StudentRegistrationComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup({});
   submitted = false;
+  taken = false;
+  errors : any = [];
 
   constructor(private formBuilder: FormBuilder, private userService: UserService) { }
 
@@ -27,11 +29,11 @@ export class StudentRegistrationComponent implements OnInit {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     }, {
-      validator: 
-      [
-        MustMatch('password', 'confirmPassword'),
-        this.usernameTakenError()
-      ]
+      validator:
+        [
+          MustMatch('password', 'confirmPassword')
+
+        ]
     });
 
   }
@@ -52,11 +54,12 @@ export class StudentRegistrationComponent implements OnInit {
     this.userService.studentRegister(this.registerForm.value.username, this.registerForm.value.password, this.registerForm.value.name).subscribe((data: any) => {
       data.password = this.registerForm.value.password;
       this.userService.studentRegistrationMongo(data).subscribe(result => {
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(result));
+
       });
     },
       (error: any) => {
-        this.usernameTakenError();
+        this.errors = ({usernameTaken : error.error.message}) ;
+        console.log(this.errors);
       });
   }
 
@@ -65,14 +68,9 @@ export class StudentRegistrationComponent implements OnInit {
     this.registerForm.reset();
   }
 
-  usernameTakenError () {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls['username'];
-      control.setErrors({ usernameTaken: true });
-    } 
+  
 
 
-  }
 
 
 }

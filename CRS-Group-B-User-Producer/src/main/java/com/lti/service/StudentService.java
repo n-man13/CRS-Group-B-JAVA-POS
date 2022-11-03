@@ -178,7 +178,7 @@ public class StudentService implements StudentServiceInterface {
 	public void createStudent(Student student) throws UsernameUsedException {
 		logger.info("createStudent in StudentService");
 		if (userDAO.findUser(student.getUsername()) != null)
-			throw new UsernameUsedException("Username already taken, username: " + student.getUsername(), student.getUsername());
+			throw new UsernameUsedException("Username already taken", student.getUsername());
 		student.setRegistrationApproved(false);
 		studentDAO.createStudent(student);
 
