@@ -26,9 +26,13 @@ export class StudentRegistrationComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-  }, {
-      validator: MustMatch('password', 'confirmPassword')
-  });
+    }, {
+      validator: 
+      [
+        MustMatch('password', 'confirmPassword'),
+        this.usernameTakenError()
+      ]
+    });
 
   }
 
@@ -36,26 +40,38 @@ export class StudentRegistrationComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
-      this.submitted = true;
+    this.submitted = true;
 
-      // stop here if form is invalid
-      if (this.registerForm.invalid) {
-          return;
-      }
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+      return;
+    }
 
-      // display form values on success
-      
-      this.userService.studentRegister(this.registerForm.value.username, this.registerForm.value.password, this.registerForm.value.name).subscribe((data: any)=> {
-        data.password = this.registerForm.value.password;
-        this.userService.studentRegistrationMongo(data).subscribe(result=> {
-          alert('SUCCESS!! :-)\n\n' + JSON.stringify(result));
-        });
+    // display form values on success
+
+    this.userService.studentRegister(this.registerForm.value.username, this.registerForm.value.password, this.registerForm.value.name).subscribe((data: any) => {
+      data.password = this.registerForm.value.password;
+      this.userService.studentRegistrationMongo(data).subscribe(result => {
+        alert('SUCCESS!! :-)\n\n' + JSON.stringify(result));
+      });
+    },
+      (error: any) => {
+        this.usernameTakenError();
       });
   }
 
   onReset() {
-      this.submitted = false;
-      this.registerForm.reset();
+    this.submitted = false;
+    this.registerForm.reset();
+  }
+
+  usernameTakenError () {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls['username'];
+      control.setErrors({ usernameTaken: true });
+    } 
+
+
   }
 
 
