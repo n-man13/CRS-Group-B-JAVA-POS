@@ -40,7 +40,7 @@ export class CreateProfessorModalComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    
+
     this.httpService.addProfessor(new Professor(0, this.registerForm.value.name, this.registerForm.value.username, this.registerForm.value.password))
       .subscribe(data => {
         console.log(data);
