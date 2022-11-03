@@ -59,11 +59,12 @@ public class AdminService implements AdminServiceInterface {
 	public void createProfessor(Professor professor) throws UsernameUsedException {
 		logger.info("createProfessor in AdminService");
 		if (userDAO.findUser(professor.getUsername()) != null)
-			throw new UsernameUsedException("Username already taken, username: "+professor.getUsername(), professor.getUsername());
+			throw new UsernameUsedException("Username " + professor.getUsername() + " already taken",
+					professor.getUsername());
 		professorDAO.createProfessor(professor);
 	}
-	
-	public List<Professor> viewProfessors(){
+
+	public List<Professor> viewProfessors() {
 		return professorDAO.viewProfessors();
 	}
 
@@ -77,7 +78,8 @@ public class AdminService implements AdminServiceInterface {
 	public void updateCourse(Course course) throws CourseNotFoundException {
 		logger.info("updateCourse in AdminService");
 		if (courseDAO.findCourseByCourseID(course.getCourseID()) == null)
-			throw new CourseNotFoundException("This course was not found, ID: "+course.getCourseID(), course.getCourseID());
+			throw new CourseNotFoundException("This course was not found, ID: " + course.getCourseID(),
+					course.getCourseID());
 		courseDAO.updateCourse(course);
 	}
 
@@ -91,7 +93,7 @@ public class AdminService implements AdminServiceInterface {
 	public void deleteCourse(int courseId) throws CourseNotFoundException {
 		logger.info("deleteCourse in AdminService");
 		if (courseDAO.findCourseByCourseID(courseId) == null)
-			throw new CourseNotFoundException("This course was not found, ID: "+courseId, courseId);
+			throw new CourseNotFoundException("This course was not found, ID: " + courseId, courseId);
 		courseDAO.deleteCourse(courseId);
 	}
 
@@ -105,11 +107,11 @@ public class AdminService implements AdminServiceInterface {
 		logger.info("listAllCourses in AdminService");
 		return courseDAO.findAllCourses();
 	}
-	
+
 	@Override
-	public Course getCourseByID(int courseId) throws CourseNotFoundException{
+	public Course getCourseByID(int courseId) throws CourseNotFoundException {
 		if (courseDAO.findCourseByCourseID(courseId) == null)
-			throw new CourseNotFoundException("This course was not found, ID: "+courseId, courseId);
+			throw new CourseNotFoundException("This course was not found, ID: " + courseId, courseId);
 		return courseDAO.findCourseByCourseID(courseId);
 	}
 
@@ -123,7 +125,8 @@ public class AdminService implements AdminServiceInterface {
 	public void approveStudentRegistration(Student student) throws StudentNotFoundException {
 		logger.info("approveStudentRegistration in AdminService");
 		if (studentDAO.findStudent(student.getStudentID()) == null)
-			throw new StudentNotFoundException("This student was not found, ID: "+student.getStudentID(), student.getStudentID());
+			throw new StudentNotFoundException("This student was not found, ID: " + student.getStudentID(),
+					student.getStudentID());
 //		Old method without streams
 //		int i = 0;
 //		for (Student s : studentDAO.viewUnregisteredStudents()) {
@@ -133,7 +136,8 @@ public class AdminService implements AdminServiceInterface {
 		List<Student> result = studentDAO.findUnregisteredStudents().stream()
 				.filter(s -> s.getStudentID() == student.getStudentID()).collect(Collectors.toList());
 		if (result.isEmpty())
-			throw new StudentNotFoundException("This student is already registerd, ID: "+student.getStudentID(), student.getStudentID());
+			throw new StudentNotFoundException("This student is already registerd, ID: " + student.getStudentID(),
+					student.getStudentID());
 		student.setRegistered(true);
 		studentDAO.updateStudent(student);
 	}
@@ -178,10 +182,10 @@ public class AdminService implements AdminServiceInterface {
 		logger.info("getStudentById in AdminService");
 		Student student = studentDAO.findStudent(studentId);
 		if (student == null)
-			throw new StudentNotFoundException("This student was not found, ID: "+studentId, studentId);
+			throw new StudentNotFoundException("This student was not found, ID: " + studentId, studentId);
 		return student;
 	}
-	
+
 	public void deleteStudent(int studentID) {
 		userDAO.deleteUser(studentID);
 	}
