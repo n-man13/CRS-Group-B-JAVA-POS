@@ -1,35 +1,42 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-
-        </div>
+        <div class="col-3"></div>
         <div class="col-md-6">
-            <form ngForm>
-                <h2 class="modal-title" appCenter>Create Professor</h2>
-                <div class="form-group">
-                    <label>ID</label>
-                    <input class="form-control" id="professorID" name="professorID" type="number"
-                        placeholder="Professor ID" [(ngModel)]="model.professorID">
+            <h2 class="modal-title" appCenter>Create Professor</h2>
+            <form [formGroup]="registerForm" (ngSubmit)="createProfessor()">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label>Name</label>
+                        <input type="text" formControlName="name" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+                        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                            <div *ngIf="f['name'].errors['required']">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label>Username</label>
+                        <input type="text" formControlName="username" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
+                        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                            <div *ngIf="f['username'].errors['required']">Username is required</div>
+                        </div>
+                        <div class="text-danger" *ngIf="errors.usernameTaken">{{errors.usernameTaken}}</div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Name</label>
-                    <input class="form-control" id="name" name="name" type="text" placeholder="Professor Name"
-                        [(ngModel)]="model.name" required>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label>Password</label>
+                        <input type="password" formControlName="password" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+                        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                            <div *ngIf="f['password'].errors['required']">Password is required</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Username</label>
-                    <input class="form-control" id="username" name="username" type="text" placeholder="Enter Username"
-                        [(ngModel)]="model.username" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input class="form-control" id="password" name="password" type="password"
-                        placeholder="Enter Password" [(ngModel)]="model.password" required>
-                </div>
-
                 <br>
-                <div class="modal-footer">
-                    <button class="btn btn-blue" (click)="createProfessor()">Submit</button>
+                <div class="text-end">
+                    <button class="btn btn-blue p-1 py-2" (click)="createProfessor()">Submit</button>
+                    <button class="btn btn-red p-1 py-2" type="reset" (click)="onReset()">Cancel</button>
                 </div>
             </form>
         </div>

@@ -17,7 +17,6 @@ export class StudentRegistrationComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup({});
   submitted = false;
-  taken = false;
   errors: any = [];
 
   constructor(private formBuilder: FormBuilder, private userService: UserService, public router: Router) { }
