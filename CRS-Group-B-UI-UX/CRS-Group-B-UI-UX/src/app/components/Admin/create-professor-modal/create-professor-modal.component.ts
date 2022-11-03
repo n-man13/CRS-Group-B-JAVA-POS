@@ -35,6 +35,7 @@ export class CreateProfessorModalComponent implements OnInit {
 
 
   createProfessor() {
+    this.submitted = true;
     this.httpService.addProfessor(new Professor(0, this.registerForm.value.name, this.registerForm.value.username, this.registerForm.value.password))
       .subscribe(data => {
         console.log(data);
