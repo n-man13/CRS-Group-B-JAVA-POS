@@ -1,9 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App.jsx";
-import Employee from "./MyComponentTwo.jsx";
-import Form from "./MyForm.jsx";
-import UserList from "./Fetch.jsx";
 import UserCRUD from "./axiosapi/components/UserCRUD.jsx";
 import { Router, Route, browserHistory, IndexRoute } from "react-router";
 import Home from './axiosapi/components/home.jsx';
@@ -14,17 +10,19 @@ import AppRouter from "./AppRoute.jsx";
 
 
 ReactDOM.render((
-    <Router history = {browserHistory}>
-    <Route path = "/" component = {AppRouter}>
-           <IndexRoute component = {Home} />
-           <Route path = "home" component = {Home} />      
-           <Route path = "about" component = {About} />
-           <Route path = "contact" component = {Contact} />
-           <Route path = "users" component = {UserCRUD} />
-           <Route path = "employees" component = {EmployeeCRUD} />
-    </Route>
-   </Router>
-   ), document.getElementById('router'));
+       <Router history={browserHistory}>
+              <Route path="/" component={AppRouter}>
+                     <IndexRoute component={Home} />
+                     <Route path="home" component={Home} >
+                            <Route path="/home/users" component={UserCRUD} />
+                            <Route path="/home/employees" component={EmployeeCRUD} />
+                     </Route>
+                     <Route path="about" component={About} />
+                     <Route path="contact" component={Contact} />
+
+              </Route>
+       </Router>
+), document.getElementById('router'));
 
 // let emp = {name:'Nikhil' , city: 'New York'};
 

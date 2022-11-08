@@ -1,18 +1,28 @@
 import React from "react";
 
-class Home extends React.Component{
+import { Link } from 'react-router';
+
+class Home extends React.Component {
 
 
- render(){
-    
-      return (
+    render() {
 
-          <div>
-              <h1>LTI Home page</h1>
-          </div>
+        return (
 
-      );
- }
+            <div>
+                <h1>LTI Home page</h1>
+                <Link to="/home/users">User Server</Link>||
+                <Link to="/home/employees">Employee</Link>
+                <div>
+                    { this.props.children }
+                </div>
+                
+            </div>
+
+
+
+        );
+    }
 
 }
 
