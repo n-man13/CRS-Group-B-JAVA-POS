@@ -51,13 +51,11 @@ export class ListUnregisteredStudentComponent implements OnInit {
   }
 
   confirmRegistration(student: Student) {
-    student.isRegistered = true;
+    student.registrationApproved = true;
     this.httpService.confirmRegistration(student)
       .subscribe(data => {
         console.log(data);
         this.getStudents();
-        this.router.navigate(['listunregisteredstudent']);
-
       })
   }
 

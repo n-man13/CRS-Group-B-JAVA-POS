@@ -64,6 +64,7 @@ export class ViewAllCoursesComponent implements OnInit {
       // this.router.navigate(['viewallcourses'])
       // this.getCourses();
     })
+    
 
   }
 
@@ -80,7 +81,7 @@ export class ViewAllCoursesComponent implements OnInit {
 
   goToAppliedCourses() {
 
-    this.router.navigate(['viewappliedcourses'])
+    this.router.navigate(['studentdashboard/viewappliedcourses'])
 
   }
 }

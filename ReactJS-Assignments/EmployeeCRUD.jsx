@@ -133,7 +133,6 @@ class EmployeeCRUD extends React.Component {
                             }
                         </tbody>
                     </table>
-                    <p>{this.state.name}</p>
                 </div>
             </div>
         );

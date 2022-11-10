@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div *ngFor="let student of getData" class="col-md-4">
-                <div *ngIf="!student.isRegistered" style="margin-bottom: 16px">
+                <div *ngIf="!student.registrationApproved" style="margin-bottom: 16px">
                     <div class="card pt-2">
                         <div class="card-header">
                             ID: {{student.studentID}}
