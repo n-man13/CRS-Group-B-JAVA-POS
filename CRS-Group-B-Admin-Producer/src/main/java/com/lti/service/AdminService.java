@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.AdminDAO;
@@ -188,6 +190,11 @@ public class AdminService implements AdminServiceInterface {
 
 	public void deleteStudent(int studentID) {
 		userDAO.deleteUser(studentID);
+	}
+
+	@Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 20000))
+	public void retryErrors() throws Exception{
+		throw new Exception("retry error thrown");
 	}
 
 }
