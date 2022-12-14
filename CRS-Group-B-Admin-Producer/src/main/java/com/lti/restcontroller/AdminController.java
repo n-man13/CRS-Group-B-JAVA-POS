@@ -1,6 +1,10 @@
 package com.lti.restcontroller;
 
-import javax.ws.rs.core.MediaType;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.Scanner;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.service.*;
-import com.lti.dao.StudentDAO;
 import com.lti.dto.*;
 import com.lti.exception.*;
 
@@ -42,16 +45,16 @@ public class AdminController {
 	 * @return an HTTP response
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/createCourse")
-	public ResponseEntity createCourse(@RequestBody Course course) {
+	public ResponseEntity<?> createCourse(@RequestBody Course course) {
 
 		adminService.createCourse(course);
 		logger.info("createCourse in AdminController");
-		return new ResponseEntity(course, HttpStatus.CREATED);
+		return new ResponseEntity<>(course, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/viewAllCourses")
-	public ResponseEntity viewAllCourses() {
-		return new ResponseEntity(adminService.listAllCourse(), HttpStatus.OK);
+	public ResponseEntity<?> viewAllCourses() {
+		return new ResponseEntity<>(adminService.listAllCourse(), HttpStatus.OK);
 	}
 
 	/**
@@ -64,7 +67,7 @@ public class AdminController {
 	 */
 	@ExceptionHandler(CourseNotFoundException.class)
 	@RequestMapping(method = RequestMethod.PUT, value = "/updateCourse/{courseID}")
-	public ResponseEntity updateCourse(@RequestBody Course course, @PathVariable int courseID)
+	public ResponseEntity<?> updateCourse(@RequestBody Course course, @PathVariable int courseID)
 			throws CourseNotFoundException {
 		logger.info("updateCourse in AdminController");
 
@@ -76,10 +79,10 @@ public class AdminController {
 			oldCourse.setPrereqCourseID(course.getPrereqCourseID());
 
 			adminService.updateCourse(oldCourse);
-			return new ResponseEntity(oldCourse, HttpStatus.OK);
+			return new ResponseEntity<>(oldCourse, HttpStatus.OK);
 
 		} else {
-			return new ResponseEntity(courseID, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(courseID, HttpStatus.NOT_FOUND);
 		}
 
 	}
@@ -92,17 +95,17 @@ public class AdminController {
 	 * @throws CourseNotFoundException if course is not found
 	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteCourse/{courseID}")
-	public ResponseEntity deleteCourse(@PathVariable int courseID) throws CourseNotFoundException {
+	public ResponseEntity<?> deleteCourse(@PathVariable int courseID) throws CourseNotFoundException {
 		logger.info("deleteCourse in AdminController");
 
 		adminService.deleteCourse(courseID);
-		return new ResponseEntity(courseID, HttpStatus.OK);
+		return new ResponseEntity<>(courseID, HttpStatus.OK);
 
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/viewProfessors")
-	public ResponseEntity viewProfessors() {
-		return new ResponseEntity(adminService.viewProfessors(), HttpStatus.OK);
+	public ResponseEntity<?> viewProfessors() {
+		return new ResponseEntity<>(adminService.viewProfessors(), HttpStatus.OK);
 	}
 
 	/**
@@ -113,17 +116,17 @@ public class AdminController {
 	 * @throws UsernameUsedException if the username is already in use
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/createProfessor")
-	public ResponseEntity createProfessor(@RequestBody Professor professor) throws UsernameUsedException {
+	public ResponseEntity<?> createProfessor(@RequestBody Professor professor) throws UsernameUsedException {
 		logger.info("createProfessor in AdminController");
 
 		adminService.createProfessor(professor);
-		return new ResponseEntity(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/viewUnapprovedStudents")
-	public ResponseEntity viewUnapprovedStudents() throws AllStudentRegisteredException {
-		return new ResponseEntity(adminService.unregisteredStudent(), HttpStatus.OK);
+	public ResponseEntity<?> viewUnapprovedStudents() throws AllStudentRegisteredException {
+		return new ResponseEntity<>(adminService.unregisteredStudent(), HttpStatus.OK);
 	}
 
 	/**
@@ -134,19 +137,27 @@ public class AdminController {
 	 * @throws StudentNotFoundException if the student is not found
 	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/approveRegistration/{studentID}")
-	public ResponseEntity approveRegistration(@PathVariable int studentID) throws StudentNotFoundException {
+	public ResponseEntity<?> approveRegistration(@PathVariable int studentID) throws StudentNotFoundException {
 		logger.info("approveRegistration in AdminController");
 
 		Student student = adminService.getStudentById(studentID);
 
 		adminService.approveStudentRegistration(student);
-		return new ResponseEntity(student, HttpStatus.CREATED);
+		return new ResponseEntity<>(student, HttpStatus.CREATED);
 
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/rejectRegistration/{studentID}")
-	public ResponseEntity rejectRegistration(@PathVariable int studentID) {
+	public ResponseEntity<?> rejectRegistration(@PathVariable int studentID) {
 		adminService.deleteStudent(studentID);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/getClientData/{clientID}")
+	public ResponseEntity<?> getClientData(@PathVariable String clientID) throws FileNotFoundException {
+		Scanner in = new Scanner(new File("CRS-Group-B-Admin-Producer/src/main/resources/ClientDetails.config.json"));
+		// Do things
+		in.close();
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
