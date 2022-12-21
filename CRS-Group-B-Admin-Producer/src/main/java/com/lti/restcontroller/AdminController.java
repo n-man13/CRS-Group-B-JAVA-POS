@@ -1,10 +1,10 @@
 package com.lti.restcontroller;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.service.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lti.dto.*;
 import com.lti.exception.*;
 
@@ -51,7 +53,7 @@ public class AdminController {
 		logger.info("createCourse in AdminController");
 		return new ResponseEntity<>(course, HttpStatus.CREATED);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/viewAllCourses")
 	public ResponseEntity<?> viewAllCourses() {
 		return new ResponseEntity<>(adminService.listAllCourse(), HttpStatus.OK);
@@ -102,7 +104,7 @@ public class AdminController {
 		return new ResponseEntity<>(courseID, HttpStatus.OK);
 
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/viewProfessors")
 	public ResponseEntity<?> viewProfessors() {
 		return new ResponseEntity<>(adminService.viewProfessors(), HttpStatus.OK);
@@ -123,7 +125,7 @@ public class AdminController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/viewUnapprovedStudents")
 	public ResponseEntity<?> viewUnapprovedStudents() throws AllStudentRegisteredException {
 		return new ResponseEntity<>(adminService.unregisteredStudent(), HttpStatus.OK);
@@ -146,7 +148,7 @@ public class AdminController {
 		return new ResponseEntity<>(student, HttpStatus.CREATED);
 
 	}
-	
+
 	@RequestMapping(method = RequestMethod.DELETE, value = "/rejectRegistration/{studentID}")
 	public ResponseEntity<?> rejectRegistration(@PathVariable int studentID) {
 		adminService.deleteStudent(studentID);
@@ -155,9 +157,25 @@ public class AdminController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/getClientData/{clientID}")
 	public ResponseEntity<?> getClientData(@PathVariable String clientID) throws FileNotFoundException {
-		Scanner in = new Scanner(new File("CRS-Group-B-Admin-Producer/src/main/resources/ClientDetails.config.json"));
-		// Do things
-		in.close();
-		return new ResponseEntity<>(HttpStatus.OK);
+		List<ClientDetail> clientDetails = new ArrayList<>();
+
+		InputStream stream = getClass().getClassLoader().getResourceAsStream("ClientDetails.config.json");
+		ObjectMapper map = new ObjectMapper();
+
+		try {
+			clientDetails = map.readValue(stream, new TypeReference<List<ClientDetail>>() {
+
+			});
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+
+		for (ClientDetail c : clientDetails){
+			if(c.getClientID().equalsIgnoreCase(clientID))
+				return new ResponseEntity<>(c, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(clientID, HttpStatus.NOT_FOUND);
+		
 	}
 }
