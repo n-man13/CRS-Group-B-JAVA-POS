@@ -1,10 +1,10 @@
 [
     {
-        "ClientID": "FEDEX",
-        "ClientData": "This is fedex data"
+        "clientID": "FEDEX",
+        "clientData": "This is fedex data"
     },
     {
-        "ClientID": "AMZN",
-        "ClientData": "This is Amazon Data"
+        "clientID": "AMZN",
+        "clientData": "This is Amazon Data"
     }
 ]
