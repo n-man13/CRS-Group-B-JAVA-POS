@@ -1,0 +1,10 @@
+[
+    {
+        "clientID": "FEDEX",
+        "clientData": "This is fedex data"
+    },
+    {
+        "clientID": "AMZN",
+        "clientData": "This is Amazon Data"
+    }
+]

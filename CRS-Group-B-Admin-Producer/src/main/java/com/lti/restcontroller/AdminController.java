@@ -1,11 +1,20 @@
 package com.lti.restcontroller;
 
-import javax.ws.rs.core.MediaType;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.lti.service.*;
-import com.lti.dao.StudentDAO;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lti.dto.*;
 import com.lti.exception.*;
 
@@ -35,6 +46,9 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 
+	@Autowired
+	RestTemplate restTemplate;
+
 	/**
 	 * creates a new course
 	 * 
@@ -42,16 +56,16 @@ public class AdminController {
 	 * @return an HTTP response
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/createCourse")
-	public ResponseEntity createCourse(@RequestBody Course course) {
+	public ResponseEntity<?> createCourse(@RequestBody Course course) {
 
 		adminService.createCourse(course);
 		logger.info("createCourse in AdminController");
-		return new ResponseEntity(course, HttpStatus.CREATED);
+		return new ResponseEntity<>(course, HttpStatus.CREATED);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/viewAllCourses")
-	public ResponseEntity viewAllCourses() {
-		return new ResponseEntity(adminService.listAllCourse(), HttpStatus.OK);
+	public ResponseEntity<?> viewAllCourses() {
+		return new ResponseEntity<>(adminService.listAllCourse(), HttpStatus.OK);
 	}
 
 	/**
@@ -64,7 +78,7 @@ public class AdminController {
 	 */
 	@ExceptionHandler(CourseNotFoundException.class)
 	@RequestMapping(method = RequestMethod.PUT, value = "/updateCourse/{courseID}")
-	public ResponseEntity updateCourse(@RequestBody Course course, @PathVariable int courseID)
+	public ResponseEntity<?> updateCourse(@RequestBody Course course, @PathVariable int courseID)
 			throws CourseNotFoundException {
 		logger.info("updateCourse in AdminController");
 
@@ -76,10 +90,10 @@ public class AdminController {
 			oldCourse.setPrereqCourseID(course.getPrereqCourseID());
 
 			adminService.updateCourse(oldCourse);
-			return new ResponseEntity(oldCourse, HttpStatus.OK);
+			return new ResponseEntity<>(oldCourse, HttpStatus.OK);
 
 		} else {
-			return new ResponseEntity(courseID, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(courseID, HttpStatus.NOT_FOUND);
 		}
 
 	}
@@ -92,17 +106,17 @@ public class AdminController {
 	 * @throws CourseNotFoundException if course is not found
 	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteCourse/{courseID}")
-	public ResponseEntity deleteCourse(@PathVariable int courseID) throws CourseNotFoundException {
+	public ResponseEntity<?> deleteCourse(@PathVariable int courseID) throws CourseNotFoundException {
 		logger.info("deleteCourse in AdminController");
 
 		adminService.deleteCourse(courseID);
-		return new ResponseEntity(courseID, HttpStatus.OK);
+		return new ResponseEntity<>(courseID, HttpStatus.OK);
 
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/viewProfessors")
-	public ResponseEntity viewProfessors() {
-		return new ResponseEntity(adminService.viewProfessors(), HttpStatus.OK);
+	public ResponseEntity<?> viewProfessors() {
+		return new ResponseEntity<>(adminService.viewProfessors(), HttpStatus.OK);
 	}
 
 	/**
@@ -113,17 +127,17 @@ public class AdminController {
 	 * @throws UsernameUsedException if the username is already in use
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/createProfessor")
-	public ResponseEntity createProfessor(@RequestBody Professor professor) throws UsernameUsedException {
+	public ResponseEntity<?> createProfessor(@RequestBody Professor professor) throws UsernameUsedException {
 		logger.info("createProfessor in AdminController");
 
 		adminService.createProfessor(professor);
-		return new ResponseEntity(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/viewUnapprovedStudents")
-	public ResponseEntity viewUnapprovedStudents() throws AllStudentRegisteredException {
-		return new ResponseEntity(adminService.unregisteredStudent(), HttpStatus.OK);
+	public ResponseEntity<?> viewUnapprovedStudents() throws AllStudentRegisteredException {
+		return new ResponseEntity<>(adminService.unregisteredStudent(), HttpStatus.OK);
 	}
 
 	/**
@@ -134,19 +148,48 @@ public class AdminController {
 	 * @throws StudentNotFoundException if the student is not found
 	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/approveRegistration/{studentID}")
-	public ResponseEntity approveRegistration(@PathVariable int studentID) throws StudentNotFoundException {
+	public ResponseEntity<?> approveRegistration(@PathVariable int studentID) throws StudentNotFoundException {
 		logger.info("approveRegistration in AdminController");
 
 		Student student = adminService.getStudentById(studentID);
 
 		adminService.approveStudentRegistration(student);
-		return new ResponseEntity(student, HttpStatus.CREATED);
+		return new ResponseEntity<>(student, HttpStatus.CREATED);
 
 	}
-	
+
 	@RequestMapping(method = RequestMethod.DELETE, value = "/rejectRegistration/{studentID}")
-	public ResponseEntity rejectRegistration(@PathVariable int studentID) {
+	public ResponseEntity<?> rejectRegistration(@PathVariable int studentID) {
 		adminService.deleteStudent(studentID);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/getClientData/{clientID}")
+	public ResponseEntity<?> getClientData(@PathVariable String clientID) throws FileNotFoundException {
+		List<ClientDetail> clientDetails = new ArrayList<>();
+
+		InputStream stream = getClass().getClassLoader().getResourceAsStream("ClientDetails.config.json");
+		ObjectMapper map = new ObjectMapper();
+
+		try {
+			clientDetails = map.readValue(stream, new TypeReference<List<ClientDetail>>() {
+
+			});
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+
+		for (ClientDetail c : clientDetails){
+			if(c.getClientID().equalsIgnoreCase(clientID)){
+				HttpHeaders headers = new HttpHeaders();
+				headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+				HttpEntity<ClientDetail> entity = new HttpEntity<>(c, headers);
+				restTemplate.exchange("http://localhost:8094/logClientData", HttpMethod.POST, entity, String.class);
+				return new ResponseEntity<>(c, HttpStatus.OK);
+			}
+		}
+		return new ResponseEntity<>(clientID, HttpStatus.NOT_FOUND);
+		
 	}
 }
