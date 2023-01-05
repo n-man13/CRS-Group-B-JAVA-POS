@@ -33,6 +33,11 @@ public class ClientDetail {
         ClientData = clientData;
     }
 
+    @Override
+    public String toString() {
+        return "ClientDetail [ClientID=" + ClientID + ", ClientData=" + ClientData + "]";
+    }
+
     
 
 }

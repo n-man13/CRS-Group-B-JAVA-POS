@@ -1,0 +1,70 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch CrsGroupBAdminProducerApplication",
+            "request": "launch",
+            "mainClass": "com.lti.application.CrsGroupBAdminProducerApplication",
+            "projectName": "CRS-Group-B-Admin-Producer"
+        },
+        {
+            "type": "java",
+            "name": "Launch CrsGroupBEmployProducerApplication",
+            "request": "launch",
+            "mainClass": "com.lti.application.CrsGroupBEmployProducerApplication",
+            "projectName": "CRS-Group-B-Employ-Producer"
+        },
+        {
+            "type": "java",
+            "name": "Launch CrsGroupBEurekaServerApplication",
+            "request": "launch",
+            "mainClass": "com.lti.application.CrsGroupBEurekaServerApplication",
+            "projectName": "CRS-Group-B-Eureka-Server"
+        },
+        {
+            "type": "java",
+            "name": "Launch CrsGroupBProfessorProducerApplication",
+            "request": "launch",
+            "mainClass": "com.lti.application.CrsGroupBProfessorProducerApplication",
+            "projectName": "CRS-Group-B-Professor-Producer"
+        },
+        {
+            "type": "java",
+            "name": "Launch CrsGroupBSpringRestApplication",
+            "request": "launch",
+            "mainClass": "com.lti.application.CrsGroupBSpringRestApplication",
+            "projectName": "CRS-Group-B-Spring-REST"
+        },
+        {
+            "type": "java",
+            "name": "Launch CrsGroupBStudentProducerApplication",
+            "request": "launch",
+            "mainClass": "com.lti.application.CrsGroupBStudentProducerApplication",
+            "projectName": "CRS-Group-B-Student-Producer"
+        },
+        {
+            "type": "java",
+            "name": "Launch CrsGroupBUserProducerApplication",
+            "request": "launch",
+            "mainClass": "com.lti.application.CrsGroupBUserProducerApplication",
+            "projectName": "CRS-Group-B-User-Producer"
+        },
+        {
+            "type": "java",
+            "name": "Launch CRSGroupBSpringRestJDBCTemplateApplication",
+            "request": "launch",
+            "mainClass": "com.lti.application.CRSGroupBSpringRestJDBCTemplateApplication",
+            "projectName": "Demo-Spring-JDBCTemplate-Practice-1"
+        }
+    ]
+}
