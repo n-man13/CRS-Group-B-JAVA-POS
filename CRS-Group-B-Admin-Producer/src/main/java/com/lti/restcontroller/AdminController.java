@@ -196,6 +196,6 @@ public class AdminController {
 	@RequestMapping(method = RequestMethod.POST, value = "/submitInfo")
 	public ResponseEntity<?> submitInfo(@RequestBody BasicData data){
 		System.out.println(data);
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

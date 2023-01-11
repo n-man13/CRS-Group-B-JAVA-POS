@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatNativeDateModule,
     HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
