@@ -21,9 +21,15 @@ export class AppComponent implements OnInit{
       'dateOfBirth': new FormControl(null),
       'insertTime': new FormControl(null)
     });
+    this.searchingForm = new FormGroup({
+      'name': new FormControl(null),
+      'dateOfBirth': new FormControl(null),
+      'insertTime': new FormControl(null)
+    })
   }
 
   informationForm!: FormGroup;
+  searchingForm!: FormGroup;
 
   // informationForm = this.formBuilder.group({
   //   name: [''],

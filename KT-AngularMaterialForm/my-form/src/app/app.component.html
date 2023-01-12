@@ -29,6 +29,8 @@
         </mat-card-actions>
     </mat-card>
 </form>
+<br>
+<form [formGroup]="searchingForm" class="main-form">
 <mat-card>
     <mat-card-header>
         <mat-card-title>Current Information Records</mat-card-title>
@@ -40,17 +42,17 @@
         </mat-form-field>
         <mat-form-field appearance="fill" style="padding:10px">
             <mat-label>Date of Birth</mat-label>
-            <input formControlName="dateOfBirth" matInput [matDatepicker]="picker">
+            <input formControlName="dateOfBirth" matInput [matDatepicker]="searcher">
             <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker-toggle matIconSuffix [for]="searcher"></mat-datepicker-toggle>
+            <mat-datepicker #searcher></mat-datepicker>
         </mat-form-field>
         <mat-form-field appearance="fill" style="padding:10px">
             <mat-label>Time of Recording</mat-label>
-            <input formControlName="insertTime" matInput [matDatepicker]="picker1">
+            <input formControlName="insertTime" matInput [matDatepicker]="searcher1">
             <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
+            <mat-datepicker-toggle matIconSuffix [for]="searcher1"></mat-datepicker-toggle>
+            <mat-datepicker #searcher1></mat-datepicker>
         </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
@@ -74,13 +76,13 @@
 
                 <!-- Weight Column -->
                 <ng-container matColumnDef="weight">
-                    <th mat-header-cell *matHeaderCellDef> Weight </th>
+                    <th mat-header-cell *matHeaderCellDef> Date of Birth </th>
                     <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
                 </ng-container>
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="symbol">
-                    <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                    <th mat-header-cell *matHeaderCellDef> Insert Date </th>
                     <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
                 </ng-container>
 
@@ -89,9 +91,10 @@
             </table>
 
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-                aria-label="Select page of periodic elements">
+                aria-label="Select page of information">
             </mat-paginator>
         </div>
 
     </mat-card-footer>
 </mat-card>
+</form>
