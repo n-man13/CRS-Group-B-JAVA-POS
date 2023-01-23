@@ -1,7 +1,5 @@
 package com.lti.dto;
 
-
-
 public class BasicData {
     String name;
     String dateOfBirth;

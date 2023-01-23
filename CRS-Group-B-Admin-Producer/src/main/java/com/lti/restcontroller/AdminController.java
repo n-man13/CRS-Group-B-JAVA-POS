@@ -10,6 +10,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -28,8 +29,10 @@ import org.springframework.web.client.RestTemplate;
 import com.lti.service.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lti.document.BasicDataDocument;
 import com.lti.dto.*;
 import com.lti.exception.*;
+import com.lti.repo.BasicDataDocumentRepo;
 
 /**
  * createCourse, updateCourse, deleteCourse, createProfessor,
@@ -49,6 +52,11 @@ public class AdminController {
 	@Autowired
 	RestTemplate restTemplate;
 
+	@Autowired
+	BasicDataDocumentRepo repo;
+
+	// @Autowired
+	// MongoTemplate mongoTemplate;
 
 	/**
 	 * creates a new course
@@ -195,9 +203,10 @@ public class AdminController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/submitInfo")
-	public ResponseEntity<?> submitInfo(@RequestBody BasicData data){
+	public ResponseEntity<?> submitInfo(@RequestBody BasicDataDocument data){
 		System.out.println(data);
-		// TODO once I figure out how to save to Mongo
+		//TODO once I figure out how to save to Mongo
+		repo.save(data);
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 
