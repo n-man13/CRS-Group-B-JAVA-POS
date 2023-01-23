@@ -49,6 +49,7 @@ public class AdminController {
 	@Autowired
 	RestTemplate restTemplate;
 
+
 	/**
 	 * creates a new course
 	 * 
@@ -196,6 +197,13 @@ public class AdminController {
 	@RequestMapping(method = RequestMethod.POST, value = "/submitInfo")
 	public ResponseEntity<?> submitInfo(@RequestBody BasicData data){
 		System.out.println(data);
-		return new ResponseEntity<>(HttpStatus.OK);
+		// TODO once I figure out how to save to Mongo
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/searchInfo")
+	public ResponseEntity<?> searchInfo(@RequestBody BasicData data){
+		// todo once I figure out how to query Mongo
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 }
