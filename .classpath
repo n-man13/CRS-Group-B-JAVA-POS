@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="CRS-Group-B-Admin-Producer/src/main/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Admin-Producer/src/test/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Employ-Producer/src/main/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Employ-Producer/src/test/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Eureka-Server/src/main/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Eureka-Server/src/test/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-JAVA-POS/src"/>
+	<classpathentry kind="src" path="CRS-Group-B-Professor-Producer/src/main/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Professor-Producer/src/test/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Spring-Rest-JDBCTemplate/src/main/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Spring-Rest-JDBCTemplate/src/test/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Spring-REST/src/main/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Spring-REST/src/test/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Student-Producer/src/main/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-Student-Producer/src/test/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-User-Producer/src/main/java"/>
+	<classpathentry kind="src" path="CRS-Group-B-User-Producer/src/test/java"/>
+	<classpathentry kind="lib" path="CRS-Group-B-Admin-Producer/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-Employ-Producer/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-Employ-Producer/bin/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-Eureka-Server/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-Eureka-Server/bin/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-Professor-Producer/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-Spring-Rest-JDBCTemplate/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-Spring-REST/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-Spring-REST/bin/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-Student-Producer/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-Student-Producer/bin/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-User-Producer/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="CRS-Group-B-User-Producer/bin/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="output" path="CRS-Group-B-JAVA-POS/bin"/>
+</classpath>
