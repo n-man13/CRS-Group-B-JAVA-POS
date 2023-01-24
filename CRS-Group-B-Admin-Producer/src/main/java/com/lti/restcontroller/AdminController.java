@@ -173,46 +173,40 @@ public class AdminController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/getClientData/{clientID}")
-	public ResponseEntity<?> getClientData(@PathVariable String clientID) throws FileNotFoundException {
-		List<ClientDetail> clientDetails = new ArrayList<>();
-
-		InputStream stream = getClass().getClassLoader().getResourceAsStream("ClientDetails.config.json");
-		ObjectMapper map = new ObjectMapper();
-
-		try {
-			clientDetails = map.readValue(stream, new TypeReference<List<ClientDetail>>() {
-
-			});
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-
-		for (ClientDetail c : clientDetails){
-			if(c.getClientID().equalsIgnoreCase(clientID)){
-				HttpHeaders headers = new HttpHeaders();
-				headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-				HttpEntity<ClientDetail> entity = new HttpEntity<>(c, headers);
-				restTemplate.exchange("http://localhost:8094/logClientData", HttpMethod.POST, entity, String.class);
-				return new ResponseEntity<>(c, HttpStatus.OK);
-			}
-		}
-		return new ResponseEntity<>(clientID, HttpStatus.NOT_FOUND);
-		
-	}
-
-	@RequestMapping(method = RequestMethod.POST, value = "/submitInfo")
-	public ResponseEntity<?> submitInfo(@RequestBody BasicDataDocument data){
-		System.out.println(data);
-		//TODO once I figure out how to save to Mongo
-		repo.save(data);
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-	}
-
-	@RequestMapping(method = RequestMethod.POST, value = "/searchInfo")
-	public ResponseEntity<?> searchInfo(@RequestBody BasicData data){
-		// todo once I figure out how to query Mongo
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-	}
+	/*
+	 * @RequestMapping(method = RequestMethod.GET, value =
+	 * "/getClientData/{clientID}") public ResponseEntity<?>
+	 * getClientData(@PathVariable String clientID) throws FileNotFoundException { 
+	 * List<ClientDetail> clientDetails = new ArrayList<>();
+	 * 
+	 * InputStream stream =
+	 * getClass().getClassLoader().getResourceAsStream("ClientDetails.config.json");
+	 * ObjectMapper map = new ObjectMapper();
+	 * 
+	 * try { clientDetails = map.readValue(stream, new
+	 * TypeReference<List<ClientDetail>>() {
+	 * 
+	 * }); } catch (IOException e) { System.err.println(e.getMessage()); return new
+	 * ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST); }
+	 * 
+	 * for (ClientDetail c : clientDetails){
+	 * if(c.getClientID().equalsIgnoreCase(clientID)){ HttpHeaders headers = new
+	 * HttpHeaders(); headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+	 * HttpEntity<ClientDetail> entity = new HttpEntity<>(c, headers);
+	 * restTemplate.exchange("http://localhost:8094/logClientData", HttpMethod.POST,
+	 * entity, String.class); return new ResponseEntity<>(c, HttpStatus.OK); } }
+	 * return new ResponseEntity<>(clientID, HttpStatus.NOT_FOUND);
+	 * 
+	 * }
+	 * 
+	 * @RequestMapping(method = RequestMethod.POST, value = "/submitInfo") public
+	 * ResponseEntity<?> submitInfo(@RequestBody BasicDataDocument data){
+	 * System.out.println(data); //TODO once I figure out how to save to Mongo
+	 * repo.save(data); return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED); }
+	 * 
+	 * @RequestMapping(method = RequestMethod.POST, value = "/searchInfo") public
+	 * ResponseEntity<?> searchInfo(@RequestBody BasicData data){ // todo once I
+	 * figure out how to query Mongo return new
+	 * ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED); }
+	 */
 }
