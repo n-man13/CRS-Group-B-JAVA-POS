@@ -100,4 +100,9 @@ public class User implements  Serializable{
 		this.userID = userID;
 	}
 
+	@Override
+	public String toString() {
+		return "User [userID=" + userID + ", username=" + username + ", password=" + password + ", role=" + role + "]";
+	}
+
 }

@@ -81,4 +81,9 @@ public class Professor extends User implements  Serializable{
 		this.professorID = professorID;
 	}
 
+	@Override
+	public String toString() {
+		return "Professor [professorID=" + professorID + ", name=" + name + "]";
+	}
+
 }

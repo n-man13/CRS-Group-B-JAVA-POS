@@ -41,4 +41,10 @@ public class RegisteredCourse implements Serializable {
 		this.grade = grade;
 	}
 
+	@Override
+	public String toString() {
+		return "RegisteredCourse [studentID=" + studentID + ", courseID=" + courseID + ", feePaid=" + feePaid
+				+ ", grade=" + grade + "]";
+	}
+
 }

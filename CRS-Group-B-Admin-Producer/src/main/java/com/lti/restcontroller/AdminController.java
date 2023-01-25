@@ -173,6 +173,7 @@ public class AdminController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	// Moved to other Controller
 	/*
 	 * @RequestMapping(method = RequestMethod.GET, value =
 	 * "/getClientData/{clientID}") public ResponseEntity<?>

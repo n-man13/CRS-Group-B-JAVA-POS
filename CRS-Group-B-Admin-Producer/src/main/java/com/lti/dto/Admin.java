@@ -11,6 +11,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Admin extends User implements  Serializable{
+	@Override
+	public String toString() {
+		return "Admin [adminID=" + adminID + "]";
+	}
+
 	private int adminID;
 
 	/**

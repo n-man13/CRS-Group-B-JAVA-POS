@@ -137,6 +137,11 @@ public class Student extends User implements  Serializable{
 		this.studentID = studentID;
 	}
 
+	@Override
+	public String toString() {
+		return "Student [studentID=" + studentID + ", name=" + name + ", registered=" + registered + "]";
+	}
+
 
 
 	/**
